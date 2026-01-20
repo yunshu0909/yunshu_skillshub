@@ -16,6 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### 新增 / Added
+- 🎨 **配图助手** (Image Assistant)
+  - 5 个完整的工作阶段：需求澄清、配图规划、文案定稿、提示词封装、迭代润色
+  - 统一风格的 16:9 信息图提示词生成
+  - 多种配图模板（封面、对比图、洞察卡片、漫画等）
+  - 批量生图脚本支持
+  - 完整的风格块和 API 配置模板
+
 ### 计划中 / Planned
 - 更多示例和最佳实践文档
 - 视频教程

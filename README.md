@@ -12,6 +12,32 @@
 
 ### ✨ 包含的 Skills
 
+#### 🎨 [配图助手](./image-assistant) (Image Assistant)
+**描述**: 把文章/模块内容转成统一风格、少字高可读的 16:9 信息图提示词
+
+**适用场景**:
+- 文章需要配图但不知道怎么设计
+- PPT、海报、社媒图需要统一风格
+- 内容太多字，想要更趣味、更好读的视觉呈现
+- 需要批量生成配图提示词
+
+**核心功能**:
+- 📋 需求澄清：挖掘内容、场景、受众和字数偏好
+- 🗂️ 配图规划：拆分内容，定义图清单（几张图/每张讲什么）
+- ✍️ 文案定稿：逐字定稿"图上写什么"（Copy Spec）
+- 🎯 提示词封装：生成可复制的生图提示词，支持批量出图
+- 🔄 迭代润色：根据反馈减字、换隐喻、提升可读性
+
+**触发方式**:
+```
+这段内容做个图/配几张图
+给我两张出图提示词
+字太多不好看，帮我更趣味、更好读
+/image /配图 /出图
+```
+
+---
+
 #### 🧠 [思维挖掘助手](./thought-mining) (Thought Mining)
 **描述**: 通过对话帮助你把脑子里的零散想法倒出来、记录下来、整理成文章
 
@@ -120,10 +146,13 @@ git clone https://github.com/你的用户名/云舒的Skills搭子们.git
 在 Claude Code CLI 中，你可以通过以下方式使用：
 
 ```bash
+# 使用配图助手
+/image-assistant
+
 # 使用思维挖掘助手
 /thought-mining
 
-# 使用 PRD ��档撰写助手
+# 使用 PRD 文档撰写助手
 /prd-doc-writer
 
 # 使用需求变更工作流
@@ -145,6 +174,13 @@ git clone https://github.com/你的用户名/云舒的Skills搭子们.git
 ├── README.md                    # 项目说明文档
 ├── LICENSE                      # MIT 许可证
 ├── CHANGELOG.md                 # 更新日志
+├── EXAMPLES.md                  # 使用示例
+├── image-assistant/             # 配图助手
+│   ├── SKILL.md                # Skill 定义文件
+│   ├── stages/                 # 各阶段详细说明
+│   ├── templates/              # 风格模板和配图模板
+│   ├── examples/               # 使用示例
+│   └── scripts/                # 批量生图脚本
 ├── thought-mining/              # 思维挖掘助手
 │   ├── SKILL.md                # Skill 定义文件
 │   ├── stages/                 # 各阶段详细说明
@@ -187,6 +223,32 @@ git clone https://github.com/你的用户名/云舒的Skills搭子们.git
 A carefully crafted collection of Claude Code Skills designed to boost efficiency in software development and product management. Each skill has been battle-tested to help you work more effectively in your daily tasks.
 
 ### ✨ Included Skills
+
+#### 🎨 [Image Assistant](./image-assistant)
+**Description**: Convert article/module content into unified-style, text-minimal, highly readable 16:9 infographic prompts
+
+**Use Cases**:
+- Need illustrations for articles but don't know how to design
+- PPT, posters, or social media graphics need a unified style
+- Too much text, want more engaging and readable visual presentation
+- Need to batch generate illustration prompts
+
+**Core Features**:
+- 📋 Requirement Clarification: Extract content, scenario, audience, and text density preferences
+- 🗂️ Illustration Planning: Split content, define image list (how many/what each explains)
+- ✍️ Copy Finalization: Word-by-word finalization of "what text goes on the image" (Copy Spec)
+- 🎯 Prompt Packaging: Generate copy-ready image generation prompts, support batch generation
+- 🔄 Iterative Refinement: Reduce text, change metaphors, improve readability based on feedback
+
+**Trigger**:
+```
+Make an image for this content / how many images?
+Give me two image generation prompts
+Too much text, make it more engaging and readable
+/image
+```
+
+---
 
 #### 🧠 [Thought Mining](./thought-mining)
 **Description**: Helps you extract scattered thoughts from your mind, record them, and organize them into articles through conversational guidance
@@ -296,6 +358,9 @@ Alternatively, you can copy individual Skills you need to your Skills directory.
 In Claude Code CLI, you can use them by:
 
 ```bash
+# Use Image Assistant
+/image-assistant
+
 # Use Thought Mining
 /thought-mining
 
@@ -321,6 +386,13 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 ├── README.md                    # Project documentation
 ├── LICENSE                      # MIT License
 ├── CHANGELOG.md                 # Changelog
+├── EXAMPLES.md                  # Usage examples
+├── image-assistant/             # Image Assistant
+│   ├── SKILL.md                # Skill definition file
+│   ├── stages/                 # Detailed stage descriptions
+│   ├── templates/              # Style templates and layout templates
+│   ├── examples/               # Usage examples
+│   └── scripts/                # Batch image generation scripts
 ├── thought-mining/              # Thought Mining Assistant
 │   ├── SKILL.md                # Skill definition file
 │   ├── stages/                 # Detailed stage descriptions
