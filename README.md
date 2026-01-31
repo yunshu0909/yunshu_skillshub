@@ -113,6 +113,31 @@
 
 ---
 
+#### 📚 [课程构建器](./lesson-builder) (Lesson Builder)
+**描述**: 通过讨论驱动的方式，帮助你快速完成课程大纲和课件
+
+**适用场景**:
+- 需要快速备好一节课
+- 已有清晰想法，需要整理成文档
+- 需要迭代现有课程大纲
+- 准备培训或教学内容
+
+**核心功能**:
+- 💭 共创大纲：通过讨论挖掘想法，形成清晰课程框架
+- 📖 课件撰写：基于大纲写出完整课件内容
+- 🎯 框架优先：先确认框架再写细节，避免返工
+- ⚡ 快速迭代：支持快速共创和严格确认两种模式
+- 📋 最少文档：只产出需要的内容（大纲/课件/补充材料）
+
+**触发方式**:
+```
+备课
+做课件/准备课程
+/lesson-builder
+```
+
+---
+
 ### 🚀 快速开始
 
 #### 安装方式
@@ -157,6 +182,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 
 # 使用需求变更工作流
 /req-change-workflow
+
+# 使用课程构建器
+/lesson-builder
 ```
 
 或者直接在对话中描述你的需求，相关 Skill 会自动触发。
@@ -190,10 +218,12 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 │   ├── SKILL.md               # Skill 定义文件
 │   ├── assets/                # 模板资源
 │   └── references/            # 参考文档和示例
-└── req-change-workflow/        # 需求变更工作流
-    ├── SKILL.md               # Skill 定义文件
-    ├── references/            # 模板和清单
-    └── scripts/               # 辅助脚本
+├── req-change-workflow/        # 需求变更工作流
+│   ├── SKILL.md               # Skill 定义文件
+│   ├── references/            # 模板和清单
+│   └── scripts/               # 辅助脚本
+└── lesson-builder/             # 课程构建器
+    └── skill.md               # Skill 定义文件
 ```
 
 ---
@@ -325,6 +355,31 @@ Adjust interaction/change feature
 
 ---
 
+#### 📚 [Lesson Builder](./lesson-builder)
+**Description**: A discussion-driven approach to quickly complete course outlines and teaching materials
+
+**Use Cases**:
+- Need to quickly prepare a lesson
+- Have clear ideas that need to be organized into documents
+- Need to iterate on existing course outlines
+- Preparing training or teaching content
+
+**Core Features**:
+- 💭 Co-create Outline: Extract ideas through discussion, form clear course framework
+- 📖 Write Materials: Create complete teaching materials based on outline
+- 🎯 Framework First: Confirm framework before details to avoid rework
+- ⚡ Rapid Iteration: Supports both quick co-creation and strict confirmation modes
+- 📋 Minimal Documentation: Only produce what you need (outline/materials/supplements)
+
+**Trigger**:
+```
+Prepare lesson
+Make teaching materials/prepare course
+/lesson-builder
+```
+
+---
+
 ### 🚀 Quick Start
 
 #### Installation
@@ -369,6 +424,9 @@ In Claude Code CLI, you can use them by:
 
 # Use Requirement Change Workflow
 /req-change-workflow
+
+# Use Lesson Builder
+/lesson-builder
 ```
 
 Or simply describe your needs in conversation, and the relevant Skill will trigger automatically.
@@ -402,10 +460,12 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 │   ├── SKILL.md               # Skill definition file
 │   ├── assets/                # Template resources
 │   └── references/            # Reference docs and examples
-└── req-change-workflow/        # Requirement Change Workflow
-    ├── SKILL.md               # Skill definition file
-    ├── references/            # Templates and checklists
-    └── scripts/               # Helper scripts
+├── req-change-workflow/        # Requirement Change Workflow
+│   ├── SKILL.md               # Skill definition file
+│   ├── references/            # Templates and checklists
+│   └── scripts/               # Helper scripts
+└── lesson-builder/             # Lesson Builder
+    └── skill.md               # Skill definition file
 ```
 
 ---
