@@ -218,6 +218,61 @@ MVP怎么做
 
 ---
 
+#### 📝 [周报写作助手](./weekly-report) (Weekly Report)
+**描述**: 帮助用户梳理周报，按照完整逻辑展示工作价值和边界
+
+**适用场景**:
+- 需要整理一周的工作内容
+- 想要清晰展示工作价值和成果
+- 需要说明遇到的问题和挑战
+- 梳理下周工作重点
+
+**核心功能**:
+- 📋 素材收集：引导式对话，收集本周工作内容
+- 🗂️ 分类整理：根据角色灵活选择合适的模块分类
+- 🔍 信息补充：追问背景、结果、价值、状态和下一步
+- ✅ 讨论调整：确认表述习惯和逻辑完整性
+- 📄 文档输出：生成结构清晰的周报文档
+
+**触发方式**:
+```
+写周报
+周报
+梳理周报
+整理工作
+/weekly-report
+```
+
+---
+
+#### 🎯 [优先级判断助手](./priority-judge) (Priority Judge)
+**描述**: 从混沌的待办事项中判断优先级，确定现在该做什么
+
+**适用场景**:
+- 有很多事要做，不知道从哪开始
+- 想快速理清楚今天/本周该做什么
+- 需要基于客观标准判断优先级
+- 避免在没想清楚的事情上浪费时间
+
+**核心功能**:
+- 📝 收集待办：记录所有要做的事情
+- 🔍 状态询问：了解每件事的清晰度和deadline
+- ⚖️ 优先级判断：基于清晰度和deadline做决策
+- 🎯 聚焦行动：每次只聚焦1-2件最重要的事
+- 📋 文档化：生成优先级清单文档
+
+**触发方式**:
+```
+我有很多事要做
+帮我理一下
+排个优先级
+今天该做什么
+我要盘一下
+/priority-judge
+```
+
+---
+
 ### 🚀 快速开始
 
 #### 安装方式
@@ -274,6 +329,12 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 
 # 使用写作助手
 /writing-assistant
+
+# 使用周报写作助手
+/weekly-report
+
+# 使用优先级判断助手
+/priority-judge
 ```
 
 或者直接在对话中描述你的需求，相关 Skill 会自动触发。
@@ -317,10 +378,14 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 │   └── SKILL.md               # Skill 定义文件
 ├── version-planner/            # 版本规划助手
 │   └── SKILL.md               # Skill 定义文件
-└── writing-assistant/          # 写作助手
+├── writing-assistant/          # 写作助手
     ├── SKILL.md               # Skill 定义文件
     ├── stages/                # 各阶段详细说明
     └── templates/             # 模板文件
+├── weekly-report/             # 周报写作助手
+│   └── SKILL.md              # Skill 定义文件
+└── priority-judge/            # 优先级判断助手
+    └── skill.md              # Skill 定义文件
 ```
 
 ---
@@ -557,6 +622,61 @@ Help me organize my thoughts
 
 ---
 
+#### 📝 [Weekly Report](./weekly-report)
+**Description**: Helps users organize weekly reports with complete logic to showcase work value and boundaries
+
+**Use Cases**:
+- Need to organize a week's work content
+- Want to clearly demonstrate work value and achievements
+- Need to explain problems and challenges encountered
+- Organize next week's priorities
+
+**Core Features**:
+- 📋 Material Collection: Guided dialogue to collect weekly work content
+- 🗂️ Categorization: Flexibly choose appropriate module classification based on role
+- 🔍 Information Supplement: Ask about background, results, value, status, and next steps
+- ✅ Discussion & Adjustment: Confirm expression habits and logical completeness
+- 📄 Document Output: Generate well-structured weekly report document
+
+**Trigger**:
+```
+Write weekly report
+Weekly report
+Organize weekly report
+Organize work
+/weekly-report
+```
+
+---
+
+#### 🎯 [Priority Judge](./priority-judge)
+**Description**: Determine priorities from chaotic to-do items and decide what to do now
+
+**Use Cases**:
+- Have many things to do, don't know where to start
+- Want to quickly figure out what to do today/this week
+- Need to judge priorities based on objective criteria
+- Avoid wasting time on things not thought through
+
+**Core Features**:
+- 📝 Collect To-dos: Record all things to do
+- 🔍 Status Inquiry: Understand clarity and deadline of each item
+- ⚖️ Priority Judgment: Make decisions based on clarity and deadline
+- 🎯 Focus Action: Focus on only 1-2 most important things each time
+- 📋 Documentation: Generate priority list document
+
+**Trigger**:
+```
+I have many things to do
+Help me sort it out
+Prioritize
+What should I do today
+Let me review
+/priority-judge
+```
+
+---
+
 ### 🚀 Quick Start
 
 #### Installation
@@ -613,6 +733,12 @@ In Claude Code CLI, you can use them by:
 
 # Use Writing Assistant
 /writing-assistant
+
+# Use Weekly Report
+/weekly-report
+
+# Use Priority Judge
+/priority-judge
 ```
 
 Or simply describe your needs in conversation, and the relevant Skill will trigger automatically.
@@ -660,6 +786,10 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
     ├── SKILL.md               # Skill definition file
     ├── stages/                # Detailed stage descriptions
     └── templates/             # Template files
+├── weekly-report/             # Weekly Report
+│   └── SKILL.md              # Skill definition file
+└── priority-judge/            # Priority Judge
+    └── skill.md              # Skill definition file
 ```
 
 ---
