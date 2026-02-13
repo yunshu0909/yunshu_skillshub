@@ -273,6 +273,58 @@ MVP怎么做
 
 ---
 
+#### 🤝 [思考拍档](./thinking-partner) (Thinking Partner)
+**描述**: 陪你从混沌中理清局面，锁定核心问题，拆解卡点，共创解法，落地行动
+
+**适用场景**:
+- 面对复杂问题不知道从哪入手
+- 想法很多但理不清主次
+- 需要有人陪你一起想清楚
+- 避免陷入细节迷失方向
+
+**核心功能**:
+- 📝 信息获取：引导式提问，看清全局
+- 🎯 锁定核心问题：从一堆问题中找到最关键的那个
+- 🔍 拆解卡点：层层追问，找到真正的根因
+- 💡 共创解法：基于你的想法补充和修正
+- ✅ 落地计划：把讨论结论变成可执行的行动
+
+**触发方式**:
+```
+我现在很乱，帮我理一下
+这事我不知道怎么办
+陪我想想这个问题
+/thinking-partner
+```
+
+---
+
+#### 🎨 [UI 样式修改助手](./ui-design) (UI Design)
+**描述**: UI 样式修改协作流程。通过结构化流程减少沟通偏差，避免浪费 token
+
+**适用场景**:
+- 需要修改页面样式、布局
+- 调整间距、颜色、组件搭配
+- UI 细节优化和微调
+- 避免猜测式改代码
+
+**核心功能**:
+- 📸 截图定位：用截图确认当前状态
+- 📐 现状描述：ASCII 画出当前布局
+- 🎯 方案选择：提供 2-3 个可视化方案
+- 🛠️ 最小改动：只改选定方案涉及的部分
+- 🔄 微调迭代：执行具体的小修改
+
+**触发方式**:
+```
+改一下这个页面的布局
+调整这里的样式
+这个间距不太对
+/ui-design
+```
+
+---
+
 ### 🚀 快速开始
 
 #### 安装方式
@@ -335,6 +387,12 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 
 # 使用优先级判断助手
 /priority-judge
+
+# 使用思考拍档
+/thinking-partner
+
+# 使用 UI 样式修改助手
+/ui-design
 ```
 
 或者直接在对话中描述你的需求，相关 Skill 会自动触发。
@@ -384,8 +442,12 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
     └── templates/             # 模板文件
 ├── weekly-report/             # 周报写作助手
 │   └── SKILL.md              # Skill 定义文件
-└── priority-judge/            # 优先级判断助手
-    └── skill.md              # Skill 定义文件
+├── priority-judge/            # 优先级判断助手
+│   └── skill.md              # Skill 定义文件
+├── thinking-partner/          # 思考拍档
+│   └── SKILL.md              # Skill 定义文件
+└── ui-design/                 # UI 样式修改助手
+    └── SKILL.md              # Skill 定义文件
 ```
 
 ---
@@ -677,6 +739,58 @@ Let me review
 
 ---
 
+#### 🤝 [Thinking Partner](./thinking-partner)
+**Description**: Accompany you to clarify the situation from chaos, lock core problems, break down bottlenecks, co-create solutions, and land actions
+
+**Use Cases**:
+- Facing complex problems and don't know where to start
+- Have many ideas but can't sort out priorities
+- Need someone to think through things with you
+- Avoid getting lost in details and losing direction
+
+**Core Features**:
+- 📝 Information Gathering: Guided questioning to see the big picture
+- 🎯 Lock Core Problem: Find the most critical one from a bunch of problems
+- 🔍 Break Down Bottlenecks: Layer-by-layer questioning to find the real root cause
+- 💡 Co-create Solutions: Supplement and refine based on your ideas
+- ✅ Action Plan: Turn discussion conclusions into executable actions
+
+**Trigger**:
+```
+I'm confused now, help me sort it out
+I don't know what to do about this
+Think through this problem with me
+/thinking-partner
+```
+
+---
+
+#### 🎨 [UI Design Assistant](./ui-design)
+**Description**: UI style modification collaboration workflow. Reduce communication deviation and avoid wasting tokens through structured process
+
+**Use Cases**:
+- Need to modify page styles and layouts
+- Adjust spacing, colors, component combinations
+- UI detail optimization and fine-tuning
+- Avoid guessing when changing code
+
+**Core Features**:
+- 📸 Screenshot Positioning: Confirm current state with screenshots
+- 📐 Status Description: Draw current layout with ASCII
+- 🎯 Solution Selection: Provide 2-3 visualized solutions
+- 🛠️ Minimal Changes: Only change parts involved in selected solution
+- 🔄 Iterative Refinement: Execute specific small modifications
+
+**Trigger**:
+```
+Modify the layout of this page
+Adjust the style here
+The spacing is not quite right
+/ui-design
+```
+
+---
+
 ### 🚀 Quick Start
 
 #### Installation
@@ -739,6 +853,12 @@ In Claude Code CLI, you can use them by:
 
 # Use Priority Judge
 /priority-judge
+
+# Use Thinking Partner
+/thinking-partner
+
+# Use UI Design Assistant
+/ui-design
 ```
 
 Or simply describe your needs in conversation, and the relevant Skill will trigger automatically.
@@ -788,8 +908,12 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
     └── templates/             # Template files
 ├── weekly-report/             # Weekly Report
 │   └── SKILL.md              # Skill definition file
-└── priority-judge/            # Priority Judge
-    └── skill.md              # Skill definition file
+├── priority-judge/            # Priority Judge
+│   └── skill.md              # Skill definition file
+├── thinking-partner/          # Thinking Partner
+│   └── SKILL.md              # Skill definition file
+└── ui-design/                 # UI Design Assistant
+    └── SKILL.md              # Skill definition file
 ```
 
 ---
