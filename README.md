@@ -524,7 +524,7 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 │   ├── references/            # 模板和清单
 │   └── scripts/               # 辅助脚本
 ├── lesson-builder/             # 课程构建器
-│   └── skill.md               # Skill 定义文件
+│   └── SKILL.md               # Skill 定义文件
 ├── backlog-manager/            # 需求池管理
 │   └── SKILL.md               # Skill 定义文件
 ├── project-map-builder/        # 项目目录地图构建器
@@ -538,7 +538,7 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 ├── weekly-report/             # 周报写作助手
 │   └── SKILL.md              # Skill 定义文件
 ├── priority-judge/            # 优先级判断助手
-│   └── skill.md              # Skill 定义文件
+│   └── SKILL.md              # Skill 定义文件
 ├── thinking-partner/          # 思考拍档
 │   └── SKILL.md              # Skill 定义文件
 ├── ui-design/                 # UI 样式修改助手
