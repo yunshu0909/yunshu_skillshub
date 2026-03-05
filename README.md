@@ -379,6 +379,82 @@ MVP怎么做
 
 ---
 
+#### 🔮 [终局愿景探索](./vision-exploration) (Vision Exploration)
+**描述**: 帮你把模糊想法推演到最远的未来形态，输出 4~6 种维度完全不同的终局 HTML 原型
+
+**适用场景**:
+- 有个想法，想看看它最终能长成什么样
+- 需要发散思维，探索一个 idea 的多种可能性
+- 想在 PRD 之前先看到终局愿景
+- 需要投资人级别的视觉原型
+
+**核心功能**:
+- 🔍 价值挖掘：反复追问"为什么"，找到需求背后的核心诉求
+- 🎯 动机发现：识别真实用户使用场景
+- 🔄 演进推导：从最小可行版本推导自然演进路径
+- 🎨 终局渲染：输出 4~6 个自包含 HTML 原型，每个代表不同维度的终局形态
+- 📊 对比分析：生成演进路径图和终局对比表
+
+**触发方式**:
+```
+探索一下这个想法的终局
+帮我看看这个功能最终能长成什么
+/vision-exploration
+```
+
+---
+
+#### 🏷️ [产品命名助手](./product-naming) (Product Naming)
+**描述**: 通过结构化协作流程，从产品本质出发推导名字，避免拍脑袋起名
+
+**适用场景**:
+- 需要给产品/项目/模块起名字
+- 不想拍脑袋，想从品牌策略角度思考命名
+- 需要竞品命名调研支撑决策
+- 起了名字但不确定好不好
+
+**核心功能**:
+- 🔍 灵魂挖掘：理解产品本质、用户画像、品牌气质
+- ⚡ 约束提取：提炼核心语素，识别诉求之间的张力
+- 🛤️ 路线发散：推导 2~4 条不同的命名策略方向
+- 🏷️ 竞品验证：搜索同赛道产品命名规律，用数据支撑建议
+- 📌 最终确认：输出名称 + Slogan + 决策依据的完整结论
+
+**触发方式**:
+```
+帮我起个名字
+给项目取名
+产品命名
+/product-naming
+```
+
+---
+
+#### 🔧 [Issue 协作处理](./issue-triage) (Issue Triage)
+**描述**: GitHub Issue 分诊与回复工作流，系统化分析问题、定位根因、撰写专业回复
+
+**适用场景**:
+- 收到 GitHub Issue 需要分析和回复
+- 不确定 Issue 是 bug、架构局限还是功能请求
+- 需要量化修复成本来做决策
+- 想写出专业、诚恳的用户回复
+
+**核心功能**:
+- 🔍 代码诊断：沿调用链完整追踪，找到真正根因
+- 🏷️ 问题定性：区分 Bug / 架构局限 / 功能请求 / 使用疑问
+- ⚖️ 做不做决策：从改动范围、影响面、测试条件、变通方案四维评估
+- ✍️ 起草回复：三层结构——解释意图、说明影响、交代计划
+- 📮 发布：发评论、打标签、记录需求
+
+**触发方式**:
+```
+帮我处理这个 Issue
+分析一下这个 bug 报告
+/issue-triage
+```
+
+---
+
 #### 🔍 [GitHub 开源项目搜索助手](./github-repo-search) (GitHub Repo Search)
 **描述**: 帮助用户搜索和筛选 GitHub 开源项目，输出结构化推荐报告
 
@@ -483,6 +559,15 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 
 # 使用 GitHub 开源项目搜索助手
 /github-search
+
+# 使用终局愿景探索
+/vision-exploration
+
+# 使用产品命名助手
+/product-naming
+
+# 使用 Issue 协作处理
+/issue-triage
 ```
 
 或者直接在对话中描述你的需求，相关 Skill 会自动触发。
@@ -532,9 +617,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 ├── version-planner/            # 版本规划助手
 │   └── SKILL.md               # Skill 定义文件
 ├── writing-assistant/          # 写作助手
-    ├── SKILL.md               # Skill 定义文件
-    ├── stages/                # 各阶段详细说明
-    └── templates/             # 模板文件
+│   ├── SKILL.md               # Skill 定义文件
+│   ├── stages/                # 各阶段详细说明
+│   └── templates/             # 模板文件
 ├── weekly-report/             # 周报写作助手
 │   └── SKILL.md              # Skill 定义文件
 ├── priority-judge/            # 优先级判断助手
@@ -543,7 +628,13 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 │   └── SKILL.md              # Skill 定义文件
 ├── ui-design/                 # UI 样式修改助手
 │   └── SKILL.md              # Skill 定义文件
-└── github-repo-search/        # GitHub 开源项目搜索助手
+├── github-repo-search/        # GitHub 开源项目搜索助手
+│   └── SKILL.md              # Skill 定义文件
+├── vision-exploration/        # 终局愿景探索
+│   └── SKILL.md              # Skill 定义文件
+├── product-naming/            # 产品命名助手
+│   └── SKILL.md              # Skill 定义文件
+└── issue-triage/              # Issue 协作处理
     └── SKILL.md              # Skill 定义文件
 ```
 
@@ -942,6 +1033,82 @@ The spacing is not quite right
 
 ---
 
+#### 🔮 [Vision Exploration](./vision-exploration)
+**Description**: Explore the ultimate potential of your ideas, outputting 4-6 dimensionally different end-state HTML prototypes
+
+**Use Cases**:
+- Have an idea and want to see what it could ultimately become
+- Need divergent thinking to explore multiple possibilities
+- Want to see end-state visions before writing a PRD
+- Need investor-ready visual prototypes
+
+**Core Features**:
+- 🔍 Value Extraction: Repeatedly ask "why" to uncover the core need behind the requirement
+- 🎯 Motivation Discovery: Identify real user scenarios
+- 🔄 Evolution Derivation: Derive natural evolution path from minimum viable version
+- 🎨 End-State Rendering: Output 4-6 self-contained HTML prototypes, each representing a different dimensional end-state
+- 📊 Comparison Analysis: Generate evolution pathway diagram and end-state comparison table
+
+**Trigger**:
+```
+Explore the end-state of this idea
+What could this feature ultimately become
+/vision-exploration
+```
+
+---
+
+#### 🏷️ [Product Naming](./product-naming)
+**Description**: Structured collaborative workflow to derive product names from brand essence, avoiding random name generation
+
+**Use Cases**:
+- Need to name a product/project/module
+- Want to approach naming from a brand strategy perspective
+- Need competitive naming research to support decisions
+- Have a name but unsure if it's good
+
+**Core Features**:
+- 🔍 Soul Mining: Understand product essence, user persona, brand personality
+- ⚡ Constraint Extraction: Extract core semantic elements, identify tension between requirements
+- 🛤️ Route Divergence: Derive 2-4 different naming strategy directions
+- 🏷️ Competitive Validation: Research naming patterns in the same space, back suggestions with data
+- 📌 Final Confirmation: Output complete conclusion with name + slogan + decision rationale
+
+**Trigger**:
+```
+Help me name this
+Name this project
+Product naming
+/product-naming
+```
+
+---
+
+#### 🔧 [Issue Triage](./issue-triage)
+**Description**: GitHub Issue triage and response workflow for systematic analysis, root cause identification, and professional replies
+
+**Use Cases**:
+- Received a GitHub Issue that needs analysis and response
+- Unsure if an Issue is a bug, architectural limitation, or feature request
+- Need to quantify fix costs for decision-making
+- Want to write professional, honest user responses
+
+**Core Features**:
+- 🔍 Code Diagnosis: Trace the full call chain to find the real root cause
+- 🏷️ Issue Classification: Distinguish Bug / Architectural Limitation / Feature Request / Usage Question
+- ⚖️ Do/Don't Decision: Evaluate across 4 dimensions — change scope, impact area, test conditions, workaround feasibility
+- ✍️ Draft Reply: Three-layer structure — explain intent, describe impact, outline plans
+- 📮 Publish: Post comment, apply labels, record requirements
+
+**Trigger**:
+```
+Help me handle this Issue
+Analyze this bug report
+/issue-triage
+```
+
+---
+
 #### 🔍 [GitHub Repo Search](./github-repo-search)
 **Description**: Help users search and filter GitHub open source projects, output structured recommendation reports
 
@@ -1046,6 +1213,15 @@ In Claude Code CLI, you can use them by:
 
 # Use GitHub Repo Search
 /github-search
+
+# Use Vision Exploration
+/vision-exploration
+
+# Use Product Naming
+/product-naming
+
+# Use Issue Triage
+/issue-triage
 ```
 
 Or simply describe your needs in conversation, and the relevant Skill will trigger automatically.
@@ -1087,7 +1263,7 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 │   ├── references/            # Templates and checklists
 │   └── scripts/               # Helper scripts
 ├── lesson-builder/             # Lesson Builder
-│   └── skill.md               # Skill definition file
+│   └── SKILL.md               # Skill definition file
 ├── backlog-manager/            # Backlog Manager
 │   └── SKILL.md               # Skill definition file
 ├── project-map-builder/        # Project Map Builder
@@ -1101,12 +1277,18 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 ├── weekly-report/             # Weekly Report
 │   └── SKILL.md              # Skill definition file
 ├── priority-judge/            # Priority Judge
-│   └── skill.md              # Skill definition file
+│   └── SKILL.md              # Skill definition file
 ├── thinking-partner/          # Thinking Partner
 │   └── SKILL.md              # Skill definition file
 ├── ui-design/                 # UI Design Assistant
 │   └── SKILL.md              # Skill definition file
-└── github-repo-search/        # GitHub Repo Search
+├── github-repo-search/        # GitHub Repo Search
+│   └── SKILL.md              # Skill definition file
+├── vision-exploration/        # Vision Exploration
+│   └── SKILL.md              # Skill definition file
+├── product-naming/            # Product Naming
+│   └── SKILL.md              # Skill definition file
+└── issue-triage/              # Issue Triage
     └── SKILL.md              # Skill definition file
 ```
 
