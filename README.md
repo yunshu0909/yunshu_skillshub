@@ -482,6 +482,34 @@ MVP怎么做
 
 ---
 
+#### 🧠 [记忆系统初始化](./memory-init) (Memory Init)
+**描述**: 在当前目录下一键部署记忆系统，生成 CLAUDE.md、MEMORY.md 和 memory/ 目录
+
+**适用场景**:
+- 新项目需要搭建记忆系统
+- 希望 Claude 在多次对话间保持上下文连续性
+- 需要长期记忆 + 每日记忆的分层管理
+- 想让 Claude 像懂业务的同事一样协作
+
+**核心功能**:
+- 🔍 现有检查：自动检测已有文件，避免覆盖
+- 📝 交互收集：引导式收集角色、用途、风格偏好
+- 🤖 人设生成：根据用户信息定制 CLAUDE.md（人设 + 对话规则 + 记忆协议）
+- 📋 记忆模板：生成 MEMORY.md 长期记忆初始模板
+- 📁 目录创建：创建 memory/ 每日记忆目录
+- ⚡ Quick 模式：支持快速初始化，用默认模板直接生成
+
+**触发方式**:
+```
+初始化记忆
+搭建记忆
+memory init
+/memory-init
+/memory-init quick
+```
+
+---
+
 ### 🚀 快速开始
 
 #### 安装方式
@@ -568,6 +596,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 
 # 使用 Issue 协作处理
 /issue-triage
+
+# 使用记忆系统初始化
+/memory-init
 ```
 
 或者直接在对话中描述你的需求，相关 Skill 会自动触发。
@@ -634,7 +665,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 │   └── SKILL.md              # Skill 定义文件
 ├── product-naming/            # 产品命名助手
 │   └── SKILL.md              # Skill 定义文件
-└── issue-triage/              # Issue 协作处理
+├── issue-triage/              # Issue 协作处理
+│   └── SKILL.md              # Skill 定义文件
+└── memory-init/               # 记忆系统初始化
     └── SKILL.md              # Skill 定义文件
 ```
 
@@ -1136,6 +1169,34 @@ Open source project recommendations
 
 ---
 
+#### 🧠 [Memory Init](./memory-init)
+**Description**: One-click deployment of a memory system in the current directory, generating CLAUDE.md, MEMORY.md, and memory/ directory
+
+**Use Cases**:
+- New project needs a memory system setup
+- Want Claude to maintain context continuity across conversations
+- Need layered management of long-term memory + daily memory
+- Want Claude to collaborate like a knowledgeable colleague
+
+**Core Features**:
+- 🔍 Existing Check: Auto-detect existing files to avoid overwriting
+- 📝 Interactive Collection: Guided collection of role, usage, and style preferences
+- 🤖 Persona Generation: Customize CLAUDE.md based on user info (persona + conversation rules + memory protocol)
+- 📋 Memory Template: Generate initial MEMORY.md long-term memory template
+- 📁 Directory Creation: Create memory/ daily memory directory
+- ⚡ Quick Mode: Support quick initialization with default templates
+
+**Trigger**:
+```
+Initialize memory
+Set up memory
+memory init
+/memory-init
+/memory-init quick
+```
+
+---
+
 ### 🚀 Quick Start
 
 #### Installation
@@ -1222,6 +1283,9 @@ In Claude Code CLI, you can use them by:
 
 # Use Issue Triage
 /issue-triage
+
+# Use Memory Init
+/memory-init
 ```
 
 Or simply describe your needs in conversation, and the relevant Skill will trigger automatically.
@@ -1288,7 +1352,9 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 │   └── SKILL.md              # Skill definition file
 ├── product-naming/            # Product Naming
 │   └── SKILL.md              # Skill definition file
-└── issue-triage/              # Issue Triage
+├── issue-triage/              # Issue Triage
+│   └── SKILL.md              # Skill definition file
+└── memory-init/               # Memory Init
     └── SKILL.md              # Skill definition file
 ```
 

@@ -52,6 +52,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   - 批量生图脚本支持
   - 完整的风格块和 API 配置模板
 
+- 🧠 **记忆系统初始化** (Memory Init)
+  - 一键部署记忆系统：CLAUDE.md + MEMORY.md + memory/ 目录
+  - 交互式模式：引导式收集角色、用途、风格偏好
+  - Quick 模式：用默认模板快速生成，之后自行修改
+  - 自动检测已有文件，避免覆盖
+  - 固定记忆协议模板，保持跨项目一致性
+  - 支持长期记忆 + 每日记忆分层管理
+
 - 🔍 **GitHub 开源项目搜索助手** (GitHub Repo Search)
   - 四环节九步结构化流程：需求收敛 → 检索执行 → 质量精炼 → 交付迭代
   - 5-10 组检索词拆解，平衡召回率与相关性
