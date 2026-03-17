@@ -510,6 +510,35 @@ memory init
 
 ---
 
+#### 🚀 [一键推送 GitHub](./git-push) (Git Push)
+**描述**: 一键推送项目到 GitHub，覆盖首次推送、日常更新、版本发布三种模式
+
+**适用场景**:
+- 新项目需要从零推送到 GitHub
+- 日常改了文件需要快速 commit + push
+- 需要打 tag 和创建 Release 发版本
+- 担心把大文件或敏感内容推上去
+
+**核心功能**:
+- 🔍 环境检查：自动检测 git、gh CLI、登录状态、用户配置
+- 📂 大文件扫描：10MB+ 提醒、50MB+ 警告、100MB+ 强制排除
+- 🔒 敏感内容扫描：公开仓库自动检测密钥、证书、AI 记忆文件
+- 📝 .gitignore 生成：基于扫描结果智能生成，不覆盖已有规则
+- 🚀 三种模式：首次推送 / 日常更新 / 版本发布（tag + Release）
+- ⚡ 日常更新轻量化：只检查新增大文件，快进快出
+
+**触发方式**:
+```
+推到GitHub
+推送到GitHub
+推一下
+发版本
+打release
+/git-push
+```
+
+---
+
 ### 🚀 快速开始
 
 #### 安装方式
@@ -599,6 +628,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 
 # 使用记忆系统初始化
 /memory-init
+
+# 使用一键推送 GitHub
+/git-push
 ```
 
 或者直接在对话中描述你的需求，相关 Skill 会自动触发。
@@ -667,7 +699,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 │   └── SKILL.md              # Skill 定义文件
 ├── issue-triage/              # Issue 协作处理
 │   └── SKILL.md              # Skill 定义文件
-└── memory-init/               # 记忆系统初始化
+├── memory-init/               # 记忆系统初始化
+│   └── SKILL.md              # Skill 定义文件
+└── git-push/                  # 一键推送 GitHub
     └── SKILL.md              # Skill 定义文件
 ```
 
@@ -1197,6 +1231,34 @@ memory init
 
 ---
 
+#### 🚀 [Git Push](./git-push)
+**Description**: One-click push projects to GitHub. Auto-scan large files, generate .gitignore, init Git, create repo and push. Supports first push, daily updates, and version release modes
+
+**Use Cases**:
+- New project needs to be pushed to GitHub from scratch
+- Daily file changes need quick commit + push
+- Need to tag and create Release for versioning
+- Worried about pushing large files or sensitive content
+
+**Core Features**:
+- 🔍 Environment Check: Auto-detect git, gh CLI, login status, user config
+- 📂 Large File Scan: 10MB+ prompt, 50MB+ warning, 100MB+ forced exclusion
+- 🔒 Sensitive Content Scan: Auto-detect keys, certificates, AI memory files for public repos
+- 📝 .gitignore Generation: Smart generation based on scan results, preserves existing rules
+- 🚀 Three Modes: First push / Daily update / Version release (tag + Release)
+- ⚡ Lightweight Daily Updates: Only check new large files, quick in and out
+
+**Trigger**:
+```
+Push to GitHub
+Push it
+Release version
+Create release
+/git-push
+```
+
+---
+
 ### 🚀 Quick Start
 
 #### Installation
@@ -1286,6 +1348,9 @@ In Claude Code CLI, you can use them by:
 
 # Use Memory Init
 /memory-init
+
+# Use Git Push
+/git-push
 ```
 
 Or simply describe your needs in conversation, and the relevant Skill will trigger automatically.
@@ -1354,7 +1419,9 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 │   └── SKILL.md              # Skill definition file
 ├── issue-triage/              # Issue Triage
 │   └── SKILL.md              # Skill definition file
-└── memory-init/               # Memory Init
+├── memory-init/               # Memory Init
+│   └── SKILL.md              # Skill definition file
+└── git-push/                  # Git Push
     └── SKILL.md              # Skill definition file
 ```
 

@@ -52,6 +52,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   - 批量生图脚本支持
   - 完整的风格块和 API 配置模板
 
+- 🚀 **一键推送 GitHub** (Git Push)
+  - 覆盖完整生命周期：首次推送 / 日常更新 / 版本发布
+  - 大文件分级拦截：10MB+ 提醒、50MB+ 警告、100MB+ 强制排除
+  - 公开仓库敏感内容扫描（密钥、证书、AI 记忆文件）
+  - 智能 .gitignore 生成，不覆盖已有规则
+  - 版本发布支持 tag + Release + 附件
+  - 推送失败自动诊断和引导修复
+
 - 🧠 **记忆系统初始化** (Memory Init)
   - 一键部署记忆系统：CLAUDE.md + MEMORY.md + memory/ 目录
   - 交互式模式：引导式收集角色、用途、风格偏好
