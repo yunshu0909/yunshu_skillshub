@@ -10,6 +10,45 @@
 
 这是一个精心打造的 Claude Code Skills 集合，旨在提升软件开发和产品管理的效率。每个 Skill 都经过实战验证，帮助你在日常工作中更加高效。
 
+### 📊 Skills 总览
+
+目前共包含 **20 个 Skills**，分为以下 3 大类：
+
+#### 💻 AI 编程（12 个）
+| Skill | 说明 |
+|-------|------|
+| [PRD 文档撰写助手](./prd-doc-writer) | 故事驱动的需求文档撰写 |
+| [新功能设计探索](./design-exploration) | 从模糊想法到可交付设计稿 |
+| [需求变更工作流](./req-change-workflow) | 标准化需求变更流程 |
+| [需求池管理](./backlog-manager) | 需求收集、整理、筛选 |
+| [版本规划助手](./version-planner) | 需求拆解为渐进式版本 |
+| [终局愿景探索](./vision-exploration) | 探索想法的多种终局形态 |
+| [产品命名助手](./product-naming) | 从品牌本质推导产品名 |
+| [UI 样式修改助手](./ui-design) | 结构化 UI 样式修改流程 |
+| [Issue 协作处理](./issue-triage) | GitHub Issue 分诊与回复 |
+| [GitHub 项目搜索](./github-repo-search) | 搜索筛选开源项目 |
+| [项目目录地图构建器](./project-map-builder) | 生成项目目录说明文档 |
+| [一键推送 GitHub](./git-push) | 项目推送、日常更新、版本发布 |
+
+#### ✍️ 思考与写作（6 个）
+| Skill | 说明 |
+|-------|------|
+| [思维挖掘助手](./thought-mining) | 引导式对话，整理零散想法 |
+| [写作助手](./writing-assistant) | 从思维挖掘到成稿的完整流程 |
+| [内容挖掘助手](./content-miner) | 从实践经历中挖掘写作选题 |
+| [思考拍档](./thinking-partner) | 陪你理清局面、拆解卡点 |
+| [配图助手](./image-assistant) | 文章内容转信息图提示词 |
+| [课程构建器](./lesson-builder) | 讨论驱动的课程大纲与课件 |
+
+#### 💼 日常办公与效率（3 个）
+| Skill | 说明 |
+|-------|------|
+| [周报写作助手](./weekly-report) | 梳理周报，展示工作价值 |
+| [优先级判断助手](./priority-judge) | 从混沌待办中判断优先级 |
+| [记忆系统初始化](./memory-init) | 一键部署 AI 记忆系统 |
+
+---
+
 ### ✨ 包含的 Skills
 
 #### 🎨 [配图助手](./image-assistant) (Image Assistant)
@@ -730,6 +769,45 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 ### 📖 Introduction
 
 A carefully crafted collection of Claude Code Skills designed to boost efficiency in software development and product management. Each skill has been battle-tested to help you work more effectively in your daily tasks.
+
+### 📊 Skills Overview
+
+Currently includes **20 Skills** across 3 categories:
+
+#### 💻 AI Programming (12)
+| Skill | Description |
+|-------|-------------|
+| [PRD Doc Writer](./prd-doc-writer) | Story-driven requirement document writing |
+| [Design Exploration](./design-exploration) | From fuzzy ideas to deliverable design mockups |
+| [Requirement Change Workflow](./req-change-workflow) | Standardized requirement change process |
+| [Backlog Manager](./backlog-manager) | Requirement collection, organization, and selection |
+| [Version Planner](./version-planner) | Decompose requirements into progressive versions |
+| [Vision Exploration](./vision-exploration) | Explore multiple end-state possibilities |
+| [Product Naming](./product-naming) | Derive product names from brand essence |
+| [UI Design Assistant](./ui-design) | Structured UI style modification workflow |
+| [Issue Triage](./issue-triage) | GitHub Issue triage and response |
+| [GitHub Repo Search](./github-repo-search) | Search and filter open source projects |
+| [Project Map Builder](./project-map-builder) | Generate project directory documentation |
+| [Git Push](./git-push) | Project push, daily updates, version release |
+
+#### ✍️ Thinking & Writing (6)
+| Skill | Description |
+|-------|-------------|
+| [Thought Mining](./thought-mining) | Guided dialogue to organize scattered ideas |
+| [Writing Assistant](./writing-assistant) | Complete flow from thought mining to final draft |
+| [Content Miner](./content-miner) | Mine writing topics from your experiences |
+| [Thinking Partner](./thinking-partner) | Clarify situations and break down bottlenecks |
+| [Image Assistant](./image-assistant) | Convert content to infographic prompts |
+| [Lesson Builder](./lesson-builder) | Discussion-driven course outlines and materials |
+
+#### 💼 Daily Office & Productivity (3)
+| Skill | Description |
+|-------|-------------|
+| [Weekly Report](./weekly-report) | Organize weekly reports with clear value |
+| [Priority Judge](./priority-judge) | Determine priorities from chaotic to-dos |
+| [Memory Init](./memory-init) | One-click AI memory system deployment |
+
+---
 
 ### ✨ Included Skills
 
