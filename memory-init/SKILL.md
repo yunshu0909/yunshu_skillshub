@@ -1,6 +1,6 @@
 ---
 name: memory-init
-description: 在当前目录下初始化记忆系统，生成 CLAUDE.md、MEMORY.md 和 memory/ 目录。当用户说"初始化记忆"、"搭建记忆"、"memory init"、"/memory-init"时触发。
+description: 在当前目录下初始化记忆系统，生成 CLAUDE.md（可选 AGENT.md 给 Cursor 用）、MEMORY.md 和 memory/ 目录。当用户说"初始化记忆"、"搭建记忆"、"memory init"、"/memory-init"时触发。
 ---
 
 # 记忆系统初始化
@@ -22,7 +22,7 @@ description: 在当前目录下初始化记忆系统，生成 CLAUDE.md、MEMORY
 
 ### 第0步：检查现有文件
 
-先检查当前目录下是否已存在 CLAUDE.md、MEMORY.md 或 memory/ 目录。
+先检查当前目录下是否已存在 CLAUDE.md、AGENT.md、MEMORY.md 或 memory/ 目录。
 
 - 如果都不存在 → 正常初始化
 - 如果部分存在 → 告诉用户哪些已存在，问是要覆盖还是只补缺的
@@ -88,6 +88,19 @@ description: 在当前目录下初始化记忆系统，生成 CLAUDE.md、MEMORY
 
 ---
 
+### 第2.5步：询问是否生成 AGENT.md（给 Codex 用）
+
+生成 CLAUDE.md 之后，问用户：
+
+> "你还用 Codex 吗？要不要同时生成一份 AGENT.md？内容和 CLAUDE.md 一模一样，Codex 会自动读取 AGENT.md。"
+
+- 用户说要 → 把 CLAUDE.md 的内容原样复制一份为 AGENT.md
+- 用户说不要 → 跳过，继续下一步
+
+**AGENT.md 和 CLAUDE.md 内容完全相同**，唯一区别是文件名。CLAUDE.md 给 Claude Code 用，AGENT.md 给 Codex 用。
+
+---
+
 ### 第3步：生成 MEMORY.md
 
 创建初始的长期记忆文件：
@@ -127,7 +140,8 @@ mkdir -p memory/
 
 ```
 已生成：
-- CLAUDE.md（人设 + 记忆协议）
+- CLAUDE.md（人设 + 记忆协议，Claude Code 用）
+- AGENT.md（同上，Cursor 用）← 如果用户选了才显示这行
 - MEMORY.md（长期记忆）
 - memory/（每日记忆目录）
 
@@ -158,7 +172,7 @@ mkdir -p memory/
 
 ### 2. 不破坏已有内容
 
-如果目录下已有 CLAUDE.md，默认不覆盖。用户明确要求才覆盖。
+如果目录下已有 CLAUDE.md 或 AGENT.md，默认不覆盖。用户明确要求才覆盖。
 
 ### 3. 生成后立即可用
 
