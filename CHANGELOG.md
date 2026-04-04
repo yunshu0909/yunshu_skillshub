@@ -17,6 +17,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### 新增 / Added
+- 🔍 **多视角深度分析** (Multi-Perspective Analysis)
+  - 5 个内置思维框架视角：Dan Sullivan、Elon Musk、Naval Ravikant、张小龙、MrBeast
+  - Sub-agent 并行独立分析，互不可见
+  - 交叉汇总：共识（高可信度）+ 分歧（高价值洞察）+ 独家观点（盲区）
+  - 自动保存各视角报告 + 汇总报告到 `多视角分析/` 目录
+  - 支持自定义视角，通过 WebSearch 临时构建任意思想家/框架
+
 - 📦 **需求池管理** (Backlog Manager)
   - 6 步结构化流程：收集 → 归类 → 写入 → 整理 → 筛选 → 归档
   - 痛点驱动，不做假设性规划

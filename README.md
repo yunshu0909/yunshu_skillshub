@@ -12,7 +12,7 @@
 
 ### 📊 Skills 总览
 
-目前共包含 **20 个 Skills**，分为以下 3 大类：
+目前共包含 **21 个 Skills**，分为以下 3 大类：
 
 #### 💻 AI 编程（12 个）
 | Skill | 说明 |
@@ -30,13 +30,14 @@
 | [项目目录地图构建器](./project-map-builder) | 生成项目目录说明文档 |
 | [一键推送 GitHub](./git-push) | 项目推送、日常更新、版本发布 |
 
-#### ✍️ 思考与写作（6 个）
+#### ✍️ 思考与写作（7 个）
 | Skill | 说明 |
 |-------|------|
 | [思维挖掘助手](./thought-mining) | 引导式对话，整理零散想法 |
 | [写作助手](./writing-assistant) | 从思维挖掘到成稿的完整流程 |
 | [内容挖掘助手](./content-miner) | 从实践经历中挖掘写作选题 |
 | [思考拍档](./thinking-partner) | 陪你理清局面、拆解卡点 |
+| [多视角深度分析](./multi-perspective-analysis) | 多 Agent 并行分析，交叉汇总共识与分歧 |
 | [配图助手](./image-assistant) | 文章内容转信息图提示词 |
 | [课程构建器](./lesson-builder) | 讨论驱动的课程大纲与课件 |
 
@@ -549,6 +550,33 @@ memory init
 
 ---
 
+#### 🔍 [多视角深度分析](./multi-perspective-analysis) (Multi-Perspective Analysis)
+**描述**: 用多个 Sub-agent 分别扮演不同思维框架的顾问，对同一份素材做独立分析，然后交叉汇总共识与分歧，产出结构化诊断报告
+
+**适用场景**:
+- 个人/创作者月度复盘，想要多角度诊断
+- 产品策略需要不同思维框架的碰撞
+- 商业决策前想看清盲区和分歧
+- 内容增长方向需要多维度验证
+
+**核心功能**:
+- 🧠 5 个内置视角：Dan Sullivan（10x）、Elon Musk（第一性原理）、Naval（杠杆）、张小龙（产品直觉）、MrBeast（增长）
+- 🔀 并行分析：所有 Sub-agent 同时启动，完全独立，互不可见
+- 🔍 交叉汇总：找共识（高可信度）、找分歧（高价值洞察）、找独家观点（盲区）
+- 📝 自动保存：每个视角独立报告 + 汇总报告，自动写入文件
+- 🎯 自定义视角：支持通过 WebSearch 临时构建任意思想家/框架
+
+**触发方式**:
+```
+帮我多视角分析
+多维分析
+用多个视角看看
+帮我诊断一下
+/multi-perspective-analysis
+```
+
+---
+
 #### 🚀 [一键推送 GitHub](./git-push) (Git Push)
 **描述**: 一键推送项目到 GitHub，覆盖首次推送、日常更新、版本发布三种模式
 
@@ -668,6 +696,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 # 使用记忆系统初始化
 /memory-init
 
+# 使用多视角深度分析
+/multi-perspective-analysis
+
 # 使用一键推送 GitHub
 /git-push
 ```
@@ -738,6 +769,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 │   └── SKILL.md              # Skill 定义文件
 ├── issue-triage/              # Issue 协作处理
 │   └── SKILL.md              # Skill 定义文件
+├── multi-perspective-analysis/ # 多视角深度分析
+│   ├── SKILL.md              # Skill 定义文件
+│   └── reference/            # 5 个视角的分析框架语料
 ├── memory-init/               # 记忆系统初始化
 │   └── SKILL.md              # Skill 定义文件
 └── git-push/                  # 一键推送 GitHub
@@ -772,7 +806,7 @@ A carefully crafted collection of Claude Code Skills designed to boost efficienc
 
 ### 📊 Skills Overview
 
-Currently includes **20 Skills** across 3 categories:
+Currently includes **21 Skills** across 3 categories:
 
 #### 💻 AI Programming (12)
 | Skill | Description |
@@ -790,13 +824,14 @@ Currently includes **20 Skills** across 3 categories:
 | [Project Map Builder](./project-map-builder) | Generate project directory documentation |
 | [Git Push](./git-push) | Project push, daily updates, version release |
 
-#### ✍️ Thinking & Writing (6)
+#### ✍️ Thinking & Writing (7)
 | Skill | Description |
 |-------|-------------|
 | [Thought Mining](./thought-mining) | Guided dialogue to organize scattered ideas |
 | [Writing Assistant](./writing-assistant) | Complete flow from thought mining to final draft |
 | [Content Miner](./content-miner) | Mine writing topics from your experiences |
 | [Thinking Partner](./thinking-partner) | Clarify situations and break down bottlenecks |
+| [Multi-Perspective Analysis](./multi-perspective-analysis) | Parallel multi-agent analysis with cross-perspective synthesis |
 | [Image Assistant](./image-assistant) | Convert content to infographic prompts |
 | [Lesson Builder](./lesson-builder) | Discussion-driven course outlines and materials |
 
@@ -1309,6 +1344,32 @@ memory init
 
 ---
 
+#### 🔍 [Multi-Perspective Analysis](./multi-perspective-analysis)
+**Description**: Use multiple Sub-agents as advisors with different thinking frameworks, independently analyze the same material, then cross-reference to find consensus, divergence, and produce a structured diagnostic report
+
+**Use Cases**:
+- Personal/creator monthly review with multi-angle diagnosis
+- Product strategy needs collision of different thinking frameworks
+- Want to identify blind spots and divergence before business decisions
+- Content growth direction needs multi-dimensional validation
+
+**Core Features**:
+- 🧠 5 Built-in Perspectives: Dan Sullivan (10x), Elon Musk (First Principles), Naval (Leverage), Zhang Xiaolong (Product Intuition), MrBeast (Growth)
+- 🔀 Parallel Analysis: All Sub-agents launch simultaneously, fully independent, invisible to each other
+- 🔍 Cross-Synthesis: Find consensus (high confidence), divergence (high-value insights), and unique observations (blind spots)
+- 📝 Auto-Save: Individual perspective reports + summary report, automatically written to files
+- 🎯 Custom Perspectives: Support building any thinker/framework via WebSearch on the fly
+
+**Trigger**:
+```
+Multi-perspective analysis
+Analyze from multiple angles
+Help me diagnose this
+/multi-perspective-analysis
+```
+
+---
+
 #### 🚀 [Git Push](./git-push)
 **Description**: One-click push projects to GitHub. Auto-scan large files, generate .gitignore, init Git, create repo and push. Supports first push, daily updates, and version release modes
 
@@ -1427,6 +1488,9 @@ In Claude Code CLI, you can use them by:
 # Use Memory Init
 /memory-init
 
+# Use Multi-Perspective Analysis
+/multi-perspective-analysis
+
 # Use Git Push
 /git-push
 ```
@@ -1497,6 +1561,9 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 │   └── SKILL.md              # Skill definition file
 ├── issue-triage/              # Issue Triage
 │   └── SKILL.md              # Skill definition file
+├── multi-perspective-analysis/ # Multi-Perspective Analysis
+│   ├── SKILL.md              # Skill definition file
+│   └── reference/            # Analysis framework materials for 5 perspectives
 ├── memory-init/               # Memory Init
 │   └── SKILL.md              # Skill definition file
 └── git-push/                  # Git Push
