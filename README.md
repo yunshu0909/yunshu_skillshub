@@ -560,7 +560,7 @@ memory init
 - 内容增长方向需要多维度验证
 
 **核心功能**:
-- 🧠 5 个内置视角：Dan Sullivan（10x）、Elon Musk（第一性原理）、Naval（杠杆）、张小龙（产品直觉）、MrBeast（增长）
+- 🧠 10 个内置视角：Dan Sullivan、马斯克、张小龙、MrBeast、芒格、蒂尔、乔布斯、贝佐斯、张一鸣、任正非
 - 🔀 并行分析：所有 Sub-agent 同时启动，完全独立，互不可见
 - 🔍 交叉汇总：找共识（高可信度）、找分歧（高价值洞察）、找独家观点（盲区）
 - 📝 自动保存：每个视角独立报告 + 汇总报告，自动写入文件
@@ -1354,7 +1354,7 @@ memory init
 - Content growth direction needs multi-dimensional validation
 
 **Core Features**:
-- 🧠 5 Built-in Perspectives: Dan Sullivan (10x), Elon Musk (First Principles), Naval (Leverage), Zhang Xiaolong (Product Intuition), MrBeast (Growth)
+- 🧠 10 Built-in Perspectives: Dan Sullivan, Elon Musk, Zhang Xiaolong, MrBeast, Charlie Munger, Peter Thiel, Steve Jobs, Jeff Bezos, Zhang Yiming, Ren Zhengfei
 - 🔀 Parallel Analysis: All Sub-agents launch simultaneously, fully independent, invisible to each other
 - 🔍 Cross-Synthesis: Find consensus (high confidence), divergence (high-value insights), and unique observations (blind spots)
 - 📝 Auto-Save: Individual perspective reports + summary report, automatically written to files
