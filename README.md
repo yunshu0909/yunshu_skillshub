@@ -12,7 +12,7 @@
 
 ### 📊 Skills 总览
 
-目前共包含 **21 个 Skills**，分为以下 3 大类：
+目前共包含 **22 个 Skills**，分为以下 3 大类：
 
 #### 💻 AI 编程（12 个）
 | Skill | 说明 |
@@ -41,12 +41,13 @@
 | [配图助手](./image-assistant) | 文章内容转信息图提示词 |
 | [课程构建器](./lesson-builder) | 讨论驱动的课程大纲与课件 |
 
-#### 💼 日常办公与效率（3 个）
+#### 💼 日常办公与效率（4 个）
 | Skill | 说明 |
 |-------|------|
 | [周报写作助手](./weekly-report) | 梳理周报，展示工作价值 |
 | [优先级判断助手](./priority-judge) | 从混沌待办中判断优先级 |
 | [记忆系统初始化](./memory-init) | 一键部署 AI 记忆系统 |
+| [文件夹整理助手](./organize) | 扫描分类、清理冗余，整理混乱目录 |
 
 ---
 
@@ -577,6 +578,34 @@ memory init
 
 ---
 
+#### 🗂️ [文件夹整理助手](./organize) (Organize)
+**描述**: 帮助用户梳理混乱的文件夹，按归属分类、统一命名、清理冗余，让目录结构一目了然
+
+**适用场景**:
+- 根目录散落很多文件，找东西困难
+- 子目录命名风格不统一，看着难受
+- 工具产生的缓存/日志/临时文件堆积
+- 怀疑有重复文件但不确定
+
+**核心功能**:
+- 🔍 扫描全貌：罗列文件、目录、隐藏项，识别散落与命名不齐
+- 🏷️ 按归属分类：客户/内部/个人 优先于 文档/代码/设计 的格式分类
+- 📋 制定方案：输出目标结构 + 操作清单（新建/移动/重命名/删除/不动）
+- ✅ 确认后执行：必须用户确认才动手，删除项尤其谨慎
+- 🛡️ 已有结构不破坏：组织良好的子目录保持不动
+- 🔐 隐藏文件谨慎：只清理明确是缓存/日志的，配置目录不动
+- 🧮 重复文件先验证：md5 比对确认后才判定为重复
+
+**触发方式**:
+```
+整理文件
+文件夹好乱
+归档/清理目录
+/organize [可选路径]
+```
+
+---
+
 #### 🚀 [一键推送 GitHub](./git-push) (Git Push)
 **描述**: 一键推送项目到 GitHub，覆盖首次推送、日常更新、版本发布三种模式
 
@@ -701,6 +730,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 
 # 使用一键推送 GitHub
 /git-push
+
+# 使用文件夹整理助手
+/organize
 ```
 
 或者直接在对话中描述你的需求，相关 Skill 会自动触发。
@@ -774,7 +806,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 │   └── reference/            # 5 个视角的分析框架语料
 ├── memory-init/               # 记忆系统初始化
 │   └── SKILL.md              # Skill 定义文件
-└── git-push/                  # 一键推送 GitHub
+├── git-push/                  # 一键推送 GitHub
+│   └── SKILL.md              # Skill 定义文件
+└── organize/                  # 文件夹整理助手
     └── SKILL.md              # Skill 定义文件
 ```
 
@@ -806,7 +840,7 @@ A carefully crafted collection of Claude Code Skills designed to boost efficienc
 
 ### 📊 Skills Overview
 
-Currently includes **21 Skills** across 3 categories:
+Currently includes **22 Skills** across 3 categories:
 
 #### 💻 AI Programming (12)
 | Skill | Description |
@@ -835,12 +869,13 @@ Currently includes **21 Skills** across 3 categories:
 | [Image Assistant](./image-assistant) | Convert content to infographic prompts |
 | [Lesson Builder](./lesson-builder) | Discussion-driven course outlines and materials |
 
-#### 💼 Daily Office & Productivity (3)
+#### 💼 Daily Office & Productivity (4)
 | Skill | Description |
 |-------|-------------|
 | [Weekly Report](./weekly-report) | Organize weekly reports with clear value |
 | [Priority Judge](./priority-judge) | Determine priorities from chaotic to-dos |
 | [Memory Init](./memory-init) | One-click AI memory system deployment |
+| [Organize](./organize) | Scan, classify, and clean up messy folders |
 
 ---
 
@@ -1370,6 +1405,34 @@ Help me diagnose this
 
 ---
 
+#### 🗂️ [Organize](./organize)
+**Description**: Help users organize messy folders by classifying by ownership, unifying naming, and cleaning up redundancy
+
+**Use Cases**:
+- Many files scattered in root directory, hard to find things
+- Subdirectory naming styles are inconsistent and look messy
+- Tool-generated cache/log/temp files have piled up
+- Suspect duplicate files but not sure
+
+**Core Features**:
+- 🔍 Full Scan: List files, directories, hidden items; identify scattered and inconsistent naming
+- 🏷️ Classify by Ownership: Client/internal/personal takes priority over format-based grouping
+- 📋 Plan Proposal: Output target structure + operation list (create/move/rename/delete/keep)
+- ✅ Confirm Before Acting: Must get user approval before executing, especially for deletions
+- 🛡️ Preserve Existing Structure: Well-organized subdirectories remain untouched
+- 🔐 Cautious with Hidden Files: Only clean clear cache/log items, leave config dirs alone
+- 🧮 Verify Duplicates First: Use md5 to confirm before judging files as duplicates
+
+**Trigger**:
+```
+Organize files
+The folder is messy
+Archive / clean up
+/organize [optional path]
+```
+
+---
+
 #### 🚀 [Git Push](./git-push)
 **Description**: One-click push projects to GitHub. Auto-scan large files, generate .gitignore, init Git, create repo and push. Supports first push, daily updates, and version release modes
 
@@ -1493,6 +1556,9 @@ In Claude Code CLI, you can use them by:
 
 # Use Git Push
 /git-push
+
+# Use Organize
+/organize
 ```
 
 Or simply describe your needs in conversation, and the relevant Skill will trigger automatically.
@@ -1566,7 +1632,9 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 │   └── reference/            # Analysis framework materials for 5 perspectives
 ├── memory-init/               # Memory Init
 │   └── SKILL.md              # Skill definition file
-└── git-push/                  # Git Push
+├── git-push/                  # Git Push
+│   └── SKILL.md              # Skill definition file
+└── organize/                  # Organize
     └── SKILL.md              # Skill definition file
 ```
 

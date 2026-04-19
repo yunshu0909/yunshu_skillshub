@@ -17,6 +17,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### 新增 / Added
+- 🗂️ **文件夹整理助手** (Organize)
+  - 5 步结构化流程：扫描全貌 → 分析归属 → 制定方案 → 确认执行 → 展示结果
+  - 按归属（客户/内部/个人）优先于按格式分类
+  - 必须用户确认才执行，删除项尤其谨慎
+  - 已组织良好的子目录保持不动，避免破坏现有结构
+  - 隐藏文件谨慎处理，只清理明确的缓存/日志
+  - 重复文件 md5 比对验证后才判定
+
 - 🔍 **多视角深度分析** (Multi-Perspective Analysis)
   - 5 个内置思维框架视角：Dan Sullivan、Elon Musk、Naval Ravikant、张小龙、MrBeast
   - Sub-agent 并行独立分析，互不可见
