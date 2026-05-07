@@ -12,9 +12,9 @@
 
 ### 📊 Skills 总览
 
-目前共包含 **22 个 Skills**，分为以下 3 大类：
+目前共包含 **25 个 Skills**，分为以下 3 大类：
 
-#### 💻 AI 编程（12 个）
+#### 💻 AI 编程（14 个）
 | Skill | 说明 |
 |-------|------|
 | [PRD 文档撰写助手](./prd-doc-writer) | 故事驱动的需求文档撰写 |
@@ -25,6 +25,8 @@
 | [终局愿景探索](./vision-exploration) | 探索想法的多种终局形态 |
 | [产品命名助手](./product-naming) | 从品牌本质推导产品名 |
 | [UI 样式修改助手](./ui-design) | 结构化 UI 样式修改流程 |
+| [macOS 产品设计专家](./macos-product-design) (Beta) | macOS 原生风格 HTML/CSS 设计稿 |
+| [PRD 自动化测试闭环](./prd-auto-test-loop) (Beta) | PRD 驱动的测试计划与自测报告 |
 | [Issue 协作处理](./issue-triage) | GitHub Issue 分诊与回复 |
 | [GitHub 项目搜索](./github-repo-search) | 搜索筛选开源项目 |
 | [项目目录地图构建器](./project-map-builder) | 生成项目目录说明文档 |
@@ -41,13 +43,14 @@
 | [配图助手](./image-assistant) | 文章内容转信息图提示词 |
 | [课程构建器](./lesson-builder) | 讨论驱动的课程大纲与课件 |
 
-#### 💼 日常办公与效率（4 个）
+#### 💼 日常办公与效率（5 个）
 | Skill | 说明 |
 |-------|------|
 | [周报写作助手](./weekly-report) | 梳理周报，展示工作价值 |
 | [优先级判断助手](./priority-judge) | 从混沌待办中判断优先级 |
 | [记忆系统初始化](./memory-init) | 一键部署 AI 记忆系统 |
 | [文件夹整理助手](./organize) | 扫描分类、清理冗余，整理混乱目录 |
+| [复杂长程任务自主执行](./auto-task) (Beta) | 1-2 小时无人值守自主跑长任务 |
 
 ---
 
@@ -606,6 +609,94 @@ memory init
 
 ---
 
+#### 🤖 [复杂长程任务自主执行](./auto-task) (Auto Task) **(Beta)**
+**描述**: 复杂长程任务的自主执行流程。AI 自己拆解、自己执行、自己校验，1-2 小时无人值守跑长任务
+
+**适用场景**:
+- 任务复杂或模糊，需要拆解才能跑
+- 答案不在脑子里，AI 要跑工具/调研/分析才能得出
+- 时间跨度长（多步、多工具、可能要 sub-agent）
+- 希望 AI 自驱，少打扰
+
+**核心功能**:
+- 📋 任务确认：先重述理解再开始，对齐边界和产出形态
+- 🗂️ 任务队列：TASK.md 作为单一真源，每跑一批主动校验
+- ⚡ 分批执行：自由调度 WebSearch / Bash / Sub-agent / MCP / 并行
+- 🔁 周期校验：立场跟着证据走，不是补充原立场
+- 📣 触发式汇报：默认不打扰，只在关键节点停下找用户
+- 🧪 诚实声明：测试/评估类任务标注数据来源、是否盲测、潜在污染
+
+**触发方式**:
+```
+帮我搞清楚 X
+评估一下这事可不可行
+帮我跑一次调研
+你自己跑别打扰我
+/auto-task
+```
+
+> ⚠️ **测试版**：当前为 Beta，欢迎使用并反馈问题。
+
+---
+
+#### 🍎 [macOS 产品设计专家](./macos-product-design) (macOS Product Design) **(Beta)**
+**描述**: 根据需求描述输出符合 macOS 原生风格的 HTML/CSS 设计稿，可直接在浏览器中预览
+
+**适用场景**:
+- 需要快速画出符合 macOS 原生风格的产品原型
+- 想要可直接预览的 HTML 设计稿
+- 需要遵循统一设计系统的多页面输出
+- 暗色主题为主的桌面端界面设计
+
+**核心功能**:
+- 📐 设计系统对齐：基于 macos-design-system.md 的 CSS 变量与组件模板
+- 🤖 Sub-agent 出稿：独立 sub-agent 严格按设计系统输出完整 HTML
+- 🌑 暗色优先：默认暗色主题，所有交互元素带 hover 状态
+- 📁 版本化输出：写入 design/ 目录，支持 v1 / v2 多版本迭代
+- 🔄 主对话迭代：出稿后直接在主对话里改细节，无需重启 sub-agent
+
+**触发方式**:
+```
+帮我设计一个界面
+做个页面
+产品设计 / UI 设计
+画个原型
+/macos-product-design
+```
+
+> ⚠️ **测试版**：当前为 Beta，欢迎使用并反馈问题。
+
+---
+
+#### 🧪 [PRD 自动化测试闭环](./prd-auto-test-loop) (PRD Auto Test Loop) **(Beta)**
+**描述**: PRD 驱动的自动化测试编排技能。把每版 PRD 的测试计划、AI 自测与自修复、测试报告标准化落地
+
+**适用场景**:
+- 每个 PRD 版本要发布前都需要测试闭环
+- 想把 Unit / Integration / E2E 分层做规范
+- 需要划分自动化与人工验证的边界
+- 想要版本化的 TEST_PLAN / TEST_REPORT 文档
+
+**核心功能**:
+- 📋 范围锁定：从 PRD 提取版本目标、测试范围、非范围、验收标准
+- 🧱 分层映射：验收标准映射到 Unit / Integration / E2E，标记 A/H/A+H
+- 📂 版本化目录：自动化测试/<version>/ 下生成 TEST_PLAN.md、TEST_REPORT.md
+- 🔁 主回归 + 增量：跨版本维护主回归基线，仅新增 PRD 差异用例
+- 🤖 AI 自测自修复：固定顺序 Unit → Integration → E2E，失败按根因重跑（最多 3 轮）
+- 🚦 发布门禁：报告输出 PASS / FAIL 结论与人工补测项
+
+**触发方式**:
+```
+帮我做这个版本的测试计划
+跑一下 PRD 的自动化测试
+生成 TEST_PLAN / TEST_REPORT
+/prd-auto-test-loop
+```
+
+> ⚠️ **测试版**：当前为 Beta，欢迎使用并反馈问题。
+
+---
+
 #### 🚀 [一键推送 GitHub](./git-push) (Git Push)
 **描述**: 一键推送项目到 GitHub，覆盖首次推送、日常更新、版本发布三种模式
 
@@ -733,6 +824,15 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 
 # 使用文件夹整理助手
 /organize
+
+# 使用复杂长程任务自主执行 (Beta)
+/auto-task
+
+# 使用 macOS 产品设计专家 (Beta)
+/macos-product-design
+
+# 使用 PRD 自动化测试闭环 (Beta)
+/prd-auto-test-loop
 ```
 
 或者直接在对话中描述你的需求，相关 Skill 会自动触发。
@@ -808,8 +908,18 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 │   └── SKILL.md              # Skill 定义文件
 ├── git-push/                  # 一键推送 GitHub
 │   └── SKILL.md              # Skill 定义文件
-└── organize/                  # 文件夹整理助手
-    └── SKILL.md              # Skill 定义文件
+├── organize/                  # 文件夹整理助手
+│   └── SKILL.md              # Skill 定义文件
+├── auto-task/                 # 复杂长程任务自主执行 (Beta)
+│   └── SKILL.md              # Skill 定义文件
+├── macos-product-design/      # macOS 产品设计专家 (Beta)
+│   ├── SKILL.md              # Skill 定义文件
+│   └── reference/            # macOS 设计系统规范
+└── prd-auto-test-loop/        # PRD 自动化测试闭环 (Beta)
+    ├── SKILL.md              # Skill 定义文件
+    ├── agents/               # 测试 Agent
+    ├── references/           # 测试封装指南
+    └── scripts/              # 辅助脚本
 ```
 
 ---
@@ -840,9 +950,9 @@ A carefully crafted collection of Claude Code Skills designed to boost efficienc
 
 ### 📊 Skills Overview
 
-Currently includes **22 Skills** across 3 categories:
+Currently includes **25 Skills** across 3 categories:
 
-#### 💻 AI Programming (12)
+#### 💻 AI Programming (14)
 | Skill | Description |
 |-------|-------------|
 | [PRD Doc Writer](./prd-doc-writer) | Story-driven requirement document writing |
@@ -853,6 +963,8 @@ Currently includes **22 Skills** across 3 categories:
 | [Vision Exploration](./vision-exploration) | Explore multiple end-state possibilities |
 | [Product Naming](./product-naming) | Derive product names from brand essence |
 | [UI Design Assistant](./ui-design) | Structured UI style modification workflow |
+| [macOS Product Design](./macos-product-design) (Beta) | macOS-native HTML/CSS design mockups |
+| [PRD Auto Test Loop](./prd-auto-test-loop) (Beta) | PRD-driven test plan and self-test reports |
 | [Issue Triage](./issue-triage) | GitHub Issue triage and response |
 | [GitHub Repo Search](./github-repo-search) | Search and filter open source projects |
 | [Project Map Builder](./project-map-builder) | Generate project directory documentation |
@@ -869,13 +981,14 @@ Currently includes **22 Skills** across 3 categories:
 | [Image Assistant](./image-assistant) | Convert content to infographic prompts |
 | [Lesson Builder](./lesson-builder) | Discussion-driven course outlines and materials |
 
-#### 💼 Daily Office & Productivity (4)
+#### 💼 Daily Office & Productivity (5)
 | Skill | Description |
 |-------|-------------|
 | [Weekly Report](./weekly-report) | Organize weekly reports with clear value |
 | [Priority Judge](./priority-judge) | Determine priorities from chaotic to-dos |
 | [Memory Init](./memory-init) | One-click AI memory system deployment |
 | [Organize](./organize) | Scan, classify, and clean up messy folders |
+| [Auto Task](./auto-task) (Beta) | Run long-horizon tasks unattended for 1-2 hours |
 
 ---
 
@@ -1433,6 +1546,94 @@ Archive / clean up
 
 ---
 
+#### 🤖 [Auto Task](./auto-task) **(Beta)**
+**Description**: Autonomous execution flow for complex, long-horizon tasks. The AI breaks them down, executes, and self-verifies — running for 1-2 hours unattended
+
+**Use Cases**:
+- Task is complex or fuzzy and needs decomposition to run
+- The answer is not in the user's head — AI must run tools/research/analysis
+- Long time horizon (multi-step, multi-tool, possibly sub-agents)
+- User wants AI to drive autonomously with minimal interruption
+
+**Core Features**:
+- 📋 Task Confirmation: Restate understanding to align scope and output form before starting
+- 🗂️ Task Queue: TASK.md as single source of truth, validated after each batch
+- ⚡ Batch Execution: Freely orchestrate WebSearch / Bash / Sub-agent / MCP / parallel tools
+- 🔁 Periodic Validation: Position follows evidence — not appended to original stance
+- 📣 Trigger-based Reporting: Default no interruption, only stop at key nodes
+- 🧪 Honesty Declaration: Test/eval tasks must declare data source, blind-test status, contamination
+
+**Trigger**:
+```
+Help me figure out X
+Evaluate whether this is feasible
+Run a research for me
+Run on your own, don't bother me
+/auto-task
+```
+
+> ⚠️ **Beta**: This is a beta release. Feedback is welcome.
+
+---
+
+#### 🍎 [macOS Product Design](./macos-product-design) **(Beta)**
+**Description**: Output macOS-native HTML/CSS design mockups based on requirement descriptions, directly previewable in browser
+
+**Use Cases**:
+- Need to quickly produce macOS-native style product prototypes
+- Want directly-previewable HTML mockups
+- Need multi-page output following a unified design system
+- Dark-theme-first desktop UI design
+
+**Core Features**:
+- 📐 Design System Alignment: Based on macos-design-system.md CSS variables and component templates
+- 🤖 Sub-agent Output: Independent sub-agent strictly outputs complete HTML per design system
+- 🌑 Dark First: Default dark theme, all interactive elements have hover states
+- 📁 Versioned Output: Written to design/ directory, supports v1 / v2 iteration
+- 🔄 Main-thread Iteration: After initial output, iterate directly in main conversation without re-launching sub-agent
+
+**Trigger**:
+```
+Help me design a UI
+Make a page
+Product design / UI design
+Sketch a prototype
+/macos-product-design
+```
+
+> ⚠️ **Beta**: This is a beta release. Feedback is welcome.
+
+---
+
+#### 🧪 [PRD Auto Test Loop](./prd-auto-test-loop) **(Beta)**
+**Description**: PRD-driven automated testing orchestration. Standardize per-PRD test plans, AI self-testing/self-fixing, and test reports
+
+**Use Cases**:
+- Each PRD release needs a closed-loop test cycle
+- Want to standardize Unit / Integration / E2E layering
+- Need to delineate boundaries between automation and manual verification
+- Want versioned TEST_PLAN / TEST_REPORT documents
+
+**Core Features**:
+- 📋 Scope Locking: Extract version goal, scope, non-scope, and acceptance criteria from PRD
+- 🧱 Layer Mapping: Map acceptance criteria to Unit / Integration / E2E, tag A/H/A+H
+- 📂 Versioned Directory: Generate TEST_PLAN.md, TEST_REPORT.md under 自动化测试/<version>/
+- 🔁 Main Regression + Increment: Maintain main regression baseline across versions, only add PRD-specific cases
+- 🤖 AI Self-test & Self-fix: Fixed order Unit → Integration → E2E, retry up to 3 rounds on root-cause fix
+- 🚦 Release Gating: Reports output PASS / FAIL conclusion plus manual coverage list
+
+**Trigger**:
+```
+Make a test plan for this version
+Run automated tests for this PRD
+Generate TEST_PLAN / TEST_REPORT
+/prd-auto-test-loop
+```
+
+> ⚠️ **Beta**: This is a beta release. Feedback is welcome.
+
+---
+
 #### 🚀 [Git Push](./git-push)
 **Description**: One-click push projects to GitHub. Auto-scan large files, generate .gitignore, init Git, create repo and push. Supports first push, daily updates, and version release modes
 
@@ -1559,6 +1760,15 @@ In Claude Code CLI, you can use them by:
 
 # Use Organize
 /organize
+
+# Use Auto Task (Beta)
+/auto-task
+
+# Use macOS Product Design (Beta)
+/macos-product-design
+
+# Use PRD Auto Test Loop (Beta)
+/prd-auto-test-loop
 ```
 
 Or simply describe your needs in conversation, and the relevant Skill will trigger automatically.
@@ -1634,8 +1844,18 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 │   └── SKILL.md              # Skill definition file
 ├── git-push/                  # Git Push
 │   └── SKILL.md              # Skill definition file
-└── organize/                  # Organize
-    └── SKILL.md              # Skill definition file
+├── organize/                  # Organize
+│   └── SKILL.md              # Skill definition file
+├── auto-task/                 # Auto Task (Beta)
+│   └── SKILL.md              # Skill definition file
+├── macos-product-design/      # macOS Product Design (Beta)
+│   ├── SKILL.md              # Skill definition file
+│   └── reference/            # macOS design system spec
+└── prd-auto-test-loop/        # PRD Auto Test Loop (Beta)
+    ├── SKILL.md              # Skill definition file
+    ├── agents/               # Test agents
+    ├── references/           # Test packaging guide
+    └── scripts/              # Helper scripts
 ```
 
 ---

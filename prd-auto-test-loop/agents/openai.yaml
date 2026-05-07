@@ -1,0 +1,3 @@
+interface:
+  display_name: "PRD 自动化测试闭环"
+  short_description: "基于 PRD 生成版本化测试计划与测试报告"

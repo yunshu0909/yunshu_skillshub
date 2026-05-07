@@ -17,6 +17,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### 新增 / Added
+- 🤖 **复杂长程任务自主执行** (Auto Task) **[Beta]**
+  - 任务确认 → 任务队列 → 分批执行 → 周期校验 → 触发式汇报
+  - TASK.md 作为任务队列的单一真源
+  - 默认不打扰用户，只在关键节点触发汇报
+  - 1-2 小时无人值守自主跑长任务
+  - 工具完全自由：WebSearch / Bash / Sub-agent / MCP / 并行调用
+
+- 🍎 **macOS 产品设计专家** (macOS Product Design) **[Beta]**
+  - 输出符合 macOS 原生风格的 HTML/CSS 设计稿，可直接浏览器预览
+  - 基于 macos-design-system.md 的 CSS 变量与组件模板
+  - 独立 sub-agent 出稿，主对话直接迭代细节
+  - 默认暗色主题，所有交互元素带 hover 状态
+  - 版本化输出到 design/ 目录
+
+- 🧪 **PRD 自动化测试闭环** (PRD Auto Test Loop) **[Beta]**
+  - PRD 驱动的测试编排：测试计划 + AI 自测自修复 + 测试报告标准化
+  - 主回归基线 + PRD 增量测试的双轨结构
+  - Unit / Integration / E2E 分层映射，标记 A/H/A+H 自动化边界
+  - 自动化测试/<version>/ 版本化目录，输出 TEST_PLAN.md、TEST_REPORT.md
+  - AI 自测固定顺序，失败按根因修复重跑（最多 3 轮）
+  - 发布门禁结论：PASS / FAIL + 人工补测项
+
 - 🗂️ **文件夹整理助手** (Organize)
   - 5 步结构化流程：扫描全貌 → 分析归属 → 制定方案 → 确认执行 → 展示结果
   - 按归属（客户/内部/个人）优先于按格式分类
