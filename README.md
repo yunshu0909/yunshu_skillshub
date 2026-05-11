@@ -12,7 +12,7 @@
 
 ### 📊 Skills 总览
 
-目前共包含 **25 个 Skills**，分为以下 3 大类：
+目前共包含 **26 个 Skills**，分为以下 3 大类：
 
 #### 💻 AI 编程（14 个）
 | Skill | 说明 |
@@ -32,7 +32,7 @@
 | [项目目录地图构建器](./project-map-builder) | 生成项目目录说明文档 |
 | [一键推送 GitHub](./git-push) | 项目推送、日常更新、版本发布 |
 
-#### ✍️ 思考与写作（7 个）
+#### ✍️ 思考与写作（8 个）
 | Skill | 说明 |
 |-------|------|
 | [思维挖掘助手](./thought-mining) | 引导式对话，整理零散想法 |
@@ -40,6 +40,7 @@
 | [内容挖掘助手](./content-miner) | 从实践经历中挖掘写作选题 |
 | [思考拍档](./thinking-partner) | 陪你理清局面、拆解卡点 |
 | [多视角深度分析](./multi-perspective-analysis) | 多 Agent 并行分析，交叉汇总共识与分歧 |
+| [输出工程](./readable-output) | 4 问挖掘 + 6 阶段框架，产可读性高的 HTML 长文 |
 | [配图助手](./image-assistant) | 文章内容转信息图提示词 |
 | [课程构建器](./lesson-builder) | 讨论驱动的课程大纲与课件 |
 
@@ -697,6 +698,37 @@ memory init
 
 ---
 
+#### 📖 [输出工程](./readable-output) (Readable Output)
+**描述**: 把"想清楚再输出"的通用逻辑封装成思考清单 + 强制 4 问挖掘，专门用来产可读性高的 HTML 长文
+
+**适用场景**:
+- 做复盘 / 总结 / 汇总 / 整理一堆素材
+- 做教程 / 学习指南 / 上手文档
+- 把某事讲清楚，整理成可读 HTML
+- 任何 > 500 字、要给人读的结构化阅读内容
+
+**核心功能**:
+- 🎯 强制 4 问：受众 / 终点 / 长度 / 风格 + 侧重，一次 AskUserQuestion 问清
+- 🧭 Backward design：先定"读完拿什么可复用工具"（对照表/判断框架/决策路径/口诀），再倒推内容
+- 📐 6 阶段框架：定终点 → 抓核心（≤3 个）→ 选主结构（不叠加）→ 写（TL;DR + 论点句 + 反例 + 出口）→ 自检
+- 📋 配置确认条：HTML 顶部自动写入「本次配置」，扫一眼知道按什么基准产的
+- 🚫 内置反模式清单：列菜单不给推荐 / TL;DR 埋中间 / 5 点并列 / 主视觉叠加等高频陷阱
+- 🧪 自检 4 问：不懂的人看得懂吗 / 一周后能复述吗 / 砍一半还说得通吗 / 每段在一屏内吗
+- 📦 写完自动 `open` 在浏览器打开 review
+
+**触发方式**:
+```
+做个复盘
+汇总一下
+总结这堆
+整理成 HTML
+做个教程 / 学习指南
+把 X 讲清楚
+/readable-output
+```
+
+---
+
 #### 🚀 [一键推送 GitHub](./git-push) (Git Push)
 **描述**: 一键推送项目到 GitHub，覆盖首次推送、日常更新、版本发布三种模式
 
@@ -833,6 +865,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 
 # 使用 PRD 自动化测试闭环 (Beta)
 /prd-auto-test-loop
+
+# 使用输出工程
+/readable-output
 ```
 
 或者直接在对话中描述你的需求，相关 Skill 会自动触发。
@@ -915,11 +950,13 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 ├── macos-product-design/      # macOS 产品设计专家 (Beta)
 │   ├── SKILL.md              # Skill 定义文件
 │   └── reference/            # macOS 设计系统规范
-└── prd-auto-test-loop/        # PRD 自动化测试闭环 (Beta)
-    ├── SKILL.md              # Skill 定义文件
-    ├── agents/               # 测试 Agent
-    ├── references/           # 测试封装指南
-    └── scripts/              # 辅助脚本
+├── prd-auto-test-loop/        # PRD 自动化测试闭环 (Beta)
+│   ├── SKILL.md              # Skill 定义文件
+│   ├── agents/               # 测试 Agent
+│   ├── references/           # 测试封装指南
+│   └── scripts/              # 辅助脚本
+└── readable-output/           # 输出工程
+    └── SKILL.md              # Skill 定义文件
 ```
 
 ---
@@ -950,7 +987,7 @@ A carefully crafted collection of Claude Code Skills designed to boost efficienc
 
 ### 📊 Skills Overview
 
-Currently includes **25 Skills** across 3 categories:
+Currently includes **26 Skills** across 3 categories:
 
 #### 💻 AI Programming (14)
 | Skill | Description |
@@ -970,7 +1007,7 @@ Currently includes **25 Skills** across 3 categories:
 | [Project Map Builder](./project-map-builder) | Generate project directory documentation |
 | [Git Push](./git-push) | Project push, daily updates, version release |
 
-#### ✍️ Thinking & Writing (7)
+#### ✍️ Thinking & Writing (8)
 | Skill | Description |
 |-------|-------------|
 | [Thought Mining](./thought-mining) | Guided dialogue to organize scattered ideas |
@@ -978,6 +1015,7 @@ Currently includes **25 Skills** across 3 categories:
 | [Content Miner](./content-miner) | Mine writing topics from your experiences |
 | [Thinking Partner](./thinking-partner) | Clarify situations and break down bottlenecks |
 | [Multi-Perspective Analysis](./multi-perspective-analysis) | Parallel multi-agent analysis with cross-perspective synthesis |
+| [Readable Output](./readable-output) | 4-question intake + 6-stage framework, produce highly readable HTML long-form content |
 | [Image Assistant](./image-assistant) | Convert content to infographic prompts |
 | [Lesson Builder](./lesson-builder) | Discussion-driven course outlines and materials |
 
@@ -1634,6 +1672,37 @@ Generate TEST_PLAN / TEST_REPORT
 
 ---
 
+#### 📖 [Readable Output](./readable-output)
+**Description**: Wraps the universal "think before you output" logic into a checklist + forced 4-question intake, dedicated to producing highly readable HTML long-form content
+
+**Use Cases**:
+- Retrospectives / summaries / aggregations / organizing piles of material
+- Tutorials / learning guides / onboarding docs
+- Explaining something clearly as a readable HTML doc
+- Any > 500-word structured reading content meant for human readers
+
+**Core Features**:
+- 🎯 Forced 4-Question Intake: Audience / Endpoint / Length / Style + Focus, asked in one AskUserQuestion call
+- 🧭 Backward Design: First define "what reusable tool the reader leaves with" (comparison table / decision framework / decision path / mnemonic), then work backward
+- 📐 6-Stage Framework: Define endpoint → Pick ≤3 core points → Choose primary structure (no stacking) → Write (TL;DR + topic sentences + counter-examples + exit) → Self-check
+- 📋 Config Banner: HTML automatically inserts a "This run's config" bar at the top so the user can see the basis at a glance
+- 🚫 Built-in Anti-pattern List: Listing menus without recommendation / TL;DR buried mid-doc / 5 parallel points / stacked primary visuals — common traps to avoid
+- 🧪 4 Self-check Questions: Can a beginner follow it / Can the reader recite the core a week later / Does it still work at half the length / Does each section fit on one screen
+- 📦 Auto `open` in browser after writing for review
+
+**Trigger**:
+```
+Make a retrospective
+Summarize this
+Aggregate this batch
+Organize into HTML
+Make a tutorial / learning guide
+Explain X clearly
+/readable-output
+```
+
+---
+
 #### 🚀 [Git Push](./git-push)
 **Description**: One-click push projects to GitHub. Auto-scan large files, generate .gitignore, init Git, create repo and push. Supports first push, daily updates, and version release modes
 
@@ -1769,6 +1838,9 @@ In Claude Code CLI, you can use them by:
 
 # Use PRD Auto Test Loop (Beta)
 /prd-auto-test-loop
+
+# Use Readable Output
+/readable-output
 ```
 
 Or simply describe your needs in conversation, and the relevant Skill will trigger automatically.
@@ -1851,11 +1923,13 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 ├── macos-product-design/      # macOS Product Design (Beta)
 │   ├── SKILL.md              # Skill definition file
 │   └── reference/            # macOS design system spec
-└── prd-auto-test-loop/        # PRD Auto Test Loop (Beta)
-    ├── SKILL.md              # Skill definition file
-    ├── agents/               # Test agents
-    ├── references/           # Test packaging guide
-    └── scripts/              # Helper scripts
+├── prd-auto-test-loop/        # PRD Auto Test Loop (Beta)
+│   ├── SKILL.md              # Skill definition file
+│   ├── agents/               # Test agents
+│   ├── references/           # Test packaging guide
+│   └── scripts/              # Helper scripts
+└── readable-output/           # Readable Output
+    └── SKILL.md              # Skill definition file
 ```
 
 ---

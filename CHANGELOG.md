@@ -17,6 +17,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### 新增 / Added
+- 📖 **输出工程** (Readable Output)
+  - 把"想清楚再输出"封装成思考清单 + 强制 4 问挖掘
+  - 一次 AskUserQuestion 问清：受众 / 终点 / 长度 / 风格 + 侧重
+  - 6 阶段框架：定终点（backward design）→ 抓核心（≤3 个）→ 选主结构（不叠加）→ 写（TL;DR + 论点句 + 反例 + 出口）→ 自检
+  - HTML 顶部自动写入「本次配置」确认条
+  - 内置反模式清单 + 自检 4 问，写完自动 `open` 浏览器预览
+  - 综合 Zinsser / Heath / Sweller CLT / Stripe / GitLab / Anthropic Docs 等三方实践交叉验证
+
 - 🤖 **复杂长程任务自主执行** (Auto Task) **[Beta]**
   - 任务确认 → 任务队列 → 分批执行 → 周期校验 → 触发式汇报
   - TASK.md 作为任务队列的单一真源
