@@ -12,7 +12,7 @@
 
 ### 📊 Skills 总览
 
-目前共包含 **26 个 Skills**，分为以下 3 大类：
+目前共包含 **27 个 Skills**，分为以下 3 大类：
 
 #### 💻 AI 编程（14 个）
 | Skill | 说明 |
@@ -32,7 +32,7 @@
 | [项目目录地图构建器](./project-map-builder) | 生成项目目录说明文档 |
 | [一键推送 GitHub](./git-push) | 项目推送、日常更新、版本发布 |
 
-#### ✍️ 思考与写作（8 个）
+#### ✍️ 思考与写作（9 个）
 | Skill | 说明 |
 |-------|------|
 | [思维挖掘助手](./thought-mining) | 引导式对话，整理零散想法 |
@@ -41,6 +41,7 @@
 | [思考拍档](./thinking-partner) | 陪你理清局面、拆解卡点 |
 | [多视角深度分析](./multi-perspective-analysis) | 多 Agent 并行分析，交叉汇总共识与分歧 |
 | [输出工程](./readable-output) | 4 问挖掘 + 6 阶段框架，产可读性高的 HTML 长文 |
+| [案例雷达](./case-radar) | 扫一遍生态抓"真物"，输出 HTML 案例集 |
 | [配图助手](./image-assistant) | 文章内容转信息图提示词 |
 | [课程构建器](./lesson-builder) | 讨论驱动的课程大纲与课件 |
 
@@ -758,6 +759,37 @@ memory init
 
 ---
 
+#### 📡 [案例雷达](./case-radar) (Case Radar)
+**描述**: 给一个新东西（新工具/新概念/新生态），扫一遍生态找好玩的真实案例，重点抓"真物"（截图/源码/演示）而不是 GitHub 主页，输出可浏览的 HTML 案例集
+
+**适用场景**:
+- 想了解一个新生态/新工具，但不想读三手 SEO 文
+- 需要一手物料（截图、源码片段、demo）来支撑研究或写作
+- 扫某个概念的"市面上有哪些玩法"
+- 不适合：已有明确目标的深度调研（用 long-research）/ 直接写文章（用 writing-assistant）
+
+**核心功能**:
+- 🔭 4 阶段流程：scan（多渠道扫信源）→ recon（真物侦察）→ capture（拉真物）→ embed（出 HTML）
+- 🎯 信源分级：一手源 / 二手优质 / 三手中文，砍掉 SEO 垃圾和 awesome 集市
+- 🧭 7 种"真物栖息地"判别 patterns（reference/recon-heuristics.md），灵活而非 checklist 化
+- 🛠️ 工具组合：curl 直接资源 + gh API 拉源码 + agent-browser 截全页
+- 📐 HTML 模板规范：5-7 张精读卡 + 普通索引层，避免"35 卡断崖式注意力低谷"
+- 🚦 反过度工程化：截不到真物就降级，不硬塞装饰图；每一步可中断
+- 🔁 Skill 自演化：发现新栖息地就更新 heuristics 文件
+
+**触发方式**:
+```
+看看大家用 X 做了什么
+扫一下 X 生态
+市面上 X 有什么新玩法
+给我看 X 的真物案例
+/case-radar
+```
+
+> 📦 **依赖**：需要预装 [agent-browser](https://github.com/vercel-labs/agent-browser) 和 `gh` CLI 已登录。
+
+---
+
 ### 🚀 快速开始
 
 #### 安装方式
@@ -868,6 +900,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 
 # 使用输出工程
 /readable-output
+
+# 使用案例雷达
+/case-radar
 ```
 
 或者直接在对话中描述你的需求，相关 Skill 会自动触发。
@@ -955,8 +990,11 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 │   ├── agents/               # 测试 Agent
 │   ├── references/           # 测试封装指南
 │   └── scripts/              # 辅助脚本
-└── readable-output/           # 输出工程
-    └── SKILL.md              # Skill 定义文件
+├── readable-output/           # 输出工程
+│   └── SKILL.md              # Skill 定义文件
+└── case-radar/                # 案例雷达
+    ├── SKILL.md              # Skill 定义文件
+    └── reference/            # recon heuristics / HTML 模板规范 / 反 anti-pattern 清单
 ```
 
 ---
@@ -987,7 +1025,7 @@ A carefully crafted collection of Claude Code Skills designed to boost efficienc
 
 ### 📊 Skills Overview
 
-Currently includes **26 Skills** across 3 categories:
+Currently includes **27 Skills** across 3 categories:
 
 #### 💻 AI Programming (14)
 | Skill | Description |
@@ -1007,7 +1045,7 @@ Currently includes **26 Skills** across 3 categories:
 | [Project Map Builder](./project-map-builder) | Generate project directory documentation |
 | [Git Push](./git-push) | Project push, daily updates, version release |
 
-#### ✍️ Thinking & Writing (8)
+#### ✍️ Thinking & Writing (9)
 | Skill | Description |
 |-------|-------------|
 | [Thought Mining](./thought-mining) | Guided dialogue to organize scattered ideas |
@@ -1016,6 +1054,7 @@ Currently includes **26 Skills** across 3 categories:
 | [Thinking Partner](./thinking-partner) | Clarify situations and break down bottlenecks |
 | [Multi-Perspective Analysis](./multi-perspective-analysis) | Parallel multi-agent analysis with cross-perspective synthesis |
 | [Readable Output](./readable-output) | 4-question intake + 6-stage framework, produce highly readable HTML long-form content |
+| [Case Radar](./case-radar) | Scan an ecosystem for "real artifacts" (screenshots/source/demos), output an HTML case gallery |
 | [Image Assistant](./image-assistant) | Convert content to infographic prompts |
 | [Lesson Builder](./lesson-builder) | Discussion-driven course outlines and materials |
 
@@ -1731,6 +1770,37 @@ Create release
 
 ---
 
+#### 📡 [Case Radar](./case-radar)
+**Description**: Given a new thing (new tool/concept/ecosystem), scan the ecosystem for interesting real-world cases. Focus on grabbing "real artifacts" (screenshots/source/demos) instead of GitHub homepages, and output a browsable HTML case gallery
+
+**Use Cases**:
+- Want to understand a new ecosystem/tool without reading third-hand SEO content
+- Need first-hand artifacts (screenshots, source snippets, demos) to support research or writing
+- Survey "what's actually being built" around a concept
+- Not for: deep research with a clear target (use long-research) / writing articles directly (use writing-assistant)
+
+**Core Features**:
+- 🔭 4-stage flow: scan (multi-channel source sweep) → recon (real-artifact reconnaissance) → capture (pull artifacts) → embed (output HTML)
+- 🎯 Source tiering: first-party / quality second-party / curated third-party — strip out SEO junk and meta-awesome lists
+- 🧭 7 "real-artifact habitat" patterns (reference/recon-heuristics.md), used flexibly rather than as a checklist
+- 🛠️ Tool combo: curl for direct assets + gh API for source snippets + agent-browser for full-page screenshots
+- 📐 HTML template spec: 5-7 deep-read cards + index layer for the rest, avoiding the "35-card attention cliff"
+- 🚦 Anti-over-engineering: degrade to plain card if no real artifact found, never stuff decorative images; every step is interruptible
+- 🔁 Self-evolving skill: discover a new habitat, update the heuristics file
+
+**Trigger**:
+```
+Show me what people are doing with X
+Scan the X ecosystem
+What new takes are out there for X
+Show me real artifacts for X
+/case-radar
+```
+
+> 📦 **Dependencies**: requires [agent-browser](https://github.com/vercel-labs/agent-browser) installed and authenticated `gh` CLI.
+
+---
+
 ### 🚀 Quick Start
 
 #### Installation
@@ -1841,6 +1911,9 @@ In Claude Code CLI, you can use them by:
 
 # Use Readable Output
 /readable-output
+
+# Use Case Radar
+/case-radar
 ```
 
 Or simply describe your needs in conversation, and the relevant Skill will trigger automatically.
@@ -1928,8 +2001,11 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 │   ├── agents/               # Test agents
 │   ├── references/           # Test packaging guide
 │   └── scripts/              # Helper scripts
-└── readable-output/           # Readable Output
-    └── SKILL.md              # Skill definition file
+├── readable-output/           # Readable Output
+│   └── SKILL.md              # Skill definition file
+└── case-radar/                # Case Radar
+    ├── SKILL.md              # Skill definition file
+    └── reference/            # Recon heuristics / HTML template spec / anti-pattern checklist
 ```
 
 ---

@@ -17,6 +17,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### 新增 / Added
+- 📡 **案例雷达** (Case Radar)
+  - 4 阶段流程：scan（多渠道扫信源）→ recon（真物侦察）→ capture（拉真物）→ embed（出 HTML 案例集）
+  - 信源分级砍 SEO 垃圾：一手源 / 二手优质 / 三手中文（仅含独立观察）
+  - 7 种"真物栖息地"判别 patterns（reference/recon-heuristics.md），灵活而非 checklist
+  - 工具组合：curl 直接资源 + gh API 拉源码片段 + agent-browser 截全页
+  - HTML 模板规范（reference/html-template-spec.md）：5-7 张精读卡 + 普通索引层，避免"35 卡断崖式注意力低谷"
+  - 反过度工程化清单（reference/workflow-anti-patterns.md）：截不到真物降级、不硬塞装饰图
+  - 4 个反向信号自检："Skill 跑得动 ≠ Skill 该被点开"
+  - Skill 自演化：发现新栖息地就更新 heuristics 文件
+  - 依赖：`agent-browser` + 已登录的 `gh` CLI
+
 - 📖 **输出工程** (Readable Output)
   - 把"想清楚再输出"封装成思考清单 + 强制 4 问挖掘
   - 一次 AskUserQuestion 问清：受众 / 终点 / 长度 / 风格 + 侧重
