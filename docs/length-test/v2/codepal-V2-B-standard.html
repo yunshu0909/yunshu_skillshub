@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodePal 是什么 · 一份给 PM 的 8 分钟读物</title>
+<style>
+  :root {
+    --bg: #f7f1e3;
+    --paper: #fbf6e9;
+    --ink: #3a2a1a;
+    --ink-soft: #6b5742;
+    --accent: #8b4513;
+    --accent-soft: #c08457;
+    --line: #e3d6bd;
+    --callout-bg: #f3e8cf;
+    --callout-border: #c08457;
+    --quote-bg: #efe2c5;
+    --bad-bg: #f5e4dc;
+    --bad-border: #b86a4f;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "PingFang SC", Georgia, serif;
+    line-height: 1.85;
+    font-size: 17px;
+  }
+  .page {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 56px 36px 72px;
+  }
+  .hero {
+    text-align: center;
+    padding: 24px 0 20px;
+    border-bottom: 1px dashed var(--line);
+    margin-bottom: 20px;
+  }
+  .hero .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-family: "PingFang SC", sans-serif;
+  }
+  .hero h1 {
+    font-size: 30px;
+    margin: 0 0 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .hero .sub {
+    color: var(--ink-soft);
+    font-size: 15px;
+    font-style: italic;
+  }
+  .config-bar {
+    background: var(--callout-bg);
+    border: 1px solid var(--callout-border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 36px;
+    font-family: "PingFang SC", -apple-system, sans-serif;
+  }
+  .config-line {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.75;
+    margin-bottom: 6px;
+  }
+  .hint-line {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    border-top: 1px dashed var(--callout-border);
+    padding-top: 8px;
+    margin-top: 8px;
+  }
+  .tldr {
+    background: var(--paper);
+    border-left: 4px solid var(--accent);
+    padding: 16px 22px;
+    margin-bottom: 36px;
+    border-radius: 0 6px 6px 0;
+  }
+  .tldr .label {
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 4px;
+    font-family: "PingFang SC", sans-serif;
+  }
+  .tldr p {
+    margin: 4px 0 0;
+    font-size: 17px;
+    color: var(--ink);
+  }
+  h2 {
+    font-size: 22px;
+    margin: 48px 0 14px;
+    color: var(--accent);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 8px;
+    font-weight: 600;
+  }
+  h2 .num {
+    color: var(--accent-soft);
+    margin-right: 10px;
+    font-size: 18px;
+  }
+  h3 {
+    font-size: 17px;
+    margin: 22px 0 8px;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  p { margin: 12px 0; }
+  .lede {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 16px;
+    margin: 8px 0 18px;
+    padding-left: 14px;
+    border-left: 2px solid var(--accent-soft);
+  }
+  .callout {
+    background: var(--callout-bg);
+    border-left: 4px solid var(--accent);
+    padding: 14px 18px;
+    margin: 18px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .callout .tag {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    font-family: "PingFang SC", sans-serif;
+    margin-bottom: 4px;
+  }
+  .bad {
+    background: var(--bad-bg);
+    border-left: 4px solid var(--bad-border);
+    padding: 12px 18px;
+    margin: 14px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 15.5px;
+  }
+  .bad .tag {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--bad-border);
+    font-family: "PingFang SC", sans-serif;
+    margin-bottom: 4px;
+  }
+  .quote {
+    background: var(--quote-bg);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 4px;
+    font-size: 17px;
+    text-align: center;
+    color: var(--ink);
+    font-style: italic;
+  }
+  ul {
+    padding-left: 22px;
+    margin: 10px 0;
+  }
+  li {
+    margin: 6px 0;
+  }
+  strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .exit {
+    background: var(--paper);
+    border: 1px solid var(--accent-soft);
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin: 40px 0 16px;
+  }
+  .exit h3 {
+    margin-top: 0;
+    color: var(--accent);
+    font-size: 18px;
+  }
+  .footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--line);
+    color: var(--ink-soft);
+    font-size: 13px;
+    text-align: center;
+    font-family: "PingFang SC", sans-serif;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="hero">
+  <div class="eyebrow">A PRODUCT NOTE</div>
+  <h1>CodePal 是什么</h1>
+  <div class="sub">—— 一份给 PM 的 8 分钟读物</div>
+</div>
+
+<div class="config-bar">
+  <div class="config-line">
+    📋 <strong>本次配置</strong> · 受众：PM / 产品经理 · 终点：概念理解
+    · 详略：标准版（5–10 分钟） · 风格：故事化阅读（暖色书卷）
+  </div>
+  <div class="hint-line">
+    💬 觉得短？告诉我「展开 [章节名]」/「加 [背景 / 案例 / 可复用框架]」
+    觉得长？「砍到要点」/「合并 X 章和 Y 章」
+  </div>
+</div>
+
+<div class="tldr">
+  <div class="label">TL;DR</div>
+  <p>AI 工具只管写代码，<strong>写代码之外的事</strong>——同步 Skills、切账户、看花了多少钱、翻历史对话——没人管。CodePal 就是那个"幕后助手"，专门做 Claude Code / Codex / Cursor / Trae 之间<strong>跨工具的连接活</strong>。一句话定位：<em>AI 写代码，CodePal 管周边</em>。</p>
+</div>
+
+<h2><span class="num">01</span>故事的起点：一个被忽略的"工具空隙"</h2>
+<p class="lede">不是 AI 不够强，而是 AI 工具之间没人搭桥。</p>
+
+<p>设想一位每天用 AI 写代码的开发者：早上在 <strong>Claude Code</strong> 里写功能，中午切到 <strong>Codex</strong> 试另一个模型，晚上在 <strong>Cursor</strong> 改前端，偶尔还在 <strong>Trae</strong> 里跑实验。四个工具，四套 Skills 目录，四份配置——改一个 prompt 模板，就要复制粘贴四次；删一个过时的 Skill，要去四个地方各删一遍。</p>
+
+<p>更折磨的是 Codex Plus / Pro 的<strong>双窗口限额</strong>（5 小时 + 7 天）：额度一触顶，必须 Logout、换邮箱、重登、二次验证，1–2 分钟一次，一天循环 N 次。再要顺手记一下"这个月 AI 帮我花了多少钱、哪个模型最贵、上次和它聊过的那段方案讨论在哪个 Session 里"——没有面板告诉你，只能在终端 history 和 <code>~/.claude/projects/</code> 里翻。</p>
+
+<div class="bad">
+  <div class="tag">REVERSE · 反例</div>
+  常见误判是"再加一个更聪明的 AI 工具就好了"。但<strong>新工具只会让跨工具的事更多</strong>——又多一份 Skills、又多一个账户、又多一处 Token 消耗。问题不在 AI 本身，在于<strong>没有一个工具愿意管"别人家工具"</strong>。Claude Code 不会管 Codex，Codex 不会管 Cursor。</p>
+</div>
+
+<p>这道空隙，就是 CodePal 站的位置。</p>
+
+<h2><span class="num">02</span>转折：CodePal 做"AI 不愿意做"的四件事</h2>
+<p class="lede">不写一行业务代码，只做工具与工具之间的连接。</p>
+
+<p>CodePal 把日常摩擦拆成四个独立模块，每个模块对应一种"AI 工具不会自己解决"的痛：</p>
+
+<h3>① 账户与用量 · 让额度可见、切换无感</h3>
+<p>多 Codex 账户<strong>纯文件交换</strong>切换（&lt;200ms 完成，不碰 Codex.app），登录新账号会被自动嗅到（chokidar 监听 <code>~/.codex/auth.json</code>）、自动提示保存；v1.6.2 起每 24 小时后台续签 token，让"躺着的账户"切回去也不会 401。Claude 会员额度则接 <strong>官方 rate_limits</strong>，5h / 7d 剩余 + 满载率趋势直接挂状态栏，触顶前一眼看到；Token 花费按日 / 周 / 月、按模型 / 按项目可视化，不用再去翻账单猜账。</p>
+
+<h3>② 文档 · 找回那条"昨天聊过的对话"</h3>
+<p>Claude Code 的所有 Session 按项目分组、全文搜索，找到后一键复制 <code>cd "..." &amp;&amp; claude --resume &lt;uuid&gt;</code>，或者直接 osascript 起 Terminal 重启对话——粘到任何终端都能接着聊。每条消息支持 Markdown 渲染（代码块、链接、图片引用都在）。再也不用在 <code>~/.claude/projects/</code> 里翻文件夹猜哪个是上周的会话。</p>
+
+<h3>③ 技能中心 · 写一次，到处用</h3>
+<p>从任意工具扫描导入 Skills 到中央仓库，<strong>批量推送到所有工具</strong>——改一处全局生效。扫描覆盖 <code>~/.claude/skills/</code>、<code>~/.codex/skills/</code>、<code>~/.cursor/skills/</code> 加自定义路径，按标签筛选 + 搜索；每 5 分钟自动增量刷新，新 Skill 自动同步出去。MCP 服务也按工具集中开关，不用手动改 JSON。</p>
+
+<h3>④ 工具设置 · 起新项目不用再"抄作业"</h3>
+<p>Claude Code 的四档权限模式（只读规划 / 每次询问 / 自动编辑 / 全自动）一键切换；新项目模板按下生成 <code>CLAUDE.md</code> + <code>.gitignore</code> + 记忆系统 + 可选 <code>git init</code>，配上常驻的 IP 监控和 Anthropic / OpenAI 连通性诊断，挂 VPN 出问题时第一时间定位是网络还是 API 自身。</p>
+
+<div class="bad">
+  <div class="tag">REVERSE · 反例</div>
+  容易把 CodePal 误判成"又一个 AI 编程工具"。但它<strong>不写代码、不调模型、不抢 IDE 的活</strong>——它做的是<strong>工具之间的胶水层</strong>。如果用一句类比：AI 工具是厨师，CodePal 是后厨那个洗菜、传菜、记账、点存货的帮工。少了帮工，厨师也能炒菜，但每盘菜要慢 2 分钟。
+</div>
+
+<h2><span class="num">03</span>启示：为什么这是"个人自用驱动"的产品</h2>
+<p class="lede">不规划 roadmap，只解决自己当下的痛。</p>
+
+<p>CodePal 没有功能列表，遵循<strong>"用 → 痛 → 解决 → 沉淀"</strong>的飞轮——作者云舒每天用 Claude Code / Codex 写代码，碰到一个跨工具的痛，就给 CodePal 加一个模块，做完自己用，再放出来。</p>
+
+<p>这种节奏带来一个特征：<strong>每个功能都对应一个真实切肤的痛</strong>，没有"为了功能丰富而做"的注水。代价是路线图不可预测——v1.4.5 的"对话回顾"、v1.5.0 的"Codex 多账户"、v1.6.2 的"凭证保活"，每一个都是某个深夜被某件事逼出来的：要找昨天那段对话却找不到、额度又掉了要重登第三次、几天没用的账户切回去 401。</p>
+
+<div class="bad">
+  <div class="tag">REVERSE · 反例</div>
+  对 PM 来说，"自用驱动"听起来浪漫，但容易被误读成"不需要做用户研究"。准确的读法应该是：<strong>作者本人就是高频用户，反馈回路 &lt; 24 小时</strong>。这跟"拍脑袋做功能"完全是两回事——前者是<strong>把自己当 design partner</strong>，后者是<strong>把自己当用户全部</strong>。CodePal 走得通，是因为 AI 编程工具用户的痛点高度同构（都在多工具切、都被额度卡、都翻不到对话）。换一个用户群分散的领域，自用驱动就会失效。
+</div>
+
+<div class="callout">
+  <div class="tag">PM 视角 · 可复用框架</div>
+  <p style="margin:0;">遇到"跨工具的连接需求"时，问三个问题：<br>
+  1. 这件事<strong>原工具会不会自己解决</strong>？（如果会 → 等就行）<br>
+  2. 不解决的成本是<strong>每天发生</strong>还是偶尔？（每天 → 才值得做工具）<br>
+  3. 解决方案能<strong>不碰原工具的核心流程</strong>吗？（能 → 才不会被原工具升级打破）</p>
+  <p style="margin:8px 0 0;">CodePal 三问全是 yes，所以飞轮转得起来。</p>
+</div>
+
+<div class="quote">"AI 工具负责写代码，CodePal 负责写代码之外的一切。"</div>
+
+<div class="exit">
+  <h3>读完手里多了什么</h3>
+  <ul>
+    <li><strong>一个口诀</strong>：AI 写代码，CodePal 管周边。</li>
+    <li><strong>一个判断框架</strong>：跨工具连接产品的"三问"——原工具会不会管 / 痛是不是天天发生 / 能不能不动原工具核心。</li>
+    <li><strong>一张定位地图</strong>：CodePal 的四块——账户用量、文档回顾、Skills 同步、工具设置——对应"AI 不会自己做"的四类摩擦。</li>
+  </ul>
+  <h3 style="margin-top:18px;">下一步</h3>
+  <ul>
+    <li>如果你做开发者工具：可以拿"三问框架"对照自己的 idea，看哪条不通。</li>
+    <li>如果你只是想用：直接到 <a href="https://github.com/yunshu0909/CodePal/releases" style="color:var(--accent);">Releases 下载 .dmg</a>（目前仅 Apple Silicon）。</li>
+  </ul>
+  <h3 style="margin-top:18px;">边界声明</h3>
+  <p style="margin:6px 0 0; color:var(--ink-soft); font-size:15px;">CodePal 不是<strong>团队级</strong>账户管理工具（无云端同步），也不是<strong>跨平台</strong>方案（Windows / Intel Mac 暂未打包），更<strong>不解决 AI 写代码本身的能力问题</strong>。它只在"个人开发者 + macOS Apple Silicon + 多 AI 工具并用"这个交集里成立。</p>
+</div>
+
+<div class="footer">
+  本次配置 · 标准版（1.5K–2.5K 中文字 / 5–10 分钟）　|　来源：CodePal README v1.6.2
+</div>
+
+</div>
+</body>
+</html>

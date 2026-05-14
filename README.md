@@ -12,7 +12,7 @@
 
 ### 📊 Skills 总览
 
-目前共包含 **27 个 Skills**，分为以下 3 大类：
+目前共包含 **28 个 Skills**，分为以下 3 大类：
 
 #### 💻 AI 编程（14 个）
 | Skill | 说明 |
@@ -37,7 +37,7 @@
 |-------|------|
 | [思维挖掘助手](./thought-mining) | 引导式对话，整理零散想法 |
 | [写作助手](./writing-assistant) | 从思维挖掘到成稿的完整流程 |
-| [内容挖掘助手](./content-miner) | 从实践经历中挖掘写作选题 |
+| [系统化学习材料生成器](./system-study) | 自主调研、搭体系、产出 HTML 学习材料 |
 | [思考拍档](./thinking-partner) | 陪你理清局面、拆解卡点 |
 | [多视角深度分析](./multi-perspective-analysis) | 多 Agent 并行分析，交叉汇总共识与分歧 |
 | [输出工程](./readable-output) | 4 问挖掘 + 6 阶段框架，产可读性高的 HTML 长文 |
@@ -730,6 +730,34 @@ memory init
 
 ---
 
+#### 🧭 [系统化学习材料生成器](./system-study) (System Study)
+**描述**: 给一个新领域/技术/概念，AI 自主调研、搭体系，并产出带案例、工程化、争议焦点和盲区清单的 HTML 学习材料
+
+**适用场景**:
+- 想系统学习一个新领域，而不是只要结论
+- 需要看清概念骨架、前沿趋势、真实案例和工具生态
+- 想把调研沉淀成可复用的学习材料
+- 需要把争议点、判断倾向和未知盲区单独拎出来
+
+**核心功能**:
+- 🎯 题目收敛：先确认学习切片和视角，避免题目跑偏
+- 🧪 调研计划：明确每个 sub-agent 要查的来源和问题
+- ⚡ 并行调研：A-D 覆盖骨架、前沿、真物案例、生态工程化，E 必做争议与盲区
+- 🧱 体系合成：主线程整合调研笔记，形成可确认的大纲
+- 📄 HTML 出稿：输出带侧栏导航、章节折叠、争议评分和盲区清单的单文件学习材料
+
+**触发方式**:
+```
+我要学 X
+帮我系统拆解 X
+我想吃透 X 这个领域
+给我整理 X 的全貌
+深度调研 X 给我系统讲讲
+/system-study
+```
+
+---
+
 #### 🚀 [一键推送 GitHub](./git-push) (Git Push)
 **描述**: 一键推送项目到 GitHub，覆盖首次推送、日常更新、版本发布三种模式
 
@@ -901,6 +929,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 # 使用输出工程
 /readable-output
 
+# 使用系统化学习材料生成器
+/system-study
+
 # 使用案例雷达
 /case-radar
 ```
@@ -921,6 +952,8 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 ├── LICENSE                      # MIT 许可证
 ├── CHANGELOG.md                 # 更新日志
 ├── EXAMPLES.md                  # 使用示例
+├── docs/                        # 补充文档与测试材料
+│   └── length-test/             # CodePal 长度测试 HTML 样例
 ├── image-assistant/             # 配图助手
 │   ├── SKILL.md                # Skill 定义文件
 │   ├── stages/                 # 各阶段详细说明
@@ -992,6 +1025,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 │   └── scripts/              # 辅助脚本
 ├── readable-output/           # 输出工程
 │   └── SKILL.md              # Skill 定义文件
+├── system-study/              # 系统化学习材料生成器
+│   ├── SKILL.md              # Skill 定义文件
+│   └── reference/            # 阶段流程、sub-agent 模板、HTML 规范与反模式
 └── case-radar/                # 案例雷达
     ├── SKILL.md              # Skill 定义文件
     └── reference/            # recon heuristics / HTML 模板规范 / 反 anti-pattern 清单
@@ -1025,7 +1061,7 @@ A carefully crafted collection of Claude Code Skills designed to boost efficienc
 
 ### 📊 Skills Overview
 
-Currently includes **27 Skills** across 3 categories:
+Currently includes **28 Skills** across 3 categories:
 
 #### 💻 AI Programming (14)
 | Skill | Description |
@@ -1050,7 +1086,7 @@ Currently includes **27 Skills** across 3 categories:
 |-------|-------------|
 | [Thought Mining](./thought-mining) | Guided dialogue to organize scattered ideas |
 | [Writing Assistant](./writing-assistant) | Complete flow from thought mining to final draft |
-| [Content Miner](./content-miner) | Mine writing topics from your experiences |
+| [System Study](./system-study) | Autonomous research, system mapping, and HTML learning materials |
 | [Thinking Partner](./thinking-partner) | Clarify situations and break down bottlenecks |
 | [Multi-Perspective Analysis](./multi-perspective-analysis) | Parallel multi-agent analysis with cross-perspective synthesis |
 | [Readable Output](./readable-output) | 4-question intake + 6-stage framework, produce highly readable HTML long-form content |
@@ -1742,6 +1778,34 @@ Explain X clearly
 
 ---
 
+#### 🧭 [System Study](./system-study)
+**Description**: Given a new field, technology, or concept, the AI researches independently, builds a learning system, and outputs an HTML learning material with cases, engineering practice, controversies, and blind spots
+
+**Use Cases**:
+- Want to systematically learn a new field, not just get a conclusion
+- Need to understand the concept map, frontier trends, real artifacts, and tool ecosystem
+- Want research to become a reusable learning material
+- Need controversies, directional judgments, and unresolved blind spots separated clearly
+
+**Core Features**:
+- 🎯 Topic Narrowing: Confirm learning slices and perspective first to avoid researching the wrong target
+- 🧪 Research Plan: Define sources and questions for each sub-agent before execution
+- ⚡ Parallel Research: A-D cover skeleton, frontier, real cases, and ecosystem; E is mandatory for controversy and blind spots
+- 🧱 System Synthesis: Main thread integrates notes into a confirmable outline
+- 📄 HTML Output: Single-file learning material with sidebar navigation, collapsible sections, controversy scores, and a blind-spot list
+
+**Trigger**:
+```
+I want to learn X
+Help me systematically break down X
+I want to really understand X
+Give me the full picture of X
+Deep research X and explain it systematically
+/system-study
+```
+
+---
+
 #### 🚀 [Git Push](./git-push)
 **Description**: One-click push projects to GitHub. Auto-scan large files, generate .gitignore, init Git, create repo and push. Supports first push, daily updates, and version release modes
 
@@ -1912,6 +1976,9 @@ In Claude Code CLI, you can use them by:
 # Use Readable Output
 /readable-output
 
+# Use System Study
+/system-study
+
 # Use Case Radar
 /case-radar
 ```
@@ -1932,6 +1999,8 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 ├── LICENSE                      # MIT License
 ├── CHANGELOG.md                 # Changelog
 ├── EXAMPLES.md                  # Usage examples
+├── docs/                        # Supplementary docs and test materials
+│   └── length-test/             # CodePal length-test HTML samples
 ├── image-assistant/             # Image Assistant
 │   ├── SKILL.md                # Skill definition file
 │   ├── stages/                 # Detailed stage descriptions
@@ -2003,6 +2072,9 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 │   └── scripts/              # Helper scripts
 ├── readable-output/           # Readable Output
 │   └── SKILL.md              # Skill definition file
+├── system-study/              # System Study
+│   ├── SKILL.md              # Skill definition file
+│   └── reference/            # Stage workflow, sub-agent templates, HTML spec, and anti-patterns
 └── case-radar/                # Case Radar
     ├── SKILL.md              # Skill definition file
     └── reference/            # Recon heuristics / HTML template spec / anti-pattern checklist

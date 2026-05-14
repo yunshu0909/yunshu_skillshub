@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodePal · 速读卡 — AI 编程的幕后助手</title>
+<style>
+  :root {
+    --bg: #faf6ef;
+    --bg-card: #fffaf0;
+    --ink: #3d2b1f;
+    --ink-soft: #6b4f3a;
+    --accent: #a0522d;
+    --line: #e8dcc4;
+    --hint-bg: #fff4dc;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Songti SC", "STSong", "Source Han Serif SC", Georgia, "Times New Roman", serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 32px 64px;
+  }
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 24px 0 28px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .hero .kicker {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: 34px;
+    margin: 12px 0 6px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .hero .sub {
+    font-size: 15px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  /* 双行配置条 */
+  .config-bar {
+    margin: 22px 0 30px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-card);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .config-line {
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-card);
+  }
+  .hint-line {
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    background: var(--hint-bg);
+  }
+  /* TL;DR */
+  .tldr {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin: 0 0 28px;
+  }
+  .tldr .label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .tldr p {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.8;
+  }
+  /* 故事段 */
+  .story p {
+    font-size: 15.5px;
+    margin: 0 0 14px;
+  }
+  .story strong { color: var(--accent); }
+  /* 主图：4 组功能矩阵 */
+  h2 {
+    font-size: 18px;
+    margin: 36px 0 14px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 6px;
+  }
+  .matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 14px 0 8px;
+  }
+  .cell {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .cell .ico {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .cell .name {
+    font-weight: 700;
+    font-size: 14.5px;
+    margin-bottom: 4px;
+  }
+  .cell .desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+  /* 反例 */
+  .counter {
+    margin: 24px 0 0;
+    padding: 14px 18px;
+    background: #f8efe1;
+    border-left: 3px solid #b87333;
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .counter b { color: var(--accent); }
+  /* 出口 */
+  .exit {
+    margin-top: 30px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--line);
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+  .exit .saying {
+    text-align: center;
+    font-size: 15px;
+    color: var(--accent);
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="kicker">SPEED READ · 3 min</div>
+    <h1>CodePal · AI 编程的幕后助手</h1>
+    <div class="sub">让 AI 工具专心写代码，其余的事交给一个连接层</div>
+  </div>
+
+  <!-- 双行配置条 -->
+  <div class="config-bar">
+    <div class="config-line">
+      📋 本次配置 · 受众：PM / 产品经理 · 终点：概念理解 · 详略：速读卡（3 分钟 / ~800 字） · 风格：故事化阅读（暖色书卷）
+    </div>
+    <div class="hint-line">
+      💬 觉得短？告诉我「展开 [章节名]」/「加 [背景/案例/可复用框架]」&nbsp;&nbsp;|&nbsp;&nbsp;觉得长？「砍到要点」/「合并 X 章和 Y 章」
+    </div>
+  </div>
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <div class="label">TL;DR</div>
+    <p>AI 编程工具（Claude Code / Codex / Cursor / Trae）只管写代码，<b>不管彼此之间的事</b>。CodePal 就是那一层"幕后助手"——把 Skills 同步、账户切换、用量监控、对话回顾这些<b>跨工具的杂活</b>从你手里接走。</p>
+  </div>
+
+  <!-- 故事段 -->
+  <div class="story">
+    <p>用 AI 写代码很爽，<strong>用得越多越发现瓶颈不在代码本身</strong>：Skill 改一处要在三个工具里同步、Codex 额度一满就得 Logout 重登 + 二次验证、月底想看花了多少 token 没人告诉你、上周那段精彩对话翻不到 Session 目录。</p>
+    <p>这些事 Claude Code 不管 Codex，Codex 也不管 Cursor——<strong>没有一个 AI 工具会替你做"跨工具的事"</strong>。CodePal 的产品定位就一句话：<strong>它是 AI 编程工具之间的连接层</strong>。它不替任何工具写代码，只把它们之间的摩擦磨平，让"用 AI 编程"这件事从单点工具升级成一套顺手的工作流。</p>
+    <p>这也决定了它的产品哲学：<strong>不提前规划功能</strong>，而是按"用 → 痛 → 解决 → 沉淀"的飞轮迭代——作者自用驱动，每一个模块都来自真实的日常摩擦点，而不是想象出来的需求。</p>
+  </div>
+
+  <!-- 主图：4 组功能矩阵 -->
+  <h2>一张图记住它做什么</h2>
+  <div class="matrix">
+    <div class="cell">
+      <div class="ico">🔋</div>
+      <div class="name">账户与用量</div>
+      <div class="desc">Codex 多号秒切（&lt;200ms）+ Claude 额度状态栏 + Token 费用看板</div>
+    </div>
+    <div class="cell">
+      <div class="ico">📚</div>
+      <div class="name">文档</div>
+      <div class="desc">历史对话全文检索 + 一键 resume、多目录 Markdown 浏览</div>
+    </div>
+    <div class="cell">
+      <div class="ico">🛠</div>
+      <div class="name">技能中心</div>
+      <div class="desc">Skills 中央仓库，写一次推送到所有工具，5 分钟自动增量</div>
+    </div>
+    <div class="cell">
+      <div class="ico">⚙️</div>
+      <div class="name">工具设置</div>
+      <div class="desc">权限模式一键切、新项目模板起步、网络/IP 诊断</div>
+    </div>
+  </div>
+
+  <!-- 反例 -->
+  <div class="counter">
+    <b>不要把它当成：</b>另一个 AI 编程工具，也不要指望它替你写 Skill 内容——它<b>不写代码、不做推理、不生产 Skill</b>，只做"工具周边的调度和管理"。如果你只用一个 AI 工具且从不切账号、不写 Skill，CodePal 给你的价值会很有限。
+  </div>
+
+  <!-- 出口 -->
+  <div class="exit">
+    <div class="saying">"AI 写代码，CodePal 写代码之外的一切。"</div>
+    <div><b>适用判断</b>：① 同时用 ≥ 2 个 AI 编程工具；② 有多个 Codex 账户在轮换；③ 在意 Token 花了多少钱 / Skill 想沉淀复用 —— 命中任一项即可考虑。当前仅支持 macOS Apple Silicon，从 GitHub Releases 下载 dmg 安装即可上手。</div>
+  </div>
+
+</div>
+</body>
+</html>

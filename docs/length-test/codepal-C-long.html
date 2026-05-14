@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>CodePal 完整教学 · 给 PM 的概念建梯</title>
+<style>
+  :root {
+    --bg: #f7f1e6;
+    --paper: #fbf6ec;
+    --ink: #3b2a1d;
+    --ink-soft: #5a4636;
+    --ink-light: #8a7461;
+    --accent: #a04a2a;
+    --accent-soft: #c97a4a;
+    --rule: #e3d6c0;
+    --quote-bg: #f1e6d2;
+    --highlight: #fff4d6;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Source Han Serif SC", "Songti SC", "Noto Serif CJK SC", Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.85;
+    letter-spacing: 0.02em;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 60px 36px 120px;
+  }
+  .hero {
+    text-align: center;
+    padding: 40px 0 30px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: 38px;
+    margin: 0 0 16px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .hero .sub {
+    font-size: 17px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: 0;
+  }
+  .config-bar {
+    margin: 28px 0 50px;
+    padding: 14px 20px;
+    background: var(--quote-bg);
+    border-left: 3px solid var(--accent);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+  .config-bar strong { color: var(--ink); }
+  h2 {
+    font-size: 26px;
+    color: var(--ink);
+    margin: 60px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--rule);
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 20px;
+    color: var(--accent);
+    margin: 36px 0 10px;
+    font-weight: 600;
+  }
+  h4 {
+    font-size: 17px;
+    color: var(--ink);
+    margin: 24px 0 8px;
+    font-weight: 600;
+  }
+  p { margin: 14px 0; }
+  .lead {
+    font-size: 19px;
+    color: var(--ink-soft);
+    line-height: 1.9;
+    border-left: 4px solid var(--accent);
+    padding: 8px 0 8px 22px;
+    margin: 30px 0;
+  }
+  blockquote {
+    margin: 24px 0;
+    padding: 18px 24px;
+    background: var(--quote-bg);
+    border-radius: 6px;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+  .scene {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 22px 26px;
+    margin: 28px 0;
+    border-radius: 4px;
+    box-shadow: 2px 2px 0 var(--rule);
+  }
+  .scene .label {
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .scene p { margin: 8px 0; }
+  .pain-fix {
+    margin: 30px 0;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .pain-fix .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pain-fix .row:last-child { border-bottom: none; }
+  .pain-fix .head {
+    background: var(--quote-bg);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--accent);
+    padding: 10px 18px;
+  }
+  .pain-fix .cell {
+    padding: 14px 18px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .pain-fix .cell.left {
+    background: #faf2e2;
+    border-right: 1px dashed var(--rule);
+  }
+  .module-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent);
+    padding: 24px 28px;
+    margin: 28px 0;
+    border-radius: 4px;
+  }
+  .module-card .num {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+  }
+  .module-card h3 {
+    margin-top: 4px;
+    color: var(--ink);
+  }
+  .pm-take {
+    background: var(--highlight);
+    border-left: 3px solid var(--accent-soft);
+    padding: 14px 20px;
+    margin: 18px 0;
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+  .pm-take strong { color: var(--accent); }
+  .anti {
+    background: #f5e8de;
+    border: 1px dashed var(--accent-soft);
+    padding: 14px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-radius: 4px;
+  }
+  .anti strong { color: var(--accent); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  th {
+    background: var(--quote-bg);
+    color: var(--ink);
+    font-weight: 600;
+  }
+  td { color: var(--ink-soft); }
+  ul, ol { padding-left: 24px; }
+  li { margin: 6px 0; color: var(--ink-soft); }
+  .toc {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 20px 28px;
+    margin: 30px 0 50px;
+    border-radius: 4px;
+  }
+  .toc-title {
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .toc ol { margin: 0; padding-left: 22px; }
+  .toc li { margin: 4px 0; }
+  .ending {
+    margin-top: 60px;
+    padding: 30px;
+    background: var(--paper);
+    border: 2px solid var(--rule);
+    border-radius: 6px;
+  }
+  .ending h2 {
+    border: none;
+    margin-top: 0;
+    padding: 0;
+  }
+  .recap {
+    background: var(--quote-bg);
+    padding: 18px 24px;
+    margin: 24px 0;
+    border-radius: 4px;
+    font-size: 15px;
+  }
+  .recap strong { color: var(--accent); }
+  hr.deco {
+    border: none;
+    text-align: center;
+    margin: 40px 0;
+  }
+  hr.deco:after {
+    content: "❦";
+    color: var(--accent);
+    font-size: 22px;
+  }
+  code {
+    background: var(--quote-bg);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    color: var(--accent);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HERO -->
+<header class="hero">
+  <div class="eyebrow">A Story for PMs · 完整教学</div>
+  <h1>CodePal：AI 编程的幕后助手</h1>
+  <p class="sub">写代码的事 AI 在做，<br>写代码"之外"的一切，谁来管？</p>
+</header>
+
+<!-- 配置确认条 -->
+<div class="config-bar">
+  <strong>📋 本次配置</strong> · 受众：PM / 产品经理 · 终点：概念理解（看完知道 CodePal 是什么、解决什么问题、有哪些核心模块） · 长度：完整教学（5-15K 字 / 30-40 分钟） · 风格：故事化阅读（暖色书卷 · 米白 + 深棕）
+</div>
+
+<!-- TL;DR -->
+<p class="lead">
+  <strong>一句话：</strong>AI 编程工具（Claude Code / Codex / Cursor / Trae）各自只管自己写代码，<strong>跨工具的脏活没人做</strong>——Skills 同步、账户切换、用量监控、对话回顾。CodePal 就是这些工具中间那一层"幕后助手"，让 AI 工具继续专注写代码，其他事它来扛。
+</p>
+
+<!-- 目录 -->
+<div class="toc">
+  <div class="toc-title">本文路径</div>
+  <ol>
+    <li>序章：一个 AI 编程用户的一天（场景白描）</li>
+    <li>为什么 AI 工具自己不解决这些问题（产品定位的底层逻辑）</li>
+    <li>四个模块四种痛点：账户用量 / 文档 / 技能中心 / 工具设置</li>
+    <li>产品哲学：自用驱动 + "用 → 痛 → 解决 → 沉淀"飞轮</li>
+    <li>给 PM 的可复用框架：连接层产品怎么定义</li>
+    <li>结语：什么时候这个判断不适用</li>
+  </ol>
+</div>
+
+<!-- 序章 -->
+<h2>序章：一个 AI 编程用户的一天</h2>
+
+<p>请你先把"产品经理"这个身份放下三分钟，想象自己是一个 2025 年的<strong>重度 AI 编程用户</strong>。早上九点你打开 Mac，准备写代码。一天会发生什么？</p>
+
+<div class="scene">
+  <div class="label">场景 · 09:00 — 09:15</div>
+  <p>你打开 Claude Code，开始写一个新项目。十分钟后你发现，昨天在 Cursor 里用得很顺手的一个 Skill（一个写好的 prompt 模板 + 工具集），在 Claude Code 这边没有。你需要把它从 <code>~/.cursor/skills/</code> 复制到 <code>~/.claude/skills/</code>。</p>
+  <p>问题来了：你有 30 多个 Skills，分布在四个工具里（Claude Code、Codex、Cursor、Trae）。改一个，哪些工具要同步？你记不清。</p>
+</div>
+
+<div class="scene">
+  <div class="label">场景 · 11:30 — 11:32</div>
+  <p>你正在用 Codex 跑一个比较费 token 的任务。突然弹窗：<em>"You've reached your usage limit."</em> Plus 套餐的 5 小时窗口到了。</p>
+  <p>你有第二个 Codex 账户。但要切过去你得：登出当前账户、清缓存、重新登录、二次验证、可能还要找密码管理器找密码。手工 1 到 2 分钟。一天切 4 次就是 5 到 8 分钟纯摩擦。</p>
+</div>
+
+<div class="scene">
+  <div class="label">场景 · 14:00 — 14:10</div>
+  <p>老板问你：这个月公司在 Claude API 上花了多少钱？哪个模型最费？你打开 Anthropic 控制台只能看到一个总数，没法按项目分。你打开本地的 <code>~/.claude/projects/</code> 看 jsonl 日志，密密麻麻全是结构化数据，没人会一行行读。</p>
+</div>
+
+<div class="scene">
+  <div class="label">场景 · 16:45 — 17:00</div>
+  <p>你想起来一周前和 Claude 聊过一段关于 Electron IPC 设计的对话，里面有个结论很重要。但你忘了在哪个项目下聊的。Claude Code 的 Session 存在 <code>~/.claude/projects/[hash]/</code> 里，全是 UUID 命名的 jsonl 文件。你逐个 grep 找了 15 分钟，没找到。</p>
+</div>
+
+<p>这就是一个普通 AI 编程用户的一天。每个摩擦单看都很小（30 秒到 2 分钟），但叠加起来，<strong>每天大概有 30 到 60 分钟在"管理 AI 工具"，而不是"用 AI 工具写代码"</strong>。</p>
+
+<p>更关键的是：这些事，<strong>没有任何一个 AI 工具会替你做</strong>。Claude Code 不管 Codex，Codex 不管 Cursor，Cursor 不管 Trae。它们之间是"工具竞品"，不是"工具协同"。</p>
+
+<p>CodePal 就是站在这些工具<em>之间</em>的那一层。它不写代码，它管<strong>"写代码之外"的一切</strong>。</p>
+
+<hr class="deco">
+
+<!-- 第一章 -->
+<h2>第一章：为什么 AI 工具自己不解决这些问题</h2>
+
+<p>读完上面四个场景，一个产品经理本能的反应应该是：<em>"那 Anthropic / OpenAI / Cursor 自己怎么不做？"</em>这个问题问得对。CodePal 存在的合理性，恰恰来自于<strong>这些大厂"不会做"的三个结构性原因</strong>。</p>
+
+<h3>原因一：竞品之间不会主动协同</h3>
+
+<p>Claude Code 不会帮你管理 Codex 账户。这不是技术做不到——OAuth 接口都是公开的——而是<strong>商业上不存在动机</strong>。Anthropic 希望你只用 Claude；OpenAI 希望你只用 Codex。每一个工具的产品经理被 KPI 衡量的，是"用户在我家工具里花了多长时间"。</p>
+
+<p>但真实的开发者不会忠于一家。一个 Claude Code 用户大概率也用过 Cursor、试过 Codex、最近还在看 Trae。<strong>用户的工作流是"多工具混合"，但每个工具的产品视野是"单工具垄断"</strong>。这中间天然有一个产品空隙。</p>
+
+<div class="anti">
+  <strong>反例提醒：</strong>不要认为"大厂没做的事就是没价值"。在每一个工具垂直 SaaS 起来的时代，都有一波"连接层"产品诞生：CleanShot X（系统截图 → Slack/Notion/Figma），Raycast（Spotlight + 100 个三方插件），Alfred（同 Raycast 的早期版本）。它们活得很好，因为它们做的事<strong>对单个工具都是负担、对用户都是刚需</strong>。
+</div>
+
+<h3>原因二：跨工具的脏活，工程量大、商业回报小</h3>
+
+<p>就拿"Skills 同步"举个例子。一个 Skill 可能是一个文件夹，里面有 SKILL.md、配套脚本、子目录、附件。要同步它需要：扫描多个目录、递归复制、处理重名、监听增量变化、断点续传、回滚机制。这些都是<strong>"小痛点 × 高工程量"</strong>。</p>
+
+<p>对 Anthropic 来说，做这个功能的优先级永远排在"把 Claude Code 的对话体验做得更好"后面。<strong>不是不能做，是排不上</strong>。</p>
+
+<p>但对一个独立开发者来说，这是<strong>"我自己每天都被烦"</strong> → "我有动机花一周写出来" → "顺手开源给同样痛的人用"。这是 CodePal 这类产品诞生的标准路径。</p>
+
+<h3>原因三：本地数据格式不稳定，大厂不愿封装</h3>
+
+<p>Claude Code 的 Session 存在 <code>~/.claude/projects/</code>，Codex 的 auth 在 <code>~/.codex/auth.json</code>，Cursor 的配置在 <code>~/.cursor/</code>。<strong>这些路径和格式没有官方稳定 API</strong>，随时可能变。</p>
+
+<p>大厂不愿把"读本地文件"作为正式产品能力暴露——一旦暴露就要承诺向后兼容，会绑住手脚。但用户愿意接受"第三方工具帮我读，坏了我换一个"。这是为什么 CodePal 能做但 Anthropic 自己不会做的根本原因。</p>
+
+<div class="pm-take">
+  <strong>PM 视角：</strong>这就是经典的"<strong>厂商不做的协议层</strong>"机会。用户的工作流跨越了厂商边界，厂商之间没有协同动机，于是中间出现一个"连接层产品"。判断这类机会成立的三个条件：①用户行为天然跨厂；②厂商之间是竞品而非生态伙伴；③厂商的商业模型不奖励"跨厂体验"。三条都满足，就有连接层机会。
+</div>
+
+<hr class="deco">
+
+<!-- 第二章 -->
+<h2>第二章：四个模块，四种痛点</h2>
+
+<p>CodePal 把"写代码之外"的事，拆成四组功能。我们一个一个看，每个都按"PM 视角"读：<strong>这个模块在解决什么类型的痛点 / 它对应的设计决策是什么 / 如果你是 PM 你会怎么定义</strong>。</p>
+
+<!-- 模块 1 -->
+<div class="module-card">
+  <div class="num">01 / 04</div>
+  <h3>🔋 账户与用量</h3>
+  <p><strong>一句话：</strong>监控 AI 工具的用量、额度、多账户状态，<em>触顶前</em>就知道。</p>
+</div>
+
+<h4>子能力 1：Codex 多账户秒切</h4>
+
+<p>这是 v1.5.0 的旗舰功能，v1.6.2 又加了"凭证保活"。</p>
+
+<p><strong>痛点直白说：</strong>Codex Plus 和 Pro 都是"5 小时短窗口 + 7 天长窗口"双限额。一旦触顶，你要 Logout → 换邮箱 → 重登 → 二次验证，1 到 2 分钟还要记密码。重度用户一天切 4 到 6 次，一周浪费 30 到 60 分钟在"切账号"上。</p>
+
+<p><strong>CodePal 怎么做：</strong>"纯文件交换"。它把每个账户的 <code>auth.json</code> 备份在本地（<code>~/.codex-switcher/accounts/</code>），切账户时直接替换文件，<strong>不到 200 毫秒</strong>，不调用任何 OAuth 流程。</p>
+
+<p>v1.6.2 又加了一个细节：每 24 小时后台主动续签躺着的账户的 token，避免你切回去发现"token 已过期还要重登"。这个用本机调 OpenAI 同款的 OAuth refresh endpoint（<code>auth.openai.com/oauth/token</code>），只用本地 refresh_token，不上传任何凭证。</p>
+
+<div class="pain-fix">
+  <div class="row">
+    <div class="head left">没有 CodePal 时</div>
+    <div class="head">有 CodePal 后</div>
+  </div>
+  <div class="row">
+    <div class="cell left">触顶 → 手工 Logout → 找密码 → 重登 → 二次验证（约 90 秒）</div>
+    <div class="cell">点一下账户卡片 → &lt;200ms 完成（自动文件交换）</div>
+  </div>
+  <div class="row">
+    <div class="cell left">切回旧账户发现 token 已过期 → 又要重登一遍</div>
+    <div class="cell">后台每 24h 自动续签，切回去就能用</div>
+  </div>
+  <div class="row">
+    <div class="cell left">不知道哪个账户离 5h / 7d 触顶还差多远</div>
+    <div class="cell">本地倒计时 + 套餐标签 + 上次切入时间，一屏看完</div>
+  </div>
+</div>
+
+<div class="pm-take">
+  <strong>PM 视角：</strong>这是一个典型的"<strong>把高频低值动作降到边际为零</strong>"案例。原本 90 秒的动作降到 200 毫秒，<em>体感不是"快了 450 倍"，而是"摩擦消失了"</em>。一旦摩擦消失，用户行为模式会改变——他们会更敢"切账户"，多账户管理本身从"麻烦事"变成"日常操作"。
+</div>
+
+<div class="anti">
+  <strong>反例提醒：</strong>不要把这个功能定义成"账户管理工具"。一旦贴上"管理"标签，用户期待会膨胀（要批量、要导入导出、要权限控制）。它的核心价值就是"切"这一个动作的极致体验。<strong>名字、icon、文案都要围绕"切"来设计</strong>。
+</div>
+
+<h4>子能力 2：Claude 会员额度 · 状态栏双向同步</h4>
+
+<p>Claude Code 官方在 v1.x 后期暴露了 <code>rate_limits</code> 接口，能取到当前用户的 5 小时和 7 天剩余额度。CodePal 把这个数字接出来，做成<strong>状态栏小组件</strong>——常驻在 Claude Code 底部，永远能看到。</p>
+
+<p>三个细节：</p>
+<ul>
+  <li><strong>色阶断点：</strong>&lt;60% 绿、60-85% 黄、≥85% 红。颜色映射到行动建议（绿=随便用、黄=注意、红=该歇了）。</li>
+  <li><strong>满载率趋势：</strong>基于最近 4 周完成的 7 天周期峰值，告诉你"以你最近的用法，本周大概会用到多少"。</li>
+  <li><strong>显示模式可配：</strong>总是显示 / 达阈值才显示 / 关闭。给低噪用户留出口。</li>
+</ul>
+
+<div class="pm-take">
+  <strong>PM 视角：</strong>这是<strong>"被动信息 → 主动感知"</strong>的设计。原本你要主动打开网页才能看到的数据，被前移到你视线里永远在的位置。代价是<strong>占用了一格状态栏</strong>，所以一定要给"关闭"出口——这是尊重用户注意力的最低门槛。
+</div>
+
+<h4>子能力 3：用量监测 · 花了多少一目了然</h4>
+
+<p>聚合 Claude Code 的所有 Token 用量，按日 / 周 / 月统计，按模型和按项目维度做分布可视化。<strong>预估费用基于内置的 pricing.json</strong>（远程可更新），所以新模型上线、定价调整都能跟上。</p>
+
+<div class="anti">
+  <strong>反例提醒：</strong>不要把这个做成"账单系统"。账单的对手盘是 Anthropic 官方控制台，永远做不过它。CodePal 这里的差异化是"<strong>按项目维度</strong>"——这是只有读本地日志才能拿到的视角，是大厂账单永远给不了的。
+</div>
+
+<!-- 模块 2 -->
+<div class="module-card">
+  <div class="num">02 / 04</div>
+  <h3>📚 文档</h3>
+  <p><strong>一句话：</strong>对话回顾 + Markdown 浏览，<em>找得到也重启得了</em>。</p>
+</div>
+
+<h4>子能力 1：对话回顾</h4>
+
+<p>这是用户最喜欢的"小功能"之一（v1.2.6 上线，v1.4.5 加了启动能力）。</p>
+
+<p><strong>它做什么：</strong>浏览 Claude Code 的所有历史 Session，按项目分组 + 全文搜索。每条消息 Markdown 渲染，包括代码块、链接、图片引用。</p>
+
+<p><strong>v1.4.5 加的两个动作：</strong></p>
+<ul>
+  <li>📋 <strong>复制 resume 参数</strong>：一键复制 <code>cd "项目路径" && claude --resume &lt;uuid&gt;</code>，粘到任意终端就能接着聊。</li>
+  <li>⚡ <strong>新终端启动</strong>：用 osascript 直接起 macOS Terminal 打开原项目目录 + 自动 resume。</li>
+</ul>
+
+<p>这两个动作把"找到对话"和"接着聊对话"打通了——过去你找到对话也没用，因为你不知道在哪个 cwd 下 resume。</p>
+
+<div class="pm-take">
+  <strong>PM 视角：</strong>这是<strong>"读 → 写"动作闭环</strong>的范例。光"能读历史"是 50 分功能（用户找完还要自己拼路径），<strong>"读完一键续上"才是 100 分功能</strong>。任何"查询型"功能在做完 v1 之后，都应该问一句：用户查到这个东西，下一步会做什么？把"下一步"内置进来，价值翻倍。
+</div>
+
+<div class="anti">
+  <strong>反例提醒：</strong>不要把对话回顾做成"对话搜索引擎"。一旦走搜索引擎方向就要拼相关性算法、做向量索引、考虑重排——工程量爆炸。<strong>它的本质是"找回最近一次对话"，不是"全语料检索"</strong>。前者全文搜 + 时间倒序就够了，后者要做半年。
+</div>
+
+<h4>子能力 2：文档查阅</h4>
+
+<p>添加多个文件夹作为根目录，展开成 N 层目录树，内置 Markdown 渲染器，拖拽分栏调宽度。</p>
+
+<p>这是个看起来很简单但实际很省心的功能。AI 编程用户的本地一般有几个固定的"文档根"：项目的 docs/、个人的笔记仓库、收藏的 cheatsheet 集合。CodePal 让你把这些都加进来，统一一个 Markdown 渲染器看，不用打开 VSCode 或 Obsidian。</p>
+
+<!-- 模块 3 -->
+<div class="module-card">
+  <div class="num">03 / 04</div>
+  <h3>🛠 技能中心</h3>
+  <p><strong>一句话：</strong>Skills 写一次，到处用；MCP 不用手动编辑 JSON。</p>
+</div>
+
+<h4>子能力 1：Skills 管理</h4>
+
+<p>这是 CodePal 最早的核心功能，也是产品名"Skill Manager"的由来。</p>
+
+<p><strong>核心模型："中央仓库 + N 个工具镜像"</strong>。</p>
+
+<ul>
+  <li>中央仓库在 <code>~/Documents/SkillManager/</code>。</li>
+  <li>各工具的 Skills 目录在 <code>~/.claude/skills/</code>、<code>~/.codex/skills/</code>、<code>~/.cursor/skills/</code> 等。</li>
+  <li>从任意工具<strong>扫描 → 导入</strong>到中央仓库，再<strong>一键推送</strong>到所有工具。</li>
+  <li>改一处全局生效（推送一遍就好）。</li>
+</ul>
+
+<p><strong>额外能力：</strong>按标签筛选（编程 / 内容 / 自定义）+ 搜索；批量推送 / 停用 / 标签管理；自动增量刷新（每 5 分钟检测新增 skill 自动同步）。</p>
+
+<div class="pm-take">
+  <strong>PM 视角：</strong>这是典型的<strong>"中心化 → 镜像分发"模型</strong>，和 Git 的逻辑一样。中央仓库是 single source of truth，各工具是消费端。一旦确立这个模型，所有衍生功能都顺理成章：版本管理可以加（中央仓库做 git）、协作可以加（中央仓库 push 到 GitHub）、跨机器同步可以加（用 iCloud 或 Dropbox 同步中央仓库）。<strong>选对核心模型，未来三年的功能路线图就有了基础</strong>。
+</div>
+
+<div class="anti">
+  <strong>反例提醒：</strong>不要做成"双向同步"——既能从工具拉到中央，又能从中央推到工具，还要双向冲突解决。这条路的工程复杂度爆炸（参考所有云盘的同步冲突 UI），<strong>而且解决的是一个伪需求</strong>。用户的真实工作流是"中央编辑 → 推送出去"，单向就够。
+</div>
+
+<h4>子能力 2：MCP 管理</h4>
+
+<p>按工具查看和管理 MCP 服务的启用 / 停用状态，不用手动编辑 JSON。</p>
+
+<p>MCP（Model Context Protocol）是 Anthropic 提出的工具协议，每个工具的 MCP 配置都存在自己的 JSON 文件里，启用 / 停用都要手改 JSON。CodePal 给了一个 GUI。</p>
+
+<!-- 模块 4 -->
+<div class="module-card">
+  <div class="num">04 / 04</div>
+  <h3>⚙️ 工具设置</h3>
+  <p><strong>一句话：</strong>启动模式、新建项目、网络诊断——AI 编程的"系统设置"。</p>
+</div>
+
+<h4>子能力 1：启动模式 · 4 种权限一键切</h4>
+
+<table>
+  <thead><tr><th>模式</th><th>行为</th><th>什么时候用</th></tr></thead>
+  <tbody>
+    <tr><td>只读规划</td><td>只读文件不执行任何操作</td><td>探索新仓库 / 读代码 / 学习</td></tr>
+    <tr><td>每次询问</td><td>每次执行前都要确认（默认）</td><td>陌生项目 / 重要分支</td></tr>
+    <tr><td>自动编辑</td><td>自动接受文件改动，但网络访问仍确认</td><td>熟悉的 side project</td></tr>
+    <tr><td>全自动</td><td>所有操作无需确认（谨慎使用）</td><td>沙箱环境 / 一次性脚本</td></tr>
+  </tbody>
+</table>
+
+<p>核心价值：<strong>把"权限模式"作为一等公民暴露出来</strong>，让用户可以根据场景一键切，而不是埋在某个深层的设置里。</p>
+
+<h4>子能力 2：新建项目 · 标准模板一键起步</h4>
+
+<p>选好模板 → 一键生成 <code>CLAUDE.md</code>、<code>.gitignore</code>、记忆系统、可选 <code>git init</code>。不用每次从零抄。</p>
+
+<p>这是典型的"<strong>把重复劳动模板化</strong>"。每一个 AI 编程用户开新项目时都要做这套动作，模板化之后人人受益。</p>
+
+<h4>子能力 3：网络诊断</h4>
+
+<p>IP 监控（后台常驻）+ Anthropic / OpenAI 等 API 连通性检测。挂 VPN 的用户排查问题用。</p>
+
+<div class="pm-take">
+  <strong>PM 视角（覆盖整个"工具设置"模块）：</strong>这一组功能看起来<strong>"零碎"</strong>，但背后是统一的——<em>把每个 AI 工具自己藏得很深的"系统级设置"，集中暴露在一个 GUI 里</em>。这是对标 macOS "系统设置 / System Settings" 的产品形态。一旦这个心智确立，未来加什么功能都顺理成章：模型偏好管理、缓存清理、日志查看、备份恢复——都属于"系统级设置"，都可以挂进来。
+</div>
+
+<hr class="deco">
+
+<!-- 第三章 -->
+<h2>第三章：产品哲学 · 自用驱动的飞轮</h2>
+
+<p>读完功能模块，我们再退一步看 CodePal 的<strong>产品方法论</strong>。这部分对 PM 比功能本身更值钱，因为它是一个"小工具型独立产品"如何活下来的样本。</p>
+
+<h3>哲学一：作者即用户</h3>
+
+<p>CodePal 的 README 里有一句很关键的话：<em>"CodePal 目前是作者自用驱动的产品，不提前规划功能列表，遵循 '用 → 痛 → 解决 → 沉淀' 的飞轮。"</em></p>
+
+<p>这句话翻译成 PM 语言是：<strong>没有 Roadmap，只有 Pain Backlog</strong>。作者每天用 AI 工具，每被一个痛点烦到一定阈值，就动手做一个模块。做完自己用，再开源给同样痛的人。</p>
+
+<div class="pm-take">
+  <strong>PM 视角：</strong>这种模式只在一个非常特殊的条件下成立——<strong>作者就是典型用户</strong>。如果你做的是 ToB SaaS，作者不是用户，这个模式失效。如果你做的是工具型独立产品（开发者工具 / 创作者工具 / Geek 工具），且你自己每天用，这个模式比"用户访谈 → 需求池 → 排期"高效 5 到 10 倍。
+</div>
+
+<h3>哲学二：先解决，再沉淀</h3>
+
+<p>看 CodePal 的版本历史，每一个 milestone 几乎都是"<strong>痛点 → 一个功能</strong>"：</p>
+
+<table>
+  <thead><tr><th>版本</th><th>痛点</th><th>功能</th></tr></thead>
+  <tbody>
+    <tr><td>v1.2.4</td><td>VPN 抖动不知道为啥连不上 API</td><td>网络诊断模块</td></tr>
+    <tr><td>v1.2.6</td><td>找不到一周前的对话</td><td>对话回顾页上线</td></tr>
+    <tr><td>v1.3.4</td><td>不知道 Claude 额度还剩多少</td><td>状态栏会员额度集成</td></tr>
+    <tr><td>v1.4.1</td><td>知道当前剩多少没用，要预测</td><td>满载率趋势</td></tr>
+    <tr><td>v1.4.5</td><td>找到对话也没法接着聊</td><td>启动历史对话（resume）</td></tr>
+    <tr><td>v1.5.0</td><td>Codex 多账户切换烦死</td><td>多账户秒切</td></tr>
+    <tr><td>v1.6.2</td><td>切回旧账户发现 token 过期</td><td>凭证主动保活</td></tr>
+  </tbody>
+</table>
+
+<p>每一个版本都是<strong>"昨天我自己被这个事烦到了" → "今天写一段代码解决"</strong>。这种节奏的产物有一个共同特点：<strong>每个功能都直接对应一个具体痛点，不存在"为了完整性而做"的功能</strong>。</p>
+
+<div class="anti">
+  <strong>反例提醒：</strong>这种模式不能复制到团队产品。一旦有 5 个工程师 + 2 个 PM，"我自己被烦到"就不再是合法的优先级标准——因为每个人的痛点不一样，决策权要交给"产品定义者"，否则会变成"工程师驱动的私人玩具"。<strong>团队产品需要 Roadmap，独立产品可以没有 Roadmap</strong>。
+</div>
+
+<h3>哲学三：诚实的边界声明</h3>
+
+<p>注意 README 里这段关于"凭证保活"的隐私声明：</p>
+
+<blockquote>
+为了避免 Codex 账户长时间不用导致 token 过期，CodePal 自 v1.6.2 起会在你本机调 OpenAI 官方 codex CLI 同款的 OAuth refresh endpoint 来续签账户 token。只用你本地 ~/.codex-switcher/accounts/ 里的 refresh_token、不上传任何凭证、不代理任何模型推理。请求 User-Agent 显式标识为 CodePal/&lt;version&gt;，不伪装成官方 CLI。如果你不需要这项能力或者你的环境对外网请求敏感，可以在登录失效时点卡片上的「重新登录」手动恢复。
+</blockquote>
+
+<p>这段写得很 PM——它<strong>主动暴露了"我做了什么对外网络请求"、"用了什么凭证"、"没用什么"、"怎么关闭"</strong>。这种声明对独立工具产品<strong>不是 nice-to-have，是命门</strong>。一旦被发现"偷偷调用 OpenAI 接口"，整个项目的信任会一夜归零。</p>
+
+<div class="pm-take">
+  <strong>PM 视角：</strong>这给所有做"本地工具 + 外部接口"的产品一个借鉴——<strong>把每一个 outbound 网络请求都用人话写在文档里</strong>。包括"我们用什么 endpoint、传什么字段、不传什么字段、能不能关闭"。透明换信任，是工具型产品的护城河。
+</div>
+
+<hr class="deco">
+
+<!-- 第四章 -->
+<h2>第四章：给 PM 的可复用框架</h2>
+
+<p>本章是<strong>本文最重要的"出口"</strong>——读到这里你应该已经懂了 CodePal。但 PM 真正关心的不只是"懂这一个产品"，而是"<strong>下次我遇到类似机会，我能不能识别出来</strong>"。下面是从 CodePal 案例里提炼出来的可复用判断框架。</p>
+
+<h3>框架一：判断"连接层产品"机会的三问</h3>
+
+<table>
+  <thead><tr><th>问题</th><th>追问</th><th>CodePal 答</th></tr></thead>
+  <tbody>
+    <tr><td>① 用户工作流是否天然跨厂？</td><td>用户每天在 N 个工具间切换，这些工具属于不同公司。</td><td>是。Claude Code、Codex、Cursor、Trae 分属四家。</td></tr>
+    <tr><td>② 这些厂商之间是竞品而非生态伙伴？</td><td>厂商不会主动协同，因为协同损害自己 KPI。</td><td>是。Anthropic 和 OpenAI 在抢同一批开发者。</td></tr>
+    <tr><td>③ 厂商不愿意做"跨厂体验"？</td><td>跨厂功能要么没有商业回报，要么会暴露不愿稳定的本地接口。</td><td>是。本地路径和文件格式都是非公开实现细节。</td></tr>
+  </tbody>
+</table>
+
+<p>三个都是"是"，机会成立。如果只满足两个，仔细想想——可能厂商会自己做。</p>
+
+<h3>框架二：连接层产品的功能路径</h3>
+
+<p>连接层产品早期不要追求大而全，按这个顺序铺：</p>
+
+<ol>
+  <li><strong>痛点最尖锐的"切动作"</strong>：用户每天重复做、单次摩擦在 30 秒以上的动作（CodePal 的"账户切换"）。</li>
+  <li><strong>可视化数据汇总</strong>：用户原本零散看不到全貌的数据，集中展示（CodePal 的"用量监测"）。</li>
+  <li><strong>跨工具同步</strong>：用户原本要在多处手工同步的内容（CodePal 的"Skills 同步"）。</li>
+  <li><strong>本地数据找回</strong>：用户原本知道存在但找不到的本地数据（CodePal 的"对话回顾"）。</li>
+  <li><strong>系统级设置外置</strong>：把每个工具藏得很深的设置集中暴露（CodePal 的"启动模式 / 新建项目"）。</li>
+</ol>
+
+<h3>框架三：独立工具产品的信任建设清单</h3>
+
+<p>做"碰本地数据 / 调外部接口"的工具，必须做的五件事：</p>
+
+<ul>
+  <li>✅ <strong>明确声明 outbound 请求</strong>：调哪个 endpoint、传什么字段、不传什么字段。</li>
+  <li>✅ <strong>User-Agent 不伪装</strong>：用 "CodePal/&lt;version&gt;" 这种自家标识，不假冒官方 CLI。</li>
+  <li>✅ <strong>给关闭出口</strong>：所有"自动行为"都要能手动关。</li>
+  <li>✅ <strong>开源</strong>：代码可审计是工具产品最低成本的信任建设。</li>
+  <li>✅ <strong>本地数据本地存</strong>：除非有强烈业务理由，不要把任何本地数据上传到云。</li>
+</ul>
+
+<hr class="deco">
+
+<!-- 结语 -->
+<div class="ending">
+
+<h2>结语：什么时候这个判断不适用</h2>
+
+<p>本文从 CodePal 这个具体产品出发，提炼了"连接层产品"的判断框架和功能路径。但任何框架都有边界，最后说一下<strong>什么时候这套思路<em>不适用</em></strong>：</p>
+
+<ul>
+  <li><strong>厂商之间是生态伙伴而非竞品时不适用。</strong>例如 Adobe 全家桶之间的协同，Adobe 自己做的比第三方好。</li>
+  <li><strong>本地数据没有结构化日志时不适用。</strong>CodePal 能成立，前提是 Claude Code 和 Codex 都把对话、用量、配置写到本地的可读文件里。如果工具本身是云端 SaaS，数据在云端，本地连接层就没素材。</li>
+  <li><strong>用户量级太小时不适用。</strong>独立工具产品需要"自己也是用户"才能持续迭代。如果目标用户群你不懂、你不用，这种自用驱动飞轮跑不起来。</li>
+  <li><strong>厂商有公开稳定的官方插件 / API 时优先用官方。</strong>当 Anthropic 推出官方"账户管理 API"那一天，CodePal 的"多账户切换"功能就要重写，可能直接失去意义。<em>连接层产品的护城河不深，永远要做好"被原厂收编"的准备。</em></li>
+</ul>
+
+<div class="recap">
+  <strong>一段话回顾：</strong>CodePal 是<strong>站在 4 个 AI 编程工具中间</strong>的连接层产品，做 4 件事——<strong>账户用量监控 / 文档浏览 / 技能中心 / 工具设置</strong>。它存在的合理性来自厂商之间不会协同、跨工具脏活商业回报小、本地数据格式非公开三个结构性原因。它的产品哲学是"<strong>作者即用户 + 用→痛→解决→沉淀的飞轮</strong>"，没有 Roadmap 只有 Pain Backlog。给 PM 的迁移：识别"连接层机会"用<strong>三问框架</strong>，铺功能用<strong>五步路径</strong>，建信任用<strong>五件事清单</strong>。
+</div>
+
+<p style="text-align:center; color:var(--ink-light); margin-top:40px; font-size:13px; letter-spacing:0.2em;">— 完 —</p>
+
+</div>
+
+</div>
+</body>
+</html>

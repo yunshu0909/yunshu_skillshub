@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>CodePal · 给 PM 的概念理解教学版（V3）</title>
+<style>
+  :root {
+    --bg: #faf6ef;
+    --bg-soft: #f3ece0;
+    --text: #3a2a1a;
+    --text-soft: #6b5a48;
+    --brown: #6b4423;
+    --brown-deep: #4a2c12;
+    --warn-bg: #f8e6d8;
+    --warn-bd: #b85c2c;
+    --warn-text: #5c2a0e;
+    --infer: #8a6d3b;
+    --rule: #d9cab2;
+    --chat-bg: #ece6db;
+    --chat-ai: #ffffff;
+    --chat-user: #d9c4a3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+    line-height: 1.85;
+    font-size: 17px;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 40px 28px 80px; }
+
+  /* === 反劝对话气泡 === */
+  .chat-mock {
+    background: var(--chat-bg);
+    border-radius: 14px;
+    padding: 22px 20px 18px;
+    margin-bottom: 28px;
+    border: 1px solid #d6cab5;
+  }
+  .chat-mock .chat-title {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+    text-align: center;
+    font-family: -apple-system, "PingFang SC", sans-serif;
+  }
+  .bubble-row { display: flex; align-items: flex-start; margin-bottom: 12px; gap: 10px; }
+  .bubble-row.user { justify-content: flex-end; }
+  .avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+    background: var(--brown); color: #fff;
+  }
+  .avatar.user { background: var(--chat-user); color: var(--brown-deep); }
+  .bubble {
+    background: var(--chat-ai);
+    padding: 12px 16px;
+    border-radius: 12px;
+    max-width: 88%;
+    font-size: 15px;
+    line-height: 1.7;
+    font-family: -apple-system, "PingFang SC", sans-serif;
+    color: #2c2014;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .bubble.user-bubble {
+    background: var(--chat-user);
+    color: var(--brown-deep);
+  }
+  .bubble strong { color: var(--brown-deep); }
+  .bubble .opt {
+    display: block;
+    margin-top: 6px;
+    padding-left: 4px;
+  }
+
+  /* === 警告横幅 === */
+  .warn-banner {
+    background: var(--warn-bg);
+    border-left: 5px solid var(--warn-bd);
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin-bottom: 32px;
+    color: var(--warn-text);
+    font-family: -apple-system, "PingFang SC", sans-serif;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .warn-banner .warn-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+
+  /* === Hero === */
+  .hero { text-align: center; padding: 24px 0 8px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+  .hero h1 { font-size: 32px; margin: 0 0 12px; color: var(--brown-deep); letter-spacing: 1px; }
+  .hero .sub { font-size: 15px; color: var(--text-soft); font-style: italic; }
+
+  /* === 配置条 === */
+  .config-bar {
+    background: var(--bg-soft);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 36px;
+    font-family: -apple-system, "PingFang SC", sans-serif;
+    font-size: 13.5px;
+    color: var(--text-soft);
+    line-height: 1.7;
+  }
+  .config-bar .config-line { color: var(--brown-deep); }
+  .config-bar .hint-line { margin-top: 6px; font-size: 12.5px; color: var(--text-soft); }
+
+  /* === 正文 === */
+  h2 {
+    font-size: 23px;
+    color: var(--brown-deep);
+    margin-top: 50px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 {
+    font-size: 18px;
+    color: var(--brown);
+    margin-top: 32px;
+    margin-bottom: 10px;
+  }
+  p { margin: 0 0 14px; }
+  blockquote {
+    border-left: 3px solid var(--brown);
+    margin: 18px 0;
+    padding: 4px 18px;
+    color: var(--text-soft);
+    font-style: italic;
+    background: rgba(107, 68, 35, 0.04);
+  }
+
+  /* === 推演段标记 === */
+  .infer-block {
+    border-left: 4px solid var(--infer);
+    background: rgba(138, 109, 59, 0.06);
+    padding: 14px 18px 4px;
+    margin: 18px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .infer-tag {
+    display: inline-block;
+    background: var(--infer);
+    color: #fff;
+    font-size: 11.5px;
+    padding: 2px 9px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    font-family: -apple-system, "PingFang SC", sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  /* === 反例 === */
+  .anti {
+    background: #f4ebdc;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 15.5px;
+  }
+  .anti strong { color: var(--brown-deep); }
+
+  /* === 表格 === */
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-family: -apple-system, "PingFang SC", sans-serif; font-size: 14.5px; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { background: var(--bg-soft); color: var(--brown-deep); font-weight: 600; }
+
+  /* === 出口/复盘 === */
+  .exit-card {
+    background: var(--bg-soft);
+    border-radius: 8px;
+    padding: 22px 24px;
+    margin: 28px 0;
+  }
+  .exit-card h3 { margin-top: 0; }
+
+  .footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--text-soft);
+    text-align: center;
+    font-family: -apple-system, "PingFang SC", sans-serif;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ============ 1. 反劝对话气泡 ============ -->
+  <div class="chat-mock">
+    <div class="chat-title">— 阶段 1.5 反劝对话回放 —</div>
+
+    <div class="bubble-row">
+      <div class="avatar">AI</div>
+      <div class="bubble">
+        ⚠️ 提示一下：你选的是<strong>教学版</strong>（20-30 分钟阅读），但素材是<strong>单 README 仅约 2,800 字</strong>。强行扩到教学版深度，约 60% 内容会是 AI 推演（背景延伸 / 对照 / 框架），不是素材原文。建议二选一：
+        <span class="opt">① <strong>改成「标准版」</strong>（5-8 分钟），刚好覆盖素材现有深度</span>
+        <span class="opt">② <strong>补充 2-3 份同类素材</strong>（多 PRD / 同领域多篇文章 / 项目全部文档），让教学版有真正的舞台</span>
+        <br><br>要继续教学版吗？（继续 / 改标准版 / 我去补素材）
+      </div>
+    </div>
+
+    <div class="bubble-row user">
+      <div class="bubble user-bubble">👤 用户选择：<strong>继续教学版</strong></div>
+      <div class="avatar user">你</div>
+    </div>
+  </div>
+
+  <!-- ============ 2. 素材体量警告横幅 ============ -->
+  <div class="warn-banner">
+    <div class="warn-title">⚠️ 素材体量警告</div>
+    本文已应用户要求按教学版深度展开。素材原文仅 ~2,800 字，扩展部分（背景延伸 / 多视角对照 / 可复用框架 / 边界声明）均为 AI 基于产品类目常识与公开行业实践的<strong>推演</strong>，并非 CodePal 团队的官方表态。每段推演内容已用<strong>左侧棕色竖线 + 「推演」标签</strong>明确标注，请按需取用。
+  </div>
+
+  <!-- ============ 3. Hero + 配置条 ============ -->
+  <div class="hero">
+    <h1>CodePal：AI 编程的幕后助手</h1>
+    <div class="sub">写代码归 AI，写代码之外的一切归 CodePal —— 给 PM 的概念理解版</div>
+  </div>
+
+  <div class="config-bar">
+    <div class="config-line">
+      📋 本次配置 · 受众：PM / 产品经理 · 终点：概念理解 · 详略：教学版（约 20-30 分钟）· 风格：故事化阅读（米白 + 深棕）
+    </div>
+    <div class="hint-line">
+      💬 觉得短？告诉我「展开 [章节名]」/「加 [背景/案例/可复用框架]」&nbsp;&nbsp;觉得长？「砍到要点」/「合并 X 章和 Y 章」
+    </div>
+  </div>
+
+  <!-- ============ 4. 正文 ============ -->
+
+  <h2>TL;DR · 30 秒看懂 CodePal 是什么</h2>
+  <p>
+    <strong>一句话</strong>：当 AI 编程工具（Claude Code / Codex / Cursor / Trae）越用越多，<strong>跨工具的"管理摩擦"</strong>就成了新瓶颈——Skills 要在多个工具间同步、Codex 多账户额度要轮换、Token 花了多少要看清、历史对话要找得回来。CodePal 是一个 macOS 桌面 App，把这些"AI 工具自己不管的事"集中到一处。
+  </p>
+  <p>
+    <strong>对 PM 而言一句话定位</strong>：CodePal 不是另一个写代码的 AI，而是 AI 工具之间的<strong>连接层（connective tissue）</strong>。它的产品形态决策、用户路径、商业边界，都围绕"AI 工具不愿意做、用户每天要做"这个交集展开。
+  </p>
+
+  <h2>故事开场 · 一个 AI 重度用户的一天</h2>
+  <p>
+    想象一个把 AI 编程当主力的开发者：早上打开电脑，<strong>Claude Code</strong> 跑主项目、<strong>Codex</strong> 处理另一条线、<strong>Cursor</strong> 改前端、偶尔切到 <strong>Trae</strong>。这是 2024 年下半年到 2025 年开始普及的工作方式——不是"选一个 AI 工具"，而是"几个工具混着用、各取所长"。
+  </p>
+  <p>
+    然后摩擦开始堆积：
+  </p>
+  <ul>
+    <li>上周写好的一个 <strong>Skill</strong>（AI 的可复用提示模板），在 Claude 里改了一处，得手动同步到 Codex 和 Cursor 的对应目录。</li>
+    <li>Codex Plus 套餐有 <strong>5 小时 + 7 天</strong>的双窗口限额，一触顶就要登出、换邮箱、重登、过二次验证，1-2 分钟，一天可能切 N 次。</li>
+    <li>这个月 Token 到底花了多少？哪个模型最贵？翻不出来。</li>
+    <li>昨天和 Claude 聊过的某段会话，今天想接着聊——找不到 Session 文件在哪。</li>
+    <li>新建项目，又要从老项目里抄一份 <code>CLAUDE.md</code> 和 <code>.gitignore</code>。</li>
+  </ul>
+  <p>
+    每一件事单独看都不大，加起来是一天里高频的、隐形的精力损耗。CodePal 想解决的就是这堆"小到不值得做工具、合起来又烦人"的事。
+  </p>
+
+  <h2>核心点 1 · 它是"连接层"，不是另一个 AI</h2>
+  <p>
+    README 里有一句话很关键：<strong>"没有一个 AI 工具会帮你做跨工具的事"</strong>——Claude Code 不管 Codex，Codex 不管 Cursor。这是 CodePal 的产品原点。
+  </p>
+  <p>
+    它的功能边界因此特别清晰：
+  </p>
+  <table>
+    <tr><th>CodePal 做</th><th>CodePal 不做</th></tr>
+    <tr>
+      <td>账户切换、用量统计、Skill 同步、对话回顾、文档浏览、模板初始化</td>
+      <td>不写代码、不调 LLM、不做模型推理、不替代任何 AI 工具本身</td>
+    </tr>
+  </table>
+  <p>
+    PM 视角的关键洞察：<strong>它选了一个绝大部分 AI 工具厂商不会自己做的位置</strong>。Anthropic 不会去帮你管 Codex 的账户，OpenAI 也不会帮你同步 Cursor 的 Skill——因为这事帮竞品做嫁衣。所以这个"连接层"位置，反而留给了第三方工具。
+  </p>
+
+  <div class="anti">
+    <strong>反例 / 容易误读它是什么</strong>：如果以为 CodePal 是"又一个能写代码的 AI 助手"，就完全跑偏了。它一行代码都不写，一次模型调用都不做。它的全部价值是<strong>组织和搬运 AI 工具周边的元数据</strong>（账户文件、Skill 目录、Session 记录、用量日志）。
+  </div>
+
+  <h2>核心点 2 · 功能围绕四组场景，不是堆 feature</h2>
+  <p>
+    CodePal 把所有功能分成 4 组，每组对应一个具体的"为什么打开它"：
+  </p>
+
+  <h3>① 账户与用量 · 触顶前就知道</h3>
+  <ul>
+    <li><strong>Codex 多账户秒切</strong>（v1.5.0 新增）：纯文件交换，&lt;200ms 完成，不碰 Codex.app 本身。v1.6.2 起增加"凭证保活"——每 24h 后台续签躺着的账户 token，避免切回去就 401。</li>
+    <li><strong>Claude 会员额度状态栏同步</strong>：接 Claude Code 官方 <code>rate_limits</code>，5h / 7d 剩余 + 满载率趋势，可显示在底部状态栏（&lt;60% 绿 / 60-85% 黄 / ≥85% 红）。</li>
+    <li><strong>用量监测</strong>：Token 聚合 + 费用估算，按日/周/月、按模型、按项目分布。</li>
+  </ul>
+
+  <h3>② 文档 · 找得回也启得回</h3>
+  <ul>
+    <li><strong>对话回顾</strong>：浏览所有 Claude Code Session，按项目分组 + 全文搜索。一键复制 <code>claude --resume &lt;uuid&gt;</code>，或用 osascript 直接起 Terminal 接着聊。</li>
+    <li><strong>多目录 Markdown 浏览</strong>：把多个文件夹挂成根目录，N 层目录树 + 内置渲染器。</li>
+  </ul>
+
+  <h3>③ 技能中心 · 写一次到处用</h3>
+  <ul>
+    <li><strong>Skills 管理</strong>：扫描 <code>~/.claude/skills/</code> / <code>~/.codex/skills/</code> / <code>~/.cursor/skills/</code> 等目录，导入到中央仓库，一键推送到所有工具。每 5 分钟自动增量同步新增 Skill。</li>
+    <li><strong>MCP 管理</strong>：按工具查看启停状态，不用手动改 JSON。</li>
+  </ul>
+
+  <h3>④ 工具设置 · 标准化重复操作</h3>
+  <ul>
+    <li><strong>启动模式</strong>：4 种 Claude Code 权限（只读规划 / 每次询问 / 自动编辑 / 全自动）一键切。</li>
+    <li><strong>新建项目</strong>：模板一键生成 <code>CLAUDE.md</code> / <code>.gitignore</code> / 记忆系统 / 可选 <code>git init</code>。</li>
+    <li><strong>网络诊断</strong>：IP 监控 + Anthropic / OpenAI API 连通性检测，挂 VPN 时排查问题用。</li>
+  </ul>
+
+  <p>
+    这 4 组之间不强依赖——你可以只用账户切换、不开 Skills 同步；也可以只看用量、不动权限模式。这是<strong>模块化 PaaS 思路</strong>，不是"功能打包卖你不需要的"。
+  </p>
+
+  <div class="anti">
+    <strong>反例 / 不是怎么做的</strong>：很容易做成"一个大 dashboard 把所有 AI 工具的指标揉在一起"。CodePal 没走这条路——它分了 4 个独立模块、各自有清晰场景入口。原因（推演）：揉一起会让用户面对"我现在到底要看什么"的负担，分开则每次打开都对着具体的痛。
+  </div>
+
+  <h2>核心点 3 · 它的隐私边界写得很明确</h2>
+  <p>
+    README 里有一段在第三方工具里少见的写法——v1.6.2 起的"凭证保活隐私声明"：
+  </p>
+  <blockquote>
+    "只用你本地 <code>~/.codex-switcher/accounts/</code> 里的 refresh_token、不上传任何凭证、不代理任何模型推理。请求 User-Agent 显式标识为 <code>CodePal/&lt;version&gt;</code>，不伪装成官方 CLI。如果你不需要这项能力或者你的环境对外网请求敏感，可以在登录失效时点卡片上的「重新登录」手动恢复。"
+  </blockquote>
+  <p>
+    PM 视角看，这一段做对了三件事：
+  </p>
+  <ol>
+    <li><strong>承认能力的灰色区域</strong>：续签 token 是个敏感动作，没有藏着掖着。</li>
+    <li><strong>给出关闭出口</strong>：不需要可以手动重登。这是 opt-out 而不是 opt-only。</li>
+    <li><strong>不伪装身份</strong>：User-Agent 标自己名字，不冒充官方 CLI。这一条是和 OpenAI 做"非敌对关系"的关键。</li>
+  </ol>
+
+  <div class="anti">
+    <strong>反例 / 容易踩坑的写法</strong>：如果只写"我们会自动帮你保持登录状态"——一个字 refresh_token 都不提，一个字 endpoint 都不提——技术用户会一眼看出在隐瞒，对工具的信任直接崩。CodePal 选了"把动作完整说清，让用户自己决定要不要"。
+  </div>
+
+  <hr>
+
+  <!-- ====== 推演段开始 ====== -->
+
+  <div class="infer-block">
+    <span class="infer-tag">推演</span>
+    <h2 style="margin-top:0; border:none; padding:0;">背景延伸 · CodePal 在"AI 工具周边"这个赛道里处于什么位置</h2>
+    <p>
+      （以下为 AI 基于公开行业观察的推演，不是 README 内容）
+    </p>
+    <p>
+      2024 下半年起，"AI 编程工具周边生态"开始冒出几类玩家：
+    </p>
+    <ul>
+      <li><strong>原厂自带的 dashboard</strong>：Anthropic Console、OpenAI Platform 等——只管自家用量，不跨工具。</li>
+      <li><strong>命令行式的开发者工具</strong>：开源的 ccmgr、claude-toolkit 之类——能力强但需要终端基础。</li>
+      <li><strong>桌面 App 形态的连接层</strong>：CodePal 属于这一类——给非纯命令行用户提供 GUI 的统一管理面。</li>
+      <li><strong>SaaS 式的团队管理平台</strong>：偏团队/企业用量审计，个人用户用不上。</li>
+    </ul>
+    <p>
+      CodePal 的位置是<strong>"个人重度用户 + 桌面 GUI + 跨工具"</strong>的交集——这是一个不大但比较明确的细分人群。
+    </p>
+  </div>
+
+  <div class="infer-block">
+    <span class="infer-tag">推演</span>
+    <h2 style="margin-top:0; border:none; padding:0;">多视角对照 · 三种角色看 CodePal 看到的东西不一样</h2>
+
+    <h3>开发者视角</h3>
+    <p>
+      最直接受益的角色。账户切换 1-2 分钟变 200ms、Skill 改一处全局生效、Token 账单一眼看完——每一项节省都直接落到日常使用。判断逻辑很简单："我每天确实在做这些动作吗？是 → 装"。
+    </p>
+
+    <h3>PM / 产品负责人视角</h3>
+    <p>
+      关注的不是单个功能，而是<strong>产品定位的清晰度</strong>。CodePal 给到的有用启示：
+    </p>
+    <ul>
+      <li><strong>Edge case 工具的市场是真实的</strong>——只要"被忽视的高频痛"足够明确，就有用户。</li>
+      <li><strong>"连接层"位置往往是第三方专属</strong>——大厂之间的间隙，是小工具的安身之地。</li>
+      <li><strong>不打包、不堆 feature</strong>——4 组模块各自独立，反而比"All-in-One Dashboard"更容易留人。</li>
+    </ul>
+
+    <h3>独立开发者 / Indie Hacker 视角</h3>
+    <p>
+      README 末尾那句话很值得品："不提前规划功能列表，遵循<strong>用 → 痛 → 解决 → 沉淀</strong>的飞轮"。这是典型的 dogfooding 产品哲学——作者自己是重度用户，痛点是第一手的，所以每个功能都直接对应一个真实场景，不太会出现"想象的需求"。
+    </p>
+  </div>
+
+  <div class="infer-block">
+    <span class="infer-tag">推演</span>
+    <h2 style="margin-top:0; border:none; padding:0;">可复用框架 · "连接层产品"的判断三问</h2>
+    <p>
+      下次你看到（或自己想做）一个号称"做 X 工具周边"的产品时，可以用这三问快速判断它能不能立住：
+    </p>
+    <table>
+      <tr><th>问题</th><th>CodePal 的答案</th><th>怎么判断别的产品</th></tr>
+      <tr>
+        <td><strong>1. 它在做的事，原厂会自己做吗？</strong></td>
+        <td>不会——Anthropic 没动力管 Codex。</td>
+        <td>如果原厂下个版本就会做，连接层一夜清零。</td>
+      </tr>
+      <tr>
+        <td><strong>2. 用户每周触发这件事几次？</strong></td>
+        <td>账户切换可能 1 天数次，Skill 同步每周数次。</td>
+        <td>低于"每周 1 次"的痛点，用户记不住产品的存在。</td>
+      </tr>
+      <tr>
+        <td><strong>3. 它的能力会不会越界（敌对原厂）？</strong></td>
+        <td>不会——不代理推理、不伪装 UA、给关闭开关。</td>
+        <td>越界的工具一旦被原厂封 API，整个产品就死了。</td>
+      </tr>
+    </table>
+    <p>
+      这三问筛掉的产品类型很清晰：原厂能做的（被吞）、低频的（被忘）、越界的（被封）。剩下的才是连接层产品的健康区。
+    </p>
+  </div>
+
+  <div class="infer-block">
+    <span class="infer-tag">推演</span>
+    <h2 style="margin-top:0; border:none; padding:0;">边界声明 · CodePal 不适合什么场景</h2>
+    <ul>
+      <li><strong>不是 AI 重度用户</strong>：一个月开几次 Claude，没多账户、没 Skill 库——CodePal 给你的价值不够覆盖学习成本。</li>
+      <li><strong>团队 / 企业用量审计</strong>：CodePal 是个人本地工具，没有团队后台、没有审计日志、没有 SSO。这类需求要看 SaaS 工具。</li>
+      <li><strong>Windows / Linux 用户</strong>：当前只发布 macOS Apple Silicon 包，Intel Mac 和其他平台需要自行构建。</li>
+      <li><strong>纯 Web 开发者</strong>：如果你的 AI 用法主要在浏览器里（claude.ai 网页版 / ChatGPT 网页版），CodePal 管不到——它管的是<strong>本地 CLI / 桌面 App 形态</strong>的 AI 工具。</li>
+    </ul>
+  </div>
+
+  <!-- ====== 推演段结束 ====== -->
+
+  <h2>出口 · 读完这一篇，PM 手里多了什么</h2>
+
+  <div class="exit-card">
+    <h3>① 一个清晰的产品定位句</h3>
+    <p>
+      "<strong>连接层（connective tissue）</strong>"——下次看到任何"AI 工具周边"的产品，可以先问：它做的是连接层、还是又一个 AI 本身？这是个二分类。
+    </p>
+
+    <h3>② 一组判断框架（连接层三问）</h3>
+    <p>原厂会做吗？用户多频？会越界吗？三个全过 = 站得住，缺一个 = 风险高。</p>
+
+    <h3>③ 一个产品哲学样本</h3>
+    <p>
+      "用 → 痛 → 解决 → 沉淀"的飞轮——dogfooding 驱动、不提前规划 roadmap、按真实使用频次决定下一个功能。这种节奏适合 indie 工具，不适合需要 stakeholder alignment 的大组织产品。
+    </p>
+
+    <h3>④ 一份"我自己要不要装"的快速判断</h3>
+    <ul>
+      <li>同时用 ≥ 2 个 AI 编程工具（Claude / Codex / Cursor / Trae）？</li>
+      <li>有 Codex 多账户切换的痛？</li>
+      <li>想知道 Token 花在哪？</li>
+      <li>有维护过 Skill 库？</li>
+    </ul>
+    <p>勾中 ≥ 2 项 → 值得装一下试。否则可以先观望。</p>
+  </div>
+
+  <h2>一句话收尾</h2>
+  <p>
+    CodePal 是个典型的"<strong>大厂不愿做、用户每天做</strong>"的连接层产品。它的可复用启示——给 PM——不是某个具体功能怎么做，而是：<strong>当一个新平台爆发时，平台之间的间隙就是第三方的机会窗口</strong>。AI 编程工具的这个窗口，2024-2025 正好开着。
+  </p>
+
+  <div class="footer">
+    本文教学版 · 素材：CodePal README v1.6.2 · 扩展四件（背景 / 多视角 / 框架 / 边界）为 AI 推演 · 已标注
+  </div>
+
+</div>
+</body>
+</html>
