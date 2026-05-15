@@ -77,14 +77,14 @@
 </div>
 ```
 
-### `.yunshu`（绿色，emerald）— 用于"对用户的启示"
+### `.insight`（绿色，emerald）— 用于"对用户的启示"
 ```html
-<div class="yunshu">
+<div class="insight">
 <span class="label">对用户的启示</span>
 <p>...</p>
 </div>
 ```
-**注意**：CSS class 名叫 `.yunshu` 是因为这是云舒专属的"启示"块。其他用户可以改名，但语义不变（"对用户的具体启示"）。
+**语义**：用来高亮"这一段对用户的具体启示"——可能是选题机会、产品决策方向、行动建议、研究入口。不是普通的总结，是"用户研究视角下可以拿走的东西"。
 
 ### `.rose`（玫红）— 用于安全警告 / 致命反模式
 ```html
@@ -131,7 +131,7 @@
 <h5>我的初判</h5>
 <p>...</p>
 
-<div class="yunshu">
+<div class="insight">
 <span class="label">对用户启示</span>
 <p>...</p>
 </div>
