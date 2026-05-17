@@ -17,6 +17,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### 新增 / Added
+- 📑 **PRD 测试用例一体化** (PRD Test Writer) **[Beta]**
+  - 伙伴模式：PRD + 可执行测试用例双文档一体化，与用户共同写并迭代
+  - 6 阶段闭环：需求确认 → 自主读代码 → PRD 故事定稿 → 测试用例定稿 → 双 HTML → 对抗校核 → 冻结
+  - 测试用例铁律：一条用例 = 一个原子验证点，13 字段标准，每条断言标「代码依据 文件:行」
+  - 任务类用例写死任务名/轮数/每轮内容/每轮期望，杜绝"测个长任务"式泛化
+  - 真 Key vs 抓包两类证据分清，反假绿/反同义反复，未实现标 BLOCKED 不掩盖
+  - MD 给 AI 做事实源，review HTML 给人查阅且与 MD 严格 1:1（机器校验闸）
+  - 阶段 5 对抗校核：≥3 个无共享上下文 sub-agent 交叉审，无能力时降级串行并如实标注
+  - 冻结后维护 docs/PRD_REGISTRY.md 台账
+
 - 📡 **案例雷达** (Case Radar)
   - 4 阶段流程：scan（多渠道扫信源）→ recon（真物侦察）→ capture（拉真物）→ embed（出 HTML 案例集）
   - 信源分级砍 SEO 垃圾：一手源 / 二手优质 / 三手中文（仅含独立观察）

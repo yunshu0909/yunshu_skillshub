@@ -12,9 +12,9 @@
 
 ### 📊 Skills 总览
 
-目前共包含 **28 个 Skills**，分为以下 3 大类：
+目前共包含 **29 个 Skills**，分为以下 3 大类：
 
-#### 💻 AI 编程（14 个）
+#### 💻 AI 编程（15 个）
 | Skill | 说明 |
 |-------|------|
 | [PRD 文档撰写助手](./prd-doc-writer) | 故事驱动的需求文档撰写 |
@@ -27,6 +27,7 @@
 | [UI 样式修改助手](./ui-design) | 结构化 UI 样式修改流程 |
 | [macOS 产品设计专家](./macos-product-design) (Beta) | macOS 原生风格 HTML/CSS 设计稿 |
 | [PRD 自动化测试闭环](./prd-auto-test-loop) (Beta) | PRD 驱动的测试计划与自测报告 |
+| [PRD 测试用例一体化](./prd-test-writer) (Beta) | PRD 与可执行测试用例双文档协作 |
 | [Issue 协作处理](./issue-triage) | GitHub Issue 分诊与回复 |
 | [GitHub 项目搜索](./github-repo-search) | 搜索筛选开源项目 |
 | [项目目录地图构建器](./project-map-builder) | 生成项目目录说明文档 |
@@ -699,6 +700,34 @@ memory init
 
 ---
 
+#### 📑 [PRD 测试用例一体化](./prd-test-writer) (PRD Test Writer) **(Beta)**
+**描述**: PRD + 可执行测试用例双文档一体化协作。以伙伴模式与用户共同写并迭代，理解需求后先自主读代码再落笔
+
+**适用场景**:
+- 既要写 PRD，又要把可执行测试用例一起冻结
+- 需要用例严格落地真实代码（每条断言标代码依据）
+- 任务类用例要写死轮数、每轮内容与期望，杜绝"测个长任务"式泛化
+- 想要 MD 事实源 + 给人查阅的 review HTML 严格 1:1
+
+**核心功能**:
+- 📖 故事驱动 PRD：用户旅程地图 + 自包含用户故事 + ASCII 线框图 + Mermaid
+- 🔍 先读死代码：写文档前 grep 落地真实行为，每条断言标「代码依据 文件:行」
+- 🧪 原子测试用例：一条用例 = 一个原子验证点，13 字段标准，任务类写死轮数/每轮内容/期望
+- 🧾 双文档一体：PRD-MD + 测试用例-MD（给 AI 事实源）+ 两份 review HTML（给人查阅）
+- 🕵️ 对抗校核：≥3 个无共享上下文 sub-agent 交叉审，反假绿/反同义反复
+- 🧊 冻结与台账：定稿标 Frozen+commit，维护 PRD_REGISTRY
+
+**触发方式**:
+```
+帮我写 PRD 和测试用例
+梳理需求文档 + 测试方案
+/prd-test-writer
+```
+
+> ⚠️ **测试版**：当前为 Beta，欢迎使用并反馈问题。
+
+---
+
 #### 📖 [输出工程](./readable-output) (Readable Output)
 **描述**: 把"想清楚再输出"的通用逻辑封装成思考清单 + 强制 4 问挖掘，专门用来产可读性高的 HTML 长文
 
@@ -926,6 +955,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 # 使用 PRD 自动化测试闭环 (Beta)
 /prd-auto-test-loop
 
+# 使用 PRD 测试用例一体化 (Beta)
+/prd-test-writer
+
 # 使用输出工程
 /readable-output
 
@@ -1023,6 +1055,11 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 │   ├── agents/               # 测试 Agent
 │   ├── references/           # 测试封装指南
 │   └── scripts/              # 辅助脚本
+├── prd-test-writer/           # PRD 测试用例一体化 (Beta)
+│   ├── SKILL.md              # Skill 定义文件
+│   ├── assets/               # PRD/用例模板与 review HTML 模板
+│   ├── references/           # 样板用例、线框图/Mermaid 示例、校验规范
+│   └── samples/              # 示例 review HTML
 ├── readable-output/           # 输出工程
 │   └── SKILL.md              # Skill 定义文件
 ├── system-study/              # 系统化学习材料生成器
@@ -1061,9 +1098,9 @@ A carefully crafted collection of Claude Code Skills designed to boost efficienc
 
 ### 📊 Skills Overview
 
-Currently includes **28 Skills** across 3 categories:
+Currently includes **29 Skills** across 3 categories:
 
-#### 💻 AI Programming (14)
+#### 💻 AI Programming (15)
 | Skill | Description |
 |-------|-------------|
 | [PRD Doc Writer](./prd-doc-writer) | Story-driven requirement document writing |
@@ -1076,6 +1113,7 @@ Currently includes **28 Skills** across 3 categories:
 | [UI Design Assistant](./ui-design) | Structured UI style modification workflow |
 | [macOS Product Design](./macos-product-design) (Beta) | macOS-native HTML/CSS design mockups |
 | [PRD Auto Test Loop](./prd-auto-test-loop) (Beta) | PRD-driven test plan and self-test reports |
+| [PRD Test Writer](./prd-test-writer) (Beta) | Co-author PRD and executable test cases as paired docs |
 | [Issue Triage](./issue-triage) | GitHub Issue triage and response |
 | [GitHub Repo Search](./github-repo-search) | Search and filter open source projects |
 | [Project Map Builder](./project-map-builder) | Generate project directory documentation |
@@ -1747,6 +1785,34 @@ Generate TEST_PLAN / TEST_REPORT
 
 ---
 
+#### 📑 [PRD Test Writer](./prd-test-writer) **(Beta)**
+**Description**: Co-author a PRD and executable test cases as paired documents. Partner-mode collaboration — reads the real code before writing
+
+**Use Cases**:
+- Need to freeze a PRD and its executable test cases together
+- Test cases must be grounded in real code (every assertion cites file:line)
+- Task-type cases must hard-code rounds, per-round input, and expected output
+- Want an MD source-of-truth plus a strictly 1:1 review HTML for humans
+
+**Core Features**:
+- 📖 Story-driven PRD: user journey map + self-contained stories + ASCII wireframes + Mermaid
+- 🔍 Code-first: grep the real behavior before writing, every assertion tagged with file:line
+- 🧪 Atomic test cases: one case = one atomic check, 13-field standard, task cases hard-coded
+- 🧾 Paired docs: PRD-MD + test-cases-MD (AI source) + two review HTMLs (for humans)
+- 🕵️ Adversarial review: ≥3 sub-agents with no shared context cross-check against false-green
+- 🧊 Freeze & registry: mark Frozen+commit on sign-off, maintain PRD_REGISTRY
+
+**Trigger**:
+```
+Write a PRD with test cases for me
+Draft requirement doc + test plan
+/prd-test-writer
+```
+
+> ⚠️ **Beta**: This is a beta release. Feedback is welcome.
+
+---
+
 #### 📖 [Readable Output](./readable-output)
 **Description**: Wraps the universal "think before you output" logic into a checklist + forced 4-question intake, dedicated to producing highly readable HTML long-form content
 
@@ -1973,6 +2039,9 @@ In Claude Code CLI, you can use them by:
 # Use PRD Auto Test Loop (Beta)
 /prd-auto-test-loop
 
+# Use PRD Test Writer (Beta)
+/prd-test-writer
+
 # Use Readable Output
 /readable-output
 
@@ -2070,6 +2139,11 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 │   ├── agents/               # Test agents
 │   ├── references/           # Test packaging guide
 │   └── scripts/              # Helper scripts
+├── prd-test-writer/           # PRD Test Writer (Beta)
+│   ├── SKILL.md              # Skill definition file
+│   ├── assets/               # PRD/test templates & review HTML templates
+│   ├── references/           # Sample cases, wireframe/Mermaid examples, check spec
+│   └── samples/              # Example review HTML
 ├── readable-output/           # Readable Output
 │   └── SKILL.md              # Skill definition file
 ├── system-study/              # System Study

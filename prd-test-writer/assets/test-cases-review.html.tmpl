@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+  测试用例 HTML 查阅模板（套用：从 测试用例-MD 抽内容灌占位符，禁手写结构/改样式）
+  占位符：{{PRD_ID}} {{STATUS}} {{TOC}} {{SEC0}} {{PHASE_TABLE}} {{TC_CARDS}} {{ELSEWHERE}}
+  TC 卡片片段格式见文件底部注释。生成后必须跑 references/html-fill-spec.md 的 1:1 校验，FAIL 不交付。
+  规则：与 MD 严格 1:1，不删字段/不删步骤/不压缩整节；卡头编号/名称/模块/优先级/证据类型均为可见文本。
+-->
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{PRD_ID}} 测试用例</title>
+<style>
+ :root{--bg:#f6f7f9;--card:#fff;--ink:#1f2329;--soft:#646a73;--line:#e5e6eb;--accent:#3370ff;--accent-soft:#eaf1ff;--p0:#a23b2e;--p1:#8a5e12;--p2:#566;--real:#2f6f4f;--cap:#8a5e12;--blk:#566;--code:#f2f3f5;--exp:#2f6f4f}
+ *{box-sizing:border-box}html{scroll-behavior:smooth}
+ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+ .shell{max-width:1180px;margin:0 auto;padding:32px 24px 80px;display:flex;gap:28px;align-items:flex-start}
+ .toc{position:sticky;top:32px;flex:0 0 230px;max-height:calc(100vh - 64px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 10px;font-size:13px;line-height:1.5}
+ .toc .t{font-weight:700;color:var(--soft);margin:2px 8px 10px;font-size:12px;letter-spacing:1px}
+ .toc a{display:block;color:#3a3f45;text-decoration:none;padding:6px 10px;border-radius:7px;margin:2px 0;border-left:2px solid transparent;transition:background .12s,color .12s}
+ .toc a:hover{background:#f0f1f3;color:var(--ink)}
+ .toc a.active{background:var(--accent-soft);color:var(--accent);font-weight:600;border-left-color:var(--accent)}
+ .wrap{flex:1 1 auto;min-width:0;max-width:880px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.03);padding:36px 44px 56px}
+ @media(max-width:1080px){.shell{flex-direction:column;padding:16px 14px 60px}.toc{position:sticky;top:0;flex:none;width:100%;max-height:none;display:flex;flex-wrap:wrap;gap:2px;z-index:5}.toc .t{width:100%}.toc a{border-left:none}.wrap{max-width:none;padding:24px 18px 40px}}
+ h1{font-size:23px;margin:0 0 4px;letter-spacing:-.2px}.sub{color:var(--soft);font-size:13px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+ h2{font-size:17px;margin:34px 0 8px;padding-bottom:7px;border-bottom:1px solid var(--line);scroll-margin-top:24px}
+ code{background:var(--code);border-radius:5px;padding:1.5px 5px;font:12px ui-monospace,Menlo,monospace;word-break:break-all}
+ pre{background:#f5f6f8;color:#1f2329;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:12px/1.6 ui-monospace,Menlo,monospace;white-space:pre-wrap;margin:6px 0;overflow:auto}
+ table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:#f4f5f7;font-weight:600}
+ .tc{background:#fcfcfb;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0;scroll-margin-top:24px}
+ .tch{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:9px}
+ .tcid{font:700 13px ui-monospace,Menlo,monospace;color:#fff;background:var(--accent);border-radius:6px;padding:2px 8px}
+ .tct{font-size:15px;font-weight:700;flex:1 1 240px}.tcmod{font-size:12px;color:var(--soft)}
+ .badge{font-size:11px;font-weight:700;border-radius:5px;padding:1px 7px;border:1px solid}
+ .b-p0{color:#fff;background:var(--p0);border-color:var(--p0)}.b-p1{color:var(--p1);border-color:var(--p1)}.b-p2{color:var(--p2);border-color:var(--p2)}
+ .b-real{color:#fff;background:var(--real);border-color:var(--real)}.b-cap{color:var(--cap);border-color:var(--cap)}.b-blk{color:var(--blk);border-color:var(--blk)}
+ .fld{margin:10px 0}.fk{font-size:12px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.4px}.fv{font-size:14px}
+ ol.steps{margin:4px 0;padding-left:20px}ol.steps>li{margin:7px 0}
+ .exp{display:block;color:var(--exp);margin-top:2px}.exp:before{content:"→ 预期：";font-weight:700}
+ ul.tight{margin:3px 0;padding-left:20px}ul.tight>li{margin:3px 0}
+ .pass{color:var(--accent);font-weight:600}.dep{font-size:12px;color:var(--soft)}
+ .foot{color:var(--soft);font-size:12.5px;margin-top:36px;border-top:1px solid var(--line);padding-top:16px}
+</style></head><body>
+<div class="shell">
+<nav class="toc"><div class="t">目录</div>{{TOC}}</nav>
+<main class="wrap">
+<h1>{{PRD_ID}} 测试用例</h1>
+<div class="sub">{{STATUS}} · 本页与 测试用例-MD 严格 1:1，不压缩 · 一条用例=一个原子验证点</div>
+<table><tr><th>标记</th><th>含义</th></tr>
+<tr><td><span class="badge b-p0">P0</span></td><td>阻断级，不过则不通过</td></tr>
+<tr><td><span class="badge b-real">真Key</span></td><td>打真实上游，证"真能用"</td></tr>
+<tr><td><span class="badge b-cap">抓包</span></td><td>假上游，只证"字段对"，不证能用</td></tr>
+<tr><td><span class="badge b-blk">BLOCKED</span></td><td>未实现，非通过非跳过</td></tr></table>
+
+<h2 id="sec0">0 全局约定</h2>
+{{SEC0}}
+
+<h2 id="phase">0.5 测试阶段编排</h2>
+{{PHASE_TABLE}}
+
+{{TC_CARDS}}
+
+{{ELSEWHERE}}
+
+<div class="foot">本页给人查阅，全部内容来自 测试用例-MD（每条带代码依据 文件:行），仅翻译排版、未增删事实。一条用例=一个原子验证点，13 字段，每步动作配预期。</div>
+</main></div>
+<script>
+(function(){
+ var links=[].slice.call(document.querySelectorAll('.toc a[href^="#"]'));
+ var map=links.map(function(a){return{a:a,el:document.getElementById(a.getAttribute('href').slice(1))};}).filter(function(x){return x.el;});
+ function onScroll(){
+  var cur=null;
+  for(var i=0;i<map.length;i++){ if(map[i].el.getBoundingClientRect().top<=140) cur=map[i]; else break; }
+  if(!cur&&map.length) cur=map[0];
+  links.forEach(function(a){a.classList.remove('active');});
+  if(cur) cur.a.classList.add('active');
+ }
+ window.addEventListener('scroll',onScroll,{passive:true});
+ window.addEventListener('resize',onScroll); onScroll();
+})();
+</script>
+</body></html>
+
+<!--
+  ===== 片段格式（生成时灌入，勿改结构） =====
+  TOC 每条： <a href="#tc-013">TC-013 …</a> 或 <a href="#m-a">模块A …</a>
+  模块标题： <h2 id="m-a">模块 A · …</h2>
+  TC 卡片（13 字段全保留，卡头为可见文本）：
+  <div class="tc" id="tc-013">
+   <div class="tch"><span class="tcid">TC-013</span><span class="tct">名称</span>
+     <span class="tcmod">模块D ／ 阶段3</span>
+     <span class="badge b-p0">P0</span><span class="badge b-real">真Key</span></div>
+   <div class="fld"><div class="fk">前置条件</div><div class="fv"><ul class="tight"><li>…</li></ul></div></div>
+   <div class="fld"><div class="fk">测试数据（精确字面值）</div><div class="fv">…；prompt 原文用 <pre>…</pre> 不截断；逐轮表用 <table></div></div>
+   <div class="fld"><div class="fk">测试步骤</div><div class="fv"><ol class="steps"><li>动作：…<span class="exp">…</span></li></ol></div></div>
+   <div class="fld"><div class="fk">通过标准</div><div class="fv pass">…</div></div>
+   <div class="fld"><div class="fk">失败判定与归类</div><div class="fv"><ul class="tight"><li>…</li></ul></div></div>
+   <div class="fld"><div class="fk">后置/清理</div><div class="fv">…</div></div>
+   <div class="fld"><div class="fk">证据产物</div><div class="fv">…</div></div>
+   <div class="dep">代码依据：文件:行</div>
+  </div>
+-->

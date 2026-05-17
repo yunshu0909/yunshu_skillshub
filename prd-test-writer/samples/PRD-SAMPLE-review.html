@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!--
+  PRD HTML 查阅模板（套用：从 PRD-MD 抽内容灌占位符，禁手写结构/改样式）
+  占位符：{{PRD_ID}} {{TITLE}} {{STATUS}} {{TOC}} {{OVERVIEW}} {{JOURNEY}} {{MERMAID}} {{US_CARDS}}
+  生成后必须跑 references/html-fill-spec.md 的 1:1 校验，FAIL 不交付。
+  规则：与 PRD-MD 严格 1:1，不删故事子项、不丢 Mermaid 代码块原文、不压缩整节。
+  Mermaid：用 .diagram 容器，<pre class="mermaid"> 装原文供浏览器渲染，再用 <details><pre> 留一份源码原文
+           （两份都是原文，1:1 校验扫 <pre> 仍命中；渲染失败也有源码可看）。
+-->
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRD-SAMPLE · 批量作业批改 - V0.5</title>
+<style>
+ :root{--bg:#f6f7f9;--card:#fff;--ink:#1f2329;--soft:#646a73;--line:#e5e6eb;--accent:#3370ff;--accent-soft:#eaf1ff;--code:#f2f3f5}
+ *{box-sizing:border-box}html{scroll-behavior:smooth}
+ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.75 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+ .shell{max-width:1180px;margin:0 auto;padding:32px 24px 80px;display:flex;gap:28px;align-items:flex-start}
+ .toc{position:sticky;top:32px;flex:0 0 230px;max-height:calc(100vh - 64px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 10px;font-size:13px;line-height:1.5}
+ .toc .t{font-weight:700;color:var(--soft);margin:2px 8px 10px;font-size:12px;letter-spacing:1px}
+ .toc a{display:block;color:#3a3f45;text-decoration:none;padding:6px 10px;border-radius:7px;margin:2px 0;border-left:2px solid transparent;transition:background .12s,color .12s}
+ .toc a:hover{background:#f0f1f3;color:var(--ink)}
+ .toc a.active{background:var(--accent-soft);color:var(--accent);font-weight:600;border-left-color:var(--accent)}
+ .wrap{flex:1 1 auto;min-width:0;max-width:860px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.03);padding:36px 44px 56px}
+ @media(max-width:1080px){.shell{flex-direction:column;padding:16px 14px 60px}.toc{position:sticky;top:0;flex:none;width:100%;max-height:none;display:flex;flex-wrap:wrap;gap:2px;z-index:5}.toc .t{width:100%}.toc a{border-left:none}.wrap{max-width:none;padding:24px 18px 40px}}
+ h1{font-size:23px;margin:0 0 4px;letter-spacing:-.2px}.sub{color:var(--soft);font-size:13px;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+ h2{font-size:18px;margin:34px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line);scroll-margin-top:24px}
+ h3{font-size:15px;margin:20px 0 6px;color:#33373d}
+ code{background:var(--code);border-radius:5px;padding:1.5px 5px;font:12.5px ui-monospace,Menlo,monospace}
+ pre{background:#f5f6f8;color:#1f2329;border:1px solid var(--line);border-radius:10px;padding:13px 15px;font:12.5px/1.6 ui-monospace,Menlo,monospace;white-space:pre-wrap;margin:8px 0;overflow:auto}
+ table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}th{background:#f4f5f7;font-weight:600}
+ .us{background:#fcfcfb;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0;scroll-margin-top:24px}
+ .usid{font-weight:700;font-size:16px;color:var(--accent);margin-bottom:4px}
+ .fld{margin:12px 0}.fk{font-size:12px;font-weight:700;color:var(--soft);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px}
+ ul{margin:6px 0 6px 18px}li{margin:4px 0}
+ .diagram{background:#fbfcfd;border:1px solid var(--line);border-radius:12px;padding:18px;margin:12px 0;overflow:auto}
+ .diagram .mermaid{background:none;border:0;padding:0;margin:0;border-radius:0;color:inherit;white-space:normal;display:flex;justify-content:center;text-align:center;min-height:32px}
+ .diagram .mermaid svg{max-width:100%;height:auto}
+ .diagram details{margin-top:10px}
+ .diagram summary{cursor:pointer;color:var(--soft);font-size:12px;user-select:none}
+ .diagram details pre{margin-top:8px}
+ .foot{color:var(--soft);font-size:12.5px;margin-top:36px;border-top:1px solid var(--line);padding-top:16px}
+</style></head><body>
+<div class="shell">
+<nav class="toc"><div class="t">目录</div><a href="#overview">1 综述</a>
+<a href="#journey">1.2 用户旅程地图</a>
+<a href="#mermaid">1.3 流程/状态/时序图</a>
+<a href="#stories">2 用户故事</a>
+<a href="#us-01">US-01 上传图片并配置参数</a>
+<a href="#us-02">US-02 监控任务进度</a></nav>
+<main class="wrap">
+<h1>PRD-SAMPLE · 批量作业批改 - V0.5</h1>
+<div class="sub">状态：Draft ｜ Frozen(待定) · 本页与 PRD-MD 严格 1:1，不压缩 · 配套：PRD-SAMPLE-测试用例</div>
+
+<h2 id="overview">1. 综述</h2>
+<h3>1.1 项目背景与核心问题</h3>
+<div>教师在 POC 阶段需要批量批改英语单词作业。当前流程为逐张人工核对，单批 20 张需 30 分钟以上，且标准答案录入易出错。本需求提供一个一站式页面：一次性上传多张作业图片、录入标准答案、配置批改模型与权重，触发批量批改并跳转监控视图，把单批操作压缩到分钟级，并把配置错误在提交前拦截掉。</div>
+
+<h2 id="journey">1.2 用户旅程地图</h2>
+<div>
+<ol>
+<li><strong>阶段一：任务提交</strong> - 用户在单页完成图片上传与标准答案录入，配置批改参数并触发批量批改任务。</li>
+<li><strong>阶段二：任务监控</strong> - 用户在监控视图实时查看批改进度与逐张结果，对失败项发起重试。</li>
+</ol>
+</div>
+
+<h2 id="mermaid">1.3 流程/状态/时序图</h2>
+<h3>1.3.1 用户操作流（必填）</h3>
+<figure class="diagram">
+<pre class="mermaid">flowchart TD
+  A["开始：用户进入批量任务页"] --> B["上传图片 + 录入标准答案"]
+  B --> C{"校验：数量 / 体积 / 序号连续性"}
+  C -->|全部通过| D["激活 #quot;开始批改#quot; 并创建任务"]
+  C -->|失败 / 异常| E["输入框下方提示具体错误，禁用提交"]
+  D --> F["跳转任务监控视图"]
+  E --> B
+  F --> G["结束"]</pre>
+<details><summary>查看 Mermaid 源码</summary><pre>flowchart TD
+  A[开始：用户进入批量任务页] --> B[上传图片 + 录入标准答案]
+  B --> C{校验：数量/体积/序号连续性}
+  C -->|全部通过| D[激活"开始批改"并创建任务]
+  C -->|失败/异常| E[输入框下方提示具体错误，禁用提交]
+  D --> F[跳转任务监控视图]
+  E --> B
+  F --> G[结束]</pre></details>
+</figure>
+<h3>1.3.2 状态机（当存在明确状态流转对象时必填）</h3>
+<figure class="diagram">
+<pre class="mermaid">stateDiagram-v2
+  [*] --> 草稿
+  草稿 --> 已提交: 点击开始批改
+  已提交 --> 处理中: 系统开始批改
+  处理中 --> 成功: 全部批改完成
+  处理中 --> 失败: 存在批改失败项
+  失败 --> 已提交: 用户对失败项重试
+  成功 --> [*]</pre>
+<details><summary>查看 Mermaid 源码</summary><pre>stateDiagram-v2
+  [*] --> 草稿
+  草稿 --> 已提交: 点击开始批改
+  已提交 --> 处理中: 系统开始批改
+  处理中 --> 成功: 全部批改完成
+  处理中 --> 失败: 存在批改失败项
+  失败 --> 已提交: 用户对失败项重试
+  成功 --> [*]</pre></details>
+</figure>
+<h3>1.3.3 关键场景时序（仅当“时序/并发/重试/超时”影响用户可见结果时填写）</h3>
+<figure class="diagram">
+<pre class="mermaid">sequenceDiagram
+  participant U as 用户
+  participant A as App/前台
+  participant S as 批改系统
+
+  U->>A: 点击"开始批改"
+  A->>S: 提交批量批改任务（图片集 + 标准答案）
+  alt 成功
+    S-->>A: 返回任务ID与初始状态"处理中 0/N"
+    A-->>U: 跳转监控页，展示"处理中 0/N"
+  else 失败/异常
+    S-->>A: 返回失败原因（如超出批量上限）
+    A-->>U: 弹窗提示并保留已填数据供调整
+  end</pre>
+<details><summary>查看 Mermaid 源码</summary><pre>sequenceDiagram
+  participant U as 用户
+  participant A as App/前台
+  participant S as 批改系统
+
+  U->>A: 点击"开始批改"
+  A->>S: 提交批量批改任务（图片集 + 标准答案）
+  alt 成功
+    S-->>A: 返回任务ID与初始状态"处理中 0/N"
+    A-->>U: 跳转监控页，展示"处理中 0/N"
+  else 失败/异常
+    S-->>A: 返回失败原因（如超出批量上限）
+    A-->>U: 弹窗提示并保留已填数据供调整
+  end</pre></details>
+</figure>
+
+<h2 id="stories">2. 用户故事</h2>
+<div class="us" id="us-01">
+ <div class="usid">US-01：作为 POC 测试用户，我希望上传多张作业图片并配置批改参数，以便一次性发起批量批改任务。</div>
+ <div class="fld"><div class="fk">价值陈述</div><div>
+  <ul>
+   <li><strong>作为</strong> POC 测试用户</li>
+   <li><strong>我希望</strong> 在一个页面完成图片上传与标准答案录入</li>
+   <li><strong>以便于</strong> 用最少的操作触发批量批改并减少配置错误</li>
+  </ul></div></div>
+ <div class="fld"><div class="fk">业务规则与逻辑</div><div>
+  <ol>
+   <li><strong>前置条件</strong>：用户已登录；系统已加载可用的批改模型列表。</li>
+   <li><strong>操作流程 (Happy Path)</strong>：
+     <ol>
+      <li>用户从导航栏进入“批量任务”页面。</li>
+      <li>左侧“拖拽上传区”选择≤20张、单张≤10MB的图片；文件列表实时展示，支持单项删除。</li>
+      <li>右侧“多行输入框”按“序号. 单词”格式录入标准答案，系统即时校验序号连续性和英文字符合法性。</li>
+      <li>用户选择批改模型（默认项）、是否启用“智能终审”、以及批改权重模板（从下拉框加载）。</li>
+      <li>所有校验通过后，“开始批改”按钮激活；点击后创建任务，页面跳转到任务监控视图。</li>
+     </ol>
+   </li>
+   <li><strong>异常处理 (Error Handling)</strong>：
+     <ul>
+      <li>图片体积 &gt;10MB 或扩展名不在白名单时，系统拒绝并提示“请压缩后重试”。</li>
+      <li>标准答案校验失败时，在输入框下方显示具体错误（如“第3行缺少序号”），并禁用提交按钮。</li>
+      <li>创建任务失败且提示为“超出批量上限”时，弹窗提醒“批次上限为20张”，保留已填数据供用户调整。</li>
+     </ul>
+   </li>
+   <li><strong>性能与容量提示</strong>：单次提交最多20张图片，总体积≤150MB；点击“开始批改”后应在合理时间内给出明确反馈；失败后支持重试并尽量减少用户重复操作。</li>
+  </ol></div></div>
+ <div class="fld"><div class="fk">验收标准</div><div>
+  <p><strong>场景1: 成功提交</strong></p>
+  <ul>
+   <li><strong>GIVEN</strong> 我上传了10张图片并输入合法标准答案</li>
+   <li><strong>WHEN</strong> 我点击“开始批改”</li>
+   <li><strong>THEN</strong> 系统应跳转到监控页，显示任务状态为“处理中 0/10”。</li>
+  </ul>
+  <p><strong>场景2: 超出批量上限</strong></p>
+  <ul>
+   <li><strong>GIVEN</strong> 我尝试上传第21张图片</li>
+   <li><strong>WHEN</strong> 系统完成校验</li>
+   <li><strong>THEN</strong> 上传被拒绝，提示“单次批改最多20张”，已上传列表保持不变。</li>
+  </ul></div></div>
+ <div class="fld"><div class="fk">页面布局线框图</div><pre>+-------------------------------------------------------------+
+| 批量任务创建                                                |
++==============================+==============================+
+| 图片上传 (Drag &amp; Drop)       | 标准答案 (多行输入)          |
+| - hw_001.jpg   [删除]        | 1. apple                     |
+| - hw_002.jpg   [删除]        | 2. banana                    |
+| ...                          | ...                          |
++------------------------------+------------------------------+
+| 批改模型: [ 默认 v ]  智能终审: [✓]  权重模板: [ 默认 v ]      |
+| [ 取消 ]                                   [ 开始批改 ]      |
++-------------------------------------------------------------+</pre></div>
+</div>
+
+<div class="us" id="us-02">
+ <div class="usid">US-02：作为 POC 测试用户，我希望实时查看批改进度并对失败项重试，以便确认批量结果并补救个别异常。</div>
+ <div class="fld"><div class="fk">价值陈述</div><div>
+  <ul>
+   <li><strong>作为</strong> POC 测试用户</li>
+   <li><strong>我希望</strong> 在监控视图看到逐张批改进度与结果</li>
+   <li><strong>以便于</strong> 第一时间发现失败项并仅对失败项发起重试，而不必整批重跑</li>
+  </ul></div></div>
+ <div class="fld"><div class="fk">业务规则与逻辑</div><div>
+  <ol>
+   <li><strong>前置条件</strong>：US-01 已成功创建任务并跳转至监控视图。</li>
+   <li><strong>操作流程 (Happy Path)</strong>：
+     <ol>
+      <li>监控视图轮询任务状态，顶部进度条显示“处理中 m/N”。</li>
+      <li>列表逐张展示结果：成功项标“已批改”，失败项标“失败”并附原因。</li>
+      <li>全部完成后，状态变为“成功”，提供导出结果入口。</li>
+     </ol>
+   </li>
+   <li><strong>异常处理 (Error Handling)</strong>：
+     <ul>
+      <li>个别图片识别失败时，该项状态置“失败”，提供“重试本项”按钮，不影响其它项。</li>
+      <li>轮询接口连续 3 次超时，顶部提示“连接不稳定，正在重连”，保留已展示进度。</li>
+     </ul>
+   </li>
+  </ol></div></div>
+ <div class="fld"><div class="fk">验收标准</div><div>
+  <p><strong>场景1: 全部成功</strong></p>
+  <ul>
+   <li><strong>GIVEN</strong> 我提交了10张图片的批改任务</li>
+   <li><strong>WHEN</strong> 全部10张批改完成</li>
+   <li><strong>THEN</strong> 顶部状态显示“成功 10/10”，并出现“导出结果”入口。</li>
+  </ul>
+  <p><strong>场景2: 单项失败重试</strong></p>
+  <ul>
+   <li><strong>GIVEN</strong> 第3张图片批改失败并标“失败”</li>
+   <li><strong>WHEN</strong> 我点击该项“重试本项”</li>
+   <li><strong>THEN</strong> 仅第3项重新进入“处理中”，其余9项结果保持不变。</li>
+  </ul></div></div>
+</div>
+
+<div class="foot">本页给人查阅，全部内容来自 PRD-MD，仅翻译排版、未增删事实。Mermaid 图浏览器内渲染，源码原文在「查看 Mermaid 源码」内完整保留。</div>
+</main></div>
+<script>
+(function(){
+ var links=[].slice.call(document.querySelectorAll('.toc a[href^="#"]'));
+ var map=links.map(function(a){return{a:a,el:document.getElementById(a.getAttribute('href').slice(1))};}).filter(function(x){return x.el;});
+ function onScroll(){
+  var cur=null;
+  for(var i=0;i<map.length;i++){ if(map[i].el.getBoundingClientRect().top<=140) cur=map[i]; else break; }
+  if(!cur&&map.length) cur=map[0];
+  links.forEach(function(a){a.classList.remove('active');});
+  if(cur) cur.a.classList.add('active');
+ }
+ window.addEventListener('scroll',onScroll,{passive:true});
+ window.addEventListener('resize',onScroll); onScroll();
+})();
+</script>
+<script type="module">
+ import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+ mermaid.initialize({startOnLoad:true,theme:'default',securityLevel:'loose',flowchart:{useMaxWidth:true,htmlLabels:true},sequence:{useMaxWidth:true},themeVariables:{fontFamily:'-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif'}});
+</script>
+</body></html>
