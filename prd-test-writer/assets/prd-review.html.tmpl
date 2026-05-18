@@ -4,40 +4,66 @@
   占位符：{{PRD_ID}} {{TITLE}} {{STATUS}} {{TOC}} {{OVERVIEW}} {{JOURNEY}} {{MERMAID}} {{US_CARDS}}
   生成后必须跑 references/html-fill-spec.md 的 1:1 校验，FAIL 不交付。
   规则：与 PRD-MD 严格 1:1，不删故事子项、不丢 Mermaid 代码块原文、不压缩整节。
-  Mermaid：用 .diagram 容器，<pre class="mermaid"> 装原文供浏览器渲染，再用 <details><pre> 留一份源码原文
-           （两份都是原文，1:1 校验扫 <pre> 仍命中；渲染失败也有源码可看）。
+  ★ 标题文本必须是单一文本节点、与 MD 一字不差（不得把序号拆进 <span>，否则去标签后 1:1 失配）。
+  ★ 视觉层级只靠 CSS（h2 左色条、h3 前缀、卡片分区头），不改任何可见文字。
+  Mermaid：用 .diagram 容器，<pre class="mermaid"> 装渲染副本，再用 <details><pre> 留一份源码原文
+           （源码副本 verbatim，1:1 校验只扫这份；渲染失败也有源码可看）。
 -->
 <html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{PRD_ID}} · {{TITLE}}</title>
 <style>
- :root{--bg:#f6f7f9;--card:#fff;--ink:#1f2329;--soft:#646a73;--line:#e5e6eb;--accent:#3370ff;--accent-soft:#eaf1ff;--code:#f2f3f5}
+ :root{
+  --bg:#f5f6f8;--card:#fff;--ink:#1d2129;--soft:#646a73;--mute:#8a9099;
+  --line:#e6e8eb;--line2:#eef0f2;
+  --accent:#3370ff;--accent-d:#1d4fd8;--accent-soft:#eef3ff;--code:#f3f4f6;
+  --ok:#1f8a5b;--ok-soft:#eaf6f0;--ok-line:#bfe3cf;
+ }
  *{box-sizing:border-box}html{scroll-behavior:smooth}
- body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.75 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
- .shell{max-width:1180px;margin:0 auto;padding:32px 24px 80px;display:flex;gap:28px;align-items:flex-start}
- .toc{position:sticky;top:32px;flex:0 0 230px;max-height:calc(100vh - 64px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 10px;font-size:13px;line-height:1.5}
- .toc .t{font-weight:700;color:var(--soft);margin:2px 8px 10px;font-size:12px;letter-spacing:1px}
- .toc a{display:block;color:#3a3f45;text-decoration:none;padding:6px 10px;border-radius:7px;margin:2px 0;border-left:2px solid transparent;transition:background .12s,color .12s}
- .toc a:hover{background:#f0f1f3;color:var(--ink)}
- .toc a.active{background:var(--accent-soft);color:var(--accent);font-weight:600;border-left-color:var(--accent)}
- .wrap{flex:1 1 auto;min-width:0;max-width:860px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.03);padding:36px 44px 56px}
- @media(max-width:1080px){.shell{flex-direction:column;padding:16px 14px 60px}.toc{position:sticky;top:0;flex:none;width:100%;max-height:none;display:flex;flex-wrap:wrap;gap:2px;z-index:5}.toc .t{width:100%}.toc a{border-left:none}.wrap{max-width:none;padding:24px 18px 40px}}
- h1{font-size:23px;margin:0 0 4px;letter-spacing:-.2px}.sub{color:var(--soft);font-size:13px;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--line)}
- h2{font-size:18px;margin:34px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line);scroll-margin-top:24px}
- h3{font-size:15px;margin:20px 0 6px;color:#33373d}
- code{background:var(--code);border-radius:5px;padding:1.5px 5px;font:12.5px ui-monospace,Menlo,monospace}
- pre{background:#f5f6f8;color:#1f2329;border:1px solid var(--line);border-radius:10px;padding:13px 15px;font:12.5px/1.6 ui-monospace,Menlo,monospace;white-space:pre-wrap;margin:8px 0;overflow:auto}
- table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}th{background:#f4f5f7;font-weight:600}
- .us{background:#fcfcfb;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0;scroll-margin-top:24px}
- .usid{font-weight:700;font-size:16px;color:var(--accent);margin-bottom:4px}
- .fld{margin:12px 0}.fk{font-size:12px;font-weight:700;color:var(--soft);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px}
- ul{margin:6px 0 6px 18px}li{margin:4px 0}
- .diagram{background:#fbfcfd;border:1px solid var(--line);border-radius:12px;padding:18px;margin:12px 0;overflow:auto}
- .diagram .mermaid{background:none;border:0;padding:0;margin:0;border-radius:0;color:inherit;white-space:normal;display:flex;justify-content:center;text-align:center;min-height:32px}
+ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+ .shell{max-width:1200px;margin:0 auto;padding:32px 24px 80px;display:flex;gap:28px;align-items:flex-start}
+ /* ---- 目录：树形父子缩进 ---- */
+ .toc{position:sticky;top:32px;flex:0 0 244px;max-height:calc(100vh - 64px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 10px;font-size:13px}
+ .toc .t{font-weight:700;color:var(--mute);margin:2px 10px 12px;font-size:11px;letter-spacing:1.5px}
+ .toc a{display:block;color:#3c4148;text-decoration:none;padding:6px 10px;border-radius:8px;margin:1px 0;border-left:2px solid transparent;transition:background .12s,color .12s}
+ .toc a:hover{background:#f1f2f4;color:var(--ink)}
+ .toc a.active{background:var(--accent-soft);color:var(--accent-d);font-weight:600;border-left-color:var(--accent)}
+ .toc a.lv1{font-weight:600;color:var(--ink);margin-top:6px}
+ .toc a.lv2{padding-left:24px;color:#5c626a;font-size:12.5px}
+ .toc .grp{font-size:11px;font-weight:700;color:var(--mute);letter-spacing:.5px;margin:14px 10px 4px}
+ /* ---- 主体 ---- */
+ .wrap{flex:1 1 auto;min-width:0;max-width:880px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.04);padding:38px 46px 60px}
+ @media(max-width:1080px){.shell{flex-direction:column;padding:16px 14px 60px}.toc{position:sticky;top:0;flex:none;width:100%;max-height:none;display:flex;flex-wrap:wrap;gap:2px;z-index:5}.toc .t,.toc .grp{width:100%}.toc a,.toc a.lv2{border-left:none;padding-left:10px}.wrap{max-width:none;padding:24px 18px 40px}}
+ h1{font-size:24px;margin:0 0 6px;letter-spacing:-.3px}
+ .sub{color:var(--soft);font-size:13px;margin-bottom:26px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+ h2{font-size:18px;margin:42px 0 14px;padding:2px 0 2px 14px;border-left:4px solid var(--accent);scroll-margin-top:24px;line-height:1.4}
+ h3{font-size:13.5px;font-weight:700;color:var(--soft);margin:24px 0 8px;letter-spacing:.2px}
+ h3:before{content:"▸";color:var(--accent);margin-right:7px}
+ p{margin:8px 0}
+ code{background:var(--code);border-radius:5px;padding:1.5px 5px;font:12.5px ui-monospace,Menlo,monospace;word-break:break-word}
+ pre{background:#f7f8fa;color:#1d2129;border:1px solid var(--line);border-radius:10px;padding:13px 15px;font:12.5px/1.65 ui-monospace,Menlo,monospace;white-space:pre-wrap;margin:8px 0;overflow:auto}
+ table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+ th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}th{background:#f5f6f8;font-weight:600}
+ ul,ol{margin:6px 0;padding-left:22px}li{margin:5px 0}ol ol,ul ul,ol ul,ul ol{margin:4px 0}
+ /* ---- 字段块（标签即锚点）---- */
+ .fld{margin:16px 20px}
+ .fk{display:inline-block;font-size:12px;font-weight:700;color:var(--accent-d);background:var(--accent-soft);border-radius:6px;padding:2px 9px;margin-bottom:8px;letter-spacing:.3px}
+ .fv{font-size:14.5px}
+ /* ---- 用户故事卡：卡头 / 分区字段 ---- */
+ .us{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0;margin:22px 0;scroll-margin-top:24px;overflow:hidden}
+ .ush{display:flex;align-items:baseline;gap:11px;background:linear-gradient(180deg,#f4f7fd,#fbfcfe);border-bottom:1px solid var(--line);padding:15px 20px}
+ .usid{font:800 13px ui-monospace,Menlo,monospace;color:#fff;background:var(--accent);border-radius:6px;padding:3px 9px;flex:none;align-self:flex-start}
+ .ustitle{font-size:15px;font-weight:700;line-height:1.5}
+ .us .fld:first-of-type{margin-top:18px}
+ .fld.wf pre{background:#fbfcfd}
+ .fld.acc .fv strong{color:var(--accent-d)}
+ /* ---- Mermaid ---- */
+ .diagram{background:#fbfcfd;border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0;overflow:auto}
+ .diagram .mermaid{background:none;border:0;padding:0;margin:0;color:inherit;white-space:normal;display:flex;justify-content:center;text-align:center;min-height:32px}
  .diagram .mermaid svg{max-width:100%;height:auto}
  .diagram details{margin-top:10px}
  .diagram summary{cursor:pointer;color:var(--soft);font-size:12px;user-select:none}
  .diagram details pre{margin-top:8px}
- .foot{color:var(--soft);font-size:12.5px;margin-top:36px;border-top:1px solid var(--line);padding-top:16px}
+ .foot{color:var(--mute);font-size:12.5px;margin-top:42px;border-top:1px solid var(--line);padding-top:16px}
 </style></head><body>
 <div class="shell">
 <nav class="toc"><div class="t">目录</div>{{TOC}}</nav>
@@ -81,21 +107,25 @@
 </body></html>
 
 <!--
-  ===== 片段格式 =====
-  TOC：<a href="#overview">1 综述</a> <a href="#us-01">US-01 …</a> …
+  ===== 片段格式（生成时灌入，勿改结构/勿改可见文字）=====
+  TOC（树形：父项 lv1，子项 lv2）：
+   <a class="lv1" href="#overview">1 综述</a>
+   <a class="lv2" href="#journey">1.2 用户旅程地图</a>
+   <a class="lv2" href="#mermaid">1.3 流程/状态/时序图</a>
+   <a class="lv1" href="#stories">2 用户故事</a>
+   <a class="lv2" href="#us-01">US-01 …</a>
   Mermaid（§1.3 每个图）：
-  <h3>1.3.1 …</h3>
-  <figure class="diagram">
-   <pre class="mermaid">渲染副本：mermaid-safe（flowchart 节点文字一律包 ["…"]，文字内 ASCII 双引号 " 写成 #quot;，避免 Syntax error）</pre>
-   <details><summary>查看 Mermaid 源码</summary><pre>源码副本：与 PRD-MD 一字不差的原文（1:1 校验只认这份；不做任何转义）</pre></details>
-  </figure>
-  注：渲染副本仅做 mermaid 必需的安全转义（不改语义）；源码副本必须 verbatim，1:1 校验扫的是这份。
-  US 卡片（故事所有子项全保留）：
-  <div class="us" id="us-01">
-   <div class="usid">US-01：作为…我希望…以便…</div>
-   <div class="fld"><div class="fk">价值陈述</div><div>…</div></div>
-   <div class="fld"><div class="fk">业务规则与逻辑</div><div>前置/Happy Path/异常处理 全列…</div></div>
-   <div class="fld"><div class="fk">验收标准</div><div>GIVEN-WHEN-THEN 每个场景…</div></div>
-   <div class="fld"><div class="fk">页面布局线框图</div><pre>ASCII 原文</pre></div>  <!-- UI 故事必有 -->
-  </div>
+   <h3>1.3.1 …</h3>
+   <figure class="diagram">
+    <pre class="mermaid">渲染副本：mermaid-safe（flowchart 节点文字一律包 ["…"]，文字内 ASCII 双引号 " 写成 #quot;）</pre>
+    <details><summary>查看 Mermaid 源码</summary><pre>源码副本：与 PRD-MD 一字不差的原文（1:1 校验只认这份；不做任何转义）</pre></details>
+   </figure>
+  US 卡片（卡头一句话标题；故事所有子项全保留；视觉层级靠 class，文字不动）：
+   <div class="us" id="us-01">
+    <div class="ush"><span class="usid">US-01</span><div class="ustitle">作为…我希望…以便…（与 MD 故事标题一字不差）</div></div>
+    <div class="fld"><div class="fk">价值陈述</div><div class="fv">…</div></div>
+    <div class="fld"><div class="fk">业务规则与逻辑</div><div class="fv">前置/Happy Path/异常处理 全列…</div></div>
+    <div class="fld acc"><div class="fk">验收标准</div><div class="fv">GIVEN-WHEN-THEN 每个场景…</div></div>
+    <div class="fld wf"><div class="fk">页面布局线框图</div><pre>ASCII 原文</pre></div>  <!-- UI 故事必有 -->
+   </div>
 -->

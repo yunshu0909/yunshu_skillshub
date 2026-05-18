@@ -4,48 +4,65 @@
   占位符：{{PRD_ID}} {{TITLE}} {{STATUS}} {{TOC}} {{OVERVIEW}} {{JOURNEY}} {{MERMAID}} {{US_CARDS}}
   生成后必须跑 references/html-fill-spec.md 的 1:1 校验，FAIL 不交付。
   规则：与 PRD-MD 严格 1:1，不删故事子项、不丢 Mermaid 代码块原文、不压缩整节。
-  Mermaid：用 .diagram 容器，<pre class="mermaid"> 装原文供浏览器渲染，再用 <details><pre> 留一份源码原文
-           （两份都是原文，1:1 校验扫 <pre> 仍命中；渲染失败也有源码可看）。
 -->
 <html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PRD-SAMPLE · 批量作业批改 - V0.5</title>
 <style>
- :root{--bg:#f6f7f9;--card:#fff;--ink:#1f2329;--soft:#646a73;--line:#e5e6eb;--accent:#3370ff;--accent-soft:#eaf1ff;--code:#f2f3f5}
+ :root{
+  --bg:#f5f6f8;--card:#fff;--ink:#1d2129;--soft:#646a73;--mute:#8a9099;
+  --line:#e6e8eb;--line2:#eef0f2;
+  --accent:#3370ff;--accent-d:#1d4fd8;--accent-soft:#eef3ff;--code:#f3f4f6;
+  --ok:#1f8a5b;--ok-soft:#eaf6f0;--ok-line:#bfe3cf;
+ }
  *{box-sizing:border-box}html{scroll-behavior:smooth}
- body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.75 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
- .shell{max-width:1180px;margin:0 auto;padding:32px 24px 80px;display:flex;gap:28px;align-items:flex-start}
- .toc{position:sticky;top:32px;flex:0 0 230px;max-height:calc(100vh - 64px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 10px;font-size:13px;line-height:1.5}
- .toc .t{font-weight:700;color:var(--soft);margin:2px 8px 10px;font-size:12px;letter-spacing:1px}
- .toc a{display:block;color:#3a3f45;text-decoration:none;padding:6px 10px;border-radius:7px;margin:2px 0;border-left:2px solid transparent;transition:background .12s,color .12s}
- .toc a:hover{background:#f0f1f3;color:var(--ink)}
- .toc a.active{background:var(--accent-soft);color:var(--accent);font-weight:600;border-left-color:var(--accent)}
- .wrap{flex:1 1 auto;min-width:0;max-width:860px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.03);padding:36px 44px 56px}
- @media(max-width:1080px){.shell{flex-direction:column;padding:16px 14px 60px}.toc{position:sticky;top:0;flex:none;width:100%;max-height:none;display:flex;flex-wrap:wrap;gap:2px;z-index:5}.toc .t{width:100%}.toc a{border-left:none}.wrap{max-width:none;padding:24px 18px 40px}}
- h1{font-size:23px;margin:0 0 4px;letter-spacing:-.2px}.sub{color:var(--soft);font-size:13px;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--line)}
- h2{font-size:18px;margin:34px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line);scroll-margin-top:24px}
- h3{font-size:15px;margin:20px 0 6px;color:#33373d}
- code{background:var(--code);border-radius:5px;padding:1.5px 5px;font:12.5px ui-monospace,Menlo,monospace}
- pre{background:#f5f6f8;color:#1f2329;border:1px solid var(--line);border-radius:10px;padding:13px 15px;font:12.5px/1.6 ui-monospace,Menlo,monospace;white-space:pre-wrap;margin:8px 0;overflow:auto}
- table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}th{background:#f4f5f7;font-weight:600}
- .us{background:#fcfcfb;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0;scroll-margin-top:24px}
- .usid{font-weight:700;font-size:16px;color:var(--accent);margin-bottom:4px}
- .fld{margin:12px 0}.fk{font-size:12px;font-weight:700;color:var(--soft);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px}
- ul{margin:6px 0 6px 18px}li{margin:4px 0}
- .diagram{background:#fbfcfd;border:1px solid var(--line);border-radius:12px;padding:18px;margin:12px 0;overflow:auto}
- .diagram .mermaid{background:none;border:0;padding:0;margin:0;border-radius:0;color:inherit;white-space:normal;display:flex;justify-content:center;text-align:center;min-height:32px}
+ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+ .shell{max-width:1200px;margin:0 auto;padding:32px 24px 80px;display:flex;gap:28px;align-items:flex-start}
+ .toc{position:sticky;top:32px;flex:0 0 244px;max-height:calc(100vh - 64px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 10px;font-size:13px}
+ .toc .t{font-weight:700;color:var(--mute);margin:2px 10px 12px;font-size:11px;letter-spacing:1.5px}
+ .toc a{display:block;color:#3c4148;text-decoration:none;padding:6px 10px;border-radius:8px;margin:1px 0;border-left:2px solid transparent;transition:background .12s,color .12s}
+ .toc a:hover{background:#f1f2f4;color:var(--ink)}
+ .toc a.active{background:var(--accent-soft);color:var(--accent-d);font-weight:600;border-left-color:var(--accent)}
+ .toc a.lv1{font-weight:600;color:var(--ink);margin-top:6px}
+ .toc a.lv2{padding-left:24px;color:#5c626a;font-size:12.5px}
+ .toc .grp{font-size:11px;font-weight:700;color:var(--mute);letter-spacing:.5px;margin:14px 10px 4px}
+ .wrap{flex:1 1 auto;min-width:0;max-width:880px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.04);padding:38px 46px 60px}
+ @media(max-width:1080px){.shell{flex-direction:column;padding:16px 14px 60px}.toc{position:sticky;top:0;flex:none;width:100%;max-height:none;display:flex;flex-wrap:wrap;gap:2px;z-index:5}.toc .t,.toc .grp{width:100%}.toc a,.toc a.lv2{border-left:none;padding-left:10px}.wrap{max-width:none;padding:24px 18px 40px}}
+ h1{font-size:24px;margin:0 0 6px;letter-spacing:-.3px}
+ .sub{color:var(--soft);font-size:13px;margin-bottom:26px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+ h2{font-size:18px;margin:42px 0 14px;padding:2px 0 2px 14px;border-left:4px solid var(--accent);scroll-margin-top:24px;line-height:1.4}
+ h3{font-size:13.5px;font-weight:700;color:var(--soft);margin:24px 0 8px;letter-spacing:.2px}
+ h3:before{content:"▸";color:var(--accent);margin-right:7px}
+ p{margin:8px 0}
+ code{background:var(--code);border-radius:5px;padding:1.5px 5px;font:12.5px ui-monospace,Menlo,monospace;word-break:break-word}
+ pre{background:#f7f8fa;color:#1d2129;border:1px solid var(--line);border-radius:10px;padding:13px 15px;font:12.5px/1.65 ui-monospace,Menlo,monospace;white-space:pre-wrap;margin:8px 0;overflow:auto}
+ table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+ th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}th{background:#f5f6f8;font-weight:600}
+ ul,ol{margin:6px 0;padding-left:22px}li{margin:5px 0}ol ol,ul ul,ol ul,ul ol{margin:4px 0}
+ .fld{margin:16px 20px}
+ .fk{display:inline-block;font-size:12px;font-weight:700;color:var(--accent-d);background:var(--accent-soft);border-radius:6px;padding:2px 9px;margin-bottom:8px;letter-spacing:.3px}
+ .fv{font-size:14.5px}
+ .us{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0;margin:22px 0;scroll-margin-top:24px;overflow:hidden}
+ .ush{display:flex;align-items:baseline;gap:11px;background:linear-gradient(180deg,#f4f7fd,#fbfcfe);border-bottom:1px solid var(--line);padding:15px 20px}
+ .usid{font:800 13px ui-monospace,Menlo,monospace;color:#fff;background:var(--accent);border-radius:6px;padding:3px 9px;flex:none;align-self:flex-start}
+ .ustitle{font-size:15px;font-weight:700;line-height:1.5}
+ .us .fld:first-of-type{margin-top:18px}
+ .fld.wf pre{background:#fbfcfd}
+ .fld.acc .fv strong{color:var(--accent-d)}
+ .diagram{background:#fbfcfd;border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0;overflow:auto}
+ .diagram .mermaid{background:none;border:0;padding:0;margin:0;color:inherit;white-space:normal;display:flex;justify-content:center;text-align:center;min-height:32px}
  .diagram .mermaid svg{max-width:100%;height:auto}
  .diagram details{margin-top:10px}
  .diagram summary{cursor:pointer;color:var(--soft);font-size:12px;user-select:none}
  .diagram details pre{margin-top:8px}
- .foot{color:var(--soft);font-size:12.5px;margin-top:36px;border-top:1px solid var(--line);padding-top:16px}
+ .foot{color:var(--mute);font-size:12.5px;margin-top:42px;border-top:1px solid var(--line);padding-top:16px}
 </style></head><body>
 <div class="shell">
-<nav class="toc"><div class="t">目录</div><a href="#overview">1 综述</a>
-<a href="#journey">1.2 用户旅程地图</a>
-<a href="#mermaid">1.3 流程/状态/时序图</a>
-<a href="#stories">2 用户故事</a>
-<a href="#us-01">US-01 上传图片并配置参数</a>
-<a href="#us-02">US-02 监控任务进度</a></nav>
+<nav class="toc"><div class="t">目录</div><a class="lv1" href="#overview">1 综述</a>
+<a class="lv2" href="#journey">1.2 用户旅程地图</a>
+<a class="lv2" href="#mermaid">1.3 流程/状态/时序图</a>
+<a class="lv1" href="#stories">2 用户故事</a>
+<a class="lv2" href="#us-01">US-01 上传图片并配置参数</a>
+<a class="lv2" href="#us-02">US-02 监控任务进度</a></nav>
 <main class="wrap">
 <h1>PRD-SAMPLE · 批量作业批改 - V0.5</h1>
 <div class="sub">状态：Draft ｜ Frozen(待定) · 本页与 PRD-MD 严格 1:1，不压缩 · 配套：PRD-SAMPLE-测试用例</div>
@@ -135,14 +152,14 @@
 
 <h2 id="stories">2. 用户故事</h2>
 <div class="us" id="us-01">
- <div class="usid">US-01：作为 POC 测试用户，我希望上传多张作业图片并配置批改参数，以便一次性发起批量批改任务。</div>
- <div class="fld"><div class="fk">价值陈述</div><div>
+ <div class="ush"><span class="usid">US-01</span><div class="ustitle">作为 POC 测试用户，我希望上传多张作业图片并配置批改参数，以便一次性发起批量批改任务。</div></div>
+ <div class="fld"><div class="fk">价值陈述</div><div class="fv">
   <ul>
    <li><strong>作为</strong> POC 测试用户</li>
    <li><strong>我希望</strong> 在一个页面完成图片上传与标准答案录入</li>
    <li><strong>以便于</strong> 用最少的操作触发批量批改并减少配置错误</li>
   </ul></div></div>
- <div class="fld"><div class="fk">业务规则与逻辑</div><div>
+ <div class="fld"><div class="fk">业务规则与逻辑</div><div class="fv">
   <ol>
    <li><strong>前置条件</strong>：用户已登录；系统已加载可用的批改模型列表。</li>
    <li><strong>操作流程 (Happy Path)</strong>：
@@ -163,7 +180,7 @@
    </li>
    <li><strong>性能与容量提示</strong>：单次提交最多20张图片，总体积≤150MB；点击“开始批改”后应在合理时间内给出明确反馈；失败后支持重试并尽量减少用户重复操作。</li>
   </ol></div></div>
- <div class="fld"><div class="fk">验收标准</div><div>
+ <div class="fld acc"><div class="fk">验收标准</div><div class="fv">
   <p><strong>场景1: 成功提交</strong></p>
   <ul>
    <li><strong>GIVEN</strong> 我上传了10张图片并输入合法标准答案</li>
@@ -176,7 +193,7 @@
    <li><strong>WHEN</strong> 系统完成校验</li>
    <li><strong>THEN</strong> 上传被拒绝，提示“单次批改最多20张”，已上传列表保持不变。</li>
   </ul></div></div>
- <div class="fld"><div class="fk">页面布局线框图</div><pre>+-------------------------------------------------------------+
+ <div class="fld wf"><div class="fk">页面布局线框图</div><pre>+-------------------------------------------------------------+
 | 批量任务创建                                                |
 +==============================+==============================+
 | 图片上传 (Drag &amp; Drop)       | 标准答案 (多行输入)          |
@@ -190,14 +207,14 @@
 </div>
 
 <div class="us" id="us-02">
- <div class="usid">US-02：作为 POC 测试用户，我希望实时查看批改进度并对失败项重试，以便确认批量结果并补救个别异常。</div>
- <div class="fld"><div class="fk">价值陈述</div><div>
+ <div class="ush"><span class="usid">US-02</span><div class="ustitle">作为 POC 测试用户，我希望实时查看批改进度并对失败项重试，以便确认批量结果并补救个别异常。</div></div>
+ <div class="fld"><div class="fk">价值陈述</div><div class="fv">
   <ul>
    <li><strong>作为</strong> POC 测试用户</li>
    <li><strong>我希望</strong> 在监控视图看到逐张批改进度与结果</li>
    <li><strong>以便于</strong> 第一时间发现失败项并仅对失败项发起重试，而不必整批重跑</li>
   </ul></div></div>
- <div class="fld"><div class="fk">业务规则与逻辑</div><div>
+ <div class="fld"><div class="fk">业务规则与逻辑</div><div class="fv">
   <ol>
    <li><strong>前置条件</strong>：US-01 已成功创建任务并跳转至监控视图。</li>
    <li><strong>操作流程 (Happy Path)</strong>：
@@ -214,7 +231,7 @@
      </ul>
    </li>
   </ol></div></div>
- <div class="fld"><div class="fk">验收标准</div><div>
+ <div class="fld acc"><div class="fk">验收标准</div><div class="fv">
   <p><strong>场景1: 全部成功</strong></p>
   <ul>
    <li><strong>GIVEN</strong> 我提交了10张图片的批改任务</li>

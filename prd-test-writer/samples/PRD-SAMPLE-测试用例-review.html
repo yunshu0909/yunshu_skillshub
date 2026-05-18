@@ -2,55 +2,98 @@
 <!--
   测试用例 HTML 查阅模板（套用：从 测试用例-MD 抽内容灌占位符，禁手写结构/改样式）
   占位符：{{PRD_ID}} {{STATUS}} {{TOC}} {{SEC0}} {{PHASE_TABLE}} {{TC_CARDS}} {{ELSEWHERE}}
-  TC 卡片片段格式见文件底部注释。生成后必须跑 references/html-fill-spec.md 的 1:1 校验，FAIL 不交付。
-  规则：与 MD 严格 1:1，不删字段/不删步骤/不压缩整节；卡头编号/名称/模块/优先级/证据类型均为可见文本。
+  生成后必须跑 references/html-fill-spec.md 的 1:1 校验，FAIL 不交付。
+  规则：与 MD 严格 1:1，不删字段/不删步骤/不压缩整节；13 字段按三组归拢，文字不动。
 -->
 <html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PRD-SAMPLE 测试用例</title>
 <style>
- :root{--bg:#f6f7f9;--card:#fff;--ink:#1f2329;--soft:#646a73;--line:#e5e6eb;--accent:#3370ff;--accent-soft:#eaf1ff;--p0:#a23b2e;--p1:#8a5e12;--p2:#566;--real:#2f6f4f;--cap:#8a5e12;--blk:#566;--code:#f2f3f5;--exp:#2f6f4f}
+ :root{
+  --bg:#f5f6f8;--card:#fff;--ink:#1d2129;--soft:#646a73;--mute:#8a9099;
+  --line:#e6e8eb;--line2:#eef0f2;
+  --accent:#3370ff;--accent-d:#1d4fd8;--accent-soft:#eef3ff;--code:#f3f4f6;
+  --g2:#6b4ef0;--g3:#1f8a5b;
+  --ok:#1f8a5b;--ok-soft:#eaf6f0;--ok-line:#bfe3cf;
+  --warn:#b4541f;--warn-soft:#fdf1ea;--warn-line:#f0d2bd;
+  --p0:#a23b2e;--p1:#8a5e12;--p2:#5b6168;--real:#1f8a5b;--cap:#8a5e12;--blk:#5b6168;
+ }
  *{box-sizing:border-box}html{scroll-behavior:smooth}
  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
- .shell{max-width:1180px;margin:0 auto;padding:32px 24px 80px;display:flex;gap:28px;align-items:flex-start}
- .toc{position:sticky;top:32px;flex:0 0 230px;max-height:calc(100vh - 64px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 10px;font-size:13px;line-height:1.5}
- .toc .t{font-weight:700;color:var(--soft);margin:2px 8px 10px;font-size:12px;letter-spacing:1px}
- .toc a{display:block;color:#3a3f45;text-decoration:none;padding:6px 10px;border-radius:7px;margin:2px 0;border-left:2px solid transparent;transition:background .12s,color .12s}
- .toc a:hover{background:#f0f1f3;color:var(--ink)}
- .toc a.active{background:var(--accent-soft);color:var(--accent);font-weight:600;border-left-color:var(--accent)}
- .wrap{flex:1 1 auto;min-width:0;max-width:880px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.03);padding:36px 44px 56px}
- @media(max-width:1080px){.shell{flex-direction:column;padding:16px 14px 60px}.toc{position:sticky;top:0;flex:none;width:100%;max-height:none;display:flex;flex-wrap:wrap;gap:2px;z-index:5}.toc .t{width:100%}.toc a{border-left:none}.wrap{max-width:none;padding:24px 18px 40px}}
- h1{font-size:23px;margin:0 0 4px;letter-spacing:-.2px}.sub{color:var(--soft);font-size:13px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
- h2{font-size:17px;margin:34px 0 8px;padding-bottom:7px;border-bottom:1px solid var(--line);scroll-margin-top:24px}
- code{background:var(--code);border-radius:5px;padding:1.5px 5px;font:12px ui-monospace,Menlo,monospace;word-break:break-all}
- pre{background:#f5f6f8;color:#1f2329;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:12px/1.6 ui-monospace,Menlo,monospace;white-space:pre-wrap;margin:6px 0;overflow:auto}
- table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:#f4f5f7;font-weight:600}
- .tc{background:#fcfcfb;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0;scroll-margin-top:24px}
- .tch{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:9px}
- .tcid{font:700 13px ui-monospace,Menlo,monospace;color:#fff;background:var(--accent);border-radius:6px;padding:2px 8px}
- .tct{font-size:15px;font-weight:700;flex:1 1 240px}.tcmod{font-size:12px;color:var(--soft)}
- .badge{font-size:11px;font-weight:700;border-radius:5px;padding:1px 7px;border:1px solid}
- .b-p0{color:#fff;background:var(--p0);border-color:var(--p0)}.b-p1{color:var(--p1);border-color:var(--p1)}.b-p2{color:var(--p2);border-color:var(--p2)}
- .b-real{color:#fff;background:var(--real);border-color:var(--real)}.b-cap{color:var(--cap);border-color:var(--cap)}.b-blk{color:var(--blk);border-color:var(--blk)}
- .fld{margin:10px 0}.fk{font-size:12px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.4px}.fv{font-size:14px}
- ol.steps{margin:4px 0;padding-left:20px}ol.steps>li{margin:7px 0}
- .exp{display:block;color:var(--exp);margin-top:2px}.exp:before{content:"→ 预期：";font-weight:700}
- ul.tight{margin:3px 0;padding-left:20px}ul.tight>li{margin:3px 0}
- .pass{color:var(--accent);font-weight:600}.dep{font-size:12px;color:var(--soft)}
- .foot{color:var(--soft);font-size:12.5px;margin-top:36px;border-top:1px solid var(--line);padding-top:16px}
+ .shell{max-width:1200px;margin:0 auto;padding:32px 24px 80px;display:flex;gap:28px;align-items:flex-start}
+ .toc{position:sticky;top:32px;flex:0 0 244px;max-height:calc(100vh - 64px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 10px;font-size:13px}
+ .toc .t{font-weight:700;color:var(--mute);margin:2px 10px 12px;font-size:11px;letter-spacing:1.5px}
+ .toc a{display:block;color:#3c4148;text-decoration:none;padding:6px 10px;border-radius:8px;margin:1px 0;border-left:2px solid transparent;transition:background .12s,color .12s}
+ .toc a:hover{background:#f1f2f4;color:var(--ink)}
+ .toc a.active{background:var(--accent-soft);color:var(--accent-d);font-weight:600;border-left-color:var(--accent)}
+ .toc a.lv1{font-weight:600;color:var(--ink);margin-top:6px}
+ .toc a.lv2{padding-left:24px;color:#5c626a;font-size:12.5px}
+ .toc .grp{font-size:11px;font-weight:700;color:var(--mute);letter-spacing:.5px;margin:14px 10px 4px}
+ .wrap{flex:1 1 auto;min-width:0;max-width:900px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.04);padding:38px 46px 60px}
+ @media(max-width:1080px){.shell{flex-direction:column;padding:16px 14px 60px}.toc{position:sticky;top:0;flex:none;width:100%;max-height:none;display:flex;flex-wrap:wrap;gap:2px;z-index:5}.toc .t,.toc .grp{width:100%}.toc a,.toc a.lv2{border-left:none;padding-left:10px}.wrap{max-width:none;padding:24px 18px 40px}}
+ h1{font-size:24px;margin:0 0 6px;letter-spacing:-.3px}
+ .sub{color:var(--soft);font-size:13px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+ h2{font-size:18px;margin:42px 0 14px;padding:2px 0 2px 14px;border-left:4px solid var(--accent);scroll-margin-top:24px;line-height:1.4}
+ h2.mod{border-left-color:var(--g2)}
+ code{background:var(--code);border-radius:5px;padding:1.5px 5px;font:12px ui-monospace,Menlo,monospace;word-break:break-word}
+ pre{background:#f7f8fa;color:#1d2129;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:12px/1.65 ui-monospace,Menlo,monospace;white-space:pre-wrap;margin:6px 0;overflow:auto}
+ table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}
+ th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:#f5f6f8;font-weight:600}
+ ul,ol{margin:6px 0;padding-left:22px}li{margin:5px 0}
+ .legend{margin:14px 0 0;font-size:13px}
+ .tc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0;margin:22px 0;scroll-margin-top:24px;overflow:hidden}
+ .tch{display:flex;gap:12px;background:linear-gradient(180deg,#f4f7fd,#fbfcfe);border-bottom:1px solid var(--line);padding:15px 20px}
+ .tcid{font:800 13px ui-monospace,Menlo,monospace;color:#fff;background:var(--accent);border-radius:6px;padding:3px 9px;height:fit-content;flex:none}
+ .tch-main{min-width:0}
+ .tct{font-size:15.5px;font-weight:700;line-height:1.45;margin-bottom:8px}
+ .tcmeta{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+ .tcmod{font-size:12px;color:var(--soft)}
+ .badge{font-size:11px;font-weight:700;border-radius:5px;padding:2px 8px;border:1px solid}
+ .b-p0{color:#fff;background:var(--p0);border-color:var(--p0)}
+ .b-p1{color:var(--p1);background:#fbf3df;border-color:#e6cf9b}
+ .b-p2{color:var(--p2);background:#eef0f2;border-color:#d3d7dc}
+ .b-real{color:#fff;background:var(--real);border-color:var(--real)}
+ .b-cap{color:var(--cap);background:#fbf3df;border-color:#e6cf9b}
+ .b-blk{color:#fff;background:var(--blk);border-color:var(--blk)}
+ .grp{border-top:1px solid var(--line2)}
+ .grp:first-of-type{border-top:0}
+ .gh{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700;color:var(--accent-d);letter-spacing:.5px;padding:14px 20px 2px}
+ .gn{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--accent);color:#fff;font:700 11px ui-monospace,Menlo,monospace}
+ .grp.g-exec .gn{background:var(--g2)}.grp.g-exec .gh{color:var(--g2)}
+ .grp.g-judge .gn{background:var(--g3)}.grp.g-judge .gh{color:var(--g3)}
+ .grp .fld{margin:12px 20px 16px}
+ .idgrid{display:grid;grid-template-columns:max-content 1fr;gap:7px 18px;font-size:13.5px;margin:12px 20px 16px}
+ .idgrid dt{color:var(--soft);font-weight:600}
+ .idgrid dd{margin:0}
+ .fld{margin:14px 20px}
+ .fk{display:inline-block;font-size:12px;font-weight:700;color:var(--accent-d);background:var(--accent-soft);border-radius:6px;padding:2px 9px;margin-bottom:8px;letter-spacing:.3px}
+ .fv{font-size:14px}
+ ol.steps{list-style:none;margin:6px 0;padding:0;counter-reset:st}
+ ol.steps>li{position:relative;counter-increment:st;padding:10px 0 10px 34px;border-bottom:1px dashed var(--line2)}
+ ol.steps>li:last-child{border-bottom:0}
+ ol.steps>li:before{content:counter(st);position:absolute;left:0;top:8px;width:22px;height:22px;border-radius:50%;background:var(--accent-soft);color:var(--accent-d);font:700 12px ui-monospace,Menlo,monospace;display:flex;align-items:center;justify-content:center}
+ .exp{display:block;margin-top:7px;padding:7px 11px;background:var(--ok-soft);border-left:3px solid var(--ok);border-radius:0 6px 6px 0;color:#1c5c3e;font-size:13px}
+ .exp:before{content:"预期 → ";font-weight:700;color:var(--ok)}
+ .pass-box{background:var(--ok-soft);border:1px solid var(--ok-line);border-left:4px solid var(--ok);border-radius:8px;padding:11px 14px;font-size:14px;color:#1c5c3e;font-weight:600}
+ .fail-box{background:var(--warn-soft);border:1px solid var(--warn-line);border-left:4px solid var(--warn);border-radius:8px;padding:9px 14px}
+ .fail-box ul{margin:4px 0}
+ ul.tight{margin:4px 0;padding-left:20px}ul.tight>li{margin:4px 0}
+ .dep{font-size:12px;color:var(--mute);background:#fafbfc;border-top:1px solid var(--line2);padding:11px 20px;font-family:ui-monospace,Menlo,monospace;word-break:break-word}
+ .foot{color:var(--mute);font-size:12.5px;margin-top:42px;border-top:1px solid var(--line);padding-top:16px}
 </style></head><body>
 <div class="shell">
-<nav class="toc"><div class="t">目录</div><a href="#sec0">0 全局约定</a>
-<a href="#phase">0.5 测试阶段编排</a>
-<a href="#m-b">模块 B · 真 Key 基础连通</a>
-<a href="#tc-003">TC-003 网关健康接口</a>
-<a href="#m-d">模块 D · 真 Key Codex 闭环</a>
-<a href="#tc-013">TC-013 codex-long 长链路</a>
-<a href="#tc-014">TC-014 claude-long 长链路</a>
-<a href="#elsewhere">别家怎么减</a></nav>
+<nav class="toc"><div class="t">目录</div><a class="lv1" href="#sec0">0 全局约定</a>
+<a class="lv1" href="#phase">0.5 测试阶段编排</a>
+<div class="grp">测试模块</div>
+<a class="lv1" href="#m-b">模块 B · 真 Key 基础连通</a>
+<a class="lv2" href="#tc-003">TC-003 网关健康接口</a>
+<a class="lv1" href="#m-d">模块 D · 真 Key Codex 闭环</a>
+<a class="lv2" href="#tc-013">TC-013 codex-long 长链路</a>
+<a class="lv2" href="#tc-014">TC-014 claude-long 长链路</a>
+<a class="lv1" href="#elsewhere">别家怎么减</a></nav>
 <main class="wrap">
 <h1>PRD-SAMPLE 测试用例</h1>
 <div class="sub">状态：Draft ｜ Frozen(待定) · 本页与 测试用例-MD 严格 1:1，不压缩 · 一条用例=一个原子验证点</div>
-<table><tr><th>标记</th><th>含义</th></tr>
+<table class="legend"><tr><th>标记</th><th>含义</th></tr>
 <tr><td><span class="badge b-p0">P0</span></td><td>阻断级，不过则不通过</td></tr>
 <tr><td><span class="badge b-real">真Key</span></td><td>打真实上游，证"真能用"</td></tr>
 <tr><td><span class="badge b-cap">抓包</span></td><td>假上游，只证"字段对"，不证能用</td></tr>
@@ -76,71 +119,95 @@
 <tr><td>贯穿·安全</td><td>配置不被改/不泄密/清理</td><td>TC-020…</td><td>任一不过 → 对应用例一票否决</td></tr>
 </table>
 
-<h2 id="m-b">模块 B · 真 Key 基础连通</h2>
+<h2 class="mod" id="m-b">模块 B · 真 Key 基础连通</h2>
 <div class="tc" id="tc-003">
- <div class="tch"><span class="tcid">TC-003</span><span class="tct">网关健康接口在真实 Key 下返回正确 provider 与 model（只验这一个原子点）</span>
-   <span class="tcmod">模块 B 真 Key 基础连通 ／ 阶段1 连通</span>
-   <span class="badge b-p0">P0 阻断</span><span class="badge b-real">真Key</span></div>
- <div class="fld"><div class="fk">所属模块/阶段</div><div class="fv">模块 B 真 Key 基础连通 ／ 阶段1 连通</div></div>
- <div class="fld"><div class="fk">优先级</div><div class="fv">P0 阻断</div></div>
- <div class="fld"><div class="fk">证据类型</div><div class="fv">真Key</div></div>
- <div class="fld"><div class="fk">前置条件</div><div class="fv"><ul class="tight">
-  <li>Node ≥16，仓库可跑 npm</li>
-  <li>有效 DeepSeek Key 已 <code>export DEEPSEEK_API_KEY=&lt;真key&gt;</code></li>
-  <li>本机 22000-22999 端口段无占用（provider-smoke.js:21 随机取该段）</li>
-  <li>无其它进程在写 ~/.deepseek-claude</li>
- </ul></div></div>
- <div class="fld"><div class="fk">测试数据（精确字面值）</div><div class="fv"><ul class="tight">
-  <li>完整命令：<code>DEEPSEEK_API_KEY=&lt;真key&gt; PROVIDER_SMOKE_PROVIDER=deepseek npm run smoke:provider</code>（cwd: <code>deepseek-claude-setup/</code>）</li>
-  <li>隐含默认：model=<code>deepseek-v4-pro</code>（provider-smoke.js:94 → provider.models[0]，deepseek.js:41）；thinking=<code>enabled</code>（provider-smoke.js:101-102）；effort=<code>high</code>（provider-smoke.js:108 写死）</li>
- </ul></div></div>
- <div class="fld"><div class="fk">测试步骤</div><div class="fv"><ol class="steps">
-  <li>动作：执行上述命令<span class="exp">stdout 出现 <code>-- live provider smoke: DeepSeek (deepseek-v4-pro) --</code>（provider-smoke.js:114）</span></li>
-  <li>动作：脚本建临时配置目录、部署 proxy bundle、随机端口起网关<span class="exp">网关 ≤60s 起来，<code>proxyManager.getHealth()</code> 返回 health 对象（provider-smoke.js:103-117）</span></li>
-  <li>动作：脚本执行 <code>assertOk('gateway health', health.provider==='deepseek' &amp;&amp; health.model==='deepseek-v4-pro')</code>（provider-smoke.js:118）<span class="exp"><code>health.provider</code> 严格 === <code>"deepseek"</code> 且 <code>health.model</code> 严格 === <code>"deepseek-v4-pro"</code></span></li>
-  <li>动作：观察该断言 stdout<span class="exp">打印一行 <code>  OK gateway health</code>（provider-smoke.js:78），未抛错退出</span></li>
- </ol></div></div>
- <div class="fld"><div class="fk">通过标准</div><div class="fv pass">步骤3布尔为 true 且步骤4打印 <code>OK gateway health</code>，进程未因此 exit 1</div></div>
- <div class="fld"><div class="fk">失败判定与归类</div><div class="fv"><ul class="tight">
-  <li>打印 <code>gateway health failed: &lt;JSON&gt;</code> → provider/model 不符 → gateway（附 redact health JSON）</li>
-  <li>exit 2 → 缺 Key（前置2未满足）</li>
-  <li>网关 60s 未起 → gateway（启动超时）</li>
- </ul></div></div>
- <div class="fld"><div class="fk">后置/清理</div><div class="fv">脚本 finally <code>proxyManager.stop()</code> + <code>fs.rmSync(tmp)</code>（provider-smoke.js:137-140）</div></div>
- <div class="fld"><div class="fk">证据产物</div><div class="fv">smoke 全量 stdout（含 OK 行）+ 退出码</div></div>
+ <div class="tch"><span class="tcid">TC-003</span>
+  <div class="tch-main">
+   <div class="tct">网关健康接口在真实 Key 下返回正确 provider 与 model（只验这一个原子点）</div>
+   <div class="tcmeta"><span class="tcmod">模块 B 真 Key 基础连通 ／ 阶段1 连通</span>
+     <span class="badge b-p0">P0 阻断</span><span class="badge b-real">真Key</span></div>
+  </div></div>
+ <div class="grp">
+  <div class="gh"><span class="gn">1</span>用例身份与前提</div>
+  <dl class="idgrid">
+   <dt>所属模块/阶段</dt><dd>模块 B 真 Key 基础连通 ／ 阶段1 连通</dd>
+   <dt>优先级</dt><dd>P0 阻断</dd>
+   <dt>证据类型</dt><dd>真Key</dd>
+  </dl>
+  <div class="fld"><div class="fk">前置条件</div><div class="fv"><ul class="tight">
+   <li>Node ≥16，仓库可跑 npm</li>
+   <li>有效 DeepSeek Key 已 <code>export DEEPSEEK_API_KEY=&lt;真key&gt;</code></li>
+   <li>本机 22000-22999 端口段无占用（provider-smoke.js:21 随机取该段）</li>
+   <li>无其它进程在写 ~/.deepseek-claude</li>
+  </ul></div></div>
+ </div>
+ <div class="grp g-exec">
+  <div class="gh"><span class="gn">2</span>如何执行</div>
+  <div class="fld"><div class="fk">测试数据（精确字面值）</div><div class="fv"><ul class="tight">
+   <li>完整命令：<code>DEEPSEEK_API_KEY=&lt;真key&gt; PROVIDER_SMOKE_PROVIDER=deepseek npm run smoke:provider</code>（cwd: <code>deepseek-claude-setup/</code>）</li>
+   <li>隐含默认：model=<code>deepseek-v4-pro</code>（provider-smoke.js:94 → provider.models[0]，deepseek.js:41）；thinking=<code>enabled</code>（provider-smoke.js:101-102）；effort=<code>high</code>（provider-smoke.js:108 写死）</li>
+  </ul></div></div>
+  <div class="fld"><div class="fk">测试步骤</div><div class="fv"><ol class="steps">
+   <li>动作：执行上述命令<span class="exp">stdout 出现 <code>-- live provider smoke: DeepSeek (deepseek-v4-pro) --</code>（provider-smoke.js:114）</span></li>
+   <li>动作：脚本建临时配置目录、部署 proxy bundle、随机端口起网关<span class="exp">网关 ≤60s 起来，<code>proxyManager.getHealth()</code> 返回 health 对象（provider-smoke.js:103-117）</span></li>
+   <li>动作：脚本执行 <code>assertOk('gateway health', health.provider==='deepseek' &amp;&amp; health.model==='deepseek-v4-pro')</code>（provider-smoke.js:118）<span class="exp"><code>health.provider</code> 严格 === <code>"deepseek"</code> 且 <code>health.model</code> 严格 === <code>"deepseek-v4-pro"</code></span></li>
+   <li>动作：观察该断言 stdout<span class="exp">打印一行 <code>  OK gateway health</code>（provider-smoke.js:78），未抛错退出</span></li>
+  </ol></div></div>
+ </div>
+ <div class="grp g-judge">
+  <div class="gh"><span class="gn">3</span>如何判定</div>
+  <div class="fld"><div class="fk">通过标准</div><div class="fv"><div class="pass-box">步骤3布尔为 true 且步骤4打印 <code>OK gateway health</code>，进程未因此 exit 1</div></div></div>
+  <div class="fld"><div class="fk">失败判定与归类</div><div class="fv"><div class="fail-box"><ul class="tight">
+   <li>打印 <code>gateway health failed: &lt;JSON&gt;</code> → provider/model 不符 → gateway（附 redact health JSON）</li>
+   <li>exit 2 → 缺 Key（前置2未满足）</li>
+   <li>网关 60s 未起 → gateway（启动超时）</li>
+  </ul></div></div></div>
+  <div class="fld"><div class="fk">后置/清理</div><div class="fv">脚本 finally <code>proxyManager.stop()</code> + <code>fs.rmSync(tmp)</code>（provider-smoke.js:137-140）</div></div>
+  <div class="fld"><div class="fk">证据产物</div><div class="fv">smoke 全量 stdout（含 OK 行）+ 退出码</div></div>
+ </div>
  <div class="dep">代码依据：provider-smoke.js:94,101-118；deepseek.js:41</div>
 </div>
 
-<h2 id="m-d">模块 D · 真 Key Codex 闭环（复杂长链路）</h2>
+<h2 class="mod" id="m-d">模块 D · 真 Key Codex 闭环（复杂长链路）</h2>
 <div class="tc" id="tc-013">
- <div class="tch"><span class="tcid">TC-013</span><span class="tct">真实 Codex 经网关打真实 DeepSeek，在 20 轮内完成 TASK-LONG-TODO 并自测自修到 ALL TESTS PASS</span>
-   <span class="tcmod">模块 D 真 Key Codex 闭环 ／ 阶段3 复杂长链路</span>
-   <span class="badge b-p0">P0</span><span class="badge b-real">真Key</span></div>
- <div class="fld"><div class="fk">所属模块/阶段</div><div class="fv">模块 D 真 Key Codex 闭环 ／ 阶段3 复杂长链路</div></div>
- <div class="fld"><div class="fk">优先级</div><div class="fv">P0</div></div>
- <div class="fld"><div class="fk">证据类型</div><div class="fv">真Key</div></div>
- <div class="fld"><div class="fk">前置条件</div><div class="fv"><ul class="tight">
-  <li>阶段1、阶段2 全过</li>
-  <li>有效 <code>DEEPSEEK_API_KEY</code>，可执行 <code>codex</code> CLI（preflight 通过）</li>
- </ul></div></div>
- <div class="fld"><div class="fk">测试数据（精确字面值）</div><div class="fv">
-  <ul class="tight">
-   <li><strong>任务名称</strong>：TASK-LONG-TODO —— 从零实现"待办 CLI 工具 + 自带测试 + 自跑自修复"</li>
-   <li><strong>任务类型</strong>：真实多步骤编程 agent 任务（看懂需求→写多文件→自运行测试→读报错→自修复→直到通过）</li>
-   <li><strong>覆盖周期</strong>：约 3~20 个工具轮、约 5~15 分钟</li>
-   <li><strong>轮数规则（写死）</strong>：一轮 = 网关日志一条 <code>RESPONSES_DONE</code>（runner grep 计数）；最少 3 轮、最多 20 轮封顶；超 20 轮未收敛 = 失败，归类 <strong>client（模型未在时限收敛）</strong>，与接入失败分开（不评模型质量）</li>
-  </ul>
-  <p><strong>每一轮发什么 / 期望什么（逐轮写死）</strong>：</p>
-  <table>
-   <tr><th>轮次</th><th>发给模型的内容</th><th>期望结果（可观测）</th></tr>
-   <tr><td>第 1 轮</td><td>首轮 verbatim prompt 全文（见下）</td><td>模型发起写文件工具调用，创建 <code>todo.js</code></td></tr>
-   <tr><td>第 2 轮</td><td>（agent 自驱，无新增人输入；上下文延续）</td><td>模型创建 <code>test.js</code>，内含 ≥3 处 <code>assert</code> 且有一处同时读 <code>todo.js</code>+<code>todo.json</code></td></tr>
-   <tr><td>第 3 轮</td><td>（agent 自驱）执行 <code>node test.js</code></td><td>模型实际跑测试，stdout 可见测试结果</td></tr>
-   <tr><td>第 4~N 轮（若测试未过）</td><td>（agent 自驱）按报错改代码后重跑</td><td>每轮改 1 处后重跑，逐步收敛</td></tr>
-   <tr><td>最后一轮</td><td>（agent 自驱）最终运行</td><td>stdout 含精确行 <code>ALL TESTS PASS</code></td></tr>
-  </table>
-  <p><strong>首轮 verbatim prompt（一字不差，照抄发送）</strong>：</p>
-  <pre>在当前目录用 Node.js 完成一个命令行待办工具，下面要求全部做完：
+ <div class="tch"><span class="tcid">TC-013</span>
+  <div class="tch-main">
+   <div class="tct">真实 Codex 经网关打真实 DeepSeek，在 20 轮内完成 TASK-LONG-TODO 并自测自修到 ALL TESTS PASS</div>
+   <div class="tcmeta"><span class="tcmod">模块 D 真 Key Codex 闭环 ／ 阶段3 复杂长链路</span>
+     <span class="badge b-p0">P0</span><span class="badge b-real">真Key</span></div>
+  </div></div>
+ <div class="grp">
+  <div class="gh"><span class="gn">1</span>用例身份与前提</div>
+  <dl class="idgrid">
+   <dt>所属模块/阶段</dt><dd>模块 D 真 Key Codex 闭环 ／ 阶段3 复杂长链路</dd>
+   <dt>优先级</dt><dd>P0</dd>
+   <dt>证据类型</dt><dd>真Key</dd>
+  </dl>
+  <div class="fld"><div class="fk">前置条件</div><div class="fv"><ul class="tight">
+   <li>阶段1、阶段2 全过</li>
+   <li>有效 <code>DEEPSEEK_API_KEY</code>，可执行 <code>codex</code> CLI（preflight 通过）</li>
+  </ul></div></div>
+ </div>
+ <div class="grp g-exec">
+  <div class="gh"><span class="gn">2</span>如何执行</div>
+  <div class="fld"><div class="fk">测试数据（精确字面值）</div><div class="fv">
+   <ul class="tight">
+    <li><strong>任务名称</strong>：TASK-LONG-TODO —— 从零实现"待办 CLI 工具 + 自带测试 + 自跑自修复"</li>
+    <li><strong>任务类型</strong>：真实多步骤编程 agent 任务（看懂需求→写多文件→自运行测试→读报错→自修复→直到通过）</li>
+    <li><strong>覆盖周期</strong>：约 3~20 个工具轮、约 5~15 分钟</li>
+    <li><strong>轮数规则（写死）</strong>：一轮 = 网关日志一条 <code>RESPONSES_DONE</code>（runner grep 计数）；最少 3 轮、最多 20 轮封顶；超 20 轮未收敛 = 失败，归类 <strong>client（模型未在时限收敛）</strong>，与接入失败分开（不评模型质量）</li>
+   </ul>
+   <p><strong>每一轮发什么 / 期望什么（逐轮写死）</strong>：</p>
+   <table>
+    <tr><th>轮次</th><th>发给模型的内容</th><th>期望结果（可观测）</th></tr>
+    <tr><td>第 1 轮</td><td>首轮 verbatim prompt 全文（见下）</td><td>模型发起写文件工具调用，创建 <code>todo.js</code></td></tr>
+    <tr><td>第 2 轮</td><td>（agent 自驱，无新增人输入；上下文延续）</td><td>模型创建 <code>test.js</code>，内含 ≥3 处 <code>assert</code> 且有一处同时读 <code>todo.js</code>+<code>todo.json</code></td></tr>
+    <tr><td>第 3 轮</td><td>（agent 自驱）执行 <code>node test.js</code></td><td>模型实际跑测试，stdout 可见测试结果</td></tr>
+    <tr><td>第 4~N 轮（若测试未过）</td><td>（agent 自驱）按报错改代码后重跑</td><td>每轮改 1 处后重跑，逐步收敛</td></tr>
+    <tr><td>最后一轮</td><td>（agent 自驱）最终运行</td><td>stdout 含精确行 <code>ALL TESTS PASS</code></td></tr>
+   </table>
+   <p><strong>首轮 verbatim prompt（一字不差，照抄发送）</strong>：</p>
+   <pre>在当前目录用 Node.js 完成一个命令行待办工具，下面要求全部做完：
 
 1. 写 todo.js，可执行 CLI，支持三个子命令：
    - node todo.js add "&lt;内容&gt;"：追加一条待办到当前目录 todo.json
@@ -155,54 +222,72 @@
    - 必须有一个用例同时读取 todo.js 和 todo.json 两个文件内容后再做断言
    - 全部断言通过后，最后一行精确打印一行：ALL TESTS PASS
 3. 运行 node test.js；若失败，修改代码重试，直到看到 ALL TESTS PASS 为止。</pre>
- </div></div>
- <div class="fld"><div class="fk">测试步骤</div><div class="fv"><ol class="steps">
-  <li>动作：执行 <code>DEEPSEEK_API_KEY=&lt;真key&gt; CLIENT_E2E_PROVIDER=deepseek CLIENT_E2E_TARGETS=codex-tool CLIENT_E2E_LONG=1 npm run e2e:clients</code><span class="exp">runner 追加 codex-long case，临时 workspace 起隔离 Codex，把首轮 prompt 原文发给模型</span></li>
-  <li>动作：等模型多轮执行<span class="exp">网关日志出现 ≥3 次 <code>RESPONSES_DONE</code> 且 ≤20 次</span></li>
-  <li>动作：等结束或 900000ms 超时<span class="exp">15 分钟内结束，未超时</span></li>
-  <li>动作：runner 读临时 workspace<span class="exp">存在 <code>todo.js</code>/<code>test.js</code>/<code>todo.json</code>，模型自跑 <code>node test.js</code> 输出含精确行 <code>ALL TESTS PASS</code></span></li>
-  <li>动作：runner <strong>独立复跑</strong> <code>node test.js</code>（模型猜不到会复跑）<span class="exp">复跑退出码 0 且 stdout 含 <code>ALL TESTS PASS</code></span></li>
-  <li>动作：grep 本次网关日志切片<span class="exp">不含本次 <code>RESPONSES_FAILED</code></span></li>
- </ol></div></div>
- <div class="fld"><div class="fk">通过标准</div><div class="fv pass">步骤2轮数∈[3,20] 且 步骤3未超时 且 步骤4产物齐+模型 <code>ALL TESTS PASS</code> 且 步骤5独立复跑也 <code>ALL TESTS PASS</code> 且 步骤6无 <code>RESPONSES_FAILED</code></div></div>
- <div class="fld"><div class="fk">失败判定与归类</div><div class="fv"><ul class="tight">
-  <li>超20轮/超时/独立复跑不过 → client（模型未收敛或谎报）</li>
-  <li>三文件缺但有 ALL TESTS PASS 文本 → client（echo 作弊，被步骤5抓出）</li>
-  <li>有 <code>RESPONSES_FAILED</code> → gateway/provider（发出点 proxy/clients/codex-responses.js:229）</li>
-  <li><code>claude-long</code> 等 target runner 未实现 → <strong>BLOCKED-待实现，不得标 PASS/SKIPPED</strong></li>
- </ul></div></div>
- <div class="fld"><div class="fk">后置/清理</div><div class="fv">随 run 末尾删除临时根目录</div></div>
- <div class="fld"><div class="fk">证据产物</div><div class="fv">报告 + redact 日志切片（含 RESPONSES_DONE 计数）+ 临时 workspace 三文件快照（不含 key）</div></div>
+  </div></div>
+  <div class="fld"><div class="fk">测试步骤</div><div class="fv"><ol class="steps">
+   <li>动作：执行 <code>DEEPSEEK_API_KEY=&lt;真key&gt; CLIENT_E2E_PROVIDER=deepseek CLIENT_E2E_TARGETS=codex-tool CLIENT_E2E_LONG=1 npm run e2e:clients</code><span class="exp">runner 追加 codex-long case，临时 workspace 起隔离 Codex，把首轮 prompt 原文发给模型</span></li>
+   <li>动作：等模型多轮执行<span class="exp">网关日志出现 ≥3 次 <code>RESPONSES_DONE</code> 且 ≤20 次</span></li>
+   <li>动作：等结束或 900000ms 超时<span class="exp">15 分钟内结束，未超时</span></li>
+   <li>动作：runner 读临时 workspace<span class="exp">存在 <code>todo.js</code>/<code>test.js</code>/<code>todo.json</code>，模型自跑 <code>node test.js</code> 输出含精确行 <code>ALL TESTS PASS</code></span></li>
+   <li>动作：runner <strong>独立复跑</strong> <code>node test.js</code>（模型猜不到会复跑）<span class="exp">复跑退出码 0 且 stdout 含 <code>ALL TESTS PASS</code></span></li>
+   <li>动作：grep 本次网关日志切片<span class="exp">不含本次 <code>RESPONSES_FAILED</code></span></li>
+  </ol></div></div>
+ </div>
+ <div class="grp g-judge">
+  <div class="gh"><span class="gn">3</span>如何判定</div>
+  <div class="fld"><div class="fk">通过标准</div><div class="fv"><div class="pass-box">步骤2轮数∈[3,20] 且 步骤3未超时 且 步骤4产物齐+模型 <code>ALL TESTS PASS</code> 且 步骤5独立复跑也 <code>ALL TESTS PASS</code> 且 步骤6无 <code>RESPONSES_FAILED</code></div></div></div>
+  <div class="fld"><div class="fk">失败判定与归类</div><div class="fv"><div class="fail-box"><ul class="tight">
+   <li>超20轮/超时/独立复跑不过 → client（模型未收敛或谎报）</li>
+   <li>三文件缺但有 ALL TESTS PASS 文本 → client（echo 作弊，被步骤5抓出）</li>
+   <li>有 <code>RESPONSES_FAILED</code> → gateway/provider（发出点 proxy/clients/codex-responses.js:229）</li>
+   <li><code>claude-long</code> 等 target runner 未实现 → <strong>BLOCKED-待实现，不得标 PASS/SKIPPED</strong></li>
+  </ul></div></div></div>
+  <div class="fld"><div class="fk">后置/清理</div><div class="fv">随 run 末尾删除临时根目录</div></div>
+  <div class="fld"><div class="fk">证据产物</div><div class="fv">报告 + redact 日志切片（含 RESPONSES_DONE 计数）+ 临时 workspace 三文件快照（不含 key）</div></div>
+ </div>
  <div class="dep">代码依据：client-e2e.js:242,256；轮信号 RESPONSES_DONE 见 proxy/clients/codex-responses.js:229；任务定义见本用例测试数据</div>
 </div>
 
 <div class="tc" id="tc-014">
- <div class="tch"><span class="tcid">TC-014</span><span class="tct">真实 Claude Code 经网关打真实 DeepSeek，在 20 轮内完成 TASK-LONG-TODO 并自测自修到 ALL TESTS PASS</span>
-   <span class="tcmod">模块 D 真 Key Codex 闭环 ／ 阶段3 复杂长链路</span>
-   <span class="badge b-p0">P0</span><span class="badge b-blk">BLOCKED</span></div>
- <div class="fld"><div class="fk">所属模块/阶段</div><div class="fv">模块 D 真 Key Codex 闭环 ／ 阶段3 复杂长链路</div></div>
- <div class="fld"><div class="fk">优先级</div><div class="fv">P0</div></div>
- <div class="fld"><div class="fk">证据类型</div><div class="fv">BLOCKED（target <code>claude-long</code> runner 未实现，非通过非跳过）</div></div>
- <div class="fld"><div class="fk">前置条件</div><div class="fv"><ul class="tight">
-  <li>阶段1、阶段2 全过</li>
-  <li>有效 <code>DEEPSEEK_API_KEY</code>，可执行 <code>claude</code> CLI（preflight 通过）</li>
- </ul></div></div>
- <div class="fld"><div class="fk">测试数据（精确字面值）</div><div class="fv"><ul class="tight">
-  <li><strong>任务名称</strong>：TASK-LONG-TODO —— 与 TC-013 同题，换 Claude Code 客户端跑以便横向对比</li>
-  <li><strong>当前状态</strong>：<code>client-e2e.js</code> 暂未实现 <code>claude-long</code> target 的多轮 runner，无法执行该用例</li>
-  <li>首轮 verbatim prompt：同 TC-013 原文（一字不差，照抄发送）</li>
- </ul></div></div>
- <div class="fld"><div class="fk">测试步骤</div><div class="fv"><ol class="steps">
-  <li>动作：执行 <code>DEEPSEEK_API_KEY=&lt;真key&gt; CLIENT_E2E_PROVIDER=deepseek CLIENT_E2E_TARGETS=claude-tool CLIENT_E2E_LONG=1 npm run e2e:clients</code><span class="exp">runner 报 <code>claude-long</code> target 未实现并标 BLOCKED，不进入多轮</span></li>
-  <li>动作：检查报告该 case 状态<span class="exp">状态记为 <code>BLOCKED-待实现</code>，未伪装 PASS 或 SKIPPED</span></li>
- </ol></div></div>
- <div class="fld"><div class="fk">通过标准</div><div class="fv pass">该 target runner 实现并补齐后，转用 TC-013 同口径标准评估；当前状态合法值仅为 BLOCKED</div></div>
- <div class="fld"><div class="fk">失败判定与归类</div><div class="fv"><ul class="tight">
-  <li><code>claude-long</code> target runner 未实现 → <strong>BLOCKED-待实现（不得标 PASS/SKIPPED）</strong></li>
-  <li>若被标成 PASS 或 SKIPPED 掩盖未实现 → 视为认证作弊，门禁拦截</li>
- </ul></div></div>
- <div class="fld"><div class="fk">后置/清理</div><div class="fv">无产物生成；无临时目录需清理</div></div>
- <div class="fld"><div class="fk">证据产物</div><div class="fv">报告中该 case 的 BLOCKED 状态行 + 未实现原因</div></div>
+ <div class="tch"><span class="tcid">TC-014</span>
+  <div class="tch-main">
+   <div class="tct">真实 Claude Code 经网关打真实 DeepSeek，在 20 轮内完成 TASK-LONG-TODO 并自测自修到 ALL TESTS PASS</div>
+   <div class="tcmeta"><span class="tcmod">模块 D 真 Key Codex 闭环 ／ 阶段3 复杂长链路</span>
+     <span class="badge b-p0">P0</span><span class="badge b-blk">BLOCKED</span></div>
+  </div></div>
+ <div class="grp">
+  <div class="gh"><span class="gn">1</span>用例身份与前提</div>
+  <dl class="idgrid">
+   <dt>所属模块/阶段</dt><dd>模块 D 真 Key Codex 闭环 ／ 阶段3 复杂长链路</dd>
+   <dt>优先级</dt><dd>P0</dd>
+   <dt>证据类型</dt><dd>BLOCKED（target <code>claude-long</code> runner 未实现，非通过非跳过）</dd>
+  </dl>
+  <div class="fld"><div class="fk">前置条件</div><div class="fv"><ul class="tight">
+   <li>阶段1、阶段2 全过</li>
+   <li>有效 <code>DEEPSEEK_API_KEY</code>，可执行 <code>claude</code> CLI（preflight 通过）</li>
+  </ul></div></div>
+ </div>
+ <div class="grp g-exec">
+  <div class="gh"><span class="gn">2</span>如何执行</div>
+  <div class="fld"><div class="fk">测试数据（精确字面值）</div><div class="fv"><ul class="tight">
+   <li><strong>任务名称</strong>：TASK-LONG-TODO —— 与 TC-013 同题，换 Claude Code 客户端跑以便横向对比</li>
+   <li><strong>当前状态</strong>：<code>client-e2e.js</code> 暂未实现 <code>claude-long</code> target 的多轮 runner，无法执行该用例</li>
+   <li>首轮 verbatim prompt：同 TC-013 原文（一字不差，照抄发送）</li>
+  </ul></div></div>
+  <div class="fld"><div class="fk">测试步骤</div><div class="fv"><ol class="steps">
+   <li>动作：执行 <code>DEEPSEEK_API_KEY=&lt;真key&gt; CLIENT_E2E_PROVIDER=deepseek CLIENT_E2E_TARGETS=claude-tool CLIENT_E2E_LONG=1 npm run e2e:clients</code><span class="exp">runner 报 <code>claude-long</code> target 未实现并标 BLOCKED，不进入多轮</span></li>
+   <li>动作：检查报告该 case 状态<span class="exp">状态记为 <code>BLOCKED-待实现</code>，未伪装 PASS 或 SKIPPED</span></li>
+  </ol></div></div>
+ </div>
+ <div class="grp g-judge">
+  <div class="gh"><span class="gn">3</span>如何判定</div>
+  <div class="fld"><div class="fk">通过标准</div><div class="fv"><div class="pass-box">该 target runner 实现并补齐后，转用 TC-013 同口径标准评估；当前状态合法值仅为 BLOCKED</div></div></div>
+  <div class="fld"><div class="fk">失败判定与归类</div><div class="fv"><div class="fail-box"><ul class="tight">
+   <li><code>claude-long</code> target runner 未实现 → <strong>BLOCKED-待实现（不得标 PASS/SKIPPED）</strong></li>
+   <li>若被标成 PASS 或 SKIPPED 掩盖未实现 → 视为认证作弊，门禁拦截</li>
+  </ul></div></div></div>
+  <div class="fld"><div class="fk">后置/清理</div><div class="fv">无产物生成；无临时目录需清理</div></div>
+  <div class="fld"><div class="fk">证据产物</div><div class="fv">报告中该 case 的 BLOCKED 状态行 + 未实现原因</div></div>
+ </div>
  <div class="dep">代码依据：client-e2e.js:242,256（target 分发未覆盖 claude-long 分支）</div>
 </div>
 

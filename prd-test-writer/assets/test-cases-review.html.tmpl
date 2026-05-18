@@ -2,48 +2,103 @@
 <!--
   测试用例 HTML 查阅模板（套用：从 测试用例-MD 抽内容灌占位符，禁手写结构/改样式）
   占位符：{{PRD_ID}} {{STATUS}} {{TOC}} {{SEC0}} {{PHASE_TABLE}} {{TC_CARDS}} {{ELSEWHERE}}
-  TC 卡片片段格式见文件底部注释。生成后必须跑 references/html-fill-spec.md 的 1:1 校验，FAIL 不交付。
-  规则：与 MD 严格 1:1，不删字段/不删步骤/不压缩整节；卡头编号/名称/模块/优先级/证据类型均为可见文本。
+  生成后必须跑 references/html-fill-spec.md 的 1:1 校验，FAIL 不交付。
+  规则：与 MD 严格 1:1，不删字段/不删步骤/不压缩整节。
+  ★ 13 字段全保留，但按「① 用例身份与前提 ② 如何执行 ③ 如何判定」三组归拢，组内才是字段。
+  ★ 模块/优先级/证据类型放在卡头 + 身份组的 .idgrid 里（均为可见文本，1:1 仍命中），
+    不再单独平铺成三个整宽 .fld（去掉重复堆叠）。证据类型若是长句（如 BLOCKED 说明），
+    其全文必须落在 .idgrid 的 <dd> 里，不能只剩 badge。
+  ★ 视觉层级只靠 CSS（分区头、步骤序号、通过/失败色块），不改任何可见文字。
 -->
 <html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{PRD_ID}} 测试用例</title>
 <style>
- :root{--bg:#f6f7f9;--card:#fff;--ink:#1f2329;--soft:#646a73;--line:#e5e6eb;--accent:#3370ff;--accent-soft:#eaf1ff;--p0:#a23b2e;--p1:#8a5e12;--p2:#566;--real:#2f6f4f;--cap:#8a5e12;--blk:#566;--code:#f2f3f5;--exp:#2f6f4f}
+ :root{
+  --bg:#f5f6f8;--card:#fff;--ink:#1d2129;--soft:#646a73;--mute:#8a9099;
+  --line:#e6e8eb;--line2:#eef0f2;
+  --accent:#3370ff;--accent-d:#1d4fd8;--accent-soft:#eef3ff;--code:#f3f4f6;
+  --g2:#6b4ef0;--g3:#1f8a5b;
+  --ok:#1f8a5b;--ok-soft:#eaf6f0;--ok-line:#bfe3cf;
+  --warn:#b4541f;--warn-soft:#fdf1ea;--warn-line:#f0d2bd;
+  --p0:#a23b2e;--p1:#8a5e12;--p2:#5b6168;--real:#1f8a5b;--cap:#8a5e12;--blk:#5b6168;
+ }
  *{box-sizing:border-box}html{scroll-behavior:smooth}
  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
- .shell{max-width:1180px;margin:0 auto;padding:32px 24px 80px;display:flex;gap:28px;align-items:flex-start}
- .toc{position:sticky;top:32px;flex:0 0 230px;max-height:calc(100vh - 64px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 10px;font-size:13px;line-height:1.5}
- .toc .t{font-weight:700;color:var(--soft);margin:2px 8px 10px;font-size:12px;letter-spacing:1px}
- .toc a{display:block;color:#3a3f45;text-decoration:none;padding:6px 10px;border-radius:7px;margin:2px 0;border-left:2px solid transparent;transition:background .12s,color .12s}
- .toc a:hover{background:#f0f1f3;color:var(--ink)}
- .toc a.active{background:var(--accent-soft);color:var(--accent);font-weight:600;border-left-color:var(--accent)}
- .wrap{flex:1 1 auto;min-width:0;max-width:880px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.03);padding:36px 44px 56px}
- @media(max-width:1080px){.shell{flex-direction:column;padding:16px 14px 60px}.toc{position:sticky;top:0;flex:none;width:100%;max-height:none;display:flex;flex-wrap:wrap;gap:2px;z-index:5}.toc .t{width:100%}.toc a{border-left:none}.wrap{max-width:none;padding:24px 18px 40px}}
- h1{font-size:23px;margin:0 0 4px;letter-spacing:-.2px}.sub{color:var(--soft);font-size:13px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
- h2{font-size:17px;margin:34px 0 8px;padding-bottom:7px;border-bottom:1px solid var(--line);scroll-margin-top:24px}
- code{background:var(--code);border-radius:5px;padding:1.5px 5px;font:12px ui-monospace,Menlo,monospace;word-break:break-all}
- pre{background:#f5f6f8;color:#1f2329;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:12px/1.6 ui-monospace,Menlo,monospace;white-space:pre-wrap;margin:6px 0;overflow:auto}
- table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:#f4f5f7;font-weight:600}
- .tc{background:#fcfcfb;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0;scroll-margin-top:24px}
- .tch{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:9px}
- .tcid{font:700 13px ui-monospace,Menlo,monospace;color:#fff;background:var(--accent);border-radius:6px;padding:2px 8px}
- .tct{font-size:15px;font-weight:700;flex:1 1 240px}.tcmod{font-size:12px;color:var(--soft)}
- .badge{font-size:11px;font-weight:700;border-radius:5px;padding:1px 7px;border:1px solid}
- .b-p0{color:#fff;background:var(--p0);border-color:var(--p0)}.b-p1{color:var(--p1);border-color:var(--p1)}.b-p2{color:var(--p2);border-color:var(--p2)}
- .b-real{color:#fff;background:var(--real);border-color:var(--real)}.b-cap{color:var(--cap);border-color:var(--cap)}.b-blk{color:var(--blk);border-color:var(--blk)}
- .fld{margin:10px 0}.fk{font-size:12px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.4px}.fv{font-size:14px}
- ol.steps{margin:4px 0;padding-left:20px}ol.steps>li{margin:7px 0}
- .exp{display:block;color:var(--exp);margin-top:2px}.exp:before{content:"→ 预期：";font-weight:700}
- ul.tight{margin:3px 0;padding-left:20px}ul.tight>li{margin:3px 0}
- .pass{color:var(--accent);font-weight:600}.dep{font-size:12px;color:var(--soft)}
- .foot{color:var(--soft);font-size:12.5px;margin-top:36px;border-top:1px solid var(--line);padding-top:16px}
+ .shell{max-width:1200px;margin:0 auto;padding:32px 24px 80px;display:flex;gap:28px;align-items:flex-start}
+ /* ---- 目录：树形父子缩进 ---- */
+ .toc{position:sticky;top:32px;flex:0 0 244px;max-height:calc(100vh - 64px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 10px;font-size:13px}
+ .toc .t{font-weight:700;color:var(--mute);margin:2px 10px 12px;font-size:11px;letter-spacing:1.5px}
+ .toc a{display:block;color:#3c4148;text-decoration:none;padding:6px 10px;border-radius:8px;margin:1px 0;border-left:2px solid transparent;transition:background .12s,color .12s}
+ .toc a:hover{background:#f1f2f4;color:var(--ink)}
+ .toc a.active{background:var(--accent-soft);color:var(--accent-d);font-weight:600;border-left-color:var(--accent)}
+ .toc a.lv1{font-weight:600;color:var(--ink);margin-top:6px}
+ .toc a.lv2{padding-left:24px;color:#5c626a;font-size:12.5px}
+ .toc .grp{font-size:11px;font-weight:700;color:var(--mute);letter-spacing:.5px;margin:14px 10px 4px}
+ /* ---- 主体 ---- */
+ .wrap{flex:1 1 auto;min-width:0;max-width:900px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.04);padding:38px 46px 60px}
+ @media(max-width:1080px){.shell{flex-direction:column;padding:16px 14px 60px}.toc{position:sticky;top:0;flex:none;width:100%;max-height:none;display:flex;flex-wrap:wrap;gap:2px;z-index:5}.toc .t,.toc .grp{width:100%}.toc a,.toc a.lv2{border-left:none;padding-left:10px}.wrap{max-width:none;padding:24px 18px 40px}}
+ h1{font-size:24px;margin:0 0 6px;letter-spacing:-.3px}
+ .sub{color:var(--soft);font-size:13px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+ h2{font-size:18px;margin:42px 0 14px;padding:2px 0 2px 14px;border-left:4px solid var(--accent);scroll-margin-top:24px;line-height:1.4}
+ h2.mod{border-left-color:var(--g2)}
+ code{background:var(--code);border-radius:5px;padding:1.5px 5px;font:12px ui-monospace,Menlo,monospace;word-break:break-word}
+ pre{background:#f7f8fa;color:#1d2129;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:12px/1.65 ui-monospace,Menlo,monospace;white-space:pre-wrap;margin:6px 0;overflow:auto}
+ table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}
+ th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:#f5f6f8;font-weight:600}
+ ul,ol{margin:6px 0;padding-left:22px}li{margin:5px 0}
+ .legend{margin:14px 0 0;font-size:13px}
+ /* ---- TC 卡：卡头 ---- */
+ .tc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0;margin:22px 0;scroll-margin-top:24px;overflow:hidden}
+ .tch{display:flex;gap:12px;background:linear-gradient(180deg,#f4f7fd,#fbfcfe);border-bottom:1px solid var(--line);padding:15px 20px}
+ .tcid{font:800 13px ui-monospace,Menlo,monospace;color:#fff;background:var(--accent);border-radius:6px;padding:3px 9px;height:fit-content;flex:none}
+ .tch-main{min-width:0}
+ .tct{font-size:15.5px;font-weight:700;line-height:1.45;margin-bottom:8px}
+ .tcmeta{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+ .tcmod{font-size:12px;color:var(--soft)}
+ .badge{font-size:11px;font-weight:700;border-radius:5px;padding:2px 8px;border:1px solid}
+ .b-p0{color:#fff;background:var(--p0);border-color:var(--p0)}
+ .b-p1{color:var(--p1);background:#fbf3df;border-color:#e6cf9b}
+ .b-p2{color:var(--p2);background:#eef0f2;border-color:#d3d7dc}
+ .b-real{color:#fff;background:var(--real);border-color:var(--real)}
+ .b-cap{color:var(--cap);background:#fbf3df;border-color:#e6cf9b}
+ .b-blk{color:#fff;background:var(--blk);border-color:var(--blk)}
+ /* ---- TC 卡：三个分区 ---- */
+ .grp{border-top:1px solid var(--line2)}
+ .grp:first-of-type{border-top:0}
+ .gh{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700;color:var(--accent-d);letter-spacing:.5px;padding:14px 20px 2px}
+ .gn{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--accent);color:#fff;font:700 11px ui-monospace,Menlo,monospace}
+ .grp.g-exec .gn{background:var(--g2)}.grp.g-exec .gh{color:var(--g2)}
+ .grp.g-judge .gn{background:var(--g3)}.grp.g-judge .gh{color:var(--g3)}
+ .grp .fld{margin:12px 20px 16px}
+ /* 身份组：紧凑键值网格，不再整宽平铺 */
+ .idgrid{display:grid;grid-template-columns:max-content 1fr;gap:7px 18px;font-size:13.5px;margin:12px 20px 16px}
+ .idgrid dt{color:var(--soft);font-weight:600}
+ .idgrid dd{margin:0}
+ /* 字段标签 */
+ .fld{margin:14px 20px}
+ .fk{display:inline-block;font-size:12px;font-weight:700;color:var(--accent-d);background:var(--accent-soft);border-radius:6px;padding:2px 9px;margin-bottom:8px;letter-spacing:.3px}
+ .fv{font-size:14px}
+ /* 测试步骤：序号圆点 + 预期独立色块 */
+ ol.steps{list-style:none;margin:6px 0;padding:0;counter-reset:st}
+ ol.steps>li{position:relative;counter-increment:st;padding:10px 0 10px 34px;border-bottom:1px dashed var(--line2)}
+ ol.steps>li:last-child{border-bottom:0}
+ ol.steps>li:before{content:counter(st);position:absolute;left:0;top:8px;width:22px;height:22px;border-radius:50%;background:var(--accent-soft);color:var(--accent-d);font:700 12px ui-monospace,Menlo,monospace;display:flex;align-items:center;justify-content:center}
+ .exp{display:block;margin-top:7px;padding:7px 11px;background:var(--ok-soft);border-left:3px solid var(--ok);border-radius:0 6px 6px 0;color:#1c5c3e;font-size:13px}
+ .exp:before{content:"预期 → ";font-weight:700;color:var(--ok)}
+ /* 通过 / 失败：高亮色块，跳出来 */
+ .pass-box{background:var(--ok-soft);border:1px solid var(--ok-line);border-left:4px solid var(--ok);border-radius:8px;padding:11px 14px;font-size:14px;color:#1c5c3e;font-weight:600}
+ .fail-box{background:var(--warn-soft);border:1px solid var(--warn-line);border-left:4px solid var(--warn);border-radius:8px;padding:9px 14px}
+ .fail-box ul{margin:4px 0}
+ ul.tight{margin:4px 0;padding-left:20px}ul.tight>li{margin:4px 0}
+ .dep{font-size:12px;color:var(--mute);background:#fafbfc;border-top:1px solid var(--line2);padding:11px 20px;font-family:ui-monospace,Menlo,monospace;word-break:break-word}
+ .foot{color:var(--mute);font-size:12.5px;margin-top:42px;border-top:1px solid var(--line);padding-top:16px}
 </style></head><body>
 <div class="shell">
 <nav class="toc"><div class="t">目录</div>{{TOC}}</nav>
 <main class="wrap">
 <h1>{{PRD_ID}} 测试用例</h1>
 <div class="sub">{{STATUS}} · 本页与 测试用例-MD 严格 1:1，不压缩 · 一条用例=一个原子验证点</div>
-<table><tr><th>标记</th><th>含义</th></tr>
+<table class="legend"><tr><th>标记</th><th>含义</th></tr>
 <tr><td><span class="badge b-p0">P0</span></td><td>阻断级，不过则不通过</td></tr>
 <tr><td><span class="badge b-real">真Key</span></td><td>打真实上游，证"真能用"</td></tr>
 <tr><td><span class="badge b-cap">抓包</span></td><td>假上游，只证"字段对"，不证能用</td></tr>
@@ -79,21 +134,44 @@
 </body></html>
 
 <!--
-  ===== 片段格式（生成时灌入，勿改结构） =====
-  TOC 每条： <a href="#tc-013">TC-013 …</a> 或 <a href="#m-a">模块A …</a>
-  模块标题： <h2 id="m-a">模块 A · …</h2>
-  TC 卡片（13 字段全保留，卡头为可见文本）：
-  <div class="tc" id="tc-013">
-   <div class="tch"><span class="tcid">TC-013</span><span class="tct">名称</span>
-     <span class="tcmod">模块D ／ 阶段3</span>
-     <span class="badge b-p0">P0</span><span class="badge b-real">真Key</span></div>
-   <div class="fld"><div class="fk">前置条件</div><div class="fv"><ul class="tight"><li>…</li></ul></div></div>
-   <div class="fld"><div class="fk">测试数据（精确字面值）</div><div class="fv">…；prompt 原文用 <pre>…</pre> 不截断；逐轮表用 <table></div></div>
-   <div class="fld"><div class="fk">测试步骤</div><div class="fv"><ol class="steps"><li>动作：…<span class="exp">…</span></li></ol></div></div>
-   <div class="fld"><div class="fk">通过标准</div><div class="fv pass">…</div></div>
-   <div class="fld"><div class="fk">失败判定与归类</div><div class="fv"><ul class="tight"><li>…</li></ul></div></div>
-   <div class="fld"><div class="fk">后置/清理</div><div class="fv">…</div></div>
-   <div class="fld"><div class="fk">证据产物</div><div class="fv">…</div></div>
-   <div class="dep">代码依据：文件:行</div>
-  </div>
+  ===== 片段格式（生成时灌入，勿改结构/勿改可见文字）=====
+  TOC（树形：模块 lv1，TC lv2；§0/§0.5/别家 lv1）：
+   <a class="lv1" href="#sec0">0 全局约定</a>
+   <a class="lv1" href="#phase">0.5 测试阶段编排</a>
+   <div class="grp">测试模块</div>
+   <a class="lv1" href="#m-b">模块 B · 真 Key 基础连通</a>
+   <a class="lv2" href="#tc-003">TC-003 网关健康接口</a>
+   <a class="lv1" href="#elsewhere">别家怎么减</a>
+  模块标题（每模块前插一条）： <h2 class="mod" id="m-b">模块 B · …</h2>
+  TC 卡片（13 字段全保留，按三组归拢；卡头与身份组均为可见文本）：
+   <div class="tc" id="tc-013">
+    <div class="tch"><span class="tcid">TC-013</span>
+     <div class="tch-main">
+      <div class="tct">用例名称（与 MD 一字不差）</div>
+      <div class="tcmeta"><span class="tcmod">模块D ／ 阶段3</span>
+        <span class="badge b-p0">P0</span><span class="badge b-real">真Key</span></div>
+     </div></div>
+    <div class="grp">
+     <div class="gh"><span class="gn">1</span>用例身份与前提</div>
+     <dl class="idgrid">
+       <dt>所属模块/阶段</dt><dd>模块D 真 Key Codex 闭环 ／ 阶段3 复杂长链路</dd>
+       <dt>优先级</dt><dd>P0（与 MD 字面值一致；长说明全文照搬）</dd>
+       <dt>证据类型</dt><dd>真Key（若为 BLOCKED 等长句，整句全文放这里，勿截断）</dd>
+     </dl>
+     <div class="fld"><div class="fk">前置条件</div><div class="fv"><ul class="tight"><li>…</li></ul></div></div>
+    </div>
+    <div class="grp g-exec">
+     <div class="gh"><span class="gn">2</span>如何执行</div>
+     <div class="fld"><div class="fk">测试数据（精确字面值）</div><div class="fv">…；prompt/JSON 用 <pre>原文</pre> 不截断；逐轮表用 <table></div></div>
+     <div class="fld"><div class="fk">测试步骤</div><div class="fv"><ol class="steps"><li>动作：…<span class="exp">…</span></li></ol></div></div>
+    </div>
+    <div class="grp g-judge">
+     <div class="gh"><span class="gn">3</span>如何判定</div>
+     <div class="fld"><div class="fk">通过标准</div><div class="fv"><div class="pass-box">…</div></div></div>
+     <div class="fld"><div class="fk">失败判定与归类</div><div class="fv"><div class="fail-box"><ul class="tight"><li>…</li></ul></div></div></div>
+     <div class="fld"><div class="fk">后置/清理</div><div class="fv">…</div></div>
+     <div class="fld"><div class="fk">证据产物</div><div class="fv">…</div></div>
+    </div>
+    <div class="dep">代码依据：文件:行（原样）</div>
+   </div>
 -->
