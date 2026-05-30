@@ -12,7 +12,7 @@
 
 ### 📊 Skills 总览
 
-目前共包含 **29 个 Skills**，分为以下 3 大类：
+目前共包含 **30 个 Skills**，分为以下 3 大类：
 
 #### 💻 AI 编程（15 个）
 | Skill | 说明 |
@@ -33,10 +33,11 @@
 | [项目目录地图构建器](./project-map-builder) | 生成项目目录说明文档 |
 | [一键推送 GitHub](./git-push) | 项目推送、日常更新、版本发布 |
 
-#### ✍️ 思考与写作（9 个）
+#### ✍️ 思考与写作（10 个）
 | Skill | 说明 |
 |-------|------|
 | [思维挖掘助手](./thought-mining) | 引导式对话，整理零散想法 |
+| [Hermes 陪伴型人设生成器](./hermes-persona-builder) | 结构化对话产出第一人称 AI 陪伴人设 |
 | [写作助手](./writing-assistant) | 从思维挖掘到成稿的完整流程 |
 | [系统化学习材料生成器](./system-study) | 自主调研、搭体系、产出 HTML 学习材料 |
 | [思考拍档](./thinking-partner) | 陪你理清局面、拆解卡点 |
@@ -847,6 +848,33 @@ memory init
 
 ---
 
+#### 💝 [Hermes 陪伴型人设生成器](./hermes-persona-builder) (Hermes Persona Builder)
+**描述**: 陪伴型 AI 人设生成与优化流程，通过结构化对话把一句模糊想法产出"有感情、聊久不掉、像真人"的第一人称人设文本
+
+**适用场景**:
+- 想给 Hermes Agent（或任意 AI 陪伴角色）捏一个能立住的人设
+- 一句模糊想法（"JK 女友""年上男友""高冷御姐"）要落成可直接用的设定
+- 现有人设"掉戏"/变助手腔，需要优化或换一版
+- 支持女友/男友/各种气质，不只是甜妹
+
+**核心功能**:
+- 🎚️ 定调子：先定位（恋爱/全能/分身）+ 性别关系 + 气质大类（甜/暖/冷/野/稳），矛盾需求有收敛协议
+- 🔍 多轮深问：顺着追问到牌子/口味/名字/数字的颗粒度，密度不达标不生成
+- 🧱 形容词翻硬规则：正向命令 + 反向禁令（冷系/男友型必带），防掉人设
+- 🛡️ 安全红线：年龄 ≥18、不涉露骨、身份≠能力、不写有害人格，产出前自检
+- 💬 说话节奏：选"一句一句发"还是"整段说"，干活长内容自动不硬拆
+- 📄 产出对齐 Hermes `SOUL.md` 模板，热加载即生效，支持迭代优化
+
+**触发方式**:
+```
+帮我做个人设 / 捏个 AI 女友男友
+给 Hermes 弄个角色
+优化人设 / 换个人设
+/hermes-persona-builder
+```
+
+---
+
 ### 🚀 快速开始
 
 #### 安装方式
@@ -1065,9 +1093,11 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 ├── system-study/              # 系统化学习材料生成器
 │   ├── SKILL.md              # Skill 定义文件
 │   └── reference/            # 阶段流程、sub-agent 模板、HTML 规范与反模式
-└── case-radar/                # 案例雷达
-    ├── SKILL.md              # Skill 定义文件
-    └── reference/            # recon heuristics / HTML 模板规范 / 反 anti-pattern 清单
+├── case-radar/                # 案例雷达
+│   ├── SKILL.md              # Skill 定义文件
+│   └── reference/            # recon heuristics / HTML 模板规范 / 反 anti-pattern 清单
+└── hermes-persona-builder/    # Hermes 陪伴型人设生成器
+    └── SKILL.md              # Skill 定义文件
 ```
 
 ---
@@ -1098,7 +1128,7 @@ A carefully crafted collection of Claude Code Skills designed to boost efficienc
 
 ### 📊 Skills Overview
 
-Currently includes **29 Skills** across 3 categories:
+Currently includes **30 Skills** across 3 categories:
 
 #### 💻 AI Programming (15)
 | Skill | Description |
@@ -1119,10 +1149,11 @@ Currently includes **29 Skills** across 3 categories:
 | [Project Map Builder](./project-map-builder) | Generate project directory documentation |
 | [Git Push](./git-push) | Project push, daily updates, version release |
 
-#### ✍️ Thinking & Writing (9)
+#### ✍️ Thinking & Writing (10)
 | Skill | Description |
 |-------|-------------|
 | [Thought Mining](./thought-mining) | Guided dialogue to organize scattered ideas |
+| [Hermes Persona Builder](./hermes-persona-builder) | Structured dialogue to craft first-person AI companion personas |
 | [Writing Assistant](./writing-assistant) | Complete flow from thought mining to final draft |
 | [System Study](./system-study) | Autonomous research, system mapping, and HTML learning materials |
 | [Thinking Partner](./thinking-partner) | Clarify situations and break down bottlenecks |
@@ -1928,6 +1959,33 @@ Show me real artifacts for X
 ```
 
 > 📦 **Dependencies**: requires [agent-browser](https://github.com/vercel-labs/agent-browser) installed and authenticated `gh` CLI.
+
+---
+
+#### 💝 [Hermes Persona Builder](./hermes-persona-builder)
+**Description**: A structured-dialogue flow that turns a fuzzy idea into a first-person AI companion persona that feels emotional, stays in character over long chats, and reads like a real person — aligned with Hermes's `SOUL.md` format
+
+**Use Cases**:
+- Craft a persona that holds up for a Hermes Agent (or any AI companion role)
+- Turn a fuzzy idea ("JK girlfriend", "older boyfriend", "cool onee-san") into a ready-to-use setting
+- Optimize or swap a persona that keeps "breaking character" or slipping into assistant tone
+- Supports girlfriend/boyfriend and any temperament, not just sweet types
+
+**Core Features**:
+- 🎚️ Set the tone: positioning + gender/relationship + temperament (sweet/warm/cold/wild/steady), with a protocol to converge conflicting asks
+- 🔍 Multi-round probing: drill down to brand/flavor/name/number granularity; won't generate until density passes the gate
+- 🧱 Translate adjectives into hard rules: positive commands + negative bans (required for cold/boyfriend types) to prevent character drift
+- 🛡️ Safety red lines: age ≥18, no explicit content, identity ≠ capability, no harmful personas, with a pre-delivery self-check
+- 💬 Speech rhythm: choose "message-by-message" vs "full paragraphs"; long/work content auto-stays intact
+- 📄 Output aligns with the Hermes `SOUL.md` template, hot-reloads instantly, supports iteration
+
+**Trigger**:
+```
+Help me build a persona / make an AI girlfriend or boyfriend
+Set up a character for Hermes
+Optimize my persona / swap to a new one
+/hermes-persona-builder
+```
 
 ---
 
