@@ -1,0 +1,188 @@
+:root {
+  --fg: #1f2328;
+  --muted: #59636e;
+  --bg: #ffffff;
+  --page: #eef0f3;
+  --soft: #f6f8fa;
+  --line: #d1d9e0;
+  --accent: #0969da;
+  --accent-soft: #ddf4ff;
+  --red: #cf222e;
+  --red-soft: #ffebe9;
+  --green: #1a7f37;
+  --green-soft: #dcffe4;
+  --orange: #bf8700;
+  --orange-soft: #fff8e1;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--fg);
+  background: var(--page);
+  padding: 24px;
+}
+
+.container {
+  max-width: 940px;
+  margin: 0 auto;
+  background: var(--bg);
+  padding: 48px 64px 64px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+h1 {
+  font-size: 30px;
+  margin: 0 0 14px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--line);
+  line-height: 1.3;
+}
+
+h2 {
+  font-size: 22px;
+  margin: 42px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 20px;
+}
+
+h3 {
+  font-size: 17px;
+  margin: 26px 0 10px;
+}
+
+h4 {
+  font-size: 15px;
+  margin: 20px 0 8px;
+  color: var(--muted);
+}
+
+p { margin: 10px 0; }
+
+blockquote {
+  margin: 16px 0;
+  padding: 4px 16px;
+  border-left: 4px solid var(--accent);
+  background: var(--soft);
+  border-radius: 0 4px 4px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+blockquote p { margin: 6px 0; }
+blockquote strong { color: var(--fg); }
+
+table {
+  width: 100%;
+  margin: 16px 0;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th, td {
+  padding: 9px 13px;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--soft);
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) td { background: #fbfcfd; }
+tbody tr:hover td { background: var(--accent-soft); }
+
+code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13px;
+}
+
+p code, li code, td code, h1 code, h2 code, h3 code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--soft);
+  color: #d73a49;
+}
+
+pre {
+  margin: 16px 0;
+  padding: 16px 18px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--soft);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  color: var(--fg);
+}
+
+ul, ol {
+  margin: 10px 0;
+  padding-left: 24px;
+}
+
+li { margin: 5px 0; }
+
+li > input[type="checkbox"] {
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+hr {
+  margin: 36px 0;
+  border: none;
+  border-top: 1px solid var(--line);
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+strong { color: var(--fg); }
+
+.toc {
+  margin: 0 0 36px;
+  padding: 16px 24px;
+  background: var(--soft);
+  border-radius: 6px;
+  font-size: 14px;
+}
+.toc strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.toc ol {
+  margin: 0;
+  padding-left: 22px;
+  columns: 2;
+  column-gap: 28px;
+}
+.toc li {
+  break-inside: avoid;
+  margin: 4px 0;
+}
+
+.footer {
+  margin-top: 48px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  text-align: center;
+  font-size: 13px;
+}

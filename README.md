@@ -12,9 +12,9 @@
 
 ### 📊 Skills 总览
 
-目前共包含 **30 个 Skills**，分为以下 3 大类：
+目前共包含 **31 个 Skills**，分为以下 3 大类：
 
-#### 💻 AI 编程（15 个）
+#### 💻 AI 编程（16 个）
 | Skill | 说明 |
 |-------|------|
 | [PRD 文档撰写助手](./prd-doc-writer) | 故事驱动的需求文档撰写 |
@@ -22,6 +22,7 @@
 | [需求变更工作流](./req-change-workflow) | 标准化需求变更流程 |
 | [需求池管理](./backlog-manager) | 需求收集、整理、筛选 |
 | [版本规划助手](./version-planner) | 需求拆解为渐进式版本 |
+| [框架计划报告助手](./plan-report) | 框架计划/版本路线/阶段方案的结构化梳理 |
 | [终局愿景探索](./vision-exploration) | 探索想法的多种终局形态 |
 | [产品命名助手](./product-naming) | 从品牌本质推导产品名 |
 | [UI 样式修改助手](./ui-design) | 结构化 UI 样式修改流程 |
@@ -875,6 +876,34 @@ memory init
 
 ---
 
+#### 🧭 [框架计划报告助手](./plan-report) (Plan Report)
+**描述**: 帮你梳理一份"框架计划报告"——位于项目章程与详细设计之间，讲清"为什么做 / 做到什么程度算完 / 分几步走"，而不是功能清单或技术方案
+
+**适用场景**:
+- 新项目立项后第一份"做什么、分几步"的框架计划
+- 已有项目的大版本规划（v2.0 / v3.0 主问题与差异对齐）
+- 老系统迁新系统的多阶段迁移计划
+- 内部脚本/工具升级为正式服务的演进路线
+- 不适用：详细设计（字段/接口/技术栈）、PRD（用 prd-doc-writer）、1 周内的小改造
+
+**核心功能**:
+- 🧭 7 步引导：摸现实 → 定文档类型 → 搭骨架 → 填内容 → 统一三段式 → 语言精修 → 自检落盘
+- 🔍 先实证再设计：动笔前先摸清现状/约束/消费方，信息不足时产出"卡住待补"清单，不"据我理解"凭空硬补
+- 📐 规模自适应：小项目用 8-9 节骨架、中大项目用 10 节标准骨架，按真实情况定行数不凑数
+- 🧱 统一三段式：每个阶段都用"要解决的问题 / 主要交付 / 阶段验收"，可横向对比、不写流水账
+- ✅ 用验收反推交付：验收用"系统已经可以回答 X / Y / Z"业务问句，不堆技术指标
+- 🚫 不做项配理由：每条"不做"都跟"为什么不放进当前版本"，防 scope creep
+- 🖨️ 自带 md → html 转换工具与样式表，产出可视化审阅页
+
+**触发方式**:
+```
+写计划报告 / 项目计划 / 框架计划
+v1.0 计划 / 版本路线 / 阶段方案
+/plan-report
+```
+
+---
+
 ### 🚀 快速开始
 
 #### 安装方式
@@ -994,6 +1023,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 
 # 使用案例雷达
 /case-radar
+
+# 使用框架计划报告助手
+/plan-report
 ```
 
 或者直接在对话中描述你的需求，相关 Skill 会自动触发。
@@ -1096,8 +1128,12 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 ├── case-radar/                # 案例雷达
 │   ├── SKILL.md              # Skill 定义文件
 │   └── reference/            # recon heuristics / HTML 模板规范 / 反 anti-pattern 清单
-└── hermes-persona-builder/    # Hermes 陪伴型人设生成器
-    └── SKILL.md              # Skill 定义文件
+├── hermes-persona-builder/    # Hermes 陪伴型人设生成器
+│   └── SKILL.md              # Skill 定义文件
+└── plan-report/               # 框架计划报告助手
+    ├── SKILL.md              # Skill 定义文件
+    ├── SKILL.html            # 可视化审阅页
+    └── tools/                # md → html 转换脚本与样式表
 ```
 
 ---
@@ -1128,9 +1164,9 @@ A carefully crafted collection of Claude Code Skills designed to boost efficienc
 
 ### 📊 Skills Overview
 
-Currently includes **30 Skills** across 3 categories:
+Currently includes **31 Skills** across 3 categories:
 
-#### 💻 AI Programming (15)
+#### 💻 AI Programming (16)
 | Skill | Description |
 |-------|-------------|
 | [PRD Doc Writer](./prd-doc-writer) | Story-driven requirement document writing |
@@ -1138,6 +1174,7 @@ Currently includes **30 Skills** across 3 categories:
 | [Requirement Change Workflow](./req-change-workflow) | Standardized requirement change process |
 | [Backlog Manager](./backlog-manager) | Requirement collection, organization, and selection |
 | [Version Planner](./version-planner) | Decompose requirements into progressive versions |
+| [Plan Report](./plan-report) | Structured framework plans, version roadmaps, and phased plans |
 | [Vision Exploration](./vision-exploration) | Explore multiple end-state possibilities |
 | [Product Naming](./product-naming) | Derive product names from brand essence |
 | [UI Design Assistant](./ui-design) | Structured UI style modification workflow |
@@ -1989,6 +2026,34 @@ Optimize my persona / swap to a new one
 
 ---
 
+#### 🧭 [Plan Report](./plan-report)
+**Description**: Helps you shape a "framework plan report" — sitting between project charter and detailed design — that answers why build it / when is it done / how many steps, rather than a feature list or tech spec
+
+**Use Cases**:
+- The first "what to build, in how many phases" plan right after a project kicks off
+- Major version planning for an existing project (align v2.0/v3.0 main problems and deltas)
+- Multi-phase migration plans from a legacy system to a new one
+- Evolution roadmap from an internal script/tool to a formal service
+- Not for: detailed design (fields/APIs/stack), PRD (use prd-doc-writer), sub-1-week tweaks
+
+**Core Features**:
+- 🧭 7-step flow: probe reality → fix doc type → build skeleton → fill content → unified 3-part stages → language polish → self-check & save
+- 🔍 Evidence before design: nail down current state/constraints/consumers first; output a "blocked, info needed" list instead of fabricating when info is short
+- 📐 Scale-adaptive: 8-9-section skeleton for small projects, 10-section standard for mid/large; row counts follow reality, no padding
+- 🧱 Unified 3-part stages: every phase uses "problem to solve / key deliverables / phase acceptance" for easy side-by-side comparison
+- ✅ Acceptance drives delivery: acceptance phrased as business questions ("the system can now answer X / Y / Z"), not tech metrics
+- 🚫 Every "won't do" carries a "why not in this version" reason to prevent scope creep
+- 🖨️ Bundled md → html converter and stylesheet for a visual review page
+
+**Trigger**:
+```
+Write a plan report / project plan / framework plan
+v1.0 plan / version roadmap / phased plan
+/plan-report
+```
+
+---
+
 ### 🚀 Quick Start
 
 #### Installation
@@ -2108,6 +2173,9 @@ In Claude Code CLI, you can use them by:
 
 # Use Case Radar
 /case-radar
+
+# Use Plan Report
+/plan-report
 ```
 
 Or simply describe your needs in conversation, and the relevant Skill will trigger automatically.
@@ -2207,9 +2275,13 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 ├── system-study/              # System Study
 │   ├── SKILL.md              # Skill definition file
 │   └── reference/            # Stage workflow, sub-agent templates, HTML spec, and anti-patterns
-└── case-radar/                # Case Radar
+├── case-radar/                # Case Radar
+│   ├── SKILL.md              # Skill definition file
+│   └── reference/            # Recon heuristics / HTML template spec / anti-pattern checklist
+└── plan-report/               # Plan Report
     ├── SKILL.md              # Skill definition file
-    └── reference/            # Recon heuristics / HTML template spec / anti-pattern checklist
+    ├── SKILL.html            # Visual review page
+    └── tools/                # md → html converter script and stylesheet
 ```
 
 ---
