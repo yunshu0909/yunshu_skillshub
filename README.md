@@ -1024,6 +1024,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 # 使用案例雷达
 /case-radar
 
+# 使用 Hermes 陪伴型人设生成器
+/hermes-persona-builder
+
 # 使用框架计划报告助手
 /plan-report
 ```
@@ -2174,6 +2177,9 @@ In Claude Code CLI, you can use them by:
 # Use Case Radar
 /case-radar
 
+# Use Hermes Persona Builder
+/hermes-persona-builder
+
 # Use Plan Report
 /plan-report
 ```
@@ -2278,6 +2284,8 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 ├── case-radar/                # Case Radar
 │   ├── SKILL.md              # Skill definition file
 │   └── reference/            # Recon heuristics / HTML template spec / anti-pattern checklist
+├── hermes-persona-builder/    # Hermes Persona Builder
+│   └── SKILL.md              # Skill definition file
 └── plan-report/               # Plan Report
     ├── SKILL.md              # Skill definition file
     ├── SKILL.html            # Visual review page
