@@ -17,6 +17,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### 新增 / Added
+- 🎯 **目标收敛助手** (Goal Setter)
+  - 把模糊诉求、粗糙 goal、handoff prompt 或任务想法，收敛成另一个 AI 可直接复制执行且可验收的 goal contract
+  - 4 步工作流：先懂诉求和环境 → 推荐式追问 → 按风险选输出形态 → 写 goal contract
+  - 任务分型：低风险 / 高风险 / 弱验证 / 探索型，按类型选格式与规则
+  - 推荐式追问：每轮最多 1-3 个高影响问题、给默认值，不把空白选择丢给用户，能安全默认就直接产出
+  - 风险自适应格式：低风险用 Goal/Scope/Done When/Verification 短格式，高风险/弱验证才展开完整 11 段 contract
+  - 高风险护栏：不用真 key/真实用户数据/付费 API、不部署不改生产，遇账号/费用/合规风险停下问人，证据避免泄露凭据
+  - 弱验证补足：标事实来源、不编造成果，模糊信息进"待确认"，输出必带可检查证据（来源标注/对照表/审阅 checklist）
+  - 自带 `agents/openai.yaml`，支持作为 OpenAI/Codex 入口直接调用
+
 - 🧭 **框架计划报告助手** (Plan Report)
   - 7 步引导：摸现实 → 定文档类型 → 搭骨架 → 填内容 → 统一三段式 → 语言精修 → 自检落盘
   - 先实证再设计：动笔前先摸清现状/约束/消费方，信息不足时产出"卡住待补"清单，杜绝"据我理解"凭空硬补

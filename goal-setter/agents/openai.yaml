@@ -1,0 +1,4 @@
+interface:
+  display_name: "Goal Setter"
+  short_description: "把模糊诉求收敛成可自主执行且可验收的 AI goal"
+  default_prompt: "Use $goal-setter to turn my rough request into an autonomous, verifiable AI goal."

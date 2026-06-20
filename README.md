@@ -12,9 +12,9 @@
 
 ### 📊 Skills 总览
 
-目前共包含 **31 个 Skills**，分为以下 3 大类：
+目前共包含 **32 个 Skills**，分为以下 3 大类：
 
-#### 💻 AI 编程（16 个）
+#### 💻 AI 编程（17 个）
 | Skill | 说明 |
 |-------|------|
 | [PRD 文档撰写助手](./prd-doc-writer) | 故事驱动的需求文档撰写 |
@@ -32,6 +32,7 @@
 | [Issue 协作处理](./issue-triage) | GitHub Issue 分诊与回复 |
 | [GitHub 项目搜索](./github-repo-search) | 搜索筛选开源项目 |
 | [项目目录地图构建器](./project-map-builder) | 生成项目目录说明文档 |
+| [目标收敛助手](./goal-setter) | 把模糊诉求收敛成可自主执行且可验收的 AI goal |
 | [一键推送 GitHub](./git-push) | 项目推送、日常更新、版本发布 |
 
 #### ✍️ 思考与写作（10 个）
@@ -904,6 +905,35 @@ v1.0 计划 / 版本路线 / 阶段方案
 
 ---
 
+#### 🎯 [目标收敛助手](./goal-setter) (Goal Setter)
+**描述**: 把用户的模糊诉求、粗糙 goal、handoff prompt 或任务想法，收敛成另一个 AI 可以直接复制执行、且可验收的 goal contract
+
+**适用场景**:
+- 想把"今天做完""尽量优化""帮我研究并执行"这类模糊请求，变成可执行的任务契约
+- 要给 AI / subagent / Codex 下一个明确、不越界的目标
+- 需要明确 scope / non-goals / 验收标准 / 验证证据 / 停止条件
+- 手里有粗糙的 goal 或 handoff prompt，想让它更可执行、少猜测
+
+**核心功能**:
+- 🧭 先懂诉求和环境：先读路径/材料/仓库上下文，不问能从环境发现的问题
+- 🏷️ 任务分型：低风险 / 高风险 / 弱验证 / 探索型，按类型选输出形态与规则
+- 💬 推荐式追问：每轮最多 1-3 个高影响问题，给默认值，不把空白选择丢给用户
+- 📐 风险自适应格式：低风险用短格式，高风险/弱验证才展开完整 goal contract
+- 🔒 高风险护栏：不碰真 key/生产/真实用户数据，遇账号/费用/合规风险停下问人
+- ✅ 弱验证补足：标事实来源、不编造成果，输出必带可检查证据（来源标注/对照表/验收清单）
+- 📦 直接可执行：最终 goal 命令式、具体、写清"做什么/不做什么/能自主什么/何时停"
+
+**触发方式**:
+```
+帮我写个 goal / 优化这个 goal
+把这个需求变成 AI 能执行的目标
+给 subagent / Codex 下个明确任务
+明确一下 scope 和验收标准
+/goal-setter
+```
+
+---
+
 ### 🚀 快速开始
 
 #### 安装方式
@@ -1029,6 +1059,9 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 
 # 使用框架计划报告助手
 /plan-report
+
+# 使用目标收敛助手
+/goal-setter
 ```
 
 或者直接在对话中描述你的需求，相关 Skill 会自动触发。
@@ -1133,10 +1166,13 @@ git clone https://github.com/yunshu0909/yunshu_skillshub.git
 │   └── reference/            # recon heuristics / HTML 模板规范 / 反 anti-pattern 清单
 ├── hermes-persona-builder/    # Hermes 陪伴型人设生成器
 │   └── SKILL.md              # Skill 定义文件
-└── plan-report/               # 框架计划报告助手
+├── plan-report/               # 框架计划报告助手
+│   ├── SKILL.md              # Skill 定义文件
+│   ├── SKILL.html            # 可视化审阅页
+│   └── tools/                # md → html 转换脚本与样式表
+└── goal-setter/               # 目标收敛助手
     ├── SKILL.md              # Skill 定义文件
-    ├── SKILL.html            # 可视化审阅页
-    └── tools/                # md → html 转换脚本与样式表
+    └── agents/               # OpenAI/Codex 入口配置
 ```
 
 ---
@@ -1167,9 +1203,9 @@ A carefully crafted collection of Claude Code Skills designed to boost efficienc
 
 ### 📊 Skills Overview
 
-Currently includes **31 Skills** across 3 categories:
+Currently includes **32 Skills** across 3 categories:
 
-#### 💻 AI Programming (16)
+#### 💻 AI Programming (17)
 | Skill | Description |
 |-------|-------------|
 | [PRD Doc Writer](./prd-doc-writer) | Story-driven requirement document writing |
@@ -1187,6 +1223,7 @@ Currently includes **31 Skills** across 3 categories:
 | [Issue Triage](./issue-triage) | GitHub Issue triage and response |
 | [GitHub Repo Search](./github-repo-search) | Search and filter open source projects |
 | [Project Map Builder](./project-map-builder) | Generate project directory documentation |
+| [Goal Setter](./goal-setter) | Turn fuzzy requests into autonomous, verifiable AI goals |
 | [Git Push](./git-push) | Project push, daily updates, version release |
 
 #### ✍️ Thinking & Writing (10)
@@ -2057,6 +2094,35 @@ v1.0 plan / version roadmap / phased plan
 
 ---
 
+#### 🎯 [Goal Setter](./goal-setter)
+**Description**: Turns a fuzzy request, rough goal, handoff prompt, or task idea into a goal contract another AI can copy-paste, execute autonomously, and have its completion verified
+
+**Use Cases**:
+- Turn vague asks like "get it done today", "optimize as much as you can", or "research and execute it for me" into an executable task contract
+- Hand an AI / subagent / Codex a clear, non-overreaching goal
+- Need explicit scope / non-goals / success criteria / verification evidence / stop conditions
+- Have a rough goal or handoff prompt you want made executable and less guess-prone
+
+**Core Features**:
+- 🧭 Understand intent & environment first: read paths/materials/repo context before asking; never ask what the environment already reveals
+- 🏷️ Task typing: low-risk / high-risk / weak-verification / exploratory — pick output form and rules by type
+- 💬 Recommendation-driven questions: at most 1-3 high-impact questions per round, with defaults — never dump blank choices on the user
+- 📐 Risk-adaptive format: short format for low-risk, full goal contract only when risk/ambiguity warrant
+- 🔒 High-risk guardrails: no real keys/production/real user data; stop and ask on account/cost/compliance risk
+- ✅ Weak-verification backfill: tag fact sources, fabricate nothing, always ship checkable evidence (source tags / comparison tables / acceptance checklists)
+- 📦 Directly executable: final goal is imperative and specific — spells out what to do / not do / what's autonomous / when to stop
+
+**Trigger**:
+```
+Help me write a goal / refine this goal
+Turn this requirement into a goal an AI can execute
+Give a subagent / Codex a clear task
+Clarify the scope and acceptance criteria
+/goal-setter
+```
+
+---
+
 ### 🚀 Quick Start
 
 #### Installation
@@ -2182,6 +2248,9 @@ In Claude Code CLI, you can use them by:
 
 # Use Plan Report
 /plan-report
+
+# Use Goal Setter
+/goal-setter
 ```
 
 Or simply describe your needs in conversation, and the relevant Skill will trigger automatically.
@@ -2286,10 +2355,13 @@ Want to learn how to use each Skill? Check out the [Usage Examples](./EXAMPLES.m
 │   └── reference/            # Recon heuristics / HTML template spec / anti-pattern checklist
 ├── hermes-persona-builder/    # Hermes Persona Builder
 │   └── SKILL.md              # Skill definition file
-└── plan-report/               # Plan Report
+├── plan-report/               # Plan Report
+│   ├── SKILL.md              # Skill definition file
+│   ├── SKILL.html            # Visual review page
+│   └── tools/                # md → html converter script and stylesheet
+└── goal-setter/               # Goal Setter
     ├── SKILL.md              # Skill definition file
-    ├── SKILL.html            # Visual review page
-    └── tools/                # md → html converter script and stylesheet
+    └── agents/               # OpenAI/Codex entry config
 ```
 
 ---
