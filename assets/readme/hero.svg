@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" role="img" aria-labelledby="title desc">
+  <title id="title">云舒的 Skills 搭子们</title>
+  <desc id="desc">云舒的狗子 IP 戴着蓝色帽子，与 33 个面向产品、开发、研究和写作的 Agent Skills 组成一张品牌封面。</desc>
+
+  <defs>
+    <clipPath id="portrait">
+      <rect x="748" y="44" width="406" height="438" rx="116"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="540" rx="34" fill="#F4F3EE"/>
+  <rect x="1" y="1" width="1198" height="538" rx="33" fill="none" stroke="#D6D2C7" stroke-width="2"/>
+
+  <path d="M0 432 C160 386 278 486 444 438 C604 392 684 420 770 478 L770 540 L0 540 Z" fill="#E9EDF6"/>
+  <circle cx="690" cy="64" r="88" fill="#E8ECF5"/>
+  <circle cx="703" cy="77" r="61" fill="#F4F3EE"/>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', Arial, sans-serif">
+    <rect x="58" y="44" width="300" height="34" rx="17" fill="#34415F"/>
+    <circle cx="78" cy="61" r="5" fill="#E2AD54"/>
+    <text x="94" y="66" fill="#FFFFFF" font-size="13" font-weight="750" letter-spacing="1.4">YUNSHU'S AGENT CREW</text>
+
+    <text x="58" y="148" fill="#34415F" font-size="52" font-weight="760" letter-spacing="-1">云舒的</text>
+    <text x="58" y="224" fill="#5575A2" font-size="74" font-weight="850" letter-spacing="-2.5">SKILLS</text>
+    <text x="363" y="221" fill="#34415F" font-size="57" font-weight="780" letter-spacing="-1">搭子们</text>
+
+    <path d="M60 244 C184 258 340 244 528 252" fill="none" stroke="#E2AD54" stroke-width="7" stroke-linecap="round"/>
+    <path d="M521 243 L544 252 L522 263" fill="none" stroke="#E2AD54" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <text x="60" y="306" fill="#34415F" font-size="23" font-weight="680">把模糊任务，交给一群会规划、会设计、会交付的 AI 搭子</text>
+    <text x="60" y="338" fill="#6B7282" font-size="16">Reusable workflows for product, engineering, research and writing.</text>
+
+    <g font-size="13" font-weight="680">
+      <rect x="60" y="370" width="118" height="34" rx="17" fill="#E3E8F2"/>
+      <text x="82" y="392" fill="#34415F">产品 × 需求</text>
+      <rect x="188" y="370" width="118" height="34" rx="17" fill="#E3E8F2"/>
+      <text x="210" y="392" fill="#34415F">开发 × 测试</text>
+      <rect x="316" y="370" width="118" height="34" rx="17" fill="#E3E8F2"/>
+      <text x="338" y="392" fill="#34415F">研究 × 写作</text>
+      <rect x="444" y="370" width="132" height="34" rx="17" fill="#E3E8F2"/>
+      <text x="466" y="392" fill="#34415F">效率 × 自动化</text>
+    </g>
+
+    <line x1="60" y1="438" x2="620" y2="438" stroke="#CBC7BC"/>
+
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+      <text x="60" y="469" fill="#7B8190" font-size="10" font-weight="750" letter-spacing="1.2">INSTALLABLE</text>
+      <text x="60" y="509" fill="#34415F" font-size="35" font-weight="850">33</text>
+
+      <text x="200" y="469" fill="#7B8190" font-size="10" font-weight="750" letter-spacing="1.2">RECOMMENDED</text>
+      <text x="200" y="509" fill="#34415F" font-size="35" font-weight="850">32</text>
+
+      <text x="374" y="469" fill="#7B8190" font-size="10" font-weight="750" letter-spacing="1.2">FORMAT</text>
+      <text x="374" y="505" fill="#34415F" font-size="17" font-weight="800">SKILL.md</text>
+
+      <text x="508" y="469" fill="#7B8190" font-size="10" font-weight="750" letter-spacing="1.2">LICENSE</text>
+      <text x="508" y="505" fill="#34415F" font-size="17" font-weight="800">MIT</text>
+    </g>
+
+    <rect x="735" y="31" width="432" height="464" rx="130" fill="#FFFFFF" stroke="#D7D2C6" stroke-width="3"/>
+    <image href="./yunshu-ip.jpg" x="748" y="44" width="406" height="438" preserveAspectRatio="xMidYMid slice" clip-path="url(#portrait)"/>
+
+    <path d="M1110 68 L1121 94 L1148 104 L1121 115 L1110 142 L1099 115 L1072 104 L1099 94 Z" fill="#E2AD54" stroke="#C98D32" stroke-width="2"/>
+    <path d="M718 107 L724 120 L738 126 L724 132 L718 146 L712 132 L698 126 L712 120 Z" fill="#E2AD54"/>
+
+    <rect x="790" y="430" width="322" height="62" rx="22" fill="#34415F"/>
+    <path d="M836 489 L824 509 L856 490" fill="#34415F"/>
+    <text x="814" y="456" fill="#FFFFFF" font-size="14" font-weight="650">“今天想做点什么？”</text>
+    <text x="814" y="477" fill="#DCE4F1" font-size="12">选个搭子，我们一步一步来。</text>
+  </g>
+</svg>
