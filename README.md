@@ -1,193 +1,196 @@
-<p align="right">
-  <strong>简体中文</strong> · <a href="./README.en.md">English</a>
-</p>
+<p align="right"><strong>简体中文</strong> · <a href="./README.en.md">English</a></p>
 
 <p align="center">
-  <img src="./assets/readme/hero.png" width="100%" alt="云舒的 Skills 搭子们：狗子 IP 与 38 个面向产品、开发、研究、写作和效率场景的 Agent Skills" />
+  <img src="./assets/readme/hero.png" width="100%" alt="云舒的 Skills 搭子：蓝帽狗子和两个 AI 搭子走在一座漂浮小岛上，岛上七间小屋分别是开发、思考、学习、写作、可视化、品牌和 Agent" />
 </p>
 
-# Yunshu SkillsHub
+<h1 align="center">Yunshu SkillsHub</h1>
 
-把模糊任务交给一组可复用、可执行、可验收的 AI 工作流。
+<p align="center"><strong>每天和 AI 干活攒下的方法。</strong></p>
 
 <p align="center">
   <a href="https://github.com/yunshu0909/yunshu_skillshub/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/yunshu0909/yunshu_skillshub?style=flat-square&color=4E63D9" /></a>
-  <a href="https://github.com/yunshu0909/yunshu_skillshub/network/members"><img alt="GitHub Forks" src="https://img.shields.io/github/forks/yunshu0909/yunshu_skillshub?style=flat-square&color=1FA884" /></a>
   <a href="./LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-172033?style=flat-square" /></a>
-  <img alt="38 installable skills" src="https://img.shields.io/badge/skills-38_installable-F6F3EA?style=flat-square&labelColor=172033" />
+  <img alt="25 skills" src="https://img.shields.io/badge/skills-25-E4AD53?style=flat-square&labelColor=172033" />
 </p>
 
-这里不是一叠孤立的提示词。每个 Skill 都用 `SKILL.md` 固化触发条件、工作阶段、确认门槛和交付物，让 Codex、Claude Code 等 Agent 在产品、开发、研究、写作和日常效率任务中按同一套方法工作。
+<p align="center">
+  <a href="#coding">开发</a> ·
+  <a href="#thinking">思考</a> ·
+  <a href="#learning">学习</a> ·
+  <a href="#writing">写作</a> ·
+  <a href="#visualization">可视化</a> ·
+  <a href="#brand">品牌</a> ·
+  <a href="#agent">Agent</a>
+</p>
 
-> 当前仓库可被 `skills` CLI 识别出 **38 个 Skill**：其中 **37 个推荐使用**，`plan-report` 已并入 `issue-pool`，作为历史兼容目录保留。
+## 这是什么
 
-## 一条真实的交付链路
+<img src="./assets/readme/scenes/about.jpg" width="100%" alt="从干活里攒下来：狗子做完一件事，把做法写进手册，两个 AI 搭子下次照着手册做" />
 
-多个 Skills 可以组合成一条从想法到反馈的闭环：
+这是我每天和 AI 一起干活时攒下来的 Skills。
+
+想一个问题、读一篇文章、写一篇稿子、做一个产品，每做完一件事，我就把当时怎么问、怎么判断、做到什么程度算完写下来，下次交给 AI 照着做。所以这里没有凭空设计出来的 skill，每一个都在真实的事情里用过、改过。
+
+## 安装
+
+### 直接跟 Agent 说
+
+把下面这段话发给 Claude Code：
 
 ```text
-想法 / 痛点 / 外部反馈
-        ↓  issue-pool
-需求收敛与可开工 task
-        ↓  design-exploration
-设计方向与全状态约束
-        ↓  prd-test-writer
-PRD + 可执行测试用例
-        ↓  AI 实现与验证
-代码、测试结果与审阅材料
-        ↓  git-push
-Branch → PR → 合并 / 发版
-        ↓  issue-triage
-新反馈回到 Issue 池
+帮我把 https://github.com/yunshu0909/yunshu_skillshub 里的 skills 安装到 Claude Code（用户级，所有项目都能用）。先列出全部 skill 和一句话用途让我挑，再安装我选的；每个 skill 的文件夹要完整保留。装完告诉我装了哪些、装在哪。
 ```
 
-这条链路已有可浏览的公开样板：[CodePal 托管 Coding 项目案例](https://github.com/yunshu0909/codepal-managed-project-example)。它展示了 Issue、设计、PRD、测试用例、代码与 PR 如何围绕同一个 task 组织，而不只是描述一个理想流程。
+或者发给 Codex：
 
-## 30 秒开始
+```text
+帮我把 https://github.com/yunshu0909/yunshu_skillshub 里的 skills 安装到 Codex（用户级，所有项目都能用）。先列出全部 skill 和一句话用途让我挑，再安装我选的；每个 skill 的文件夹要完整保留。装完告诉我装了哪些、装在哪。
+```
 
-先查看仓库里有哪些 Skills，不做安装：
+### 用命令装
 
 ```bash
+# 先看看有哪些
 npx skills add yunshu0909/yunshu_skillshub --list
+
+# 挑几个，同时装到 Claude Code 和 Codex
+npx skills add yunshu0909/yunshu_skillshub -g -a claude-code codex --skill thinking-partner writing-assistant
+
+# 全部装上
+npx skills add yunshu0909/yunshu_skillshub -g -a claude-code codex --skill '*' -y
 ```
 
-把全部 Skills 安装到当前项目检测到的 Agent：
+### 手动装
 
 ```bash
-npx skills add yunshu0909/yunshu_skillshub --all
+git clone https://github.com/yunshu0909/yunshu_skillshub.git
+
+# 装一个：把 skill 文件夹整个复制过去
+cp -R yunshu_skillshub/thinking/thinking-partner ~/.claude/skills/   # Claude Code
+cp -R yunshu_skillshub/thinking/thinking-partner ~/.agents/skills/   # Codex
+
+# 全部装上（以 Claude Code 为例，Codex 换成 ~/.agents/skills/）
+mkdir -p ~/.claude/skills
+for f in yunshu_skillshub/*/*/SKILL.md; do cp -R "$(dirname "$f")" ~/.claude/skills/; done
 ```
 
-也可以只安装需要的 Skill：
+装好后直接说你要做什么，或者点名某个 skill。请保留完整的 skill 文件夹，里面的模板、参考材料和脚本也是方法的一部分。
 
-```bash
-npx skills add yunshu0909/yunshu_skillshub --skill issue-pool
-```
+<a id="coding"></a>
 
-安装后直接描述需求即可，相关 Skill 会按触发条件工作：
+## 开发
 
-```text
-记个 issue：用户晚上使用时觉得页面太亮
-帮我把这个模糊需求收敛成 Codex 能自主执行的 goal
-持续了解我的情况，帮我找出当前阶段最重要的三件事
-扫一下 Agent Memory 生态，给我看真实案例
-带我精读这篇文章，每讲都考我一次
-把这些零散观点整理成一篇文章
-```
+<img src="./assets/readme/scenes/coding.jpg" width="100%" alt="开发：狗子对着流程板讲解，一个 AI 搭子写代码，另一个拿放大镜检查" />
 
-也可以直接点名：`/issue-pool`、`/goal-setter`、`/find-top-three`、`/article-study`、`/case-radar`、`/writing-assistant`。
+先把要什么说清楚，再让 AI 动手。从整理需求、定方案、写测试，到改代码、发版本，每一步都能检查。
 
-## 按你的问题选择 Skill
-
-如果你还不知道名字，从现在遇到的问题开始找。
-
-### 产品与需求 · 10
-
-| Skill | 什么时候用 | 主要产物 |
+| Skill | 什么时候用 | 会得到 |
 | --- | --- | --- |
-| [`vision-exploration`](./vision-exploration) | 想法还很早，先看最远可能性 | 多种终局愿景 |
-| [`product-naming`](./product-naming) | 产品、项目或模块需要命名 | 命名方向、候选与验证 |
-| [`backlog-manager`](./backlog-manager) | 日常收集、合并和筛选需求 | 可维护的需求池 |
-| [`issue-pool`](./issue-pool) | 把想法或反馈收敛成可开工 task | Issue、task、滚动计划 |
-| [`version-planner`](./version-planner) | 把需求拆成 MVP 到 V1.0 | 渐进式版本路线 |
-| [`design-exploration`](./design-exploration) | 新功能需要先探索交互与状态 | ASCII 方案、HTML 设计稿、实现契约 |
-| [`page-solution-design`](./page-solution-design) | 一个页面要整页重做、替换或从零设计 | 三层法方案、全状态高保真、交互流程图与定稿包 |
-| [`prd-doc-writer`](./prd-doc-writer) | 需要故事驱动的 PRD | 用户故事、验收标准、图表 |
-| [`prd-test-writer`](./prd-test-writer) · Beta | PRD 与测试用例必须对齐 | PRD、测试用例、双 review HTML |
-| [`req-change-workflow`](./req-change-workflow) | 在现有代码上安全改需求 | 变更简报、影响评估、回归证据 |
+| [Issue 池 · `issue-pool`](./coding/issue-pool/SKILL.md) | 零散想法、用户反馈和 bug 要整理 | `ISSUES.md` 和可以开工的问题定义 |
+| [页面方案 · `page-solution-design`](./coding/page-solution-design/SKILL.md) | 一个页面要整页重做或从零设计 | 全状态高保真方案和定稿包 |
+| [后端逻辑 · `backend-logic-design`](./coding/backend-logic-design/SKILL.md) | 规则复杂，得先讲清楚再写 | 规则表和例子，必要时附交互模拟器 |
+| [PRD 与测试用例 · `prd-test-writer`](./coding/prd-test-writer/SKILL.md) | 写需求的同时把测试写好 | 一一对应的 PRD 和测试用例 |
+| [双模型协作 · `dual-agent-collaboration`](./coding/dual-agent-collaboration/SKILL.md) | 重要改动想让另一家 AI 审一遍 | 一家写、一家只读审核，修到双方都通过 |
+| [需求变更 · `req-change-workflow`](./coding/req-change-workflow/SKILL.md) | 要改一个已经做好的功能 | 影响分析、最小改动和回归清单 |
+| [推送与发布 · `git-push`](./coding/git-push/SKILL.md) | 提交、推送或发版 | 发前检查、推送结果，以及 Tag 和 Release |
+| [Issue 诊断 · `issue-triage`](./coding/issue-triage/SKILL.md) | 开源项目收到了 Issue | 根因判断、处理建议和回复稿 |
+| [开源项目搜索 · `github-repo-search`](./coding/github-repo-search/SKILL.md) | 想找可以借鉴的开源项目 | 带比较的推荐清单 |
 
-### 工程与交付 · 6
+> `dual-agent-collaboration` 需要本机装好 Codex 和 Claude Code；`git-push` 发版需要登录 `gh`。
 
-| Skill | 什么时候用 | 主要产物 |
+<a id="thinking"></a>
+
+## 思考
+
+<img src="./assets/readme/scenes/thinking.jpg" width="100%" alt="思考：狗子和两个 AI 搭子把一团乱毛线理开，连到三盏亮起的灯笼" />
+
+很多时候不是不会做，是还没想清楚。陪你理清问题、换个角度看、做出取舍。
+
+| Skill | 什么时候用 | 会得到 |
 | --- | --- | --- |
-| [`ui-design`](./ui-design) | 基于现有页面调整样式与布局 | UI 方案与最小代码修改 |
-| [`macos-product-design`](./macos-product-design) · Beta | 设计 macOS 原生风格界面 | 可预览的 HTML/CSS 设计稿 |
-| [`prd-auto-test-loop`](./prd-auto-test-loop) · Beta | 用 PRD 编排自动化测试闭环 | 测试计划、自测修复、测试报告 |
-| [`issue-triage`](./issue-triage) | 收到 GitHub Issue 后需要诊断和回复 | 根因判断、决策与用户回复 |
-| [`project-map-builder`](./project-map-builder) | 需要快速理解或维护目录说明 | `PROJECT_MAP.md` |
-| [`git-push`](./git-push) | 首次推送、日常更新或版本发布 | 安全检查、提交、推送与 Release |
+| [思考拍档 · `thinking-partner`](./thinking/thinking-partner/SKILL.md) | 局面很乱，说不清卡在哪 | 问题诊断、几种解法和下一步 |
+| [多视角分析 · `multi-perspective-analysis`](./thinking/multi-perspective-analysis/SKILL.md) | 怕自己被一种思路框住 | 多个独立视角的推演，共识、分歧和盲区 |
+| [最重要的三件事 · `find-top-three`](./thinking/find-top-three/SKILL.md) | 人生、职业或业务方向上要做取舍 | 当前阶段最重要的三件事，和可以马上做的下一步 |
 
-### 调研与决策 · 8
+<a id="learning"></a>
 
-| Skill | 什么时候用 | 主要产物 |
+## 学习
+
+<img src="./assets/readme/scenes/learning.jpg" width="100%" alt="学习：狗子在书屋讲台前读书，AI 搭子出题、搭模型" />
+
+读完和学会之间，还隔着复述、测验和用起来。具体材料就精读，陌生领域就先搭出整体地图。
+
+| Skill | 什么时候用 | 会得到 |
 | --- | --- | --- |
-| [`case-radar`](./case-radar) | 想看一个新生态里真实做出了什么 | 带截图、源码或演示的 HTML 案例集 |
-| [`github-repo-search`](./github-repo-search) | 需要搜索和筛选开源项目 | 可比较的 Top N 推荐报告 |
-| [`system-study`](./system-study) | 想系统吃透一个领域 | 有体系、有案例的 HTML 学习材料 |
-| [`article-study`](./article-study) | 想精读具体文章或文档并验证学会 | 分讲课件、学习笔记、测验与蒸馏结果 |
-| [`multi-perspective-analysis`](./multi-perspective-analysis) | 一个问题需要多个独立视角 | 共识、分歧与盲区报告 |
-| [`find-top-three`](./find-top-three) | 人生、职业或个人业务需要找出当前最重要的三件事 | 动态用户模型、战略前三与复盘边界 |
-| [`thinking-partner`](./thinking-partner) | 局面混乱，不知道核心卡点 | 问题诊断、共创解法、行动计划 |
-| [`priority-judge`](./priority-judge) | 待办太多，不知道先做什么 | 优先级判断与当前行动 |
+| [文章精读 · `article-study`](./learning/article-study/SKILL.md) | 有一篇文章、文档或代码想真正读懂 | 分讲课件、随堂测验和错题回顾 |
+| [系统化学习 · `system-study`](./learning/system-study/SKILL.md) | 想系统了解一个陌生领域 | 带来源、案例和争议的知识地图 |
 
-### 内容与表达 · 8
+<a id="writing"></a>
 
-| Skill | 什么时候用 | 主要产物 |
+## 写作
+
+<img src="./assets/readme/scenes/writing.jpg" width="100%" alt="写作：零散纸片飘向书桌上的手稿，狗子握笔书写" />
+
+文章从自己的想法里长出来。观点清楚就直接搭框架写；观点还散，就先把它挖出来。
+
+| Skill | 什么时候用 | 会得到 |
 | --- | --- | --- |
-| [`thought-mining`](./thought-mining) | 脑中有零散想法但还没成形 | 洞察记录、选题与文章素材 |
-| [`writing-assistant`](./writing-assistant) | 从选题、框架一路写到成稿 | 结构清晰的文章 |
-| [`readable-output`](./readable-output) | 要把复杂内容整理给人阅读 | 高可读 HTML 长文 |
-| [`image-assistant`](./image-assistant) | 文章、PPT 或社媒内容需要配图 | Copy Spec 与生图提示词 |
-| [`logo-design`](./logo-design) · 需 Codex | 产品或品牌需要设计、诊断、精修 Logo | 方向探索、受控精修、应用图标与可用资产 |
-| [`lesson-builder`](./lesson-builder) | 需要快速备课或制作培训材料 | 课程大纲与课件 |
-| [`weekly-report`](./weekly-report) | 要把一周工作讲清价值与边界 | 结构化周报 |
-| [`hermes-persona-builder`](./hermes-persona-builder) | 为 Hermes 或陪伴型 Agent 创建人设 | 可直接使用的 `SOUL.md` |
+| [写作助手 · `writing-assistant`](./writing/writing-assistant/SKILL.md) | 想写一篇，从选题一路到成稿 | 选题、框架和完整初稿 |
+| [思维挖掘 · `thought-mining`](./writing/thought-mining/SKILL.md) | 有很多零碎想法，说不出核心观点 | 挖出来的观点、候选选题和写作素材 |
 
-### Agent 与个人效率 · 5
+<a id="visualization"></a>
 
-| Skill | 什么时候用 | 主要产物 |
+## 可视化
+
+<img src="./assets/readme/scenes/visualization.jpg" width="100%" alt="可视化：画室里一边是乱纸堆，一边是画架上清楚的示意图" />
+
+让别人一眼看懂：看案例知道别人做出了什么，看配图抓住一个意思，看长文能顺着读完。
+
+| Skill | 什么时候用 | 会得到 |
 | --- | --- | --- |
-| [`auto-task`](./auto-task) · Beta | 复杂任务希望 AI 长时间自主推进 | 任务队列、阶段证据与最终结果 |
-| [`dual-agent-collaboration`](./dual-agent-collaboration) | 重要任务需要 Codex 与 Claude Code 独立交叉校核 | 四道门禁、独立审查与 ACK 结论 |
-| [`goal-setter`](./goal-setter) | 要把模糊诉求交给另一个 Agent 执行 | 有范围、验收与停止条件的 goal |
-| [`memory-init`](./memory-init) | 新项目需要稳定的长期记忆协议 | `CLAUDE.md`、`MEMORY.md`、`memory/` |
-| [`organize`](./organize) | 文件夹混乱、重复或难以归档 | 经确认的整理方案与目录结果 |
+| [案例雷达 · `case-radar`](./visualization/case-radar/SKILL.md) | 想看看一个新领域里别人真做出了什么 | 带截图和来源的案例集 |
+| [配图助手 · `image-assistant`](./visualization/image-assistant/SKILL.md) | 文章或讲解要配图 | 每张图讲什么、图上写什么，以及生图提示词 |
+| [可读长文 · `readable-output`](./visualization/readable-output/SKILL.md) | 想把资料、复盘或教程写成给人读的 | 结构清楚的 HTML 长文 |
 
-### 历史兼容 · 1
+<a id="brand"></a>
 
-| Skill | 状态 | 推荐替代 |
+## 品牌
+
+<img src="./assets/readme/scenes/brand.jpg" width="100%" alt="品牌：设计工坊里狗子在几枚徽记模型中挑选" />
+
+名字和 Logo 回答的是同一件事：这个产品是谁、给谁用、想留下什么印象。
+
+| Skill | 什么时候用 | 会得到 |
 | --- | --- | --- |
-| [`plan-report`](./plan-report) | 已合并并退役，目录暂时保留 | 使用 [`issue-pool`](./issue-pool) 的滚动计划流程 |
+| [产品命名 · `product-naming`](./brand/product-naming/SKILL.md) | 给产品、项目或模块起名 | 命名方向、候选名和取舍理由 |
+| [Logo 设计 · `logo-design`](./brand/logo-design/SKILL.md) | 从定位一路做到能用的 Logo 和图标 | 方向对比、精修稿和应用图标 |
 
-## 真实产物与示例
+> `logo-design` 出图和改图需要 Codex。
 
-- [CodePal 托管 Coding 项目案例](https://github.com/yunshu0909/codepal-managed-project-example)：Issue → 设计 → PRD → 测试 → PR → 反馈的完整公开链路。
-- [PRD review 示例](./prd-test-writer/samples/PRD-SAMPLE-review.html)：面向人审阅的 PRD HTML。
-- [测试用例 review 示例](./prd-test-writer/samples/PRD-SAMPLE-测试用例-review.html)：与 PRD 对齐的可执行测试用例。
-- [12 个精选使用示例](./EXAMPLES.md)：展示触发方式、对话过程和预期输出。
-- [更新日志](./CHANGELOG.md)：查看 Skill 的新增、调整与 Beta 状态。
+<a id="agent"></a>
 
-## 设计原则
+## Agent
 
-这些 Skills 共享几条底层原则：
+<img src="./assets/readme/scenes/agent.jpg" width="100%" alt="Agent：狗子把卷轴交给要出发的 AI 搭子，另一个搭子把卡片放进记忆抽屉" />
 
-- **先摸现实，再给方案**：能从代码、文件和外部事实确认的信息，不反问用户。
-- **用户决定方向，Agent 负责推进**：关键分歧确认后，执行、检查与整理尽量自主完成。
-- **交付物必须可检查**：PRD 有验收标准，测试有证据，调研有来源，计划有完成条件。
-- **小步确认，避免大返工**：高影响选择先收敛，细节在已确认的框架内推进。
-- **不虚构能力与结果**：依赖缺失、无法验证或需要人工判断时明确标注。
+把任务交给 Agent，光说一句“去做”不够，它还要知道目标、记得上下文。
 
-## 兼容性与仓库结构
+| Skill | 什么时候用 | 会得到 |
+| --- | --- | --- |
+| [目标契约 · `goal-setter`](./agent/goal-setter/SKILL.md) | 要把任务交给另一个 Agent 自己跑 | 写清范围、完成标准和停止条件的 goal |
+| [项目记忆 · `memory-init`](./agent/memory-init/SKILL.md) | 新项目，不想每次重讲一遍背景 | `CLAUDE.md`、`MEMORY.md` 和 `memory/` |
+| [陪伴型人设 · `hermes-persona-builder`](./agent/hermes-persona-builder/SKILL.md) | 给 Hermes 或陪伴型 Agent 定人设 | 可以直接用的 `SOUL.md` |
+| [文件夹整理 · `organize`](./agent/organize/SKILL.md) | 文件堆得乱，命名也乱 | 分类方案和整理好的目录 |
 
-仓库采用标准的 `SKILL.md` 目录约定，已验证 `skills` CLI 可以发现全部 38 个 Skill。不同 Agent 的工具能力并不完全相同；涉及浏览器、联网、图像生成或多 Agent 的 Skill，会以各自 `SKILL.md` 中的依赖和降级规则为准。
+## 认识一下
 
-```text
-<skill-name>/
-├── SKILL.md          # 触发条件、流程、约束与交付
-├── references/       # 按需读取的规范与参考材料
-├── assets/           # 模板或可复用资源
-└── scripts/          # 可选的确定性工具
+想认识我、聊聊怎么用 AI 干活，欢迎加我微信。
 
-assets/readme/        # README 视觉资产
-EXAMPLES.md           # 精选使用示例
-CHANGELOG.md          # 更新记录
-```
+<p align="center"><img src="./assets/readme/wechat-qr.jpg" width="220" alt="云舒的微信二维码" /></p>
 
-## 贡献与许可
-
-欢迎通过 [Issues](https://github.com/yunshu0909/yunshu_skillshub/issues) 提交问题、真实使用反馈或新的 Skill 建议，也欢迎发起 Pull Request。
-
-本项目采用 [MIT License](./LICENSE)。
+用的时候遇到问题，也欢迎直接提 [Issue](https://github.com/yunshu0909/yunshu_skillshub/issues)。更新记录见 [CHANGELOG](./CHANGELOG.md)。
 
 ---
 
-Made with care by Yunshu.
+<p align="center">采用 <a href="./LICENSE">MIT License</a> · Made with care by 云舒</p>

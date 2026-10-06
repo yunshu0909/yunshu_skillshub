@@ -1,253 +1,61 @@
 # 更新日志 / Changelog
 
-所有重要的项目变更都会记录在此文件中。
+记录影响使用的变化。日期按 Asia/Shanghai（北京时间）；`Unreleased` 是尚未正式发布的内容。正式版本以 GitHub Tag / Release 为准。
 
-格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
-本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
-
----
-
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/).
-
----
+Changes that affect use are recorded here. Dates use Asia/Shanghai time. `Unreleased` contains unpublished work; GitHub tags and Releases identify published versions.
 
 ## [Unreleased]
 
-### 新增 / Added
-- 🧩 **页面方案设计** (Page Solution Design)
-  - 用三层法和用户一起敲定单个前端页面：先定这页给用户什么，再定含哪几样怎么排，最后才是长什么样
-  - 覆盖已有页面整页重做、占用同一入口的替换方案，以及从零的新页面
-  - 用户说不清哪里不对时退层而不是出下一版；AI 主动加的元素打标，连续被砍即停止
-  - 最终打成定稿包交给开发：高保真全状态板、交互流程图、状态清单与实现契约，附布局检查脚本
+### 调整 / Changed
 
-- ✒️ **Logo 设计与交付** (Logo Design)
-  - 从产品定位与审美反馈收敛 Logo 方向，按方向、轮廓、内部元素、颜色关系、构图逐层精修
-  - 把「空」「怪」「普通」「不像 Logo」等反馈拆成可检验假设，在受控对照里验证
-  - 覆盖应用图标适配、品牌组合与母版确定性导出，预览稿与正式资产分开交付
-  - **需在 Codex 中使用**：出图与参考图编辑依赖 Codex 的图像生成；无生图能力的环境只做研究与诊断
+- 当前整理版保留 **25 个在用 skill，7 个分类**：Coding 9、产品品牌 2、思考 3、学习 2、可视化 3、写作 2、Agent 4。分类路径改变，安装继续使用 skill 名称。
+- 文件夹整理 `organize` 并入 Agent 助手，取消单独的小工具分类；`system-study` 属于学习，`github-repo-search` 属于 Coding。
+- 开发暂以独立 skills 组合使用：引入或更新 Issue 池、页面方案、后端逻辑设计、PRD 与测试用例、已有需求变更。保留 `dual-agent-collaboration`，不加入 `cross-model-review`；本轮不发布 dev-workflow 插件。
+- 中英文 README 按场景解释方法，通过各场景表格介绍全部 25 个 skill 的用途与交付物。
+- 重做 README：头图改为七间小屋的“Skills 小岛”地图，“这是什么”和七个场景各配一张同一像素世界的场景图；开发排在最前，正文按场景用表格介绍，结尾加入微信二维码。画面单、提示词和生成记录保存在 `assets/readme/source/readme-20261006/`。
+- 移除 EXAMPLES 案例页和产物截图，这一版 README 不放案例。
+- 更新日志对齐现有 Release，修正占位链接；旧文档中的 `1.0.0` 保留为历史记录，不再当作可下载的正式版本。
 
-- 📖 **文章精读** (Article Study)
-  - 面向具体文章、文档、PDF、Skill 或代码材料的验证式精读，不把摘要冒充学会
-  - 五步闭环：抽干货 → 切讲次 → 学-考-讲 → 对号入座 → 实操、测验、错题回退与蒸馏
-  - 每讲强制用户输出，并用否定/收窄句校准不精确的复述，防止「听着懂」的流畅性错觉
-  - 原文与 AI 推论强制视觉分离，同时把每一讲落到用户的真实业务对象
-  - 自带 HTML 课件、自动判分测验、学习计划、笔记、资料与蒸馏模板，以及可交互演示范例
-  - 支持完整档与 20 分钟轻量档、短文/长文降级、用户拒绝考核及跨会话恢复
-  - 去除 Claude 专属路径与工具假设，补充 `agents/openai.yaml`，支持 Codex/Claude Code 等不同 Agent 环境
+### 退役 / Removed
 
-- 🧭 **找到最重要的三件事** (Find Top Three)
-  - 面向人生、职业、个人业务与内容创作等复杂取舍，通过证据和动态用户模型找出当前阶段的三项战略优先级
-  - 四种对话状态：探索 → 校准 → 收敛 → 行动与复盘；信息不足时不拍脑袋给最终前三
-  - 自适应提问：每轮只选择最多三个最可能改变排序、且回答成本合理的问题或原始材料
-  - 证据纪律：严格区分已确认事实、用户解释与模型假设，新证据出现后显式修正判断
-  - 代理目标与替代路径检查：不把赚钱、涨粉、离职等手段直接当顶层目标，先比较它们真正服务的结果
-  - 反事实收敛：在输出前三前检查冲击情景、最强替代方案、执行容量和资源冲突
-  - 每项优先级交付当前目标、领先信号、可逆下一步、停止/复盘边界和重新排序条件
-  - 自带建模框架、输出模板与 `agents/openai.yaml`，支持 OpenAI/Codex 入口
+- 本轮移出在用目录：`auto-task`、`project-map-builder`、`backlog-manager`、`prd-auto-test-loop`、`prd-doc-writer`、`lesson-builder`、`plan-report`、`design-exploration`、`macos-product-design`、`ui-design`、`version-planner`、`vision-exploration`、`priority-judge`、`weekly-report`。
+- 临时退役目录 `pending/` 已移除。旧版本中的目录可从对应版本或 Git 历史查阅。
 
-- 🎯 **目标收敛助手** (Goal Setter)
-  - 把模糊诉求、粗糙 goal、handoff prompt 或任务想法，收敛成另一个 AI 可直接复制执行且可验收的 goal contract
-  - 4 步工作流：先懂诉求和环境 → 推荐式追问 → 按风险选输出形态 → 写 goal contract
-  - 任务分型：低风险 / 高风险 / 弱验证 / 探索型，按类型选格式与规则
-  - 推荐式追问：每轮最多 1-3 个高影响问题、给默认值，不把空白选择丢给用户，能安全默认就直接产出
-  - 风险自适应格式：低风险用 Goal/Scope/Done When/Verification 短格式，高风险/弱验证才展开完整 11 段 contract
-  - 高风险护栏：不用真 key/真实用户数据/付费 API、不部署不改生产，遇账号/费用/合规风险停下问人，证据避免泄露凭据
-  - 弱验证补足：标事实来源、不编造成果，模糊信息进"待确认"，输出必带可检查证据（来源标注/对照表/审阅 checklist）
-  - 自带 `agents/openai.yaml`，支持作为 OpenAI/Codex 入口直接调用
+## [0.1.0] - 2026-05-19
 
-- 🧭 **框架计划报告助手** (Plan Report)
-  - 7 步引导：摸现实 → 定文档类型 → 搭骨架 → 填内容 → 统一三段式 → 语言精修 → 自检落盘
-  - 先实证再设计：动笔前先摸清现状/约束/消费方，信息不足时产出"卡住待补"清单，杜绝"据我理解"凭空硬补
-  - 规模快筛 + 自适应骨架：小项目 8-9 节、中大项目 10 节标准，按真实情况定行数不凑数，避免小项目过度结构化
-  - 统一三段式：每个阶段都用"要解决的问题 / 主要交付 / 阶段验收"，可横向对比、不写流水账
-  - 用验收反推交付：验收用"系统已经可以回答 X / Y / Z"业务问句；不做项必配"为什么不放进当前版本"防 scope creep
-  - 类型纯度自检：剔除字段/接口/技术栈/cron 等详细设计内容，专注框架层；附 6 个常见反模式与 customer-metrics-service 实战案例
-  - 自带 `tools/md2html.py` + `style.css`，一键把产出的 `.md` 转成可视化审阅 HTML
+此节以 [v0.1.0 Release](https://github.com/yunshu0909/yunshu_skillshub/releases/tag/v0.1.0) 的实际发布记录为依据。发布时的技能清单属于该版本，与当前 Unreleased 整理版不同。
 
-- 💝 **Hermes 陪伴型人设生成器** (Hermes Persona Builder)
-  - 结构化对话流程：定调子 → 名字 → 外形 → 性格 → 背景 → 关系 → 说话节奏 → 生成 SOUL.md → 迭代
-  - 参数化气质大类（甜/暖/冷/野/稳）+ 性别关系，不再默认甜妹；矛盾需求有收敛协议
-  - 核心方法论：多轮深问逼出真人级细节（牌子/口味/名字/数字），密度 gate 不达标不生成
-  - 形容词翻硬规则：正向命令 + 反向禁令（冷系/男友型必带），防"掉人设"变助手腔
-  - 安全红线：年龄 ≥18、不涉露骨、身份≠能力、不写有害人格，产出前逐条自检清单
-  - 说话节奏可选"一句一句发 / 整段说"，干活长内容自动不硬拆
-  - 产出对齐 Hermes `SOUL.md` 模板，热加载即生效；经 5 轮 sub-agent 盲测验证
+### 调整 / Changed
 
-- 📑 **PRD 测试用例一体化** (PRD Test Writer) **[Beta]**
-  - 伙伴模式：PRD + 可执行测试用例双文档一体化，与用户共同写并迭代
-  - 6 阶段闭环：需求确认 → 自主读代码 → PRD 故事定稿 → 测试用例定稿 → 双 HTML → 对抗校核 → 冻结
-  - 测试用例铁律：一条用例 = 一个原子验证点，13 字段标准，每条断言标「代码依据 文件:行」
-  - 任务类用例写死任务名/轮数/每轮内容/每轮期望，杜绝"测个长任务"式泛化
-  - 真 Key vs 抓包两类证据分清，反假绿/反同义反复，未实现标 BLOCKED 不掩盖
-  - MD 给 AI 做事实源，review HTML 给人查阅且与 MD 严格 1:1（机器校验闸）
-  - 阶段 5 对抗校核：≥3 个无共享上下文 sub-agent 交叉审，无能力时降级串行并如实标注
-  - 冻结后维护 docs/PRD_REGISTRY.md 台账
+- 重排 PRD 与测试用例 review HTML：树形目录、标题层级、故事字段分组，以及测试用例 13 个字段的三段组织。
+- 强化 Markdown 与 HTML 的逐项对应和审阅结构。
+- `readable-output` 调整长文组织；`system-study` 更新到其材料版本 v0.3.1。
 
-- 📡 **案例雷达** (Case Radar)
-  - 4 阶段流程：scan（多渠道扫信源）→ recon（真物侦察）→ capture（拉真物）→ embed（出 HTML 案例集）
-  - 信源分级砍 SEO 垃圾：一手源 / 二手优质 / 三手中文（仅含独立观察）
-  - 7 种"真物栖息地"判别 patterns（reference/recon-heuristics.md），灵活而非 checklist
-  - 工具组合：curl 直接资源 + gh API 拉源码片段 + agent-browser 截全页
-  - HTML 模板规范（reference/html-template-spec.md）：5-7 张精读卡 + 普通索引层，避免"35 卡断崖式注意力低谷"
-  - 反过度工程化清单（reference/workflow-anti-patterns.md）：截不到真物降级、不硬塞装饰图
-  - 4 个反向信号自检："Skill 跑得动 ≠ Skill 该被点开"
-  - Skill 自演化：发现新栖息地就更新 heuristics 文件
-  - 依赖：`agent-browser` + 已登录的 `gh` CLI
+### 新增 / Added since v0.0.1
 
-- 📖 **输出工程** (Readable Output)
-  - 把"想清楚再输出"封装成思考清单 + 强制 4 问挖掘
-  - 一次 AskUserQuestion 问清：受众 / 终点 / 长度 / 风格 + 侧重
-  - 6 阶段框架：定终点（backward design）→ 抓核心（≤3 个）→ 选主结构（不叠加）→ 写（TL;DR + 论点句 + 反例 + 出口）→ 自检
-  - HTML 顶部自动写入「本次配置」确认条
-  - 内置反模式清单 + 自检 4 问，写完自动 `open` 浏览器预览
-  - 综合 Zinsser / Heath / Sweller CLT / Stripe / GitLab / Anthropic Docs 等三方实践交叉验证
+- 发布记录列出累计新增：`prd-test-writer`、`case-radar`、`readable-output`、`auto-task`、`macos-product-design`、`prd-auto-test-loop`、`organize`、`system-study`。其中部分已在当前整理版退役，保留名称用于准确描述历史。
 
-- 🤖 **复杂长程任务自主执行** (Auto Task) **[Beta]**
-  - 任务确认 → 任务队列 → 分批执行 → 周期校验 → 触发式汇报
-  - TASK.md 作为任务队列的单一真源
-  - 默认不打扰用户，只在关键节点触发汇报
-  - 1-2 小时无人值守自主跑长任务
-  - 工具完全自由：WebSearch / Bash / Sub-agent / MCP / 并行调用
+## [0.0.1] - 2026-04-09
 
-- 🍎 **macOS 产品设计专家** (macOS Product Design) **[Beta]**
-  - 输出符合 macOS 原生风格的 HTML/CSS 设计稿，可直接浏览器预览
-  - 基于 macos-design-system.md 的 CSS 变量与组件模板
-  - 独立 sub-agent 出稿，主对话直接迭代细节
-  - 默认暗色主题，所有交互元素带 hover 状态
-  - 版本化输出到 design/ 目录
+此节以 [v0.0.1 Release](https://github.com/yunshu0909/yunshu_skillshub/releases/tag/v0.0.1) 的实际发布记录为依据。
 
-- 🧪 **PRD 自动化测试闭环** (PRD Auto Test Loop) **[Beta]**
-  - PRD 驱动的测试编排：测试计划 + AI 自测自修复 + 测试报告标准化
-  - 主回归基线 + PRD 增量测试的双轨结构
-  - Unit / Integration / E2E 分层映射，标记 A/H/A+H 自动化边界
-  - 自动化测试/<version>/ 版本化目录，输出 TEST_PLAN.md、TEST_REPORT.md
-  - AI 自测固定顺序，失败按根因修复重跑（最多 3 轮）
-  - 发布门禁结论：PASS / FAIL + 人工补测项
+### 调整 / Changed
 
-- 🗂️ **文件夹整理助手** (Organize)
-  - 5 步结构化流程：扫描全貌 → 分析归属 → 制定方案 → 确认执行 → 展示结果
-  - 按归属（客户/内部/个人）优先于按格式分类
-  - 必须用户确认才执行，删除项尤其谨慎
-  - 已组织良好的子目录保持不动，避免破坏现有结构
-  - 隐藏文件谨慎处理，只清理明确的缓存/日志
-  - 重复文件 md5 比对验证后才判定
+- 多视角深度分析从 5 种视角扩展到 10 种。
+- 新增芒格、彼得·蒂尔、乔布斯、贝索斯、张一鸣、任正非视角，移除纳瓦尔视角。
+- 补充参考材料编写指南，统一编号与路径，并同步 README。
 
-- 🔍 **多视角深度分析** (Multi-Perspective Analysis)
-  - 5 个内置思维框架视角：Dan Sullivan、Elon Musk、Naval Ravikant、张小龙、MrBeast
-  - Sub-agent 并行独立分析，互不可见
-  - 交叉汇总：共识（高可信度）+ 分歧（高价值洞察）+ 独家观点（盲区）
-  - 自动保存各视角报告 + 汇总报告到 `多视角分析/` 目录
-  - 支持自定义视角，通过 WebSearch 临时构建任意思想家/框架
+## 历史文档记录 - 2026-01-19
 
-- 📦 **需求池管理** (Backlog Manager)
-  - 6 步结构化流程：收集 → 归类 → 写入 → 整理 → 筛选 → 归档
-  - 痛点驱动，不做假设性规划
-  - AI 整理，用户决策
-  - 支持需求合并和状态升档
-  - 基于频率/可绕过性/ROI 的筛选分析
+旧更新日志曾以 `1.0.0` 记录首批内容。目前未找到对应的 GitHub Tag / Release，此处保留文档历史，不把它映射到后来的 v0.1.0。
 
-- 🎨 **新功能设计探索** (Design Exploration)
-  - 7 步结构化流程：需求收敛 → 技术调研 → ASCII 批量探索 → HTML 设计稿 → 全状态覆盖 → 需求总结
-  - 一次出 5-8 个 ASCII 方案供选择
-  - 全状态覆盖（正常/加载/空态/错误/边界）
-  - 交互行为规则表，前端开发直接对照实现
-  - 产出 3 个文件：需求总结.md、设计稿.html、全状态设计参考.html
+- 记录了 `thought-mining`、`prd-doc-writer`、`req-change-workflow` 三个核心 skill 及相关模板、参考和脚本。
+- 记录了中英文 README、MIT License、项目结构与安装指南。
 
-- 🤝 **思考拍档** (Thinking Partner)
-  - 5 步结构化流程：信息获取 → 锁定核心问题 → 拆解卡点 → 共创解法 → 落地计划
-  - 基于"主次矛盾"思维模型，帮用户找到核心问题
-  - 严格的阶段里程碑确认机制
-  - 共创式解法讨论，不是单向给答案
-  - 落地计划包含"做什么"和"不做什么"
+## 维护方式
 
-- 🎨 **UI 样式修改助手** (UI Design)
-  - 结构化 UI 修改协作流程
-  - ASCII 布局图辅助沟通
-  - 方案选择机制（2-3 个可视化方案）
-  - 最小改动原则，避免过度修改
-  - 微调迭代流程
+每次先把用户可见变化写进 Unreleased，描述新行为、目录或依赖变化，以及旧用法如何迁移。需要发版时，再按确定的版本创建 Tag / Release，把本节归档并填写实际发布日期。
 
-- 🎨 **配图助手** (Image Assistant)
-  - 5 个完整的工作阶段：需求澄清、配图规划、文案定稿、提示词封装、迭代润色
-  - 统一风格的 16:9 信息图提示词生成
-  - 多种配图模板（封面、对比图、洞察卡片、漫画等）
-  - 批量生图脚本支持
-  - 完整的风格块和 API 配置模板
-
-- 🚀 **一键推送 GitHub** (Git Push)
-  - 覆盖完整生命周期：首次推送 / 日常更新 / 版本发布
-  - 大文件分级拦截：10MB+ 提醒、50MB+ 警告、100MB+ 强制排除
-  - 公开仓库敏感内容扫描（密钥、证书、AI 记忆文件）
-  - 智能 .gitignore 生成，不覆盖已有规则
-  - 版本发布支持 tag + Release + 附件
-  - 推送失败自动诊断和引导修复
-
-- 🧠 **记忆系统初始化** (Memory Init)
-  - 一键部署记忆系统：CLAUDE.md + MEMORY.md + memory/ 目录
-  - 交互式模式：引导式收集角色、用途、风格偏好
-  - Quick 模式：用默认模板快速生成，之后自行修改
-  - 自动检测已有文件，避免覆盖
-  - 固定记忆协议模板，保持跨项目一致性
-  - 支持长期记忆 + 每日记忆分层管理
-
-- 🔍 **GitHub 开源项目搜索助手** (GitHub Repo Search)
-  - 四环节九步结构化流程：需求收敛 → 检索执行 → 质量精炼 → 交付迭代
-  - 5-10 组检索词拆解，平衡召回率与相关性
-  - 仓库归属类型分类（框架层/应用层/记忆层/MCP层/目录清单层等）
-  - 综合权重排序（相关性/场景适用性/活跃度/工程成熟度）
-  - 结构化推荐报告，可理解、可比较、可决策、可直接行动
-
-### 计划中 / Planned
-- 更多示例和最佳实践文档
-- 视频教程
-- 社区贡献的 Skills
-
----
-
-## [1.0.0] - 2026-01-19
-
-### 新增 / Added
-- 🧠 **思维挖掘助手** (Thought Mining)
-  - 5 个完整的工作阶段：思维挖掘、选题确定、观点验证、写作辅助、最终审核
-  - 洞察记录模板和写作记录模板
-  - 完整案例参考
-
-- 📋 **PRD 文档撰写助手** (PRD Doc Writer)
-  - 以用户故事为核心的需求文档撰写流程
-  - ASCII 线框图支持
-  - Mermaid 图表集成（流程图、状态图、时序图）
-  - 阶段性确认机制
-  - PRD 版本管理（总集/台账）
-
-- 🔄 **需求变更工作流** (Requirement Change Workflow)
-  - 7 步标准化变更流程
-  - 需求澄清模板
-  - 回归测试清单
-  - 决策日志模板
-  - 影响扫描脚本
-
-### 文档 / Documentation
-- 中英双语 README
-- MIT 开源许可证
-- 项目结构说明
-- 快速开始指南
-- 支持 Codex 和 Claude Code CLI 安装
-
----
-
-## 版本说明 / Version Notes
-
-### [Unreleased]
-- 尚未发布的变更
-
-### [1.0.0] - 2026-01-19
-- 首次发布
-- 包含 3 个核心 Skills
-
----
-
-[Unreleased]: https://github.com/你的用户名/云舒的Skills搭子们/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/你的用户名/云舒的Skills搭子们/releases/tag/v1.0.0
+[Unreleased]: https://github.com/yunshu0909/yunshu_skillshub/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/yunshu0909/yunshu_skillshub/releases/tag/v0.1.0
+[0.0.1]: https://github.com/yunshu0909/yunshu_skillshub/releases/tag/v0.0.1

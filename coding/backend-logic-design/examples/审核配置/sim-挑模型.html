@@ -1,0 +1,56 @@
+<div class="sim" id="sim-pick"><h3>挑模型模拟器</h3><p class="hint">只演示「挑谁」：不含体检失败、能力不支持、审到一半换人（后-25、后-26）。改上面的条件、用 ↑ ↓ 调顺序、点模型名开关它，看 dev 会派谁（后-21、后-22、后-23）。</p>
+<div class="ctl"><label>谁写代码 <select id="sp-impl"><option value="anthropic">Claude Code</option><option value="openai">Codex</option></select></label>
+<label>这道关设 <select id="sp-max"><option>1</option><option selected>2</option><option>3</option></select> 个模型</label>
+<label><input type="checkbox" id="sp-self"> 写代码的那家也参与审核</label></div>
+<div class="ml" id="sp-ml"></div><div id="sp-out"></div></div>
+<script>
+(() => {
+// 模拟器：照 后-21 / 后-22 / 后-23。未覆盖：模型体检失败、能力不支持、正在审时换人（后-25、后-26）
+const FAM = { anthropic: 'Claude 家', openai: 'Codex 家', deepseek: 'DeepSeek 家', minimax: 'MiniMax 家' }
+let models = [
+  { n: 'Opus 5.5', v: 'Claude Code', f: 'anthropic', on: true },
+  { n: 'GPT-6.1-Sol', v: 'Codex', f: 'openai', on: true },
+  { n: 'GPT-6-Astra', v: 'Codex', f: 'openai', on: true },
+  { n: 'deepseek-flash', v: 'DeepSeek', f: 'deepseek', on: true },
+  { n: 'MiniMax-M3.1-Flash', v: 'MiniMax M Plan', f: 'minimax', on: false },
+]
+function run() {
+  const impl = document.getElementById('sp-impl').value
+  const max = +document.getElementById('sp-max').value
+  const want = max
+  const self = document.getElementById('sp-self').checked
+  const res = []
+  const seen = new Set() // 同一个模型一关只派一次（后-22）
+  let picked = 0
+  for (const m of models) {
+    if (!m.on) { res.push(['skip', '没打开']); continue }
+    if (picked >= want) { res.push(['skip', '已经够数']); continue }
+    if (!self && m.f === impl) { res.push(['skip', '跳过：写代码的那家']); continue }
+    if (seen.has(m.n)) { res.push(['skip', '跳过：这个模型已经派过']); continue }
+    seen.add(m.n); picked++; res.push(['pick', `派第 ${picked} 个`])
+  }
+  document.getElementById('sp-ml').innerHTML = models.map((m, i) => `<div class="mr"><span class="rk">${i + 1}</span><span class="mv"><button data-up="${i}">↑</button><button data-dn="${i}">↓</button></span><span class="nm"><button data-tg="${i}" style="border:0;background:none;padding:0;font-size:14px;color:var(--fg);${m.on ? '' : 'text-decoration:line-through;opacity:.5'}">${m.n}</button><span class="vd">${m.v}</span></span><span class="res ${res[i][0]}">${res[i][1]}</span></div>`).join('')
+  const names = models.filter((_, i) => res[i][0] === 'pick').map((m) => m.n)
+  let out
+  if (!names.length) {
+    const anyOn = models.some((m) => m.on)
+    const why = !anyOn ? '没有打开任何模型' : '能用的模型都是写代码的那家'
+    out = `<div class="out bad"><b>停下告诉你：审核不了</b>——${why}。</div>`
+  } else {
+    out = `<div class="out ${names.length < want ? 'warn' : 'ok'}">设了 ${want} 个，派了 <b>${names.join(' + ')}</b>${names.length < want ? `（只找到 ${names.length} 个，有几个派几个，验收页会写明）` : ''}，同时审，都通过才算过。</div>`
+  }
+  document.getElementById('sp-out').innerHTML = out
+}
+document.getElementById('sim-pick').addEventListener('click', (e) => {
+  const t = e.target.dataset
+  if (t.up !== undefined && +t.up > 0) { const i = +t.up; [models[i - 1], models[i]] = [models[i], models[i - 1]] }
+  else if (t.dn !== undefined && +t.dn < models.length - 1) { const i = +t.dn; [models[i + 1], models[i]] = [models[i], models[i + 1]] }
+  else if (t.tg !== undefined) models[+t.tg].on = !models[+t.tg].on
+  else return
+  run()
+})
+document.getElementById('sim-pick').addEventListener('change', run)
+run()
+
+})()
+</script>

@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-06",
+  "tool": "built-in image_gen.imagegen",
+  "style": "N42 等距像素",
+  "use": "README品牌插画，非业务案例",
+  "reference": "../../yunshu-ip.jpg",
+  "prompt": "prompts/HERO-N42.txt",
+  "output": "out/HERO-N42.png",
+  "promptArgumentVerbatim": true,
+  "promptSha256": "946956a31073665ca3c108127fb75f1c9506dedecb5a592b5fda3931d288450d",
+  "imageSha256": "40dac2264ebe68133bc0a1adfc45ad5a3a877dc8f843ee2f8452f81d7b327ae6",
+  "visualCheck": {
+    "title": "云舒的 Skills 搭子",
+    "subtitle": "想清楚，也做出来",
+    "mascot": "蓝帽、黑灰白毛色、尖耳，工作室场景",
+    "countsAndVersions": "none"
+  },
+  "source": "Native generated PNG copied unchanged into the repository",
+  "promptVerification": "Saved prompt matches the submitted tool argument exactly; verify_log.py also verified the matching revisedPrompt in this conversation’s original logs.",
+  "legacyLogCheck": {
+    "report": "verification.json",
+    "imageValid": true,
+    "verbatim": true,
+    "scope": "Only this conversation’s original session logs were scanned."
+  },
+  "responseIncludesRevisedPrompt": false,
+  "sessionLogIncludesRevisedPrompt": true
+}

@@ -1,189 +1,196 @@
-<p align="right">
-  <a href="./README.md">简体中文</a> · <strong>English</strong>
-</p>
+<p align="right"><a href="./README.md">简体中文</a> · <strong>English</strong></p>
 
 <p align="center">
-  <img src="./assets/readme/hero.png" width="100%" alt="Yunshu's Skills crew: the dog mascot with 38 agent skills for product, engineering, research, writing, and personal productivity" />
+  <img src="./assets/readme/hero.png" width="100%" alt="Yunshu's Skills crew: a husky in a blue cap and two AI buddies walking across a floating island with seven little houses for coding, thinking, learning, writing, visualization, brand and agents" />
 </p>
 
-# Yunshu SkillsHub
+<h1 align="center">Yunshu SkillsHub</h1>
 
-Turn fuzzy requests into reusable, executable, and verifiable AI workflows.
+<p align="center"><strong>Methods I've collected from working with AI every day.</strong></p>
 
 <p align="center">
   <a href="https://github.com/yunshu0909/yunshu_skillshub/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/yunshu0909/yunshu_skillshub?style=flat-square&color=4E63D9" /></a>
-  <a href="https://github.com/yunshu0909/yunshu_skillshub/network/members"><img alt="GitHub Forks" src="https://img.shields.io/github/forks/yunshu0909/yunshu_skillshub?style=flat-square&color=1FA884" /></a>
   <a href="./LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-172033?style=flat-square" /></a>
-  <img alt="38 installable skills" src="https://img.shields.io/badge/skills-38_installable-F6F3EA?style=flat-square&labelColor=172033" />
+  <img alt="25 skills" src="https://img.shields.io/badge/skills-25-E4AD53?style=flat-square&labelColor=172033" />
 </p>
 
-This is not a pile of disconnected prompts. Each Skill uses `SKILL.md` to preserve its triggers, stages, decision gates, constraints, and deliverables so agents such as Codex and Claude Code can apply the same method repeatedly.
+<p align="center">
+  <a href="#coding">Coding</a> ·
+  <a href="#thinking">Thinking</a> ·
+  <a href="#learning">Learning</a> ·
+  <a href="#writing">Writing</a> ·
+  <a href="#visualization">Visualization</a> ·
+  <a href="#brand">Brand</a> ·
+  <a href="#agent">Agent</a>
+</p>
 
-> The `skills` CLI discovers **38 installable Skills** in this repository: **37 are recommended**, while `plan-report` is retained for compatibility after its workflow moved into `issue-pool`.
+## What this is
 
-## A real delivery path
+<img src="./assets/readme/scenes/about.jpg" width="100%" alt="Collected from real work: the husky finishes a job, writes down how it was done, and the AI buddies follow the handbook next time" />
 
-The Skills can be composed into an end-to-end loop:
+These are the skills I've collected from working with AI every day.
+
+Whenever I finish something, whether it's thinking a problem through, reading an article, writing a post or building a product, I write down how I asked, how I judged, and what "done" looked like, so next time the AI can follow the same path. None of these skills were designed in a vacuum. Each one has been used and revised on real work.
+
+## Install
+
+### Just ask your agent
+
+Send this to Claude Code:
 
 ```text
-Idea / pain point / external feedback
-        ↓  issue-pool
-Refined, buildable task
-        ↓  design-exploration
-Design direction and complete UI states
-        ↓  prd-test-writer
-PRD + executable test cases
-        ↓  AI implementation and verification
-Code, test evidence, and review artifacts
-        ↓  git-push
-Branch → PR → merge / release
-        ↓  issue-triage
-New feedback returns to the issue pool
+Install the skills from https://github.com/yunshu0909/yunshu_skillshub into Claude Code at user level, so every project can use them. First list every skill with a one-line description and let me choose, then install the ones I pick, keeping each skill folder intact. When done, tell me what was installed and where.
 ```
 
-Explore the public [CodePal Managed Project Example](https://github.com/yunshu0909/codepal-managed-project-example) to see Issues, design, PRDs, test cases, code, and PRs organized around one traceable task.
+Or send this to Codex:
 
-## Start in 30 seconds
+```text
+Install the skills from https://github.com/yunshu0909/yunshu_skillshub into Codex at user level, so every project can use them. First list every skill with a one-line description and let me choose, then install the ones I pick, keeping each skill folder intact. When done, tell me what was installed and where.
+```
 
-List the available Skills without installing anything:
+### With the CLI
 
 ```bash
+# See what's available
 npx skills add yunshu0909/yunshu_skillshub --list
+
+# Pick a few, installed to both Claude Code and Codex
+npx skills add yunshu0909/yunshu_skillshub -g -a claude-code codex --skill thinking-partner writing-assistant
+
+# Install everything
+npx skills add yunshu0909/yunshu_skillshub -g -a claude-code codex --skill '*' -y
 ```
 
-Install every Skill for the agents detected in the current project:
+### By hand
 
 ```bash
-npx skills add yunshu0909/yunshu_skillshub --all
+git clone https://github.com/yunshu0909/yunshu_skillshub.git
+
+# One skill: copy the whole folder
+cp -R yunshu_skillshub/thinking/thinking-partner ~/.claude/skills/   # Claude Code
+cp -R yunshu_skillshub/thinking/thinking-partner ~/.agents/skills/   # Codex
+
+# Everything (Claude Code shown; use ~/.agents/skills/ for Codex)
+mkdir -p ~/.claude/skills
+for f in yunshu_skillshub/*/*/SKILL.md; do cp -R "$(dirname "$f")" ~/.claude/skills/; done
 ```
 
-Or install only what you need:
+After installing, just describe what you want to do, or name a skill. Keep each skill folder intact: the templates, references and scripts inside are part of the method. Most skills are written in Chinese.
 
-```bash
-npx skills add yunshu0909/yunshu_skillshub --skill issue-pool
-```
+<a id="coding"></a>
 
-Then describe the job in plain language:
+## Coding
 
-```text
-Capture an issue: the page feels too bright when used at night.
-Turn this fuzzy request into a goal that Codex can execute autonomously.
-Keep learning my context and help me find the three priorities that matter most right now.
-Scan the Agent Memory ecosystem and show me real artifacts.
-Walk me through this article closely, and test me after every lesson.
-Turn these scattered thoughts into a coherent article.
-```
+<img src="./assets/readme/scenes/coding.jpg" width="100%" alt="Coding: the husky explains a flow board while one AI buddy codes and the other checks the work with a magnifier" />
 
-You can also name a Skill directly: `/issue-pool`, `/goal-setter`, `/find-top-three`, `/article-study`, `/case-radar`, or `/writing-assistant`.
+Be clear about what you want before the AI starts building. From shaping requirements, designing and testing to changing code and shipping, every step can be checked.
 
-## Find a Skill by the problem
-
-### Product and requirements · 10
-
-| Skill | Use it when | Main output |
+| Skill | When to use it | What you get |
 | --- | --- | --- |
-| [`vision-exploration`](./vision-exploration) | An idea is early and needs long-range exploration | Multiple end-state visions |
-| [`product-naming`](./product-naming) | A product, project, or module needs a name | Naming directions, candidates, validation |
-| [`backlog-manager`](./backlog-manager) | Requirements need ongoing capture and cleanup | A maintainable backlog |
-| [`issue-pool`](./issue-pool) | Ideas or feedback must become buildable tasks | Issues, tasks, rolling plans |
-| [`version-planner`](./version-planner) | Requirements need an MVP-to-V1.0 path | Progressive release plan |
-| [`design-exploration`](./design-exploration) | A new feature needs interaction and state exploration | ASCII options, HTML mockups, implementation contract |
-| [`page-solution-design`](./page-solution-design) | A page needs a full redesign, replacement, or a from-scratch design | Three-layer plan, full-state hi-fi mockups, interaction flow, and a handoff package |
-| [`prd-doc-writer`](./prd-doc-writer) | You need a story-driven PRD | User stories, acceptance criteria, diagrams |
-| [`prd-test-writer`](./prd-test-writer) · Beta | PRD and tests must stay aligned | PRD, test cases, two review pages |
-| [`req-change-workflow`](./req-change-workflow) | An existing codebase needs a safe requirement change | Change brief, impact analysis, regression evidence |
+| [Issue pool · `issue-pool`](./coding/issue-pool/SKILL.md) | Ideas, feedback and bugs need sorting out | `ISSUES.md` and problem statements ready to work on |
+| [Page design · `page-solution-design`](./coding/page-solution-design/SKILL.md) | A page needs a full redesign or a fresh start | High-fidelity designs for every state, plus a handoff pack |
+| [Backend logic · `backend-logic-design`](./coding/backend-logic-design/SKILL.md) | The rules are complex and need spelling out before coding | Rule tables and examples, with an interactive simulator if needed |
+| [PRD & test cases · `prd-test-writer`](./coding/prd-test-writer/SKILL.md) | You want tests written alongside the requirements | A PRD and test cases that map one to one |
+| [Dual-agent collaboration · `dual-agent-collaboration`](./coding/dual-agent-collaboration/SKILL.md) | An important change deserves a second AI's review | One agent builds, the other reviews read-only, until both sign off |
+| [Requirement change · `req-change-workflow`](./coding/req-change-workflow/SKILL.md) | You need to change a feature that already exists | Impact analysis, a minimal change and a regression checklist |
+| [Push & release · `git-push`](./coding/git-push/SKILL.md) | You're committing, pushing or cutting a release | Pre-push checks, the push, and the tag and Release |
+| [Issue triage · `issue-triage`](./coding/issue-triage/SKILL.md) | Your open-source project got an issue | Root cause, a recommendation and a reply draft |
+| [Repo search · `github-repo-search`](./coding/github-repo-search/SKILL.md) | You're looking for open-source projects to learn from | A compared shortlist |
 
-### Engineering and delivery · 6
+> `dual-agent-collaboration` needs Codex and Claude Code installed locally; releases with `git-push` need `gh` logged in.
 
-| Skill | Use it when | Main output |
+<a id="thinking"></a>
+
+## Thinking
+
+<img src="./assets/readme/scenes/thinking.jpg" width="100%" alt="Thinking: the husky and two AI buddies untangle a ball of yarn that leads to three glowing lanterns" />
+
+Often you aren't stuck on doing, you're stuck on thinking. These help you untangle the problem, look from other angles, and make the call.
+
+| Skill | When to use it | What you get |
 | --- | --- | --- |
-| [`ui-design`](./ui-design) | An existing UI needs focused styling or layout changes | UI options and a small code diff |
-| [`macos-product-design`](./macos-product-design) · Beta | You need a native macOS-style interface | Previewable HTML/CSS design |
-| [`prd-auto-test-loop`](./prd-auto-test-loop) · Beta | A PRD should drive an automated test loop | Test plan, repair loop, test report |
-| [`issue-triage`](./issue-triage) | A GitHub Issue needs diagnosis and a professional reply | Root-cause decision and response |
-| [`project-map-builder`](./project-map-builder) | A repository needs a concise directory map | `PROJECT_MAP.md` |
-| [`git-push`](./git-push) | A project needs its first push, update, or release | Safety checks, push, and release workflow |
+| [Thinking partner · `thinking-partner`](./thinking/thinking-partner/SKILL.md) | Things are messy and you can't say where you're stuck | A diagnosis, a few options and a next step |
+| [Multi-perspective analysis · `multi-perspective-analysis`](./thinking/multi-perspective-analysis/SKILL.md) | You worry one line of thinking is boxing you in | Independent perspectives, with agreements, conflicts and blind spots |
+| [Top three · `find-top-three`](./thinking/find-top-three/SKILL.md) | You need to choose a direction in life, career or business | The three things that matter most right now, and a step you can take today |
 
-### Research and decisions · 8
+<a id="learning"></a>
 
-| Skill | Use it when | Main output |
+## Learning
+
+<img src="./assets/readme/scenes/learning.jpg" width="100%" alt="Learning: the husky reads at a lectern while the AI buddies make quiz cards and build a model" />
+
+Between reading and understanding there's explaining it back, being tested, and putting it to use. Close-read a specific text, or map out an unfamiliar field first.
+
+| Skill | When to use it | What you get |
 | --- | --- | --- |
-| [`case-radar`](./case-radar) | You want real artifacts from an emerging ecosystem | HTML casebook with screenshots, source, or demos |
-| [`github-repo-search`](./github-repo-search) | Open-source projects need searching and filtering | Comparable Top-N recommendation report |
-| [`system-study`](./system-study) | You want to understand a field systematically | Structured HTML learning material |
-| [`article-study`](./article-study) | You want to master a specific article or document through active recall | Lesson pages, learning notes, tests, and distilled improvements |
-| [`multi-perspective-analysis`](./multi-perspective-analysis) | One question needs independent viewpoints | Consensus, disagreements, and blind spots |
-| [`find-top-three`](./find-top-three) | Life, career, or a personal business needs three strategic priorities | Dynamic user model, strategic top three, review boundaries |
-| [`thinking-partner`](./thinking-partner) | The situation is messy and the bottleneck is unclear | Diagnosis, co-created solution, action plan |
-| [`priority-judge`](./priority-judge) | Too many tasks compete for attention | Priority decision and next action |
+| [Close reading · `article-study`](./learning/article-study/SKILL.md) | You want to really understand an article, doc or codebase | Lesson pages, quizzes and a review of what you got wrong |
+| [Systematic study · `system-study`](./learning/system-study/SKILL.md) | You want a structured view of a new field | A sourced knowledge map with cases and open debates |
 
-### Content and expression · 8
+<a id="writing"></a>
 
-| Skill | Use it when | Main output |
+## Writing
+
+<img src="./assets/readme/scenes/writing.jpg" width="100%" alt="Writing: scattered notes float toward a manuscript as the husky writes" />
+
+Writing grows out of your own ideas. If your point is clear, build the outline and write. If it's still scattered, dig it out first.
+
+| Skill | When to use it | What you get |
 | --- | --- | --- |
-| [`thought-mining`](./thought-mining) | Scattered thoughts need to become usable material | Insight notes, angle, article material |
-| [`writing-assistant`](./writing-assistant) | You need a path from topic to finished draft | A structured article |
-| [`readable-output`](./readable-output) | Complex material must become easy to read | High-readability HTML document |
-| [`image-assistant`](./image-assistant) | Articles, slides, or social posts need visuals | Copy spec and image prompts |
-| [`logo-design`](./logo-design) · Requires Codex | A product or brand needs a logo designed, diagnosed, or refined | Direction exploration, controlled refinement, app icons, and usable assets |
-| [`lesson-builder`](./lesson-builder) | A class or training session needs preparation | Lesson outline and teaching material |
-| [`weekly-report`](./weekly-report) | Weekly work needs a clear value narrative | Structured weekly report |
-| [`hermes-persona-builder`](./hermes-persona-builder) | Hermes or a companion agent needs a durable persona | Ready-to-use `SOUL.md` |
+| [Writing assistant · `writing-assistant`](./writing/writing-assistant/SKILL.md) | You want to go from topic to finished draft | A topic, an outline and a full first draft |
+| [Thought mining · `thought-mining`](./writing/thought-mining/SKILL.md) | You have lots of fragments but no core point yet | The point you actually want to make, topic ideas and material |
 
-### Agent and personal productivity · 5
+<a id="visualization"></a>
 
-| Skill | Use it when | Main output |
+## Visualization
+
+<img src="./assets/readme/scenes/visualization.jpg" width="100%" alt="Visualization: a studio with a messy pile of paper on one side and a clear diagram on the easel" />
+
+Make it easy to grasp at a glance: real examples of what others built, one clear idea per image, long reads people can follow to the end.
+
+| Skill | When to use it | What you get |
 | --- | --- | --- |
-| [`auto-task`](./auto-task) · Beta | A complex job should run autonomously for a long stretch | Task queue, milestone evidence, final result |
-| [`dual-agent-collaboration`](./dual-agent-collaboration) | Important work needs independent Codex and Claude Code cross-review | Four review gates, independent findings, and an ACK verdict |
-| [`goal-setter`](./goal-setter) | A fuzzy request must be handed to another agent | Goal with scope, acceptance, and stop conditions |
-| [`memory-init`](./memory-init) | A project needs a stable long-term memory protocol | `CLAUDE.md`, `MEMORY.md`, `memory/` |
-| [`organize`](./organize) | A folder is cluttered, duplicated, or hard to navigate | Approved cleanup plan and organized tree |
+| [Case radar · `case-radar`](./visualization/case-radar/SKILL.md) | You want to see what people have actually built in a new space | A case gallery with screenshots and sources |
+| [Image assistant · `image-assistant`](./visualization/image-assistant/SKILL.md) | An article or talk needs illustrations | What each image says, the exact on-image text, and prompts |
+| [Readable output · `readable-output`](./visualization/readable-output/SKILL.md) | You want to turn notes, a retro or a tutorial into something people read | A well-structured HTML long read |
 
-### Legacy compatibility · 1
+<a id="brand"></a>
 
-| Skill | Status | Recommended replacement |
+## Brand
+
+<img src="./assets/readme/scenes/brand.jpg" width="100%" alt="Brand: in a design workshop the husky picks among several emblem models" />
+
+A name and a logo answer the same question: what is this product, who is it for, and what should people remember.
+
+| Skill | When to use it | What you get |
 | --- | --- | --- |
-| [`plan-report`](./plan-report) | Merged and retired; directory retained temporarily | Use the rolling-plan workflow in [`issue-pool`](./issue-pool) |
+| [Product naming · `product-naming`](./brand/product-naming/SKILL.md) | You need a name for a product, project or module | Naming directions, candidates and the reasoning |
+| [Logo design · `logo-design`](./brand/logo-design/SKILL.md) | You want to go from positioning to a usable logo and icon | Direction comparisons, refined drafts and app icons |
 
-## Real outputs and examples
+> `logo-design` needs Codex for image generation and editing.
 
-- [CodePal Managed Project Example](https://github.com/yunshu0909/codepal-managed-project-example): a public Issue → design → PRD → test → PR → feedback loop.
-- [PRD review sample](./prd-test-writer/samples/PRD-SAMPLE-review.html): a human-facing PRD review page.
-- [Test-case review sample](./prd-test-writer/samples/PRD-SAMPLE-测试用例-review.html): executable cases aligned with the PRD.
-- [12 curated usage examples](./EXAMPLES.md): triggers, conversations, and expected outputs.
-- [Changelog](./CHANGELOG.md): new Skills, changes, and Beta status.
+<a id="agent"></a>
 
-## Design principles
+## Agent
 
-- **Inspect reality before proposing.** Read available code, files, and facts instead of asking discoverable questions.
-- **Users choose direction; agents carry the work.** Once consequential choices are settled, execution and verification should continue autonomously.
-- **Every deliverable must be checkable.** PRDs have acceptance criteria, tests have evidence, research has sources, and plans have completion conditions.
-- **Confirm high-impact choices early.** Keep later work inside the agreed frame to avoid expensive rewrites.
-- **Never invent capability or success.** Missing dependencies and unverifiable results stay visible.
+<img src="./assets/readme/scenes/agent.jpg" width="100%" alt="Agent: the husky hands a scroll to an AI buddy about to set off, while the other files a card into a memory drawer" />
 
-## Compatibility and repository shape
+Handing work to an agent takes more than "go do it". It needs a clear goal and context it can remember.
 
-The repository follows the `SKILL.md` directory convention, and the `skills` CLI discovers all 38 Skills. Agent toolsets differ; Skills that need browsing, image generation, browser control, or multiple agents follow the dependencies and fallback rules documented in their own `SKILL.md`.
+| Skill | When to use it | What you get |
+| --- | --- | --- |
+| [Goal contract · `goal-setter`](./agent/goal-setter/SKILL.md) | You're handing a task to another agent to run on its own | A goal with scope, done criteria and stop conditions |
+| [Project memory · `memory-init`](./agent/memory-init/SKILL.md) | A new project where you don't want to re-explain everything | `CLAUDE.md`, `MEMORY.md` and `memory/` |
+| [Companion persona · `hermes-persona-builder`](./agent/hermes-persona-builder/SKILL.md) | You're defining a persona for Hermes or a companion agent | A ready-to-use `SOUL.md` |
+| [Folder cleanup · `organize`](./agent/organize/SKILL.md) | Files have piled up and naming is a mess | A plan and a tidy folder |
 
-```text
-<skill-name>/
-├── SKILL.md          # Triggers, workflow, constraints, deliverables
-├── references/       # Material loaded only when needed
-├── assets/           # Reusable templates and resources
-└── scripts/          # Optional deterministic tools
+## Say hi
 
-assets/readme/        # README visual assets
-EXAMPLES.md           # Curated usage examples
-CHANGELOG.md          # Release notes
-```
+If you'd like to get to know me or chat about working with AI, add me on WeChat.
 
-## Contributing and license
+<p align="center"><img src="./assets/readme/wechat-qr.jpg" width="220" alt="Yunshu's WeChat QR code" /></p>
 
-Use [Issues](https://github.com/yunshu0909/yunshu_skillshub/issues) for bugs, real-world feedback, and Skill proposals. Pull requests are welcome.
-
-Released under the [MIT License](./LICENSE).
+Questions or ideas are also welcome as an [Issue](https://github.com/yunshu0909/yunshu_skillshub/issues). Version history is in the [CHANGELOG](./CHANGELOG.md).
 
 ---
 
-Made with care by Yunshu.
+<p align="center"><a href="./LICENSE">MIT License</a> · Made with care by Yunshu</p>

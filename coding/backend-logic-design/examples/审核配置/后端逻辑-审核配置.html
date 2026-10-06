@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>审核配置后端逻辑</title>
+<style>
+:root{
+  --bg:#f6f6f4;--card:#fff;--fg:#1d1d1f;--fg2:#555;--fg3:#8a8a8e;--line:#e6e6e3;--step:#f2f2f0;
+  --acc:#0a66e8;--acc-bg:#e9f1ff;--ok:#1f8a4c;--ok-bg:#e7f6ed;--bad:#c8322b;--bad-bg:#fdecea;--skip:#8a8a8e;--you:#c46a00;--you-bg:#fff3e2;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#161618;--card:#1f1f22;--fg:#f2f2f3;--fg2:#b4b4b8;--fg3:#86868b;--line:#333336;--step:#2a2a2d;
+  --acc:#6ea8ff;--acc-bg:#1c2a44;--ok:#4cc27e;--ok-bg:#17301f;--bad:#ff6b62;--bad-bg:#3d1d1b;--skip:#86868b;--you:#f0a341;--you-bg:#3a2a14;}}
+:root[data-theme="dark"]{
+  --bg:#161618;--card:#1f1f22;--fg:#f2f2f3;--fg2:#b4b4b8;--fg3:#86868b;--line:#333336;--step:#2a2a2d;
+  --acc:#6ea8ff;--acc-bg:#1c2a44;--ok:#4cc27e;--ok-bg:#17301f;--bad:#ff6b62;--bad-bg:#3d1d1b;--skip:#86868b;--you:#f0a341;--you-bg:#3a2a14;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif}
+main{max-width:820px;margin:0 auto;padding:32px 16px 80px}
+h1{font-size:24px;margin:0 0 8px;letter-spacing:-.01em}
+.ask{background:var(--card);border-left:4px solid var(--you);padding:12px 16px;border-radius:8px;margin:14px 0}
+.lead{color:var(--fg2);font-size:14px;margin:0 0 6px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px}
+.toc a{font-size:13.5px;padding:5px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--fg);text-decoration:none}
+.grp{margin-top:44px}
+.grp>h2{font-size:19px;margin:0 0 2px}
+.grp>p{color:var(--fg3);font-size:13.5px;margin:0 0 14px}
+.c{background:var(--card);border-radius:14px;padding:16px 18px 14px;margin:0 0 12px;box-shadow:0 0 0 1px var(--line)}
+.c .q{font-size:16.5px;font-weight:700;margin:0}
+.c .a{font-size:15px;color:var(--acc);font-weight:600;margin:4px 0 10px}
+.steps{display:flex;flex-wrap:wrap;align-items:center;gap:6px 4px}
+.steps span{background:var(--step);border-radius:8px;padding:4px 10px;font-size:13.5px;line-height:1.5}
+.steps span.end{background:var(--ok-bg);color:var(--ok);font-weight:600}
+.steps span.todo{background:var(--you-bg);color:var(--you);font-weight:600}
+.steps span.badend{background:var(--bad-bg);color:var(--bad);font-weight:600}
+.steps i{font-style:normal;color:var(--fg3);font-size:13px}
+.c .id{display:block;text-align:right;font:500 11px ui-monospace,Menlo,monospace;color:var(--fg3);margin-top:8px}
+.dec{display:inline-block;font-size:11.5px;font-weight:700;color:var(--you);background:var(--you-bg);border-radius:999px;padding:0 8px;margin-left:6px;vertical-align:2px}
+/* 模拟器 */
+.sim{background:var(--card);border-radius:14px;padding:16px 18px;margin:0 0 12px;box-shadow:0 0 0 2px var(--acc)}
+.sim h3{margin:0 0 2px;font-size:16.5px}
+.sim .hint{color:var(--fg3);font-size:13px;margin:0 0 12px}
+.ctl{display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:12px;font-size:14px}
+.ctl label{display:inline-flex;align-items:center;gap:6px}
+.ctl select{font:inherit;font-size:13.5px;padding:2px 6px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--fg)}
+.ml{border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px var(--line)}
+.mr{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line);font-size:14px}
+.mr:last-child{border-bottom:0}
+.mr .rk{width:16px;color:var(--fg3);font-variant-numeric:tabular-nums}
+.mr .nm{flex:1;min-width:0}
+.mr .vd{color:var(--fg3);font-size:12.5px;margin-left:6px}
+.mr .mv{display:inline-flex;gap:2px}
+.mr button{font:inherit;font-size:12px;border:1px solid var(--line);background:var(--card);color:var(--fg2);border-radius:6px;padding:0 7px;cursor:pointer}
+.mr .res{font-size:12.5px;min-width:150px;text-align:right}
+.res.pick{color:var(--ok);font-weight:700}.res.skip{color:var(--skip)}
+.out{margin-top:12px;padding:10px 12px;border-radius:10px;font-size:14.5px}
+.out.warn{background:var(--you-bg);color:var(--you)}
+.out.ok{background:var(--ok-bg);color:var(--ok)}.out.bad{background:var(--bad-bg);color:var(--bad)}
+.out b{color:inherit}
+/* 迁移 */
+.mig{background:var(--card);border-radius:14px;box-shadow:0 0 0 1px var(--line);overflow:hidden}
+.mig .r{display:grid;grid-template-columns:1fr 24px 1fr;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line);font-size:14px;align-items:center}
+.mig .r:last-child{border-bottom:0}
+.mig .old{color:var(--fg3);text-decoration:line-through;text-decoration-color:var(--fg3)}
+.mig .ar{color:var(--fg3);text-align:center}
+.mig .new{font-weight:600}
+.mig .mid{font:500 11px ui-monospace,Menlo,monospace;color:var(--fg3)}
+@media (max-width:600px){.mig .r{grid-template-columns:1fr}.mig .ar{display:none}.mr .res{min-width:0}}
+/* 附录 */
+details.dev{margin-top:48px;background:var(--card);border-radius:14px;box-shadow:0 0 0 1px var(--line);padding:12px 16px}
+details.dev>summary{cursor:pointer;font-weight:700;font-size:15px}
+.dev h4{font-size:14px;margin:18px 0 6px}
+.dev table{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.55}
+.dev th,.dev td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.dev th{color:var(--fg3);font-weight:500}
+.dev .tw{overflow-x:auto}
+.dev pre.notes{white-space:pre-wrap;font-size:12.5px;background:var(--step);border-radius:8px;padding:10px 12px;overflow-x:auto}
+.dev code{font:11.5px ui-monospace,Menlo,monospace;background:var(--step);padding:1px 4px;border-radius:4px}
+.dev .files{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;font-size:12.5px}
+.dev .f{background:var(--step);border-radius:8px;padding:8px 10px}
+.dev .f b{display:block}
+.dev .tag{font-size:10.5px;color:var(--you);font-weight:700;margin-left:4px}
+.dec.pend{color:var(--bad);background:var(--bad-bg)}
+.c.pendc{box-shadow:0 0 0 2px var(--bad)}
+.pendt{color:var(--bad)}
+.dev tr.st-pending td{background:var(--bad-bg)}
+.dev tr.st-void td{text-decoration:line-through;color:var(--fg3)}
+.mr{flex-wrap:wrap}
+@media (max-width:600px){.mr .res{flex-basis:100%;text-align:left;padding-left:26px}.ctl{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<main>
+<h1>审核配置：看不见的部分</h1>
+<div class="ask">请一组一组往下看，每张卡只有「问题、答案、一个小例子」。哪张不对，报右下角的编号；都对就回「后端也可以」。</div>
+<p class="lead">纯技术的规则放在最底下的折叠里，给开发和审核用。（23 张卡；完整规则 52 条在最底下的折叠里）</p>
+<div class="toc"><a href="#g1">① 我在页面上改了以后</a><a href="#g2">② 升级以后</a><a href="#g3">③ dev 怎么挑模型、审几轮</a><a href="#g4">④ 出问题的时候</a><a href="#gm">现在的东西会变成什么样</a></div>
+<div id="cards"><section class="grp" id="g1"><h2>① 我在页面上改了以后</h2><p>点了就保存。下面是保存之后的事。</p><div class="c"><p class="q">改完什么时候生效？<span class="dec">已定</span></p><p class="a">下一次审核就按新的；正在审的那个不受影响。</p><div class="steps"><span>GPT 正在审代码</span><i>→</i><span>你把 DeepSeek 拖到第一</span><i>→</i><span>GPT 照常审完</span><i>→</i><span class="end">下一道关先找 DeepSeek</span></div><span class="id">后-20</span></div><div class="c"><p class="q">保存失败了会怎样？</p><p class="a">页面退回原值、弹红色提示；dev 读到的和页面一致。万一保存时断电，CodePal 下次启动会自动对齐。</p><div class="steps"><span>把轮数改成 4</span><i>→</i><span>磁盘满了没存上</span><i>→</i><span class="end">页面退回 3，dev 读到的也是 3</span></div><span class="id">后-10</span></div><div class="c"><p class="q">「恢复默认」恢复什么？</p><p class="a">只恢复审核规则；模型的开关、顺序、思考等级不动。</p><div class="steps"><span>你改过：代码审核 3 个、最长 30 分钟，还把 DeepSeek 排第一</span><i>→</i><span>点「恢复默认」</span><i>→</i><span class="end">代码审核回 2 个、最长回 20 分钟，DeepSeek 还在第一</span></div><span class="id">后-14</span></div><div class="c"><p class="q">改回和建议值一样，算改过吗？</p><p class="a">不算。以后升级会跟着新建议走。</p><div class="steps"><span>开工前检查 3 → 4 轮</span><i>→</i><span>过两天又改回 3 轮</span><i>→</i><span class="end">算「没改过」</span></div><span class="id">后-13</span></div><div class="c"><p class="q">怎么知道一个任务中途改过规则？</p><p class="a">验收页上写明改过几次。</p><div class="steps"><span>任务跑了两天</span><i>→</i><span>中间你把代码审核 2 → 3 个</span><i>→</i><span class="end">验收页：「审核规则改过 1 次」</span></div><span class="id">后-30</span></div></section><section class="grp" id="g2"><h2>② 升级以后</h2><p>CodePal 和 dev 各自升级时会发生什么。</p><div class="c"><p class="q">升级 CodePal 后，建议值变了怎么办？<span class="dec">已定</span></p><p class="a">你改过的保留，没改过的跟新版本。</p><div class="steps"><span>2.1.17：代码审核 3 轮、最长 20 分钟</span><i>→</i><span>你只把最长改成 30 分钟</span><i>→</i><span>2.1.18 建议代码审核 4 轮</span><i>→</i><span class="end">升级后：4 轮 + 30 分钟</span></div><span class="id">后-16</span></div><div class="c"><p class="q">只升级了 CodePal，dev 没升级？</p><p class="a">页面顶部亮橙点；你的设置等 dev 升级后才生效。</p><div class="steps"><span>CodePal 是新版</span><i>→</i><span>dev 还是 0.12.10</span><i>→</i><span class="end">顶部橙点「版本太旧」，dev 照旧用它自带的规则</span></div><span class="id">后-33</span></div><div class="c"><p class="q">dev 比 CodePal 新，多了一个设置？</p><p class="a">多出来的那一项用 dev 的建议值，其余照你的。</p><div class="steps"><span>dev 新版多了一项</span><i>→</i><span>CodePal 旧版还没有它</span><i>→</i><span class="end">这一项用建议值，其他不变</span></div><span class="id">后-34</span></div></section><section class="grp" id="g3"><h2>③ dev 怎么挑模型、审几轮</h2><p>先用模拟器自己点一点，再看下面几张卡。</p><div class="sim" id="sim-pick"><h3>挑模型模拟器</h3><p class="hint">只演示「挑谁」：不含体检失败、能力不支持、审到一半换人（后-25、后-26）。改上面的条件、用 ↑ ↓ 调顺序、点模型名开关它，看 dev 会派谁（后-21、后-22、后-23）。</p>
+<div class="ctl"><label>谁写代码 <select id="sp-impl"><option value="anthropic">Claude Code</option><option value="openai">Codex</option></select></label>
+<label>这道关设 <select id="sp-max"><option>1</option><option selected>2</option><option>3</option></select> 个模型</label>
+<label><input type="checkbox" id="sp-self"> 写代码的那家也参与审核</label></div>
+<div class="ml" id="sp-ml"></div><div id="sp-out"></div></div>
+<script>
+(() => {
+// 模拟器：照 后-21 / 后-22 / 后-23。未覆盖：模型体检失败、能力不支持、正在审时换人（后-25、后-26）
+const FAM = { anthropic: 'Claude 家', openai: 'Codex 家', deepseek: 'DeepSeek 家', minimax: 'MiniMax 家' }
+let models = [
+  { n: 'Opus 5.5', v: 'Claude Code', f: 'anthropic', on: true },
+  { n: 'GPT-6.1-Sol', v: 'Codex', f: 'openai', on: true },
+  { n: 'GPT-6-Astra', v: 'Codex', f: 'openai', on: true },
+  { n: 'deepseek-flash', v: 'DeepSeek', f: 'deepseek', on: true },
+  { n: 'MiniMax-M3.1-Flash', v: 'MiniMax M Plan', f: 'minimax', on: false },
+]
+function run() {
+  const impl = document.getElementById('sp-impl').value
+  const max = +document.getElementById('sp-max').value
+  const want = max
+  const self = document.getElementById('sp-self').checked
+  const res = []
+  const seen = new Set() // 同一个模型一关只派一次（后-22）
+  let picked = 0
+  for (const m of models) {
+    if (!m.on) { res.push(['skip', '没打开']); continue }
+    if (picked >= want) { res.push(['skip', '已经够数']); continue }
+    if (!self && m.f === impl) { res.push(['skip', '跳过：写代码的那家']); continue }
+    if (seen.has(m.n)) { res.push(['skip', '跳过：这个模型已经派过']); continue }
+    seen.add(m.n); picked++; res.push(['pick', `派第 ${picked} 个`])
+  }
+  document.getElementById('sp-ml').innerHTML = models.map((m, i) => `<div class="mr"><span class="rk">${i + 1}</span><span class="mv"><button data-up="${i}">↑</button><button data-dn="${i}">↓</button></span><span class="nm"><button data-tg="${i}" style="border:0;background:none;padding:0;font-size:14px;color:var(--fg);${m.on ? '' : 'text-decoration:line-through;opacity:.5'}">${m.n}</button><span class="vd">${m.v}</span></span><span class="res ${res[i][0]}">${res[i][1]}</span></div>`).join('')
+  const names = models.filter((_, i) => res[i][0] === 'pick').map((m) => m.n)
+  let out
+  if (!names.length) {
+    const anyOn = models.some((m) => m.on)
+    const why = !anyOn ? '没有打开任何模型' : '能用的模型都是写代码的那家'
+    out = `<div class="out bad"><b>停下告诉你：审核不了</b>——${why}。</div>`
+  } else {
+    out = `<div class="out ${names.length < want ? 'warn' : 'ok'}">设了 ${want} 个，派了 <b>${names.join(' + ')}</b>${names.length < want ? `（只找到 ${names.length} 个，有几个派几个，验收页会写明）` : ''}，同时审，都通过才算过。</div>`
+  }
+  document.getElementById('sp-out').innerHTML = out
+}
+document.getElementById('sim-pick').addEventListener('click', (e) => {
+  const t = e.target.dataset
+  if (t.up !== undefined && +t.up > 0) { const i = +t.up; [models[i - 1], models[i]] = [models[i], models[i - 1]] }
+  else if (t.dn !== undefined && +t.dn < models.length - 1) { const i = +t.dn; [models[i + 1], models[i]] = [models[i], models[i + 1]] }
+  else if (t.tg !== undefined) models[+t.tg].on = !models[+t.tg].on
+  else return
+  run()
+})
+document.getElementById('sim-pick').addEventListener('change', run)
+run()
+
+})()
+</script>
+<div class="c"><p class="q">一道关派几个模型？<span class="dec">已定</span></p><p class="a">设几个就派几个，不管任务大小。</p><div class="steps"><span>代码审核设 2 个</span><i>→</i><span>改一个按钮颜色</span><i>→</i><span class="end">也派 2 个一起审</span></div><span class="id">后-21</span></div><div class="c"><p class="q">几个一起审，怎么算过？</p><p class="a">都说通过才算过。</p><div class="steps"><span>GPT：通过</span><i>→</i><span>DeepSeek：发现严重问题</span><i>→</i><span>改完两个都再看</span><i>→</i><span class="end">都通过才过</span></div><span class="id">后-24</span></div><div class="c"><p class="q">复审找谁？<span class="dec">已定</span></p><p class="a">找上一轮提意见的那个，你改了顺序也不换。</p><div class="steps"><span>第一轮 DeepSeek 提了意见</span><i>→</i><span>你把 MiniMax 拖到 DeepSeek 前面</span><i>→</i><span class="end">复审仍找 DeepSeek</span></div><span class="id">后-25</span></div><div class="c"><p class="q">提过意见的模型被你关掉了？<span class="dec">已定</span></p><p class="a">换顺序里下一个当替补，它接过原来的意见和已用的轮次。</p><div class="steps"><span>DeepSeek 提了严重问题</span><i>→</i><span>你在页面上关掉 DeepSeek</span><i>→</i><span class="end">MiniMax 接着审，意见不作废</span></div><span class="id">后-25</span></div><div class="c"><p class="q">正在审的时候，你把人数改少了？<span class="dec">已定</span></p><p class="a">这一轮先按原来的人数审完，下一轮才按新的。</p><div class="steps"><span>代码审核 3 个在审，DeepSeek 提了严重问题</span><i>→</i><span>你改成 1 个</span><i>→</i><span class="end">3 个都要审完，DeepSeek 点头才过</span></div><span class="id">后-20</span></div><div class="c"><p class="q">能来审的不够数？<span class="dec">已定</span></p><p class="a">有几个派几个，验收页写明实际派了几个。</p><div class="steps"><span>设 3 个，只开了 2 个能审的</span><i>→</i><span>派 2 个照样审</span><i>→</i><span class="end">验收页：「设 3 个，实际 2 个」</span></div><span class="id">后-23</span></div><div class="c"><p class="q">模型挂了、超时了？</p><p class="a">确认它真的停了，再换顺序里下一个没在审的；超时不会再把关卡锁死。</p><div class="steps"><span>GPT 被限流 → 换 MiniMax（DeepSeek 正在审，跳过）</span><i>→</i><span>MiniMax 超过 20 分钟 → 结束它</span><i>→</i><span class="end">换下一个接着审，迟到的结果不算</span></div><span class="id">后-26、后-27</span></div><div class="c"><p class="q">审了几轮还不过？</p><p class="a">每个模型轮次用完，自动加「高级」里设的轮数（默认 1 轮），还不过就停下找你。</p><div class="steps"><span>开工前检查每个 3 轮</span><i>→</i><span>DeepSeek 3 轮没让过</span><i>→</i><span>自动加到 4 轮</span><i>→</i><span class="badend">还不过 → 停下找你</span></div><span class="id">后-28</span></div><div class="c"><p class="q">你在验收页说「这里要改」之后？<span class="dec">已定</span></p><p class="a">你的否决就是授权：每个审核模型多审 1 轮，不再问你。</p><div class="steps"><span>自动加轮设成 0</span><i>→</i><span>验收时你划掉一条</span><i>→</i><span class="end">改完每个审核模型多审 1 轮</span></div><span class="id">后-43</span></div><div class="c"><p class="q">审核用哪个思考等级？</p><p class="a">用这页设的；「模型接入」里的只管你在终端手动用。</p><div class="steps"><span>这页：DeepSeek high</span><i>→</i><span>模型接入：DeepSeek max</span><i>→</i><span class="end">审核用 high，终端用 max</span></div><span class="id">后-29</span></div></section><section class="grp" id="g4"><h2>④ 出问题的时候</h2><p>原则：能接着干就接着干，并告诉你；真干不了才停。</p><div class="c"><p class="q">半夜 dev 读不出审核配置？<span class="dec">已定</span></p><p class="a">用默认规则接着审，验收页写明原因。</p><div class="steps"><span>你关了 Claude、DeepSeek 排第一</span><i>→</i><span>凌晨 2 点配置读不出</span><i>→</i><span>只用 Claude Code、Codex 接着审</span><i>→</i><span class="end">早上验收页写着原因</span></div><span class="id">后-32</span></div><div class="c"><p class="q">别人只装了 dev、没装 CodePal？</p><p class="a">用 Claude Code、Codex 互相审，按建议值。</p><div class="steps"><span>同事只装了 dev</span><i>→</i><span class="end">Claude Code 和 Codex 互相审</span></div><span class="id">后-31</span></div><div class="c"><p class="q">某个模型的 Key 过期了？</p><p class="a">它从「审核在用」里消失，不会被派。</p><div class="steps"><span>MiMo 的 Key 过期</span><i>→</i><span>模型接入里测一下失败</span><i>→</i><span class="end">审核不会派 MiMo</span></div><span class="id">后-35</span></div><div class="c"><p class="q">所有模型都连不上？</p><p class="a">停下告诉你「审核不了」。</p><div class="steps"><span>出差网络不好</span><i>→</i><span>每个模型都连不上</span><i>→</i><span class="badend">停下：「审核不了：都连不上」</span></div><span class="id">后-36</span></div><div class="c"><p class="q">CodePal 没开着？</p><p class="a">不影响，dev 按你上次的设置走。</p><div class="steps"><span>你关了 CodePal 去写代码</span><i>→</i><span class="end">dev 照样按上次的设置派审核</span></div><span class="id">后-37</span></div></section><section class="grp" id="gm"><h2>现在的东西会变成什么样</h2><p>删项目配置里的旧字段、改协议，动手前会再给你看改前改后。</p><div class="mig"><div class="r"><span class="old">审核顺序写在项目配置里</span><span class="ar">→</span><span class="new">在页面上拖 <span class="mid">后-39</span></span></div><div class="r"><span class="old">想加一个审核模型要改插件代码</span><span class="ar">→</span><span class="new">在页面上打开它 <span class="mid">后-40</span></span></div><div class="r"><span class="old">用 DeepSeek 审核要写你的原话授权</span><span class="ar">→</span><span class="new">打开就能用（协议第 3 节跟着改） <span class="mid">后-42</span></span></div><div class="r"><span class="old">轮次用完要你说「加一轮」</span><span class="ar">→</span><span class="new">自动加，加完还不过才找你 <span class="mid">后-43</span></span></div><div class="r"><span class="old">只剩一家套餐时插件特殊放行</span><span class="ar">→</span><span class="new">打开自审开关 <span class="mid">后-41</span></span></div><div class="r"><span class="old">第二个审核者必须换一家</span><span class="ar">→</span><span class="new">同一家的不同模型也能一起审 <span class="mid">后-22</span></span></div><div class="r"><span class="old">简版 / 正式版</span><span class="ar">→</span><span class="new">简单需求 · 快速开发 / 复杂需求 · 完整开发 <span class="mid">后-46</span></span></div><div class="r"><span class="old">模型接入页的思考等级</span><span class="ar">→</span><span class="new">旁边标「终端手动用」 <span class="mid">后-47</span></span></div></div></section></div>
+<details class="dev"><summary>给开发和审核：完整规则表（52 条）与技术细节</summary><div><h4>① 数据和负责人</h4><div class="tw"><table><tr><th>#</th><th>规则</th><th>触点</th><th>案例</th><th>状态</th></tr><tr class="st-ai"><td>后-01</td><td>审核配置只有 CodePal 写，dev 只读；dev 不读 CodePal 的其他任何文件。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>你在页面上把 DeepSeek 拖到第一 → CodePal 重写审核配置 → dev 下次派审核时读到「DeepSeek 第一」。dev 审核时记的东西写在它自己的账本里，从不改这份文件。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-02</td><td>审核配置是从「本页设置 + 审核规则 + 默认值表 + 模型接入里测通的模型」算出来的结果，不单独改它。有人手改：取值在范围内，dev 照用，你下次在页面上改任何一项时会被重新生成覆盖；超出范围或格式不对，按「读不出」处理（后-32）。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>有人用编辑器把「代码审核 3 轮」改成 9 轮（范围是 1–5）→ dev 判定配置无效，这次用默认规则接着审，验收页写明原因。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-03</td><td>CodePal 和 dev 的默认值从同一份带版本的正本生成（后-50），不各写一份。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>2.1.18 把代码审核建议改成 4 轮 → 正本改一处，CodePal 和 dev 生成出来都是 4 轮；只改了一边，交付前检查拦住。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-04</td><td>页面只告诉后台「改哪一项、改成什么」，不传文件路径；后台检查取值范围后再写。</td><td>C8</td><td>你把代码审核改成 2 个 → 页面只说「代码审核 · 个数 = 2」→ 后台确认 2 在 1–3 之间才写；要是传来 9，直接拒绝，文件不动。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-50</td><td>默认值只有一份带版本的正本，CodePal 和 dev 都从它生成，交付前核对两边实际内置的内容一致；只是重新生成文件、内容没变，不算「审核规则改过」。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>同一个默认值版本，CodePal 里代码审核是 2 个、dev 里是 1 个 → 交付前检查直接拦住。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-51</td><td>审核配置只放审核需要的字段：不放任何 Key；调用入口的本机路径只在本机用，不进送审材料和对外的证据。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>代码审核派了 GPT-6.1-Sol 和 GPT-6-Astra → 送审包里写「代码审核 2 个、用了这两个」→ 审核者看不到你的用户名目录和 Key。</td><td>AI 定</td></tr></table></div><h4>② 加载</h4><div class="tw"><table><tr><th>#</th><th>规则</th><th>触点</th><th>案例</th><th>状态</th></tr><tr class="st-ai"><td>后-05</td><td>四样东西各读各的、同时读：模型来源（Claude Code、Codex、模型接入）、本页设置、审核规则、dev 安装信息。谁坏只影响自己那块。</td><td>B1、A1、F1、F2、F3、F4、F5、F6、F9</td><td>打开页面 → 模型、你的设置、审核规则、dev 版本四样同时读 → 平时不到一秒骨架就消失。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-06</td><td>本页设置坏了 → 整页读取失败；审核规则坏了 → 只有「审核规则」页签失败，「模型」页签照常能改，重新生成审核配置时规则部分沿用上一份有效的；模型接入配置坏了 → 只少了接入的那几家；dev 信息读不到 → 那一端显示「版本未知」；给 dev 的审核配置坏了 → 用设置重新生成，生成失败才显示 F13。</td><td>F10、F12、F13、F7、F8、C13</td><td>审核规则文件被改坏了 → 「模型」页签照常能开关、排顺序，只有「审核规则」页签显示读取失败；DeepSeek 的 Key 文件读不出 → 只是「其余模型」里少了 DeepSeek 那一组。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-07</td><td>每次进页面、窗口回到前台都重读（同现在）。</td><td>B2</td><td>你在「模型接入」新测通了一个 MiMo 模型 → 切回本页 → 它出现在「其余模型」里，不用重启 CodePal。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-08</td><td>打开页面只读不写。审核配置在这些时候重新生成：你在本页改了任何一项；模型接入里测试结果变了、模型被删除或改名；Codex 下架或新出了模型；CodePal 启动时发现审核配置和设置对不上；升级后实际生效的值变了。内容没变不写。</td><td>B3、B5、F7、A8</td><td>MiMo 的 Key 过期，你在「模型接入」里测一下失败 → 不用打开本页，审核配置马上去掉 MiMo，dev 下一次就不会派它。</td><td>AI 定</td></tr><tr class="st-confirmed"><td>后-09</td><td>dev 版本：Claude Code 和 Codex 两端分别读，分别显示（已生效 / 没装 / 太旧 / 版本未知）；两端都正常才是全绿，任何一端有问题就标橙并写明是哪一端。版本未知不能当作支持。（10-05 用户定：两端分开写）</td><td>F10、F11</td><td>Claude Code 端装的是新版，Codex 端读不出版本 → 最上面一行「Claude Code 端已生效 · Codex 端版本未知」，橙色；不会因为一端正常就显示全绿。</td><td>用户定</td></tr></table></div><h4>③ 保存</h4><div class="tw"><table><tr><th>#</th><th>规则</th><th>触点</th><th>案例</th><th>状态</th></tr><tr class="st-ai"><td>后-10</td><td>每次保存分两步：先写「本页设置」或「审核规则」，再重新生成审核配置。第二步失败就把第一步退回，页面退回原值并弹红色提示。万一中途断电，两份对不上，CodePal 下次启动时以本页设置和审核规则为准，重新生成审核配置。</td><td>C1、C14、C2、C3、C5、C7、C8、C9、C11</td><td>你把开工前检查改成 4 轮：第一步存下了，生成审核配置时断电 → 重启 CodePal 时发现对不上，按你设的 4 轮重新生成；dev 在 CodePal 重启前读到的仍是 3 轮。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-11</td><td>写文件先写临时文件再替换，写到一半断电也不会留下半个文件。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>保存的那一瞬间电脑没电 → 重启后文件要么是改之前的样子，要么是改之后的样子，不会是写了一半、谁都读不出的样子。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-12</td><td>保存排队，一次只写一个；同一个配置目录只允许一个 CodePal 在写（多窗口共用后台；开发时多开要加锁）。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>你拖完顺序马上又改了一个轮数 → 两次保存一个接一个写，后面那次不会把前面拖好的顺序冲掉。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-13</td><td>你亲手把某项改回和这个版本的建议值一样，就当没改过（从审核规则里去掉）；升级后建议值碰巧变得和你的值一样，仍算你改过，不自动去掉。全部都没改过时「恢复默认」变灰。</td><td>A22</td><td>① 开工前检查 3 → 4 → 你又改回 3 → 算没改过。② 你把代码审核改成 4 轮，后来新版本建议值也变成 4 → 仍算你改过；再下个版本建议值变成 5，你的仍是 4。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-14</td><td>「恢复默认」一次清掉你改过的全部规则项，再重新生成审核配置；只管规则，不动模型的开关、顺序和思考等级。</td><td>C14</td><td>你改过：代码审核 3 个、最长 30 分钟，还把 DeepSeek 拖到了第一 → 点「恢复默认」后代码审核回到 2 个、最长回到 20 分钟；DeepSeek 仍然排第一，开关和思考等级也不变。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-15</td><td>改顺序时把整串新顺序一次存下，不是一行一行挪。</td><td>C6、E2</td><td>你把第 5 个 GPT-6-Astra 拖到第 2 → 存下的是整串「Opus、GPT-6-Astra、GPT-6.1-Sol、deepseek-flash、MiniMax」，不是「第 5 个往上挪 3 格」，中途出错也不会排乱。</td><td>AI 定</td></tr></table></div><h4>④ 默认值和升级</h4><div class="tw"><table><tr><th>#</th><th>规则</th><th>触点</th><th>案例</th><th>状态</th></tr><tr class="st-confirmed"><td>后-16</td><td>实际生效的值 = 这个版本的默认值，再用你改过的项盖上去。（题 1 已定 A。）</td><td>B7</td><td>2.1.17 时你只把「最长」改成 30 分钟 → 升级到 2.1.18（建议代码审核 4 轮）→ 代码审核变 4 轮，最长仍是 30 分钟。</td><td>用户定</td></tr><tr class="st-ai"><td>后-17</td><td>CodePal 升级后第一次启动，如果实际生效的值变了，重新生成审核配置；没变不写。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>升级到 2.1.18 后第一次打开 CodePal：代码审核建议从 3 变 4、你没改过 → 自动重新生成审核配置，dev 下次就按 4 轮；这次升级没改任何建议值 → 文件不动。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-18</td><td>审核配置里写明默认值版本，出了问题能查到用的是哪一版建议值。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>哪天审核突然变成 4 轮 → 打开审核配置看到「默认值版本 2.1.18」→ 知道是升级带来的，不是谁偷偷改的。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-19</td><td>这个版本的默认值：快速开发 开工前检查 1 个模型 · 3 轮、代码审核 2 个模型 · 3 轮；完整开发 需求对齐 1 · 3、答后再对齐 1 · 2、开工前检查 1 · 3、代码审核 2 · 3；自审关；最长 20 分钟、换模型 3 次、自动加 1 轮。</td><td>A20</td><td>新装 CodePal、什么都没改 → 打开「审核规则」页签 → 代码审核 2 个模型一起审，其余关各 1 个（你 10-05：2–3 个一起审效率更高）。</td><td>AI 定</td></tr></table></div><h4>⑤ 执行</h4><div class="tw"><table><tr><th>#</th><th>规则</th><th>触点</th><th>案例</th><th>状态</th></tr><tr class="st-confirmed"><td>后-20</td><td>每次派审核前读一次审核配置；你中途改了规则，下一次审核起按新的。正在进行的这一轮先按开审时的规则走完，已经提出的严重问题必须改好、提出它的审核者（或它的替补）点头才算过。（10-05 用户定）</td><td>B9</td><td>代码审核 3 个在审，GPT、MiniMax 通过，DeepSeek 提了严重问题；你这时改成 1 个 → 这一轮 3 个都要走完，DeepSeek 的问题改好、它点头才过；之后的关和下一个任务才派 1 个。</td><td>用户定</td></tr><tr class="st-confirmed"><td>后-21</td><td>派几个：就是这道关设的个数，不管任务大小（10-05 用户定：设几个就派几个）。原来「改坏了后果大自动多派」取消；后果大的任务仍会多做专项验证。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>代码审核设 2 个 → 改按钮颜色派 2 个，改「写 Claude Code 设置文件」的逻辑也派 2 个。想让某道关更严，就在页面上把个数调大。</td><td>用户定</td></tr><tr class="st-confirmed"><td>后-22</td><td>挑谁：按顺序从上往下找；自审开关关着时跳过写代码那一家的所有模型；同一个模型在一道关里只派一次，同一家的不同模型可以一起审（10-05 用户定：不限）；跳过最近体检不通、调不起来的。</td><td>A21、C10</td><td>顺序是 Opus、GPT-6.1-Sol、GPT-6-Astra、deepseek-flash，Claude 写代码，设 2 个 → 跳过 Opus（Claude 家）→ 派 GPT-6.1-Sol、GPT-6-Astra 两个一起审。</td><td>用户定</td></tr><tr class="st-confirmed"><td>后-23</td><td>不够就有几个派几个，页面上橙字提醒，验收页写明「实际派了几个」；一个都没有就停下，告诉你「审核不了」和原因（都关了 / 都是写代码那家 / 都连不上）。（10-05 用户定）</td><td>A2、A3、B8</td><td>代码审核设 3 个，Claude 写代码，只开了 GPT-6.1-Sol 和 deepseek-flash → 派这 2 个审，验收页写「代码审核：设 3 个，实际 2 个」；如果只开了 Opus、自审关着 → 停下告诉你「审核不了：能用的模型都是写代码的那家（Claude）」。</td><td>用户定</td></tr><tr class="st-ai"><td>后-24</td><td>几个模型同时审，都通过才算这道关过；任何一个提出的严重问题都要改完。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>GPT 说通过，DeepSeek 说「备份后原件被改了会被直接删掉」是严重问题 → 这道关不过；改完两个都再看，都说通过才过。</td><td>AI 定</td></tr><tr class="st-confirmed"><td>后-25</td><td>某个模型已经给过意见，复审还找它。它被你关掉、连不上、超时时，换顺序里下一个能用、且不在这道关里正在审的模型当替补；替补接过它的意见和已用掉的轮次接着审，意见不会因为换人作废。（10-05 用户定）</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>第一轮 DeepSeek 提了严重问题，改代码期间你在页面上关掉了 DeepSeek → 复审交给顺序里下一个 MiniMax，它拿到 DeepSeek 的意见和已用的 1 轮，接着审，最多再审 2 轮。</td><td>用户定</td></tr><tr class="st-ai"><td>后-26</td><td>模型挂了、超时、被限流 → 按顺序换下一个能用、不在这道关里正在审的模型；换模型的次数整道关一起算，最多「高级」里设的次数。</td><td>C11</td><td>GPT-6.1-Sol 和 DeepSeek 同时审，GPT 被限流 → 跳过正在审的 DeepSeek，换 MiniMax；这道关已换 1 次，最多 3 次。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-27</td><td>一次审核超过「一次审核最长」就结束：确认这次启动的审核进程连同它的子进程真的都停了，再记成「超时」、派替补；旧那次迟到的结果作废。不能再出现超时后这道关锁死、或两个模型重复在跑的情况（现在 0.12.8 / 0.12.10 的已知坑，这次一起修）。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>#62 那次 Codex 审了 15 分钟被结束，插件没记「已结束」，这道关再也派不出去。改后：超过 20 分钟 → 结束它和它启动的子进程 → 记超时 → 换 DeepSeek 接着审；原来那次后来才回来的结果不算数。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-28</td><td>轮次按每个模型（席位）算；用完自动加「高级」里设的轮数，每个席位只加一次，换人不会重新拿到一套轮次；加完还不过就停下找你。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>开工前检查每个 3 轮，DeepSeek 3 轮都没让过 → 自动加 1 轮变 4 轮 → 第 4 轮还不过 → 停下找你；中途换成 MiniMax 接替，也只剩原来那 4 轮里没用完的。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-29</td><td>思考等级按审核配置里的值传给模型；只用这个模型实际支持的档位：不支持了就退回它的默认档并在页面提示，没有档位可调的（如 MiniMax M3）调用时不传。CodePal 所有渠道都只认传进来的等级，不再同时塞两份。</td><td>A24、B4、C4</td><td>你在本页把 DeepSeek 设成 high，「模型接入」里设的是 max → 审核用 high，终端用 max；某个 Codex 模型不再支持 max → 页面显示它的默认档并提示「原来的 max 不再支持」。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-30</td><td>每道关开审时，把当时完整的生效规则和派了谁存进账本；之后改规则、换人只追加记录，不改旧记录，回放时按当时的记录算，不用今天的配置重算。验收页写「这个任务期间审核规则改过几次」。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>一个任务跑了两天，中间你把代码审核从 2 个改成 3 个 → 第一轮的 2 个和第二轮的 3 个各有完整记录；验收页写「审核规则改过 1 次」。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-48</td><td>迁移范围不止门表：两道需求对齐关也按新规则派（人数、自审开关、轮次）；核心状态机放宽到 1–3 个审核席位；删掉「第三家推翻否决」的裁决分支（都通过才过以后不再需要），僵持时按轮次用完停下找你。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>需求对齐设 2 个 → 必须留下 2 份对当前计划的有效审核记录，两个都通过才算对齐。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-49</td><td>dev 不再依赖你在「模型接入」点过「安装命令」：调用接入模型时直接走 CodePal 自带的命令行入口并指定模型；Claude Code、Codex 订阅模型分别传模型名和思考等级。测通了但调不起来（比如 CodePal 被移走）→ 写明原因，不悄悄少派。</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>页面上 DeepSeek 打开的是第二个模型 deepseek-pro → 调用时就指定 deepseek-pro，不是 DeepSeek 列表里的第一个。</td><td>AI 定</td></tr></table></div><h4>⑥ 出问题时</h4><div class="tw"><table><tr><th>#</th><th>规则</th><th>触点</th><th>案例</th><th>状态</th></tr><tr class="st-ai"><td>后-31</td><td>没装 CodePal / 还没有审核配置：页面上—；dev 用内置默认值，只用 Claude Code、Codex 两家订阅（找得到命令、登录了的）</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>同事只装了 dev、没装 CodePal → 他的任务用 Claude Code 和 Codex 互相审，轮数按建议值。</td><td>AI 定</td></tr><tr class="st-confirmed"><td>后-32</td><td>审核配置坏了、格式不认识、取值超出范围：页面上最上面橙字「dev 正在用默认规则」，自动重新生成（F13）；dev 用默认规则接着审，只用 Claude Code、Codex，验收页写明原因（题 2 已定）</td><td>F13</td><td>你关了 Claude、DeepSeek 排第一，凌晨 2 点 dev 读不出审核配置 → 只用 Claude Code、Codex 按建议值接着审；早上验收页写着原因，打开 CodePal 时配置已重新生成。</td><td>用户定</td></tr><tr class="st-ai"><td>后-33</td><td>dev 太旧，不认这份配置：页面上最上面橙点 F11；dev 旧 dev 照旧用它自己写死的规则</td><td>F11</td><td>你升级了 CodePal，但 dev 还是 0.12.10 → 页面最上面橙点；dev 照旧按它写死的规则（只认 DeepSeek 一条路线），你页面上的设置要等升级 dev 后才生效。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-34</td><td>CodePal 太旧，配置里缺了新版 dev 要的项：页面上—；dev 缺的项用 dev 内置默认值补上，其余照配置</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>dev 新版多了一个设置项，CodePal 还是旧版、配置里没有这一项 → 这一项 dev 用自己的建议值，其余照你的设置。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-35</td><td>某个模型测不通、Key 失效、被下架、改名：页面上从「审核在用」里消失；恢复后回到原位；改名的当新模型；dev 审核配置里没有它；审核那一刻临时连不上就按 后-26 换人</td><td>A7、A9、A11、A23、B6</td><td>MiMo 的 Key 过期测不通 → 从审核配置里去掉，顺序位置留着；Key 更新、测通后回到原位。你在「模型接入」把 mimo-pro 改名成 mimo-max → 当新模型，测通后排到最后。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-36</td><td>所有模型都用不了：页面上—；dev 停下告诉你，按 后-23</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>你出差网络不好，所有模型都连不上 → 停下告诉你「审核不了：都连不上」。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-37</td><td>CodePal 没开着：页面上—；dev 不影响，审核配置一直在；终端命令不需要 CodePal 开着</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>你把 CodePal 关了去写代码 → dev 照样按你上次在页面上设的规则派审核。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-38</td><td>审核进行中你改了规则：页面上照常保存；dev 按 后-20、后-25</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>代码审核正在审 → 你把个数从 2 改成 3 → 这一轮照旧走完，下一次审核起派 3 个（同 后-20）。</td><td>AI 定</td></tr></table></div><h4>⑦ 迁移</h4><div class="tw"><table><tr><th>#</th><th>规则</th><th>触点</th><th>案例</th><th>状态</th></tr><tr class="st-ai"><td>后-39</td><td>项目配置里的审核顺序、有哪几家套餐、付费授权、加轮授权、排除路线 → 删掉，由审核配置代替；项目配置只留开源边界、送审附带文件、共用依赖三样</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>现在 .dev-workflow/project-defaults.json 里写着「Codex 先、DeepSeek 后」→ 以后删掉这几行，以页面上你拖的顺序为准；开源边界那几行留着。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-40</td><td>插件代码里写死的审核关表、路线表（只认 DeepSeek 一条） → 变成内置默认值；实际用的模型和规则都从审核配置读</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>现在想让 MiniMax 参与审核 → 得改插件代码 → 以后在页面上打开它就行。</td><td>AI 定</td></tr><tr class="st-confirmed"><td>后-41</td><td>「只剩一家套餐」例外、「第二个审核者要第三家」 → 由自审开关代替；第二个审核者不再必须换一家（10-05 用户选 2B：同一家的不同模型也能一起审）</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>现在你只剩 Claude 一家套餐 → 插件有一条特殊放行规则 → 以后你打开自审开关就行。</td><td>用户定</td></tr><tr class="st-inherited"><td>后-42</td><td>付费路线要逐条授权；协议第 3 节「花钱先问」 → 删掉付费授权；协议改成「审核配置里打开的模型都可以用」（你 10-05 定的）</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>现在让 DeepSeek 审核 → 要写下你的原话授权 → 以后在页面上打开它就能用，协议第 3 节跟着改。</td><td>已定·继承</td></tr><tr class="st-confirmed"><td>后-43</td><td>加轮要你的原话授权 → 改成配置里的「自动加 N 轮」；用完停下找你保留。你在验收页否决后的返工复审另算：你的否决就是授权，每个审核模型额外 +1 轮，按那条否决只加一次，和自动加轮分开记。（10-05 用户定）</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>自动加轮设成 0，你在验收页划掉一条 → 改完代码后，每个审核模型多审 1 轮，不再问你；同一条否决重复处理也只加这一次。</td><td>用户定</td></tr><tr class="st-ai"><td>后-44</td><td>旧审核模型清单（CodePal 生成、没人读） → 换成审核配置</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>现在 CodePal 生成的审核模型清单 → 没人读 → 以后换成审核配置，dev 真的读它。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-45</td><td>本页设置没有顺序 → 加顺序；第一次按 Claude Code → Codex → 模型接入各家排</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>第一次打开新版页面，顺序是 Opus 5.5、GPT-6.1-Sol、deepseek-flash、MiniMax（Claude Code → Codex → 接入各家），之后以你拖的为准。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-46</td><td>dev 里叫简版 / 正式版 → 给你看的地方改成「简单需求 · 快速开发」「复杂需求 · 完整开发」；插件内部代号不动</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>dev 开工时的一行通知 → 从「走简版」→ 变成「走简单需求 · 快速开发」。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-47</td><td>模型接入页的思考等级 → 旁边标「终端手动用」</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>打开「模型接入」看 DeepSeek → 思考等级旁边写「终端手动用」→ 不会和本页的审核等级弄混。</td><td>AI 定</td></tr><tr class="st-ai"><td>后-52</td><td>正在用旧插件跑的任务、项目配置里的旧审核字段 → 先迁移再删：旧任务按旧规则做完，再删项目配置里的旧审核字段；协议第 3 节（付费、加轮）和第 6 节（配置来源）、插件说明一起改</td><td>无：dev 内部执行，用户在验收页看到结果</td><td>升级当天还有一个 #62 这样的任务停在代码审核 → 它按旧规则做完；之后的新任务才只读审核配置。</td><td>AI 定</td></tr></table></div><h4>技术细节</h4><pre class="notes">- 目录：~/Library/Application Support/CodePal/models/（可用 CODEPAL_MODELS_HOME 改）。本页设置 = 现有 hub.json 加 order[]；审核规则 = 新 review-rules.json（只存 overrides）；审核配置 = 新 review-config.json（0644，原子写），取代 review-models.json。
+- 审核配置草案字段：schemaVersion、generator、generatedAt、defaultsVersion、minDevWorkflow、models[]（按顺序：id / family / runner / model / effort / command）、selfReview、gates{ lite.G0 … formal.G4: {maxModels, rounds} }、advanced{ timeoutMinutes, failoverMax, autoExtendRounds }。格式定义放 dev 插件仓，CodePal 按它生成。
+- IPC 走 models: 前缀，返回 { success, data, error }：沿用 models:hubList / hubSetEnabled / hubSetEffort，新增 models:hubSetOrder、models:rulesGet、models:rulesSet { key, value }、models:rulesReset。
+- Claude Code 端版本：~/.claude/skills/dev-workflow/.claude-plugin/plugin.json 的 version（本机 0.12.10）。
+- 待查：Codex 端 ~/.codex/plugins/cache/ 下同时留着多个版本，当前启用哪个要读 Codex 插件配置，实现时核实；读不出时 Codex 端显示「版本未知」（橙），不当作支持（后-09）。
+- 读取用 Promise.allSettled，每块独立出错。
+- 替换现有：review_eligibility.GATE_TABLE → 默认值；seat_review_gate.candidate_routes → 按 models[] 顺序；同厂商判断按 family。订阅模型走 claude / codex exec 并传模型名与等级；接入模型走 CodePal 命令行入口并指定模型 ID（直接用已有的 cli.cjs launch &lt;provider&gt; &lt;modelId&gt;，不依赖 codepal-&lt;家&gt; 那个固定取第一个模型的入口，后-49）。
+- 执行授权里冻结的路线清单改为「审核配置指纹」，改配置不再需要重新授权。
+- 超时记账：结束子进程后补写「进程已退出」的结算事件（0.12.9 待修那条）。</pre></div></details>
+</main>
+</body>
+</html>

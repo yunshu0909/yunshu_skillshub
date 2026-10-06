@@ -74,6 +74,12 @@ temp/
 .env
 .env.local
 .env.*.local
+*.env
+!*.env.example
+
+# Python runtime caches
+__pycache__/
+*.py[cod]
 
 # Test coverage
 coverage/
@@ -82,3 +88,20 @@ coverage/
 # Build outputs (if any)
 dist/
 build/
+
+# Local README planning drafts and feedback
+/docs/readme-planning/
+
+# Local Markdown rendering previews
+/docs/readme-preview/
+
+# Local only: category folder READMEs, maintainer review page, raw image outputs
+/agent/README.md
+/brand/README.md
+/coding/README.md
+/learning/README.md
+/thinking/README.md
+/visualization/README.md
+/writing/README.md
+/skill-review.html
+/assets/readme/source/*/out/
