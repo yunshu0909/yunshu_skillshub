@@ -1,7 +1,7 @@
 <p align="right"><strong>简体中文</strong> · <a href="./README.en.md">English</a></p>
 
 <p align="center">
-  <img src="./assets/readme/hero.png" width="100%" alt="云舒的 Skills 搭子：蓝帽狗子和两个 AI 搭子走在一座漂浮小岛上，岛上七间小屋分别是开发、思考、学习、写作、可视化、品牌和 Agent" />
+  <img src="./assets/readme/hero.jpg" width="100%" alt="云舒的 Skills 搭子：蓝帽狗子和两个 AI 搭子走在一座漂浮小岛上，岛上七间小屋分别是开发、思考、学习、写作、可视化、品牌和 Agent" />
 </p>
 
 <h1 align="center">Yunshu SkillsHub</h1>

@@ -1,7 +1,7 @@
 <p align="right"><a href="./README.md">简体中文</a> · <strong>English</strong></p>
 
 <p align="center">
-  <img src="./assets/readme/hero.png" width="100%" alt="Yunshu's Skills crew: a husky in a blue cap and two AI buddies walking across a floating island with seven little houses for coding, thinking, learning, writing, visualization, brand and agents" />
+  <img src="./assets/readme/hero.jpg" width="100%" alt="Yunshu's Skills crew: a husky in a blue cap and two AI buddies walking across a floating island with seven little houses for coding, thinking, learning, writing, visualization, brand and agents" />
 </p>
 
 <h1 align="center">Yunshu SkillsHub</h1>

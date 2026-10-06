@@ -1,0 +1,106 @@
+{
+  "date": "2026-10-06",
+  "originalCommit": "dccfb0de416a65237c56eda71ba7c5811d711c4e",
+  "encoder": "sharp / libvips / mozjpeg",
+  "format": "JPEG",
+  "quality": 80,
+  "chromaSubsampling": "4:2:0",
+  "dimensionsPreserved": true,
+  "qrUnchanged": true,
+  "entries": [
+    {
+      "source": "assets/readme/hero.png",
+      "output": "assets/readme/hero.jpg",
+      "beforeBytes": 2364858,
+      "afterBytes": 322766,
+      "width": 1916,
+      "height": 821,
+      "sourceSha256": "0b0f0d29cf893f0253f2d42d68f1c306162515ffa4256927d9b1cbd2808b4b81",
+      "outputSha256": "baa1e0545486f1c88e9152348cb4b9c021d9b4ed7ea9e0a4e8ad8db514df6ff9"
+    },
+    {
+      "source": "assets/readme/scenes/about.jpg",
+      "output": "assets/readme/scenes/about.jpg",
+      "beforeBytes": 615231,
+      "afterBytes": 256495,
+      "width": 1916,
+      "height": 821,
+      "sourceSha256": "4fffe542d991a774dddccc959f69a603f8e2af2147adc97f671224aec0137d7a",
+      "outputSha256": "f76fd5159b448263119630f305797d27ae9a9285c197dc9c0714b6e990962698"
+    },
+    {
+      "source": "assets/readme/scenes/agent.jpg",
+      "output": "assets/readme/scenes/agent.jpg",
+      "beforeBytes": 575344,
+      "afterBytes": 237585,
+      "width": 1916,
+      "height": 821,
+      "sourceSha256": "9439fcd69a49fc4c8484bbf890550d8f58067ddf20bfb7bec8e8e06adb848ce5",
+      "outputSha256": "d2a00734f263568b9c2af66819239dc45914937bc01024c65a1a081485c18fe0"
+    },
+    {
+      "source": "assets/readme/scenes/brand.jpg",
+      "output": "assets/readme/scenes/brand.jpg",
+      "beforeBytes": 583637,
+      "afterBytes": 241587,
+      "width": 1916,
+      "height": 821,
+      "sourceSha256": "bb07d6ba1615e636e601df4163bfed7603c4b8fe00b692b52adf981b3f4b941a",
+      "outputSha256": "eecedf04b07ffcb4c33b2fa34eaa028aa42dd721641b903cd2b8179ea2971a07"
+    },
+    {
+      "source": "assets/readme/scenes/coding.jpg",
+      "output": "assets/readme/scenes/coding.jpg",
+      "beforeBytes": 525980,
+      "afterBytes": 215166,
+      "width": 1916,
+      "height": 821,
+      "sourceSha256": "fe60a7349fa7051f18381833396ade26005b8eead516b4f2aa58625b01383c69",
+      "outputSha256": "c4d7ea37c4a1244dbd331654ae46c95b1a3bd345c6cb0c5b1f8eff46f4bfa969"
+    },
+    {
+      "source": "assets/readme/scenes/learning.jpg",
+      "output": "assets/readme/scenes/learning.jpg",
+      "beforeBytes": 534951,
+      "afterBytes": 216765,
+      "width": 1916,
+      "height": 821,
+      "sourceSha256": "25bb06f761a8d07e096aa9af00eb4f1124b7eeee9167268919abb6c919c08de4",
+      "outputSha256": "f516ab2e01120ea0cd6731f2e07aeda286ce3506576493490b627fad26477cc7"
+    },
+    {
+      "source": "assets/readme/scenes/thinking.jpg",
+      "output": "assets/readme/scenes/thinking.jpg",
+      "beforeBytes": 598384,
+      "afterBytes": 244495,
+      "width": 1916,
+      "height": 821,
+      "sourceSha256": "4bbddc9e7ca8fcf67dedfa7dd6a42dd1cba93e616d2ef0a07431a8b292830866",
+      "outputSha256": "7f29acd04693c319f808019104d3f5c1592d5320172430e2c35b1356798f0512"
+    },
+    {
+      "source": "assets/readme/scenes/visualization.jpg",
+      "output": "assets/readme/scenes/visualization.jpg",
+      "beforeBytes": 568579,
+      "afterBytes": 232955,
+      "width": 1916,
+      "height": 821,
+      "sourceSha256": "5672af187a820c25704f1e7f10f35c4b7f87db026419148ff1816a21995b7969",
+      "outputSha256": "2850e57f667b904bedf898363a1d9ad9615e839bebeb2c32f5f4c3c302b98c89"
+    },
+    {
+      "source": "assets/readme/scenes/writing.jpg",
+      "output": "assets/readme/scenes/writing.jpg",
+      "beforeBytes": 586452,
+      "afterBytes": 237175,
+      "width": 1916,
+      "height": 821,
+      "sourceSha256": "19e8768e6ff097a295f57df066211b645aa6bb35c8ade7a68820c987c7e0f72b",
+      "outputSha256": "07b6635fbc60e5a760ffbdff34a4cbe5a22edff3026d5639e6005561dafbd850"
+    }
+  ],
+  "totalBeforeBytes": 7061453,
+  "totalAfterBytes": 2313026,
+  "note": "Light lossy re-encoding only. No resize, crop, repaint or generative edit. Original files are recoverable from originalCommit and backed up locally.",
+  "reductionPercent": 67.2
+}

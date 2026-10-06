@@ -16,6 +16,8 @@ Changes that affect use are recorded here. Dates use Asia/Shanghai time. `Unrele
 - 移除 EXAMPLES 案例页和产物截图，这一版 README 不放案例。
 - 更新日志对齐现有 Release，修正占位链接；旧文档中的 `1.0.0` 保留为历史记录，不再当作可下载的正式版本。
 
+- 优化 README 图片加载：头图与场景图保留原尺寸，轻微有损压缩后，含二维码的图片合计从约 7.06 MB 减至 2.31 MB；保存参数与逐图记录。
+
 ### 退役 / Removed
 
 - 本轮移出在用目录：`auto-task`、`project-map-builder`、`backlog-manager`、`prd-auto-test-loop`、`prd-doc-writer`、`lesson-builder`、`plan-report`、`design-exploration`、`macos-product-design`、`ui-design`、`version-planner`、`vision-exploration`、`priority-judge`、`weekly-report`。
