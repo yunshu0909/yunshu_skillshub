@@ -1,0 +1,14 @@
+Use the same style and character design as the reference image.
+
+A vertical 3:4 manga comic page with 3 panels. Follow the exact same art style, color palette, character design, and border style as the reference image.
+
+Main character: Juzi the Orange Cat (same design as reference - chubby round orange tabby cat, fluffy fur, round thin-rimmed glasses, red knitted scarf, rosy cheeks, cheerful expression).
+Second character: AI Helper, a small round friendly robot with a screen face and two dot eyes (same art style as the reference).
+
+Panel 1 (top left, 30%): Juzi lies relaxed on a beanbag with the laptop, casually typing. Speech bubble: "把这周的会议整理成一张表".
+
+Panel 2 (top right, 30%): The AI Helper zooms off with motion lines, plugging its single cable into the calendar socket and then the spreadsheet socket, little checkmarks popping up. Speech bubble from AI Helper: "查日历……写表格……".
+
+Panel 3 (bottom, full width, 40%): Scene "完成". A neat meeting table floats on the laptop screen with rows and checkmarks; Juzi raises both paws happily, the AI Helper gives a thumbs up, confetti around. Caption at the bottom: "一句话，AI 自己去调用工具".
+
+Rich visual details: calendar pages flipping, spreadsheet grid, coffee mug, confetti, sparkles. No brand logos anywhere. All Chinese text clearly readable. Light, easy and satisfying mood.

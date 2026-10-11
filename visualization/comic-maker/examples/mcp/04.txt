@@ -1,0 +1,16 @@
+Use the same style and character design as the reference image.
+
+A vertical 3:4 manga comic page with a title area and 3 stacked panels. Follow the exact same art style, color palette, character design, and border style as the reference image.
+
+Main character: Juzi the Orange Cat (same design as reference - chubby round orange tabby cat, fluffy fur, round thin-rimmed glasses, red knitted scarf, rosy cheeks, cheerful expression).
+Second character: AI Helper, a small round friendly robot with a screen face and two dot eyes (same art style as the reference).
+
+Panel 1 (header, 12%): Title "MCP 里的三个角色".
+
+Panel 2 (upper middle, 29%): Scene "AI 应用". The AI Helper (no logo or emblem anywhere on its body) sits at a control desk with a big screen, Juzi next to it typing a request. Label: "AI 应用：接收你的需求". Speech bubble from AI Helper: "我要查日历！".
+
+Panel 3 (lower middle, 29%): Scene "MCP 服务器". A small waiter-like character with an "MCP" badge on its chest carries a tray with a menu card, walking between the control desk and a shelf of tools. Label: "MCP 服务器：告诉 AI 能用哪些工具，并替它去办".
+
+Panel 4 (bottom, 30%): Scene "工具和数据". A busy back room: the calendar, mailbox, database cabinet and file folders as little working characters, one handing a schedule card to the waiter. Label: "你的工具和数据：真正干活的地方".
+
+Arrows connect the three panels top to bottom and back up, showing the request going down and the result coming back. Rich visual details: menu cards, trays, shelves, small gears. No brand logos anywhere. All Chinese text clearly readable. Clear, friendly explanatory mood.

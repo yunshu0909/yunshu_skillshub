@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/yunshu0909/yunshu_skillshub/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/yunshu0909/yunshu_skillshub?style=flat-square&color=4E63D9" /></a>
   <a href="./LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-172033?style=flat-square" /></a>
-  <img alt="25 skills" src="https://img.shields.io/badge/skills-25-E4AD53?style=flat-square&labelColor=172033" />
+  <img alt="27 skills" src="https://img.shields.io/badge/skills-27-E4AD53?style=flat-square&labelColor=172033" />
 </p>
 
 <p align="center">
@@ -145,13 +145,53 @@ for f in yunshu_skillshub/*/*/SKILL.md; do cp -R "$(dirname "$f")" ~/.claude/ski
 
 <img src="./assets/readme/scenes/visualization.jpg" width="100%" alt="可视化：画室里一边是乱纸堆，一边是画架上清楚的示意图" />
 
-让别人一眼看懂：看案例知道别人做出了什么，看配图抓住一个意思，看长文能顺着读完。
+让别人一眼看懂：看案例知道别人做出了什么，看配图抓住一个意思，看漫画和 PPT 跟着讲解走，看长文能顺着读完。
 
 | Skill | 什么时候用 | 会得到 |
 | --- | --- | --- |
 | [案例雷达 · `case-radar`](./visualization/case-radar/SKILL.md) | 想看看一个新领域里别人真做出了什么 | 带截图和来源的案例集 |
-| [配图助手 · `image-assistant`](./visualization/image-assistant/SKILL.md) | 文章或讲解要配图 | 每张图讲什么、图上写什么，以及生图提示词 |
+| [配图助手 · `image-render`](./visualization/image-render/SKILL.md) | 文章要配图、封面或海报 | 一套风格统一的图，28 种风格看样张选，常用尺寸都能出 |
+| [漫画助手 · `comic-maker`](./visualization/comic-maker/SKILL.md) | 想用漫画讲清一个概念 | 一期 3:4 竖版漫画小课堂，老师可以换成你自己的 IP |
+| [PPT 助手 · `scene-ppt`](./visualization/scene-ppt/SKILL.md) | 分享或讲课要一套 PPT | 把一篇文章放进一个世界里讲，一页一张 16:9 图（图片，不是可编辑的 .pptx） |
 | [可读长文 · `readable-output`](./visualization/readable-output/SKILL.md) | 想把资料、复盘或教程写成给人读的 | 结构清楚的 HTML 长文 |
+
+> 配图、漫画、PPT 三个助手用 Codex 内置的图像生成出图，需要本机装好 Codex CLI 并登录（走 Codex 订阅）。在 Claude Code 或 Codex 里都能用：Claude Code 负责设计画面时，出图交给 Codex。
+
+### 配图助手
+
+<p>
+  <img src="./assets/readme/cases/image-render-rpg.jpg" width="32%" alt="RPG 游戏界面风格配图" />
+  <img src="./assets/readme/cases/image-render-pixel.jpg" width="32%" alt="等距像素小岛风格配图" />
+  <img src="./assets/readme/cases/image-render-pencil.jpg" width="32%" alt="彩铅水彩风格配图" />
+</p>
+
+28 种风格，每种都有样张，第一次用时看图挑一个存成默认：
+
+<img src="./assets/readme/cases/image-render-styles.jpg" width="100%" alt="配图助手的 28 种风格样张" />
+
+### 漫画助手
+
+<p>
+  <img src="./assets/readme/cases/comic-maker-1.jpg" width="32%" alt="漫画小课堂示例页：Coding is all you need" />
+  <img src="./assets/readme/cases/comic-maker-2.jpg" width="32%" alt="漫画小课堂示例页：Code as Renderer" />
+  <img src="./assets/readme/cases/comic-maker-3.jpg" width="32%" alt="漫画小课堂示例页：Code as Orchestrator" />
+</p>
+
+老师可以换成你自己的 IP，给一张角色图就行。同一节课，三个老师：
+
+<img src="./assets/readme/cases/comic-maker-teachers.jpg" width="100%" alt="同一节 MCP 小课堂，分别由橘猫、小熊猫和哈士奇当老师" />
+
+### PPT 助手
+
+<p>
+  <img src="./assets/readme/cases/scene-ppt-classroom.jpg" width="32%" alt="小课堂世界的 PPT 封面" />
+  <img src="./assets/readme/cases/scene-ppt-rpg.jpg" width="32%" alt="RPG 世界的 PPT 内页" />
+  <img src="./assets/readme/cases/scene-ppt-kitchen.jpg" width="32%" alt="后厨世界的 PPT 内页" />
+</p>
+
+整套 PPT 只用一个世界讲完，现在有 11 个世界可选：
+
+<img src="./assets/readme/cases/scene-ppt-worlds.jpg" width="100%" alt="PPT 助手的 11 个世界样张" />
 
 <a id="brand"></a>
 

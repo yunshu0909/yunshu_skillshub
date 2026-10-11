@@ -1,0 +1,12 @@
+Use the same style and character design as the reference image.
+
+A vertical 3:4 manga comic page with 2 panels. Follow the exact same art style, color palette, character design, and border style as the reference image.
+
+Main character: Juzi the Orange Cat (same design as reference - chubby round orange tabby cat, fluffy fur, round thin-rimmed glasses, red knitted scarf, rosy cheeks, cheerful expression).
+Second character: AI Helper, a small round friendly robot with a screen face and two dot eyes (same art style as the reference).
+
+Panel 1 (top, 45%): Scene "小心插头". Juzi wears a detective hat and inspects an unfamiliar plug with a magnifying glass; the plug has a suspicious shadowy little face and a question mark above it. A row of trusted plugs with small shield badges sits on the table beside. Speech bubble from Juzi: "这个是谁做的？先看清楚再插". Caption: "只装信得过的 MCP 服务器".
+
+Panel 2 (bottom, 55%): Scene "总结". Juzi and the AI Helper stand in front of a big chalkboard, Juzi pointing at it with a pointer stick, the AI Helper holding the universal plug. On the chalkboard, written clearly in three lines: "AI 负责想", "MCP 负责接", "工具负责干活". Footer text at the bottom: "💡 MCP：让 AI 用上你的工具".
+
+Rich visual details: chalk dust, little doodles of plugs and sockets on the board, sparkles. No brand logos anywhere. All Chinese text clearly readable. Warm, confident wrap-up mood.

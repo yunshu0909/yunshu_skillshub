@@ -1,0 +1,12 @@
+Use the same style and character design as the reference image.
+
+A vertical 3:4 manga comic page with 2 panels. Follow the exact same art style, color palette, character design, and border style as the reference image.
+
+Main character: Juzi the Orange Cat (same design as reference - chubby round orange tabby cat, fluffy fur, round thin-rimmed glasses, red knitted scarf, rosy cheeks, cheerful expression).
+Second character: AI Helper, a small round friendly robot with a screen face and two dot eyes (same art style as the reference).
+
+Panel 1 (top, 45%): Scene "求助". Title at the very top: "MCP 是什么？". Juzi sits at a cozy desk with a laptop, cheerfully asking the AI Helper for help. Around the desk: a wall calendar, a mailbox stuffed with letters, a stack of folders, a coffee mug. Speech bubble from Juzi: "帮我看看明天的日程，顺便回个邮件".
+
+Panel 2 (bottom, 55%): Scene "够不着". The AI Helper is stuck inside a big glass jar on the desk, pressing its hands against the glass, sweat drops flying. Outside the jar, the calendar, the mailbox and the folders sit just out of reach. Juzi tilts head, puzzled, with a question mark. Speech bubble from AI Helper: "我很聪明，但我够不着它们……". Caption at the bottom: "AI 很会想，却碰不到你的工具".
+
+Rich visual details: papers, sticky notes, desk lamp, plants, little sparkles of confusion. No brand logos anywhere. All Chinese text clearly readable. Funny and relatable mood, clear problem setup.

@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/yunshu0909/yunshu_skillshub/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/yunshu0909/yunshu_skillshub?style=flat-square&color=4E63D9" /></a>
   <a href="./LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-172033?style=flat-square" /></a>
-  <img alt="25 skills" src="https://img.shields.io/badge/skills-25-E4AD53?style=flat-square&labelColor=172033" />
+  <img alt="27 skills" src="https://img.shields.io/badge/skills-27-E4AD53?style=flat-square&labelColor=172033" />
 </p>
 
 <p align="center">
@@ -145,13 +145,25 @@ Writing grows out of your own ideas. If your point is clear, build the outline a
 
 <img src="./assets/readme/scenes/visualization.jpg" width="100%" alt="Visualization: a studio with a messy pile of paper on one side and a clear diagram on the easel" />
 
-Make it easy to grasp at a glance: real examples of what others built, one clear idea per image, long reads people can follow to the end.
+Make it easy to grasp at a glance: real examples of what others built, one clear idea per image, comics and slides that walk people through, long reads people can follow to the end.
 
 | Skill | When to use it | What you get |
 | --- | --- | --- |
 | [Case radar · `case-radar`](./visualization/case-radar/SKILL.md) | You want to see what people have actually built in a new space | A case gallery with screenshots and sources |
-| [Image assistant · `image-assistant`](./visualization/image-assistant/SKILL.md) | An article or talk needs illustrations | What each image says, the exact on-image text, and prompts |
+| [Image render · `image-render`](./visualization/image-render/SKILL.md) | An article needs illustrations, a cover or a poster | A consistent set of images; pick from 28 styles by looking at samples, common aspect ratios supported |
+| [Comic maker · `comic-maker`](./visualization/comic-maker/SKILL.md) | You want to explain one idea as a comic | A 3:4 vertical comic "class", taught by your own character if you have one |
+| [Scene PPT · `scene-ppt`](./visualization/scene-ppt/SKILL.md) | You need slides for a talk or a lesson | An article told inside one "world", one 16:9 image per slide (images, not an editable .pptx) |
 | [Readable output · `readable-output`](./visualization/readable-output/SKILL.md) | You want to turn notes, a retro or a tutorial into something people read | A well-structured HTML long read |
+
+> The image, comic and slide skills render with Codex's built-in image generation, so Codex CLI must be installed and signed in (uses your Codex subscription). They work from Claude Code or Codex; when Claude Code designs the pictures, Codex does the rendering.
+
+<p>
+  <img src="./assets/readme/cases/image-render-rpg.jpg" width="32%" alt="Image render: RPG game UI style" />
+  <img src="./assets/readme/cases/comic-maker-1.jpg" width="20%" alt="Comic maker: a sample page" />
+  <img src="./assets/readme/cases/scene-ppt-kitchen.jpg" width="32%" alt="Scene PPT: a kitchen-world slide" />
+</p>
+
+More samples (28 styles, 11 worlds, swapping the teacher) are in the [Chinese README](./README.md#visualization).
 
 <a id="brand"></a>
 

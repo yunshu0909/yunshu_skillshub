@@ -1,0 +1,14 @@
+Use the same style and character design as the reference image.
+
+A vertical 3:4 manga comic page with 3 panels. Follow the exact same art style, color palette, character design, and border style as the reference image.
+
+Main character: Juzi the Orange Cat (same design as reference - chubby round orange tabby cat, fluffy fur, round thin-rimmed glasses, red knitted scarf, rosy cheeks, cheerful expression).
+Second character: AI Helper, a small round friendly robot with a screen face and two dot eyes (same art style as the reference).
+
+Panel 1 (top, full width, 45%): Scene "以前的做法". A wall behind Juzi covered with a chaotic tangle of cables. Each tool (a calendar, a mailbox, a database cabinet, a file folder) has its own oddly shaped plug: square, star-shaped, triangle, zigzag, all different. Adapters stacked on adapters. Juzi stands in the middle holding a bundle of cables, overwhelmed, sweat drops. Caption: "以前：每个工具都要单独写一套对接".
+
+Panel 2 (bottom left, 27%): Juzi wearing safety goggles, soldering yet another weird adapter, a pile of finished adapters beside. Speech bubble: "又一个转接头……".
+
+Panel 3 (bottom right, 28%): One of the tools gets a shiny update badge and its plug changes shape; the old cable pops out with a little spark. Juzi falls back in shock. Speech bubble: "工具一更新，对接就断了".
+
+Rich visual details: cables, plugs, sockets, toolbox, scattered screws. No brand logos anywhere. All Chinese text clearly readable. Chaotic, exhausted but comedic mood.

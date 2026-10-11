@@ -1,0 +1,10 @@
+Use the same style and character design as the reference image.
+
+A vertical 3:4 manga comic page with 1 large panel. Follow the exact same art style, color palette, character design, and border style as the reference image.
+
+Main character: Juzi the Orange Cat (same design as reference - chubby round orange tabby cat, fluffy fur, round thin-rimmed glasses, red knitted scarf, rosy cheeks, cheerful expression).
+Second character: AI Helper, a small round friendly robot with a screen face and two dot eyes (same art style as the reference).
+
+Panel 1 (full page, cover): Scene "开课". At the very top, a string of small colorful triangle bunting flags, one Chinese character on each flag, spelling: "橘子小课堂". Below it, a big decorative title with sparkles: "橘子小课堂开课啦！". In the middle, a cozy classroom: Juzi stands in front of a green chalkboard, waving one paw happily like a teacher, a pointer stick in the other paw. On the chalkboard, written large in chalk: "MCP 是什么？", with a small chalk doodle of a plug and a socket next to it. The AI Helper sits on the teacher's desk swinging its legs, looking curious. Wooden student desks in the foreground, a few books, a globe, a potted plant. Speech bubble from Juzi: "同学们好！今天我们来聊聊 MCP～".
+
+Rich visual details: chalk dust, sparkles, bunting flags, warm sunlight through the classroom window. No brand logos anywhere. All Chinese text clearly readable. Warm, welcoming opening mood.

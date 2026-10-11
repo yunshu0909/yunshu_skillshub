@@ -8,18 +8,24 @@ Changes that affect use are recorded here. Dates use Asia/Shanghai time. `Unrele
 
 ### 调整 / Changed
 
-- 当前整理版保留 **25 个在用 skill，7 个分类**：Coding 9、产品品牌 2、思考 3、学习 2、可视化 3、写作 2、Agent 4。分类路径改变，安装继续使用 skill 名称。
+- 当前整理版保留 **27 个在用 skill，7 个分类**：Coding 9、产品品牌 2、思考 3、学习 2、可视化 5、写作 2、Agent 4。分类路径改变，安装继续使用 skill 名称。
 - 文件夹整理 `organize` 并入 Agent 助手，取消单独的小工具分类；`system-study` 属于学习，`github-repo-search` 属于 Coding。
 - 开发暂以独立 skills 组合使用：引入或更新 Issue 池、页面方案、后端逻辑设计、PRD 与测试用例、已有需求变更。保留 `dual-agent-collaboration`，不加入 `cross-model-review`；本轮不发布 dev-workflow 插件。
-- 中英文 README 按场景解释方法，通过各场景表格介绍全部 25 个 skill 的用途与交付物。
+- 中英文 README 按场景解释方法，通过各场景表格介绍全部 27 个 skill 的用途与交付物。
 - 重做 README：头图改为七间小屋的“Skills 小岛”地图，“这是什么”和七个场景各配一张同一像素世界的场景图；开发排在最前，正文按场景用表格介绍，结尾加入微信二维码。画面单、提示词和生成记录保存在 `assets/readme/source/readme-20261006/`。
-- 移除 EXAMPLES 案例页和产物截图，这一版 README 不放案例。
+- 移除 EXAMPLES 案例页和产物截图；案例图只在可视化一节按 skill 放。
 - 更新日志对齐现有 Release，修正占位链接；旧文档中的 `1.0.0` 保留为历史记录，不再当作可下载的正式版本。
 
 - 优化 README 图片加载：头图与场景图保留原尺寸，轻微有损压缩后，含二维码的图片合计从约 7.06 MB 减至 2.31 MB；保存参数与逐图记录。
 
+### 新增 / Added
+
+- 可视化新增三个出图助手：配图助手 `image-render`（28 种带样张的风格、多种尺寸）、漫画助手 `comic-maker`（漫画小课堂，可换成自己的 IP）、PPT 助手 `scene-ppt`（11 个世界，一页一张 16:9 图）。三者都用 Codex 内置图像生成出图，需要本机装好并登录 Codex CLI。
+- README 可视化一节加入三个助手的案例图，图放在 `assets/readme/cases/`。
+
 ### 退役 / Removed
 
+- 配图助手旧版 `image-assistant`（apimart API 出图）由 `image-render` 取代，不再保留。
 - 本轮移出在用目录：`auto-task`、`project-map-builder`、`backlog-manager`、`prd-auto-test-loop`、`prd-doc-writer`、`lesson-builder`、`plan-report`、`design-exploration`、`macos-product-design`、`ui-design`、`version-planner`、`vision-exploration`、`priority-judge`、`weekly-report`。
 - 临时退役目录 `pending/` 已移除。旧版本中的目录可从对应版本或 Git 历史查阅。
 

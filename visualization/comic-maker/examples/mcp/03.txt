@@ -1,0 +1,10 @@
+Use the same style and character design as the reference image.
+
+A vertical 3:4 manga comic page with 1 large panel. Follow the exact same art style, color palette, character design, and border style as the reference image.
+
+Main character: Juzi the Orange Cat (same design as reference - chubby round orange tabby cat, fluffy fur, round thin-rimmed glasses, red knitted scarf, rosy cheeks, cheerful expression).
+Second character: AI Helper, a small round friendly robot with a screen face and two dot eyes (same art style as the reference).
+
+Panel 1 (full page): Scene "统一接口". Title at the top: "MCP = 给 AI 用的万能插座". In the center, Juzi proudly holds up one single universal plug like a trophy, with sparkles around it. Behind Juzi, a clean wall with a neat row of identical sockets, and every tool (calendar, mailbox, database cabinet, file folder, web browser window) is now plugged in with the same simple cable. The AI Helper floats happily next to Juzi, connected to the row by one tidy cable. A small label on the plug reads: "MCP". Caption at the bottom: "统一标准：工具按 MCP 接一次，支持 MCP 的 AI 都能用".
+
+Rich visual details: tidy cables, glowing socket lights, happy little tool characters with tiny faces. No brand logos anywhere. All Chinese text clearly readable. Bright, relieved, triumphant mood with strong contrast to the previous tangled mess.
