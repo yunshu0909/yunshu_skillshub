@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/yunshu0909/yunshu_skillshub/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/yunshu0909/yunshu_skillshub?style=flat-square&color=4E63D9" /></a>
   <a href="./LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-172033?style=flat-square" /></a>
-  <img alt="27 skills" src="https://img.shields.io/badge/skills-27-E4AD53?style=flat-square&labelColor=172033" />
+  <img alt="28 skills" src="https://img.shields.io/badge/skills-28-E4AD53?style=flat-square&labelColor=172033" />
 </p>
 
 <p align="center">
@@ -194,6 +194,7 @@ Handing work to an agent takes more than "go do it". It needs a clear goal and c
 | [Project memory · `memory-init`](./agent/memory-init/SKILL.md) | A new project where you don't want to re-explain everything | `CLAUDE.md`, `MEMORY.md` and `memory/` |
 | [Companion persona · `hermes-persona-builder`](./agent/hermes-persona-builder/SKILL.md) | You're defining a persona for Hermes or a companion agent | A ready-to-use `SOUL.md` |
 | [Folder cleanup · `organize`](./agent/organize/SKILL.md) | Files have piled up and naming is a mess | A plan and a tidy folder |
+| [Skill usage audit · `skill-loader-audit`](./agent/skill-loader-audit/SKILL.md) | See which skills Claude Code or Codex has used recently and decide which to keep enabled | An HTML usage report and a reversible plan to enable or disable selected skills (Python 3.11+) |
 
 ## Say hi
 

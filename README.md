@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/yunshu0909/yunshu_skillshub/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/yunshu0909/yunshu_skillshub?style=flat-square&color=4E63D9" /></a>
   <a href="./LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-172033?style=flat-square" /></a>
-  <img alt="27 skills" src="https://img.shields.io/badge/skills-27-E4AD53?style=flat-square&labelColor=172033" />
+  <img alt="28 skills" src="https://img.shields.io/badge/skills-28-E4AD53?style=flat-square&labelColor=172033" />
 </p>
 
 <p align="center">
@@ -222,6 +222,7 @@ for f in yunshu_skillshub/*/*/SKILL.md; do cp -R "$(dirname "$f")" ~/.claude/ski
 | [项目记忆 · `memory-init`](./agent/memory-init/SKILL.md) | 新项目，不想每次重讲一遍背景 | `CLAUDE.md`、`MEMORY.md` 和 `memory/` |
 | [陪伴型人设 · `hermes-persona-builder`](./agent/hermes-persona-builder/SKILL.md) | 给 Hermes 或陪伴型 Agent 定人设 | 可以直接用的 `SOUL.md` |
 | [文件夹整理 · `organize`](./agent/organize/SKILL.md) | 文件堆得乱，命名也乱 | 分类方案和整理好的目录 |
+| [技能使用盘点 · `skill-loader-audit`](./agent/skill-loader-audit/SKILL.md) | 想知道 Claude Code 或 Codex 最近用过哪些技能，打算清理低频项 | 按使用证据排序的 HTML 报告、可预览和恢复的启停计划（Python 3.11+） |
 
 ## 认识一下
 

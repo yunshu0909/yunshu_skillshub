@@ -20,6 +20,8 @@ Changes that affect use are recorded here. Dates use Asia/Shanghai time. `Unrele
 
 ### 新增 / Added
 
+- Agent 分类新增 `skill-loader-audit`，支持统计 Claude Code 与 Codex 最近的技能使用记录，预览启停计划并恢复本批设置。
+
 - 可视化新增三个出图助手：配图助手 `image-render`（28 种带样张的风格、多种尺寸）、漫画助手 `comic-maker`（漫画小课堂，可换成自己的 IP）、PPT 助手 `scene-ppt`（11 个世界，一页一张 16:9 图）。三者都用 Codex 内置图像生成出图，需要本机装好并登录 Codex CLI。
 - README 可视化一节加入三个助手的案例图，图放在 `assets/readme/cases/`。
 
